@@ -1,5 +1,8 @@
-﻿using Bismuth.Utilities;
+﻿using Bismuth.Content.Items.Weapons.Melee;
+using Bismuth.Content.Items.Weapons.Throwing;
+using Bismuth.Utilities;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Bismuth.Content.Items.Accessories
@@ -16,6 +19,10 @@ namespace Bismuth.Content.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<BismuthPlayer>().OrbitalAlive = true;                          
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<SolarWind>();
         }
     }
 }

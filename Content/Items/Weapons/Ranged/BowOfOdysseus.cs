@@ -1,4 +1,5 @@
-﻿using Bismuth.Content.Projectiles;
+﻿using Bismuth.Content.Items.Accessories;
+using Bismuth.Content.Projectiles;
 using Bismuth.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -28,6 +29,10 @@ namespace Bismuth.Content.Items.Weapons.Ranged
             Item.useAnimation = 20;
             Item.shoot = AmmoID.Arrow;
             Item.useAmmo = AmmoID.Arrow;
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<QuiverOfOdysseus>();
         }
         public override bool AltFunctionUse(Player player)
         {

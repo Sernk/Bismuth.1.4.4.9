@@ -1,6 +1,7 @@
 ﻿using Bismuth.Content.Items.Armor;
 using Bismuth.Content.Items.Other;
 using Bismuth.Utilities;
+using Bismuth.Utilities.Global;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

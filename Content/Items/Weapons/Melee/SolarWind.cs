@@ -1,4 +1,6 @@
-﻿using Bismuth.Content.Projectiles;
+﻿using Bismuth.Content.Items.Weapons.Ranged;
+using Bismuth.Content.Items.Weapons.Throwing;
+using Bismuth.Content.Projectiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,6 +28,10 @@ namespace Bismuth.Content.Items.Weapons.Melee
         public override bool AltFunctionUse(Player player)
         {
             return true;
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<Heat>();
         }
         public override bool CanUseItem(Player player)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Bismuth.Content.Items.Weapons.Assassin;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -26,6 +27,10 @@ namespace Bismuth.Content.Items.Weapons.Ranged
             Item.shootSpeed = 35f;
             Item.useStyle = 5;
             Item.useAmmo = AmmoID.Arrow;
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<Prominence>();
         }
         public override Vector2? HoldoutOffset()
         {

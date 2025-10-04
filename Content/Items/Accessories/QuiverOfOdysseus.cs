@@ -1,5 +1,7 @@
-﻿using Bismuth.Utilities;
+﻿using Bismuth.Content.Items.Weapons.Ranged;
+using Bismuth.Utilities;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Bismuth.Content.Items.Accessories
@@ -11,6 +13,10 @@ namespace Bismuth.Content.Items.Accessories
             Item.value = Item.sellPrice(0, 2, 0, 0);
             Item.rare = 4;
             Item.accessory = true;
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<BowOfOdysseus>();
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

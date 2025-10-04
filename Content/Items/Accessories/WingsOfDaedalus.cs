@@ -11,6 +11,7 @@ namespace Bismuth.Content.Items.Accessories
         public override void SetStaticDefaults()
         {
             ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(55, 8f, 1.8f);
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<GoldenRune>();
         }
         public override void SetDefaults()
         {            

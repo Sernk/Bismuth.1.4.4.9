@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Bismuth.Content.Items.Weapons.Throwing;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,11 +10,6 @@ namespace Bismuth.Content.Items.Accessories
 {
     public class StatuetteOfHelios : ModItem
     {        
-        public override void SetStaticDefaults()
-        {
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 10));
-            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
-        }
         public override void SetDefaults()
         {           
             Item.value = Item.sellPrice(0, 2, 0, 0);
@@ -21,6 +17,12 @@ namespace Bismuth.Content.Items.Accessories
             Item.width = 20;
             Item.height = 20;
             Item.accessory = true;
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<ShinyCover>();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 10));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

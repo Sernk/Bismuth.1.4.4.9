@@ -1,4 +1,5 @@
-﻿using Bismuth.Utilities;
+﻿using Bismuth.Content.Items.Tools;
+using Bismuth.Utilities;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,7 +13,11 @@ namespace Bismuth.Content.Items.Accessories
             Item.value = Item.sellPrice(0, 2, 0, 0);
             Item.rare = ItemRarityID.LightRed;
             Item.accessory = true;
-        }        
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<PrometheusFire>();
+        }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<ModP>().assassinDamage += 0.07f;

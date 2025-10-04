@@ -74,7 +74,7 @@ namespace Bismuth
         public IList<string> shorts = new List<string>();
         public IList<string> descscompl = new List<string>();
         public IList<string> shortscompl = new List<string>();
-        public static Vector2 bookcoord = new Vector2(Main.screenWidth / 2 - 237, 200);       
+        public static Vector2 bookcoord = new(Main.screenWidth / 2 - 237, 200);       
         public Texture2D ActualPanel;
         int selectedquest = -1;
         int selectedquest2 = -1;

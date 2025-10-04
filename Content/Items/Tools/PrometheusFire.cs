@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using Bismuth.Content.Items.Accessories;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,6 +23,7 @@ namespace Bismuth.Content.Items.Tools
         public override void SetStaticDefaults()
         {
             ItemID.Sets.Torches[Item.type] = true;
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<AriadnesTangle>();
         }
     }
 }

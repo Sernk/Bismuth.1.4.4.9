@@ -1,7 +1,9 @@
-﻿using Bismuth.Utilities;
+﻿using Bismuth.Content.Items.Weapons.Throwing;
+using Bismuth.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Bismuth.Content.Items.Weapons.Assassin
@@ -18,6 +20,10 @@ namespace Bismuth.Content.Items.Weapons.Assassin
         {
             type = ModContent.ProjectileType<Projectiles.ProminenceP>();
             return base.Shoot(player, source, position, velocity, type, damage, knockback);
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<SolarDisk>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Bismuth.Content.Projectiles;
+﻿using Bismuth.Content.Items.Accessories;
+using Bismuth.Content.Projectiles;
 using Microsoft.Xna.Framework;
 using System.Linq;
 using Terraria;
@@ -30,7 +31,10 @@ namespace Bismuth.Content.Items.Weapons.Throwing
             Item.useStyle = 1;
             Item.noUseGraphic = true;
         }
-
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<StatuetteOfHelios>();
+        }
         const int max_count = 8;
 
         public override bool CanUseItem(Player player)

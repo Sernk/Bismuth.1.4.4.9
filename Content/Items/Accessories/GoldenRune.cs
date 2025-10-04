@@ -1,5 +1,6 @@
 ﻿using Bismuth.Utilities;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Bismuth.Content.Items.Accessories
@@ -14,6 +15,10 @@ namespace Bismuth.Content.Items.Accessories
             Item.accessory = true;
             Item.width = 40;
             Item.height = 40;
+        }
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<WingsOfDaedalus>();
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

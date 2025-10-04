@@ -21,6 +21,17 @@ namespace Bismuth.Utilities.Global
         {
             _ = this.GetLocalization("HeliosText").Value;
         }
+        public void GenerateBiomeHeliosChestLoot(Item[] chestInventory, int HelioscurrentIndex)
+        {
+            // Prominence => SolarDisk => StatuetteOfHelios => ShinyCover => SolarWind => Heat => Prominence
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<Prominence>(), ModContent.ItemType<SolarDisk>(), ModContent.ItemType<StatuetteOfHelios>(), ModContent.ItemType<ShinyCover>(), ModContent.ItemType<SolarWind>(), ModContent.ItemType<Heat>())); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GreaterHealingPotion); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(3, 11); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RegenerationPotion, ItemID.IronskinPotion, ItemID.SwiftnessPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.GillsPotion, ItemID.ShinePotion, ItemID.SpelunkerPotion, ItemID.NightOwlPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RecallPotion, ItemID.InvisibilityPotion, ItemID.HunterPotion, ItemID.ThornsPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.CookedFish, ItemID.CookedShrimp, ItemID.CookedMarshmallow, ItemID.BowlofSoup, ItemID.Bacon, ItemID.SugarCookie)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(6, 12); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GoldCoin); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(2, 5); HelioscurrentIndex++;
+        }
         public override void OnKill(NPC npc)
         {
             string HeliosText = this.GetLocalization("HeliosText").Value;
@@ -138,7 +149,7 @@ namespace Bismuth.Utilities.Global
                             if (chestIndex != -1)
                             {
 
-                                GenerateBiomeHeliosChestLoot(Main.chest[chestIndex].item);
+                                GenerateBiomeHeliosChestLoot(Main.chest[chestIndex].item, 0);
                             }
                         }
 
@@ -194,18 +205,6 @@ namespace Bismuth.Utilities.Global
                     WorldGen.PlaceObject(StartHeliosX + 10, StartHeliosY + 5, ModContent.TileType<SunrisePicture>());
                 }
             }
-        }
-
-        void GenerateBiomeHeliosChestLoot(Item[] chestInventory)
-        {
-            int HelioscurrentIndex = 0;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<Prominence>(), ModContent.ItemType<SolarDisk>(), ModContent.ItemType<StatuetteOfHelios>(), ModContent.ItemType<ShinyCover>(), ModContent.ItemType<SolarWind>(), ModContent.ItemType<Heat>())); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GreaterHealingPotion); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(3, 11); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RegenerationPotion, ItemID.IronskinPotion, ItemID.SwiftnessPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.GillsPotion, ItemID.ShinePotion, ItemID.SpelunkerPotion, ItemID.NightOwlPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RecallPotion, ItemID.InvisibilityPotion, ItemID.HunterPotion, ItemID.ThornsPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.CookedFish, ItemID.CookedShrimp, ItemID.CookedMarshmallow, ItemID.BowlofSoup, ItemID.Bacon, ItemID.SugarCookie)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(6, 12); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GoldCoin); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(2, 5); HelioscurrentIndex++;
         }
     }
 }

@@ -273,7 +273,7 @@ namespace Bismuth.Utilities.Global
                     if (greenchestIndex != -1)
                     {
 
-                        GenerateBiomeGreenChestLoot(Main.chest[greenchestIndex].item);
+                        GenerateBiomeGreenChestLoot(Main.chest[greenchestIndex].item, 0);
                     }
 
                     int bluechest = WorldGen.PlaceChest(BismuthWorld.MazeStartX + 24, BismuthWorld.MazeStartY + 16, (ushort)ModContent.TileType<BlueMazeChest>(), false, 0);
@@ -281,7 +281,7 @@ namespace Bismuth.Utilities.Global
                     if (bluechestIndex != -1)
                     {
 
-                        GenerateBiomeBlueChestLoot(Main.chest[bluechestIndex].item);
+                        GenerateBiomeBlueChestLoot(Main.chest[bluechestIndex].item, 0);
                     }
 
                     int redchest = WorldGen.PlaceChest(BismuthWorld.MazeStartX + 52, BismuthWorld.MazeStartY + 56, (ushort)ModContent.TileType<RedMazeChest>(), false, 0);
@@ -289,17 +289,13 @@ namespace Bismuth.Utilities.Global
                     if (redchestIndex != -1)
                     {
 
-                        GenerateBiomeRedChestLoot(Main.chest[redchestIndex].item);
-                    }
-                   
-                }
-               
-            }
-            
+                        GenerateBiomeRedChestLoot(Main.chest[redchestIndex].item, 0);
+                    } 
+                }             
+            }        
         }
-        void GenerateBiomeRedChestLoot(Item[] chestInventory)
+        public void GenerateBiomeRedChestLoot(Item[] chestInventory, int RedcurrentIndex)
         {
-            int RedcurrentIndex = 0;
             chestInventory[RedcurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<AriadnesTangle>(), ModContent.ItemType<PrometheusFire>())); RedcurrentIndex++;
             chestInventory[RedcurrentIndex].SetDefaults(ModContent.ItemType<AthenasShield>()); RedcurrentIndex++; 
             chestInventory[RedcurrentIndex].SetDefaults(ModContent.ItemType<TheMoldofaKeyOfTheSun>()); RedcurrentIndex++;
@@ -308,18 +304,16 @@ namespace Bismuth.Utilities.Global
             chestInventory[RedcurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.CookedFish, ItemID.CookedShrimp)); chestInventory[RedcurrentIndex].stack = Main.rand.Next(2, 5); RedcurrentIndex++;
           
         }
-        void GenerateBiomeBlueChestLoot(Item[] chestInventory)
+        public void GenerateBiomeBlueChestLoot(Item[] chestInventory, int BluecurrentIndex)
         {
-            int BluecurrentIndex = 0;
             chestInventory[BluecurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<WingsOfDaedalus>(), ModContent.ItemType<GoldenRune>())); BluecurrentIndex++;
             chestInventory[BluecurrentIndex].SetDefaults(ModContent.ItemType<RedKey>()); BluecurrentIndex++;
             chestInventory[BluecurrentIndex].SetDefaults(ItemID.HealingPotion); chestInventory[BluecurrentIndex].stack = Main.rand.Next(3, 11); BluecurrentIndex++;
             chestInventory[BluecurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.HunterPotion, ItemID.ShinePotion)); chestInventory[BluecurrentIndex].stack = Main.rand.Next(2, 4); BluecurrentIndex++;
             chestInventory[BluecurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.CookedFish, ItemID.CookedShrimp)); chestInventory[BluecurrentIndex].stack = Main.rand.Next(2, 5); BluecurrentIndex++;
         }
-        void GenerateBiomeGreenChestLoot(Item[] chestInventory)
+        public void GenerateBiomeGreenChestLoot(Item[] chestInventory, int GreencurrentIndex)
         {
-            int GreencurrentIndex = 0;
             chestInventory[GreencurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<QuiverOfOdysseus>(), ModContent.ItemType<BowOfOdysseus>())); GreencurrentIndex++;
             chestInventory[GreencurrentIndex].SetDefaults(ModContent.ItemType<BlueKey>()); GreencurrentIndex++;
             chestInventory[GreencurrentIndex].SetDefaults(ItemID.HealingPotion); chestInventory[GreencurrentIndex].stack = Main.rand.Next(3, 11); GreencurrentIndex++;
