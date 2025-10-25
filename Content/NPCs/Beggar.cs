@@ -74,7 +74,7 @@ namespace Bismuth.Content.NPCs
             Player player = Main.player[Main.myPlayer];
             var quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.Beggar).FirstOrDefault();
 
-            if (TempNPCs.BeggarNewQuest && quest != null) return quest.GetChat(NPC, player, quest.CornerItem);
+            if (TempNPCs.BeggarNewQuest && quest != null) return quest.GetChat(NPC, player);
 
             if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 0)
             {

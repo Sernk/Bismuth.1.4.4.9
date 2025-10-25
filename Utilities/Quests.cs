@@ -16,6 +16,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -554,7 +555,7 @@ namespace Bismuth
                 descs.Insert(0, desc8);
                 activequests.Insert(0, 8);
                 shorts.Insert(0, short8);
-            }           
+            }
             if ((TombstoneQuest == 100 || TombstoneQuest == 200 || TombstoneQuest == 300) && !completedquests.Contains(8))
             {
                 activequests.Remove(8);
@@ -657,36 +658,62 @@ namespace Bismuth
             var qPlayer = Main.LocalPlayer.GetModPlayer<QuestPlayer>();
             var activeQuests = qPlayer.ActiveQuests.Select(QuestRegistry.GetQuestByKey).Where(q => q != null).ToList();
             var p = Main.LocalPlayer;
+
             foreach (var quest in activeQuests)
             {
                 if (quest == null) continue;
-                    
+
                 string name = quest.DisplayName;
                 string stage = quest.DisplayStage;
 
+                // Надёжный идентификатор для списков (если у тебя есть стабильный int-id в реестре — лучше использовать его)
+                int questId = quest.UniqueKey.GetHashCode();
+
+                // Если квест завершён — удаляем из active (по индексу) и добавляем в completed (если ещё нет)
                 if (quest.IsCompleted(p))
                 {
-                    if (activequests.Contains(15))
+                    int idxActive = activequests.IndexOf(questId);
+                    if (idxActive >= 0)
                     {
-                        activequests.Remove(15);
-                        shorts.Remove(stage);
-                        descs.Remove(name);
+                        // удаляем синхронно по индексу, а не Remove(value)
+                        activequests.RemoveAt(idxActive);
+                        if (idxActive < descs.Count) descs.RemoveAt(idxActive);
+                        if (idxActive < shorts.Count) shorts.RemoveAt(idxActive);
                     }
 
-                    if (!completedquests.Contains(15))
+                    if (!completedquests.Contains(questId))
                     {
-                        completedquests.Insert(0, 15);
+                        completedquests.Insert(0, questId);
                         descscompl.Insert(0, name);
                         shortscompl.Insert(0, stage);
                     }
                 }
+                // Если квест активен — вставляем в начало (или обновляем существующий)
                 else if (quest.IsActive(p))
                 {
-                    if (!activequests.Contains(15))
+                    int idxActive = activequests.IndexOf(questId);
+                    if (idxActive == -1)
                     {
+                        activequests.Insert(0, questId);
                         descs.Insert(0, name);
-                        activequests.Insert(0, 15);
                         shorts.Insert(0, stage);
+                    }
+                    else
+                    {
+                        // Если квест уже есть в списке — обновляем текст (на случай изменения stage/name)
+                        descs[idxActive] = name;
+                        shorts[idxActive] = stage;
+                    }
+                }
+                else
+                {
+                    // Квест не в активном и не в завершённом состоянии — удаляем, если он где-то остался
+                    int idxActive = activequests.IndexOf(questId);
+                    if (idxActive >= 0)
+                    {
+                        activequests.RemoveAt(idxActive);
+                        if (idxActive < descs.Count) descs.RemoveAt(idxActive);
+                        if (idxActive < shorts.Count) shorts.RemoveAt(idxActive);
                     }
                 }
             }
@@ -767,11 +794,11 @@ namespace Bismuth
             {
                 TombstoneQuest = 100;
                 Player.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), ModContent.ItemType<UnchargedSoulScythe>());
-                CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");               
+                CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");
             }
             if (TombstoneQuest == 190 && Player.talkNPC == -1)
-            {               
-              //  TombstoneQuest = 200;
+            {
+                //  TombstoneQuest = 200;
                 if (Main.netMode == 2)
                 {
                     NetMessage.SendData(7, -1, -1, null, 0, 0f, 0f, 0f, 0, 0, 0);
@@ -832,7 +859,7 @@ namespace Bismuth
                 CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");
             }
             #endregion
-        }     
+        }
         public void OldmanQuests()
         {
             string Oldman_2 = this.GetLocalization("Quests.Oldman_2").Value;
@@ -2007,7 +2034,6 @@ namespace Bismuth
                                         Utils.DrawBorderStringFourWay(sb, curfont, Stage, bookcoord.X + 516, bookcoord.Y + 90, Color.White, Color.Black, Vector2.Zero, 0.9f);
                                         string diary = BismuthPlayer.StringBreak(FontAssets.MouseText.Value, Description, 380f, size);
                                         Utils.DrawBorderStringFourWay(sb, FontAssets.MouseText.Value, diary, bookcoord.X + 510, bookcoord.Y + 210, Color.White, Color.Black, Vector2.Zero, size);
-                                        break;
                                     }
                                     break;
                                 }
@@ -2025,11 +2051,30 @@ namespace Bismuth
                                         Utils.DrawBorderStringFourWay(sb, curfont, Stage, bookcoord.X + 516, bookcoord.Y + 110, Color.White, Color.Black, Vector2.Zero, 0.9f);
                                         string diary = BismuthPlayer.StringBreak(FontAssets.MouseText.Value, Description, 380f, size);
                                         Utils.DrawBorderStringFourWay(sb, FontAssets.MouseText.Value, diary, bookcoord.X + 510, bookcoord.Y + 210, Color.White, Color.Black, Vector2.Zero, size);
-                                        break;
                                     }
                                 }   break;
                             default:
-                                break;
+                                {
+                                    foreach (var quest in activeQuests)
+                                    {
+                                        if (quest == null) continue;
+                                            
+                                        int questId = quest.UniqueKey.GetHashCode();
+
+                                        if (selectedquest != questId) continue;
+
+                                        string Name = quest.DisplayName;
+                                        string Stage = quest.DisplayStage;
+                                        string Description = quest.DisplayDescription;
+
+                                        Utils.DrawBorderStringFourWay(sb, curfont, Name, bookcoord.X + 700 - curfont.MeasureString(Name).X / 2, bookcoord.Y + 30, Color.White, Color.Black, Vector2.Zero);
+                                        sb.Draw(activetex, new Vector2(bookcoord.X + 520 + curfont.MeasureString(Stage).X * 0.9f, bookcoord.Y + 87), Color.White);
+                                        Utils.DrawBorderStringFourWay(sb, curfont, Stage, bookcoord.X + 516, bookcoord.Y + 90, Color.White, Color.Black, Vector2.Zero, 0.9f);
+                                        string diary = BismuthPlayer.StringBreak(FontAssets.MouseText.Value, Description, 380f, size);
+                                        Utils.DrawBorderStringFourWay(sb, FontAssets.MouseText.Value, diary, bookcoord.X + 510, bookcoord.Y + 210, Color.White, Color.Black, Vector2.Zero, size);
+                                    }
+                                    break;
+                                }
 
                         }
                         #endregion
@@ -2323,12 +2368,27 @@ namespace Bismuth
                                         Utils.DrawBorderStringFourWay(sb, curfont, Stage, bookcoord.X + 516, bookcoord.Y + 90, Color.White, Color.Black, Vector2.Zero, 0.9f);
                                         string diary = BismuthPlayer.StringBreak(FontAssets.MouseText.Value, Description, 380f, size);
                                         Utils.DrawBorderStringFourWay(sb, FontAssets.MouseText.Value, diary, bookcoord.X + 510, bookcoord.Y + 210, Color.White, Color.Black, Vector2.Zero, size);
-
-                                        break;
                                     }
                                 }
                                 break;
                             default:
+                                foreach (var quest in activeQuests)
+                                {
+                                    if (quest == null) continue;
+
+                                    int questId = quest.UniqueKey.GetHashCode();
+                                    if (selectedquest2 != questId) continue; 
+                                       
+                                    string Name = quest.DisplayName;
+                                    string Stage = quest.DisplayStage;
+                                    string Description = quest.DisplayDescription;
+
+                                    Utils.DrawBorderStringFourWay(sb, curfont, Name, bookcoord.X + 700 - curfont.MeasureString(Name).X / 2, bookcoord.Y + 30, Color.White, Color.Black, Vector2.Zero);
+                                    sb.Draw(completedtex, new Vector2(bookcoord.X + 520 + curfont.MeasureString(Stage).X * 0.9f, bookcoord.Y + 88), Color.White);
+                                    Utils.DrawBorderStringFourWay(sb, curfont, Stage, bookcoord.X + 516, bookcoord.Y + 90, Color.White, Color.Black, Vector2.Zero, 0.9f);
+                                    string diary = BismuthPlayer.StringBreak(FontAssets.MouseText.Value, Description, 380f, size);
+                                    Utils.DrawBorderStringFourWay(sb, FontAssets.MouseText.Value, diary, bookcoord.X + 510, bookcoord.Y + 210, Color.White, Color.Black, Vector2.Zero, size);
+                                }
                                 break;
 
                         }
@@ -2469,14 +2529,13 @@ namespace Bismuth
                         {
                             foreach (var quests in activeQuests)
                             {
-                                if (completedquests.Count > 12 || quests != null)
+                                for (int i = 0; i < completedquests.Count && i < descscompl.Count; i++)
                                 {
                                     Utils.DrawBorderStringFourWay(sb, curfont, descscompl[12], bookcoord.X + 40, bookcoord.Y + 382, Color.White, Color.Black, Vector2.Zero);
                                     Utils.DrawBorderStringFourWay(sb, curfont, shortscompl[12], bookcoord.X + 44, bookcoord.Y + 406, Color.White, Color.Black, Vector2.Zero, 0.85f);
                                     if (Main.mouseX > bookcoord.X + 15 && Main.mouseX < bookcoord.X + emptypage.Width / 2 - 15 && Main.mouseY > bookcoord.Y + 378 && Main.mouseY < bookcoord.Y + 426 && Main.mouseLeft && Main.mouseLeftRelease)
                                     {
-                                        selectedquest2 = completedquests[12];
-                                        selectedquest2 = 15;
+                                        selectedquest2 = completedquests[i];
                                     }
                                     sb.Draw(linetex, new Vector2(bookcoord.X + 58, bookcoord.Y + 108), Color.White);
                                 }

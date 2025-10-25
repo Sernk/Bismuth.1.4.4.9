@@ -1834,7 +1834,7 @@ namespace Bismuth.Utilities
                 Tile tile1 = Framing.GetTileSafely(LeaderHouseX + 9, LeaderHouseY + 15);
                 Tile tile1under = Framing.GetTileSafely(LeaderHouseX + 9, LeaderHouseY + 14);
                 tile1.TileFrameX += 18;
-                tile1under.TileFrameX += 18;
+                tile1under.TileFrameX += 18; 
                 WorldGen.Place3x2(LeaderHouseX + 11, LeaderHouseY + 15, (ushort)ModContent.TileType<BorealTableNoSettle>());
                 WorldGen.Place1x2(LeaderHouseX + 13, LeaderHouseY + 15, (ushort)ModContent.TileType<BorealChairNoSettle>(), 0);
                 WorldGen.Place1xX(LeaderHouseX + 2, LeaderHouseY + 15, TileID.ClosedDoor, 30);

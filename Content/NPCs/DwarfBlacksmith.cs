@@ -83,7 +83,7 @@ namespace Bismuth.Content.NPCs
 
             if (TempNPCs.DwarfBlacksmithNewQuest && quest != null)
             {
-                return quest.GetChat(NPC, player, quest.CornerItem);
+                return quest.GetChat(NPC, player);
             }
 
             else if (Main.LocalPlayer.GetModPlayer<Quests>().GlamdringQuest == 20)

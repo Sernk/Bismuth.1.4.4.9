@@ -126,7 +126,7 @@ namespace Bismuth.Content.NPCs
             {
                 var quest = QuestRegistry.GetAvailableQuests(player, "BabaYaga").FirstOrDefault();
 
-                if (TempNPCs.BabaYagaNewQuest && quest != null) return quest.GetChat(NPC, player, quest.CornerItem);
+                if (TempNPCs.BabaYagaNewQuest && quest != null) return quest.GetChat(NPC, player);
 
                 if (NPC.FindFirstNPC(ModContent.NPCType<Priest>()) >= 0 && WorldGen.genRand.Next(0, 4) == 0)
                 {

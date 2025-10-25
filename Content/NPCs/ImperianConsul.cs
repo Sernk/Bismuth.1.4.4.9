@@ -90,7 +90,7 @@ namespace Bismuth.Content.NPCs
 
             if (TempNPCs.ImperianConsulNewQuest && quest != null)
             {
-                return quest.GetChat(NPC, player, quest.CornerItem);
+                return quest.GetChat(NPC, player);
             }
 
             if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 0)

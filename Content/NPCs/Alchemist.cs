@@ -346,11 +346,11 @@ namespace Bismuth.Content.NPCs
             {
                 if (TempNPCs.AlchemistPreSkeletonNewQuest)
                 {
-                    return quest.GetChat(NPC, player, quest.CornerItem);
+                    return quest.GetChat(NPC, player);
                 }
                 else if (TempNPCs.AlchemistNewQuest)
                 {
-                    return quest.GetChat(NPC, player, quest.CornerItem);
+                    return quest.GetChat(NPC, player);
                 }
             }
             if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().SunriseQuest == 0 && BismuthWorld.downedSkeletron)

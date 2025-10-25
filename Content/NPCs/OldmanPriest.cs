@@ -79,7 +79,7 @@ namespace Bismuth.Content.NPCs
 
             if (quest != null)
             {
-                return quest.GetChat(NPC, player, quest.CornerItem);
+                return quest.GetChat(NPC, player);
             }
 
             return WorldGen.genRand.Next(0, 4) switch
