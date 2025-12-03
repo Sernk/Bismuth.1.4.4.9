@@ -14,7 +14,6 @@ namespace Bismuth.Content.Tiles
     public class TotemOfCurse : ModTile
     {
         int time = BismuthWorld.TotemCooldown;
-        public static bool NearbyTotemOfCurse = false;
 
         public override void SetStaticDefaults()
         {

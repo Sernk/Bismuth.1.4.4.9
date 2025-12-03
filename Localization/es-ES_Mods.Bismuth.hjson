@@ -103,8 +103,8 @@ Tiles: {
 	HeliosDoorClosed.MapEntry: Puerta
 	HeliosDoorOpen.MapEntry: Puerta
 	MahoganyMirror.MapEntry: Espejo
-	OrcishBed.MapEntry: Cama 
-	OrcishBookcase.MapEntry: Librería 
+	OrcishBed.MapEntry: Cama
+	OrcishBookcase.MapEntry: Librería
 	OrcishClock.MapEntry: Reloj
 	OrcishDresser.MapEntry: Aparador
 	OrcishPiano.MapEntry: Piano
@@ -1925,12 +1925,12 @@ Items: {
 
 	SoulEater: {
 		Item.AssassinDamage: daño de asesino
-		DisplayName: Devorador de Almas
 		Tooltip:
 			'''
 			Al causar daño, aparecen almas inquietas cerca de ti. Aumentan tu
 			daño, pero disminuyen tu salud
 			'''
+		DisplayName: Devorador de Almas
 	}
 
 	Whirlpool: {
@@ -3471,7 +3471,7 @@ NPCs: {
 			Oldman_1: ¡Un humano! ¡Gracias, dioses del Olimpo! ¡Necesito tu ayuda! He estado atrapado en esta cueva sin posibilidad de rescate durante varios meses: ¡eres mi última esperanza!
 			Oldman_3: ¿Has encontrado la piedra?
 			Oldman_4: ¡No tardes demasiado, mi vida está en tus manos!
-			Oldman_7: "¿Puedo pedirte algo, {0}?"
+			Oldman_7: ¿Puedo pedirte algo, {0}?
 			OldmanNQ_1: Me alegro de haber salido por fin de ese laberinto: estaba terriblemente oscuro.
 			OldmanNQ_2: Ahora que el Minotauro ha sido derrotado, el subsuelo se va a calmar bastante.
 			OldmanNQ_3: En los tiempos antiguos hubo un héroe que también derrotó al Minotauro. Teseo era su nombre, creo.
@@ -3485,8 +3485,6 @@ NPCs: {
 			OldmanAnsv_6: ¡Claro!
 			OldmanAnsv_7: Hablaré con {0}
 		}
-
-		Census.SpawnCondition: Condiciones desconocidas
 	}
 
 	SwampHound.DisplayName: Sabueso del Pantano

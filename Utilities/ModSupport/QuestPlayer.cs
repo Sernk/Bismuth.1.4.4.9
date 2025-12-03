@@ -5,7 +5,7 @@ using Terraria.ModLoader.IO;
 
 namespace Bismuth.Utilities.ModSupport
 {
-    public class QuestPlayer : ModPlayer // Класс для хранения данных о квестах игрока
+    public class QuestPlayer : ModPlayer
     {
         public HashSet<string> CompletedQuests = [];
         public HashSet<string> ActiveQuests = [];
@@ -20,10 +20,5 @@ namespace Bismuth.Utilities.ModSupport
             CompletedQuests = [.. tag.GetList<string>("CompletedQuests")];
             ActiveQuests = [.. tag.GetList<string>("ActiveQuests")];
         }
-        // И обезательно
-        // public override void Load()
-        //{
-        // QuestRegistry.Register(new PreSkeletronHerbQuest());
-        //}
     }
 }

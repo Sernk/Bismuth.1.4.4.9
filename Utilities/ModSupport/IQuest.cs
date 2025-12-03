@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace Bismuth.Utilities.ModSupport
@@ -50,7 +51,9 @@ namespace Bismuth.Utilities.ModSupport
         void OnChatButtonClicked(Player player);
         void IsActiveQuestUIIcon(bool isAvailableQuest, bool isActiveQuest, SpriteBatch spriteBatch, NPC npc, Player player);
         void Notification(Player player, bool isCompletedSuccessfully, bool isQuestAccepted);
+        int ModifyNotificationText(Player player, string text, Color color);
         int CompletedQuickSpawnItem(Player player, int itemId, int quantity = 1);
+        int RandomValue(int min, int max);
         void CheckItem(Player player, ref bool result, int itemId, int neededCount = 1, int consumeCount = 1, string successText = "", string failText = "", int rewardId = 0, int rewardStack = 0, bool showNotification = true, bool markCompleted = true, int progress = 0);
         bool IsAvailable(Player player);
         bool IsActive(Player player);

@@ -37,6 +37,7 @@ namespace Bismuth.Utilities
         public static bool SwampBiome = false; // Находится ли игрок в болоте?
         public static int SwampTiles = 0; // Количество болотных блоков вокруг игрока.
         public static int TombstoneCounts = 0; // Количество могил вокруг игрока.
+        public static bool NearbyTotemOfCurse = false;
 
         public static int TombstoneX = 0; // x-координата могилы
         public static int TombstoneY = 0; // y-координата могилы
@@ -189,7 +190,6 @@ namespace Bismuth.Utilities
                     int[] rand = new int[6] { ModContent.ItemType<DraculasCover>(), ModContent.ItemType<PendantOfBlood>(), ModContent.ItemType<MarbleMask>(), ModContent.ItemType<ManGosh>(), ModContent.ItemType<Misericorde>(), ModContent.ItemType<Baselard>() };
                     for (int i = rand.Length - 1; i >= 1; i--)
                     {
-
                         int j = Main.rand.Next(i + 1);
                         int temp = rand[j];
                         rand[j] = rand[i];
@@ -211,7 +211,7 @@ namespace Bismuth.Utilities
                 DefeatedPortals = 0;
             }
             #region Statue Buff Update
-            if (TotemOfCurse.NearbyTotemOfCurse == false)
+            if (NearbyTotemOfCurse == false)
             {
                 IsTotemActive = false;
             }
@@ -458,6 +458,7 @@ namespace Bismuth.Utilities
         {
             int MicroBiomesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
             int ShiniesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
+            ModLoader.TryGetMod("Synergia", out Mod Synergia); 
             if (ShiniesIndex == -1)
             {
                 return;
@@ -1270,20 +1271,12 @@ namespace Bismuth.Utilities
                         }
                     }
                 }
-                for (int i = 0; i < (Main.maxTilesX / 20); i++)
-                {
-                    for (int j = 0; j < 100; j++)
-                    {
-                        if (Main.rand.Next(9) == 0)
-                        {
-                            switch (Main.rand.Next(2))
-                            {
-                                case 0:
-                                    WorldGen.PlaceTile(SwampStartX + i, SwampStartY - 50 + j, (ushort)ModContent.TileType<Reed>());
-                                    break;
-                                case 1:
-                                    WorldGen.PlaceTile(SwampStartX + i, SwampStartY - 50 + j, (ushort)ModContent.TileType<Reed2>());
-                                    break;
+                for (int i = 0; i < (Main.maxTilesX / 20); i++) {
+                    for (int j = 0; j < 100; j++) {
+                        if (Main.rand.Next(9) == 0) {
+                            switch (Main.rand.Next(2)) {
+                                case 0: WorldGen.PlaceTile(SwampStartX + i, SwampStartY - 50 + j, (ushort)ModContent.TileType<Reed>()); break;
+                                case 1: WorldGen.PlaceTile(SwampStartX + i, SwampStartY - 50 + j, (ushort)ModContent.TileType<Reed2>());break;
                             }
                         }
                     }
@@ -1365,7 +1358,14 @@ namespace Bismuth.Utilities
             int WeedsIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Weeds"));
             int SpawnCleanIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle Chests"));
             int SpawnPointIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Spawn Point"));
-            tasks.Insert(SpawnPointIndex + 1, new PassLegacy("Spawn Update", delegate (GenerationProgress progress, GameConfiguration configuration)
+            string name;
+            if (Synergia != null) {
+                name = "Final Cleanup";
+            }
+            else {
+                name = "Spawn Update";
+            }
+            tasks.Insert(SpawnPointIndex + 1, new PassLegacy(name, delegate (GenerationProgress progress, GameConfiguration configuration)
             {
                 Main.spawnTileX = Main.maxTilesX / 2;
                 Main.spawnTileY -= 2;

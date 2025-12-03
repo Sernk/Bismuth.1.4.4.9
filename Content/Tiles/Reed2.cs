@@ -14,7 +14,7 @@ namespace Bismuth.Content.Tiles
             TileObjectData.newTile.Height = 4;
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.StyleWrapLimit = 36;
-            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16, 18 };
+            TileObjectData.newTile.CoordinateHeights = [16, 16, 16, 18];
             TileObjectData.addTile(Type);
         }
     }
