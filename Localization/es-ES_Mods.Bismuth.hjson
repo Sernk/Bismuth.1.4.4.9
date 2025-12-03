@@ -1,0 +1,4369 @@
+Tiles: {
+	AlchemicalShelf.MapEntry: Estante Alquímico
+	BlastFurnace.MapEntry: Horno de Fundición
+	PeatBlock.MapEntry: Bloque de Turba
+	OrcishBar.MapEntry: Lingote Orcish
+	AltarOfWaters.MapEntry: Altar de las Aguas
+	AluminiumOre.MapEntry: Aluminio
+	BeggarsCasket.MapEntry: Cofre
+	BeggarTent.MapEntry: Tienda del Mendigo
+	Bone1.MapEntry: ""
+	Bone4.MapEntry: ""
+	BookOfSecrets.MapEntry: Libro de Secretos
+	BorealChairNoSettle.MapEntry: Silla
+	BorealTableNoSettle.MapEntry: Silla
+	Cinnabar.MapEntry: Cinabrio
+	DeadCourier.MapEntry: Mensajero Muerto
+	Fern.MapEntry: Helecho
+	Fern2.MapEntry: Helecho
+	Fountain.MapEntry: Fuente
+	MagicPot.MapEntry: Olla Mágica
+	OrcishCandelabra.MapEntry: Candelabro
+	OrcishCandle.MapEntry: Vela Orcish
+	OrcishChair.MapEntry: Silla
+	OrcishChandelier.MapEntry: Lámpara de Araña
+
+	OrcishChest: {
+		MapEntry1: Cofre
+		OrcishChest: Cofre
+	}
+
+	OrcishCoatOfArms.MapEntry: Escudo de Armas Orcish
+	OrcishDoorClosed.MapEntry: Puerta
+	OrcishDoorOpen.MapEntry: Puerta
+	OrcishLamp.MapEntry: Lámpara
+	OrcishLantern.MapEntry: Farol
+	OrcishTable.MapEntry: Mesa
+	OrnamentalPlant.MapEntry: Planta Ornamental
+	PapuansBed.MapEntry: Cama Papuana
+	PapuansCandle.MapEntry: Vela
+	PapuansChair.MapEntry: Silla
+
+	PapuansChest: {
+		MapEntry1: Cofre
+		PapuansChest: Cofre
+	}
+
+	PapuansDoorClosed.MapEntry: Puerta
+	PapuansDoorOpen.MapEntry: Puerta
+	PapuansLamp.MapEntry: Lámpara
+	PapuansLantern.MapEntry: Farol
+	PapuansSofa.MapEntry: Sofá
+	PapuansTable.MapEntry: Mesa
+	PapuansWorkbench.MapEntry: Banco de Trabajo
+	RuneTable.MapEntry: Mesa Rúnica
+	ShadewoodBedNoSettle.MapEntry: Cama
+	SunrisePicture.MapEntry: Cuadro
+
+	SwampChest: {
+		MapEntry1: Cofre
+		Chat.Death5: no era digno
+		SwampChest: Cofre
+	}
+
+	SwampTreeSaplingTile.MapEntry: Brote
+	TannedSkin.MapEntry: Piel Curtida
+	Target.MapEntry: Diana
+	TotemOfCurse.MapEntry: Tótem de la Maldición
+	WallCarpet.MapEntry: Alfombra de Pared
+	WarriorsTombstone.MapEntry: Lápida del Guerrero
+	AluminiumBar.MapEntry: Lingote de Metal
+	amphora3.MapEntry: Dinós
+	amphora2.MapEntry: Olpe
+	amphora1.MapEntry: Ánfora
+	BismuthumBar.MapEntry: Lingote de Metal
+	BismuthumOre.MapEntry: Bismuto
+	BronzeBar.MapEntry: Lingote de Metal
+	BorealWoodMirror.MapEntry: Espejo
+
+	BlueMazeChest: {
+		MapEntry1: Cofre del Laberinto
+		MazeChest: Cofre del Laberinto
+	}
+
+	EbonwoodMirror.MapEntry: Espejo
+	BlueDoorLocked.MapEntry: Puerta Azul
+	MazeDoorClosed.MapEntry: Puerta
+	MazeDoorOpen.MapEntry: Puerta
+	Bone2.MapEntry: ""
+	Bone3.MapEntry: ""
+
+	HeliosChest: {
+		MapEntry1: Cofre de Helios
+		HeliosChest: Cofre de Helios
+	}
+
+	GreenMazeChest: {
+		MapEntry1: Cofre del Laberinto
+		MazeChest: Cofre del Laberinto
+	}
+
+	GreenDoorLocked.MapEntry: Puerta Verde
+	DugWarriorsTombstone.MapEntry: Lápida del Guerrero
+	HeliosDoorClosed.MapEntry: Puerta
+	HeliosDoorOpen.MapEntry: Puerta
+	MahoganyMirror.MapEntry: Espejo
+	OrcishBed.MapEntry: Cama 
+	OrcishBookcase.MapEntry: Librería 
+	OrcishClock.MapEntry: Reloj
+	OrcishDresser.MapEntry: Aparador
+	OrcishPiano.MapEntry: Piano
+	OrcishSofa.MapEntry: Sofá
+	PalmWoodMirror.MapEntry: Espejo
+	PapuansBathtub.MapEntry: Bañera
+	PapuansBookcase.MapEntry: Estantería
+	PapuansCandelabra.MapEntry: Candelabro
+	PapuansChandelier.MapEntry: Lámpara de Araña
+	PapuansClock.MapEntry: Reloj
+	PapuansDresser.MapEntry: Aparador
+	PapuansPiano.MapEntry: Piano
+	PapuansSink.MapEntry: Fregadero
+	PearlwoodMirror.MapEntry: Espejo
+
+	RedMazeChest: {
+		MapEntry1: Cofre del Laberinto
+		MazeChest: Cofre del Laberinto
+	}
+
+	ShadewoodMirror.MapEntry: Espejo
+	WoodenMirror.MapEntry: Espejo
+	RedDoorLocked.MapEntry: Puerta
+}
+
+Items: {
+	Aether: {
+		DisplayName: Éter
+		Tooltip: Se usa para cargar la piedra filosofal
+	}
+
+	AirEssence: {
+		DisplayName: Esencia de Aire
+		Tooltip: ""
+	}
+
+	EarthEssence: {
+		DisplayName: Esencia de Tierra
+		Tooltip: ""
+	}
+
+	FireEssence: {
+		DisplayName: Esencia de Fuego
+		Tooltip: ""
+	}
+
+	WaterEssence: {
+		DisplayName: Esencia de Agua
+		Tooltip: ""
+	}
+
+	AnimalSkin: {
+		DisplayName: Piel de Animal
+		Tooltip: ""
+	}
+
+	Cinnabar: {
+		DisplayName: Cinabrio
+		Tooltip: ""
+	}
+
+	DarkEngraving: {
+		DisplayName: Grabado Oscuro
+		Tooltip: ""
+	}
+
+	DarkEssence: {
+		DisplayName: Esencia Oscura
+		Tooltip: ""
+	}
+
+	DarkPartOfArchmagesAmulet: {
+		DisplayName: Fragmento Oscuro del Amuleto del Archimago
+		Tooltip: ""
+	}
+
+	Elessar: {
+		DisplayName: Gaermire
+		Tooltip: Contiene el poder oculto del pueblo del mar
+	}
+
+	EmptyAmulet: {
+		DisplayName: Amuleto Vacío
+		Tooltip: ""
+	}
+
+	FernFlower: {
+		DisplayName: Flor de Helecho
+		Tooltip: ""
+	}
+
+	GalvornBar: {
+		DisplayName: Lingote de Galvorn
+		Tooltip: ""
+	}
+
+	PeatPowder: {
+		DisplayName: Polvo de Turba
+		Tooltip: ""
+	}
+
+	PeatBlock: {
+		DisplayName: Bloque de Turba
+		Tooltip: ""
+	}
+
+	HerbalFeather: {
+		DisplayName: Pluma de Hierbas
+		Tooltip: ""
+	}
+
+	IceCrystal: {
+		DisplayName: Cristal de Hielo
+		Tooltip: ""
+	}
+
+	LightPartOfArchmagesAmulet: {
+		DisplayName: Fragmento Luminoso del Amuleto del Archimago
+		Tooltip: ""
+	}
+
+	MirrorRim: {
+		DisplayName: Borde de Espejo
+		Tooltip: ""
+	}
+
+	OrcishBar: {
+		DisplayName: Lingote Orcish
+		Tooltip: ""
+	}
+
+	OrcishFragment: {
+		DisplayName: Fragmento Orcish
+		Tooltip: ""
+	}
+
+	PieceOfTabula: {
+		DisplayName: Pieza de la Tábula
+		Tooltip: ""
+	}
+
+	PoisonFlask: {
+		DisplayName: Frasco de Veneno
+		Tooltip: ""
+	}
+
+	Quicksilver: {
+		DisplayName: Mercurio
+		Tooltip: ""
+	}
+
+	RingRim: {
+		DisplayName: Borde de Anillo
+		Tooltip: ""
+	}
+
+	RuneEssence: {
+		DisplayName: Esencia Rúnica
+		Tooltip: ""
+	}
+
+	RuneRim: {
+		DisplayName: Borde de Runa
+		Tooltip: ""
+	}
+
+	Sanguinem: {
+		DisplayName: Sanguinem
+		Tooltip: ""
+	}
+
+	SerpentsScale: {
+		DisplayName: Escama de Serpiente
+		Tooltip: ""
+	}
+
+	TheMoldofaKeyOfTheSun: {
+		DisplayName: Molde de la Llave del Sol
+		Tooltip: ""
+	}
+
+	ToadsEye: {
+		DisplayName: Ojo de Sapo
+		Tooltip: ""
+	}
+
+	UnchargedSoulScythe: {
+		DisplayName: Guadaña de Alma Sin Cargar
+		Tooltip: ""
+	}
+
+	AlchemistsBelt: {
+		DisplayName: Cinturón del Alquimista
+		Tooltip:
+			'''
+			La duración de todos los efectos de las pociones aumenta en un 15%
+			El tiempo de reutilización de las pociones curativas se reduce en 5 segundos
+			'''
+	}
+
+	BottleOfIncense: {
+		DisplayName: Botella de Incienso
+		Tooltip: +15 de encanto
+	}
+
+	DiceCup: {
+		DisplayName: Cubilete
+		Tooltip: Te da un punto extra en los juegos de dados
+	}
+
+	DraculasCover: {
+		DisplayName: Capa de Drácula
+		Tooltip:
+			'''
+			Te permite transformarte en murciélago sin importar la saciedad
+			Aumenta la probabilidad de golpe crítico de asesino en un 25%.
+			'''
+	}
+
+	GamblersBag: {
+		DisplayName: Bolsa del Jugador
+		Tooltip: Aumenta el premio monetario en el juego de dados en un 50%
+	}
+
+	HeartOfSwamp: {
+		DisplayName: Corazón del Pantano
+		Tooltip:
+			'''
+			Aumenta la vida máxima en 60 y la regeneración de vida
+			Otorga inmunidad al agua del pantano
+			'''
+	}
+
+	HerosBoots: {
+		DisplayName: Las Botas de un Héroe
+		Tooltip: ""
+
+		Quests: {
+			HerosBoots_1: Mods.Bismuth.Items.HerosBoots.Quests.HerosBoots_1
+			HerosBoots6:
+				'''
+				El portador puede correr superrápido, la velocidad de movimiento aumenta un
+				60%, proporciona la habilidad de caminar sobre el agua y la lava, otorga
+				inmunidad a los bloques de fuego, aumenta ligeramente la altura de
+				salto, aumenta la regeneración de vida al caminar, te permite
+				hacer triple salto, anula el daño por caída,
+				crea una explosión tras caer
+				'''
+			HerosBoots5:
+				'''
+				El portador puede correr superrápido, la velocidad de movimiento aumenta un
+				45%, proporciona la habilidad de caminar sobre el agua y la lava, otorga
+				inmunidad a los bloques de fuego, aumenta ligeramente la altura de
+				salto, aumenta la regeneración de vida al caminar,
+				te permite hacer triple salto
+				'''
+			HerosBoots4:
+				'''
+				Quien las lleva puede correr súper rápido, la velocidad de movimiento aumenta en
+				un 30%, permite caminar sobre agua y lava, otorga inmunidad a bloques de fuego,
+				aumenta ligeramente la altura del salto, incrementa la regeneración de vida al caminar,
+				permite doble salto
+				'''
+			HerosBoots3:
+				'''
+				El portador puede correr superrápido, la velocidad de movimiento aumenta un
+				20%, proporciona la habilidad de caminar sobre el agua y la lava, otorga
+				inmunidad a los bloques de fuego, aumenta ligeramente la altura de
+				salto, aumenta la regeneración de vida al caminar,
+				te permite hacer doble salto
+				'''
+			HerosBoots2:
+				'''
+				El portador puede correr superrápido, la velocidad de movimiento aumenta un
+				15%, proporciona la habilidad de caminar sobre el agua, otorga
+				inmunidad a los bloques de fuego,
+				aumenta ligeramente la altura de salto
+				'''
+			HerosBoots1:
+				'''
+				El portador puede correr superrápido, la velocidad de movimiento aumenta un
+				10%, proporciona la habilidad de caminar sobre el agua,
+				aumenta ligeramente la altura de salto.
+				'''
+			HerosBoots: El portador puede correr superrápido.
+			DivineEquipment: Equipamiento Divino
+		}
+	}
+
+	ImperianBanner: {
+		DisplayName: Bandera Imperiana
+		Tooltip:
+			'''
+			+15 de encanto. Aumenta la regeneración de vida cuando estás en la ciudad.
+			Cuantos más NPCs haya en la ciudad, mayor defensa.
+			'''
+	}
+
+	LichCrown: {
+		DisplayName: Corona de un Lich
+		Tooltip:
+			'''
+			Tienes entre el 20% y el 120% de la vida máxima 
+			dependiendo de la cantidad de enemigos derrotados
+			'''
+	}
+
+	MagnesiumOxide: {
+		DisplayName: Óxido de Magnesio
+		Tooltip: 40% de aumento en la velocidad de lanzamiento, 8% de reducción en el daño de lanzamiento.
+	}
+
+	MarbleMask: {
+		DisplayName: Máscara de Mármol
+		Tooltip:
+			'''
+			Aumenta el daño de asesino en un 10% y la probabilidad de golpe crítico en un 8%
+			Una vez al día obtienes invulnerabilidad absoluta durante 12 segundos
+			si tienes menos del 20% de tu vida máxima
+			'''
+	}
+
+	MidasGlove: {
+		DisplayName: Guante de Midas
+		Tooltip: 6% de aumento de daño, 30% más de monedas soltadas por enemigos
+	}
+
+	OrcishBanner: {
+		DisplayName: Estandarte Orcish
+		Tooltip: Más defensa y regeneración de vida por cada NPC vivo en la ciudad
+	}
+
+	PendantOfBlood: {
+		DisplayName: Colgante de Sangre
+		Tooltip: 20% de reducción de hambre, menos saciedad - más daño de asesino
+	}
+
+	Sanctus: {
+		DisplayName: Sanctus
+		Tooltip: Cuanto más daño recibas, mayor será tu defensa y reflejo de daño
+	}
+
+	Scutum: {
+		DisplayName: Scutum
+		Tooltip: Reduce el daño recibido en un 5%
+	}
+
+	SignOfUndead: {
+		DisplayName: Signo de los No Muertos
+		Tooltip:
+			'''
+			10% de aumento de daño de asesino
+			20% de aumento de probabilidad de golpe crítico.
+			'''
+	}
+
+	TheRingOfTheBlood: {
+		DisplayName: El Anillo de la Sangre
+		Tooltip: Te convierte en un vampiro
+	}
+
+	TheRingOfTheSeas: {
+		DisplayName: El Anillo de los Mares
+		Tooltip: Te convierte en un Naga
+	}
+
+	ImperianHelmet: {
+		DisplayName: Yelmo Imperiano
+		Tooltip: La probabilidad de golpe crítico aumenta en un 3%.
+		ImperianSetBonus: Todos los tipos de daño aumentan en un 5%.
+	}
+
+	KillersBoots: {
+		DisplayName: Botas del Asesino
+		Tooltip: La velocidad de movimiento aumenta en un 20%, el daño crítico aumenta en un 25%.
+	}
+
+	KillersHood: {
+		DisplayName: Capucha del Asesino
+		Tooltip: La probabilidad de golpe crítico aumenta en un 8%.
+		KillerSetBonus:
+			'''
+			Te hace invisible por la noche, el daño aumenta en 4 por cada golpe mientras estás invisible
+			+1 de saciedad por cada asesinato, si eres vampiro.
+			'''
+	}
+
+	KillersJacket: {
+		DisplayName: Chaqueta del Asesino
+		Tooltip:
+			'''
+			El daño de asesino aumenta en un 10%
+			La probabilidad de golpe crítico aumenta en un 4%.
+			'''
+	}
+
+	Lorica: {
+		DisplayName: Lorica
+		Tooltip: ""
+	}
+
+	NomadsBoots: {
+		DisplayName: Botas del Nómada
+		Tooltip:
+			'''
+			La velocidad de movimiento aumenta en un 25%.
+			El daño de asesino aumenta en un 9%.
+			'''
+	}
+
+	NomadsHood: {
+		DisplayName: Capucha del Nómada
+		Tooltip:
+			'''
+			El daño de asesino aumenta en un 5%.
+			La probabilidad de golpe crítico aumenta en un 13%.
+			'''
+		NomadSetBonus: La regeneración de vida aumenta significativamente mientras estás montado.
+	}
+
+	NomadsJacket: {
+		DisplayName: Chaqueta del Nómada
+		Tooltip: El daño de asesino aumenta en un 11%, el daño crítico aumenta en un 30%
+	}
+
+	Ocrea: {
+		DisplayName: Ócrea
+		Tooltip: La velocidad de movimiento aumenta en un 8%.
+	}
+
+	PaladinsLeggings: {
+		DisplayName: Grebas del Paladín
+		Tooltip:
+			'''
+			El daño cuerpo a cuerpo aumenta en un 8%, la resistencia al daño aumenta en un 5%.
+			La velocidad de movimiento disminuye en un 5%.
+			'''
+	}
+
+	PaladinsMask: {
+		DisplayName: Máscara del Paladín
+		Tooltip:
+			'''
+			El daño cuerpo a cuerpo aumenta en un 10%, la resistencia al daño aumenta en un 5%.
+			La velocidad de movimiento disminuye en un 5%.
+			'''
+		PaladinSetBonus: Tres proyectiles de luz golpean a tus enemigos después de recibir daño
+	}
+
+	PaladinsShell: {
+		DisplayName: Coraza del Paladín
+		Tooltip:
+			'''
+			El daño cuerpo a cuerpo aumenta en un 12%, la resistencia al daño aumenta en un 8%.
+			La velocidad de movimiento disminuye en un 10%.
+			'''
+	}
+
+	ScalyBreastplate: {
+		DisplayName: Peto Escamoso
+		Tooltip: El daño de lanzamiento aumenta en un 10%.
+	}
+
+	ScalyHelmet: {
+		DisplayName: Yelmo Escamoso
+		Tooltip:
+			'''
+			Aumenta la probabilidad de golpe crítico con armas de lanzamiento en un 11%.
+			Usas todos los objetos un 5% más rápido.
+			'''
+		ScalySetBonus: Los atacantes también reciben daño.
+	}
+
+	ScalyLeggings: {
+		DisplayName: Grebas Escamosas
+		Tooltip: La velocidad de movimiento aumenta en un 9%.
+	}
+
+	Ushanka: {
+		DisplayName: Ushanka
+		Tooltip: ""
+	}
+
+	Valenki: {
+		DisplayName: Valenki
+		Tooltip: ""
+	}
+
+	WatersBreastplate: {
+		DisplayName: Peto del Agua
+		Tooltip: Cuanta más humedad, más daño y regeneración de vida
+	}
+
+	WatersHelmet: {
+		DisplayName: Yelmo del Agua
+		Tooltip: Cuanta más humedad, mayor probabilidad de golpe crítico
+		WaterSetBonus: Se reduce el desperdicio de humedad.
+	}
+
+	WatersLeggings: {
+		DisplayName: Grebas del Agua
+		Tooltip: Cuanta más humedad, mayor velocidad de movimiento
+	}
+
+	Alembic: {
+		DisplayName: Alambique
+		Tooltip: 33% de probabilidad de no consumir ingredientes al fabricar pociones
+	}
+
+	BeggarsCasket: {
+		DisplayName: Cofre del Mendigo
+		Tooltip: Imposible de abrir sin una ganzúa
+	}
+
+	BismuthumCasket: {
+		DisplayName: Cofre de Bismuto
+		Tooltip: Contiene objetos de desarrollador
+	}
+
+	BookOfMazarbul: {
+		DisplayName: Libro de Mazarbul
+		Tooltip: Otorga un punto de habilidad extra
+	}
+
+	BookOfSecrets: {
+		DisplayName: Libro de los Secretos
+		Tooltip: Contiene conocimientos secretos...
+	}
+
+	DwarvenBrokenArmor: {
+		DisplayName: Armadura Dwarven Destrozada
+		Tooltip: ""
+	}
+
+	DwarvenCoin: {
+		DisplayName: Moneda Dwarven
+		Tooltip: Moneda para comerciar con el Herrero
+	}
+
+	EmpathyMirror: {
+		DisplayName: Espejo de Empatía
+		Tooltip:
+			'''
+			Pulsa el botón izquierdo del ratón para añadir un NPC a la red de empatía y el derecho para eliminarlo
+			Todo el daño recibido se distribuye entre todos los miembros de la red
+			Si uno de los miembros del grupo muere, la red se destruirá, al igual que cada miembro...
+			'''
+	}
+
+	FaithTreatise: {
+		DisplayName: Tratado de Fe
+		Tooltip:
+			'''
+			Te otorga un bono permanente de regeneración de vida al usarlo
+			Una vez al día puedes restaurar el 40% de tu vida,
+			si está por debajo del 20%
+			'''
+	}
+
+	FifthPartOfAmulet: {
+		DisplayName: Quinto Fragmento del Amuleto
+		Tooltip: Fragmento de un artefacto poderoso
+	}
+
+	FirstPartOfAmulet: {
+		DisplayName: Primer Fragmento del Amuleto
+		Tooltip: Fragmento de un artefacto poderoso
+	}
+
+	FourthPartOfAmulet: {
+		DisplayName: Cuarto Fragmento del Amuleto
+		Tooltip: Fragmento de un artefacto poderoso
+	}
+
+	GalvornScroll: {
+		DisplayName: Pergamino de Galvorn
+		Tooltip: Con este pergamino puedes crear lingotes de Galvorn
+	}
+
+	GlamdringBlueprint: {
+		DisplayName: Plano de Glamdring
+		Tooltip: ""
+	}
+
+	Glamdring: {
+		DisplayName: Glamdring
+		Tooltip: Inflige daño multiplicado a los goblins
+	}
+
+	GreenKey: {
+		DisplayName: Llave Verde
+		Tooltip: Abre el cofre y la puerta verde del laberinto
+	}
+
+	HolyGrail: {
+		DisplayName: El Santo Grial
+		Tooltip: ""
+	}
+
+	HornOfGondor: {
+		DisplayName: Cuerno de Batalla
+		Tooltip: Úsalo para elevar tu espíritu de combate
+	}
+
+	ImprovedMiningPotion: {
+		DisplayName: Poción de Minería Mejorada
+		Tooltip: Aumenta la velocidad de minería en un 50%
+	}
+
+	InkBottle: {
+		DisplayName: Tintero
+		Tooltip:
+			'''
+			Crea una mancha de tinta en la posición de tu cursor
+			Clic derecho para teletransportarte a la posición de la mancha
+			'''
+	}
+
+	Luceat: {
+		DisplayName: Luceat
+		Tooltip: Te teletransporta a la ciudad Imperian
+	}
+
+	MasterToolBox: {
+		DisplayName: Caja de Herramientas Maestra
+		Tooltip: Te permite destruir bloques de estructuras
+	}
+
+	MinotaurHorn: {
+		DisplayName: Cuerno del Minotauro
+		Tooltip: ""
+	}
+
+	OpenedBeggarsCasket: {
+		DisplayName: Cofre del Mendigo Abierto
+		Tooltip: Cofre del mendigo abierto
+	}
+
+	OrcishKey: {
+		DisplayName: Llave Orcish
+		Tooltip: Abre el cofre orcish
+	}
+
+	Panacea: {
+		DisplayName: Panacea
+		Tooltip: Te salva de todos los efectos negativos
+	}
+
+	Pancakes: {
+		DisplayName: Tortitas
+		Tooltip: Mejoras menores a todas las estadísticas
+	}
+
+	PhoenixPendant: {
+		DisplayName: Colgante del Fénix
+		Tooltip:
+			'''
+			Obtienes un 50% de resistencia al daño durante 15 segundos
+			Puedes usarlo una vez al día
+			Especial para Spinal111
+			'''
+	}
+
+	Picklock: {
+		DisplayName: Ganzúa
+		Tooltip: Una herramienta para forzar cerraduras
+	}
+
+	PotionOfHumanity: {
+		DisplayName: Poción de Humanidad
+		Tooltip: Reinicia tu raza
+	}
+
+	PotionOfInvulnerability: {
+		DisplayName: Poción de Invulnerabilidad
+		Tooltip: Otorga invulnerabilidad absoluta por un corto tiempo
+	}
+
+	PotionOfOblivion: {
+		DisplayName: Poción del Olvido
+		Tooltip: Reinicia todas tus habilidades y devuelve tus puntos de habilidad
+	}
+
+	ScoutsReport: {
+		DisplayName: Informe del Explorador
+		Tooltip: ""
+	}
+
+	SecondPartOfAmulet: {
+		DisplayName: Segundo Fragmento del Amuleto
+		Tooltip: Fragmento de un artefacto poderoso
+	}
+
+	TabulaSmaragdina: {
+		DisplayName: Tabula Smaragdina
+		Tooltip: Artefacto ancestral necesario para crear éter
+	}
+
+	ThirdPartOfAmulet: {
+		DisplayName: Tercer Fragmento del Amuleto
+		Tooltip: Fragmento de un artefacto poderoso
+	}
+
+	TruePhilosopherStone: {
+		DisplayName: Piedra Filosofal Verdadera
+		Tooltip: Te da una segunda oportunidad...
+	}
+
+	UnchargedElessar: {
+		DisplayName: Gaermire
+		Tooltip: Necesita algo para cargarse...
+	}
+
+	UnchargedLuceat: {
+		DisplayName: Luceat Sin Cargar
+		Tooltip: Debe ser cargado primero
+	}
+
+	UnchargedTruePhilosopherStone: {
+		DisplayName: Piedra Filosofal Verdadera
+		Tooltip: Debe cargarse primero
+	}
+
+	WarriorsRemains: {
+		DisplayName: Restos de un Guerrero
+		Tooltip: ""
+	}
+
+	AluminiumOre: {
+		DisplayName: Mineral de Aluminio
+		Tooltip: ""
+	}
+
+	FernSpore: {
+		DisplayName: Espora de Helecho
+		Tooltip: ""
+	}
+
+	MagicPot: {
+		DisplayName: Olla Mágica
+		Tooltip: ""
+	}
+
+	OrcishCandelabra: {
+		DisplayName: Candelabro Orcish
+		Tooltip: ""
+	}
+
+	OrcishCandle: {
+		DisplayName: Vela Orcish
+		Tooltip: ""
+	}
+
+	OrcishChair: {
+		DisplayName: Silla Orcish
+		Tooltip: ""
+	}
+
+	OrcishChandelier: {
+		DisplayName: Lámpara de Araña Orcish
+		Tooltip: ""
+	}
+
+	OrcishChest: {
+		DisplayName: Cofre Orcish
+		Tooltip: ""
+	}
+
+	OrcishCoatOfArms: {
+		DisplayName: Escudo Orcish
+		Tooltip: ""
+	}
+
+	OrcishDoor: {
+		DisplayName: Puerta Orcish
+		Tooltip: ""
+	}
+
+	OrcishLamp: {
+		DisplayName: Lámpara Orcish
+		Tooltip: ""
+	}
+
+	OrcishLantern: {
+		DisplayName: Farol Orcish
+		Tooltip: ""
+	}
+
+	OrcishPlatform: {
+		DisplayName: Plataforma Orcish
+		Tooltip: ""
+	}
+
+	OrcishTable: {
+		DisplayName: Mesa Orcish
+		Tooltip: ""
+	}
+
+	OrnamentalPlant: {
+		DisplayName: Planta Ornamental
+		Tooltip: ""
+	}
+
+	PapuansBed: {
+		DisplayName: Cama papuana
+		Tooltip: ""
+	}
+
+	PapuansCandle: {
+		DisplayName: Vela papuana
+		Tooltip: ""
+	}
+
+	PapuansChair: {
+		DisplayName: Silla papuana
+		Tooltip: ""
+	}
+
+	PapuansChest: {
+		DisplayName: Cofre papuano
+		Tooltip: ""
+	}
+
+	PapuansDoor: {
+		DisplayName: Puerta papuana
+		Tooltip: ""
+	}
+
+	PapuansLamp: {
+		DisplayName: Lámpara papuana
+		Tooltip: ""
+	}
+
+	PapuansLantern: {
+		DisplayName: Farol papuano
+		Tooltip: ""
+	}
+
+	PapuansPlatform: {
+		DisplayName: Plataforma papuana
+		Tooltip: ""
+	}
+
+	PapuansSofa: {
+		DisplayName: Sofá papuano
+		Tooltip: ""
+	}
+
+	PapuansTable: {
+		DisplayName: Mesa papuana
+		Tooltip: ""
+	}
+
+	PapuansWorkbench: {
+		DisplayName: Banco de Trabajo papuano
+		Tooltip: ""
+	}
+
+	RuneTable: {
+		DisplayName: Mesa Rúnica
+		Tooltip: ""
+	}
+
+	SunrisePicture: {
+		DisplayName: Amanecer
+		Tooltip: Autor Desconocido
+	}
+
+	SwampChest: {
+		DisplayName: Cofre del Pantano
+		Tooltip: ""
+	}
+
+	SwampWood: {
+		DisplayName: Madera del Pantano
+		Tooltip: ""
+	}
+
+	SwampWoodWall: {
+		DisplayName: Pared de Madera del Pantano
+		Tooltip: ""
+	}
+
+	TannedSkin: {
+		DisplayName: Piel Curtida
+		Tooltip: ""
+	}
+
+	WallCarpet: {
+		DisplayName: Alfombra de Pared
+		Tooltip: ""
+	}
+
+	DirtyShovel: {
+		DisplayName: Pala Sucia
+		Tooltip: ""
+	}
+
+	Baselard: {
+		DisplayName: Baselard
+		Tooltip: <clic derecho> para usar como arma arrojadiza
+		Item.AssassinDamage: daño de asesino
+	}
+
+	BookOfTheDead: {
+		DisplayName: Libro de los Muertos
+		Tooltip:
+			'''
+			Consume 60 de maná
+			Invoca manos óseas en la posición de enemigos recientemente muertos (hasta 6 manos)
+			'''
+	}
+
+	WaveOfForce: {
+		DisplayName: Ola de Fuerza
+		Tooltip: ""
+	}
+
+	WoodenStaff: {
+		DisplayName: Bastón de Madera
+		Tooltip: ""
+	}
+
+	Doomhammer: {
+		DisplayName: Martillo Maldito
+		Tooltip:
+			'''
+			Crea una pequeña explosión en el suelo
+			¡Lok Tar Ogar!
+			'''
+	}
+
+	Gladius: {
+		DisplayName: Gladius
+		Tooltip: ""
+	}
+
+	Narsil: {
+		DisplayName: Narsil
+		Tooltip: Es capaz de reflejar proyectiles
+	}
+
+	Ringril: {
+		DisplayName: Ringril
+		Tooltip: Crea cinco picos de hielo después de infligir daño
+	}
+
+	SoulScythe: {
+		DisplayName: Guadaña de Almas
+		Tooltip:
+			'''
+			Roba las almas de ciertos enemigos
+			Mata arpías, wyverns y nimbos enfadados para obtener [i:Bismuth/AirEssence]
+			Mata tiburones, medusas y pirañas para obtener [i:Bismuth/WaterEssence]
+			Mata gusanos para obtener [i:Bismuth/EarthEssence]
+			Mata diablos menores, slimes de lava y demonios para obtener [i:Bismuth/FireEssence]
+			'''
+	}
+
+	TheBladeOfWoe: {
+		DisplayName: La Hoja del Dolor
+		Tooltip:
+			'''
+			Te permite matar NPCs para obtener [i:Bismuth/DarkEssence]
+			No tienes honor...
+			'''
+	}
+
+	TheseusSword: {
+		DisplayName: Espada de Teseo
+		Tooltip: Crea ocho proyectiles que vuelan en distintas direcciones tras un combo de golpes
+	}
+
+	BowOfOdysseus: {
+		DisplayName: Arco de Odiseo
+		Tooltip: <clic derecho> para cargar el arco con tres flechas poderosas
+	}
+
+	WoodenCrossbow: {
+		DisplayName: Ballesta de Madera
+		Tooltip: ""
+	}
+
+	Aeglos: {
+		DisplayName: Aeglos
+		Tooltip: ""
+	}
+
+	Lancea: {
+		DisplayName: Lancea
+		Tooltip: ""
+	}
+
+	StarOfTheDunedain: {
+		DisplayName: Estrella de los Dunedain
+		Tooltip: Crea dos discos giratorios
+	}
+
+	Key: {
+		DisplayName: Llave
+		Tooltip: ""
+	}
+
+	CoatlsWings: {
+		DisplayName: Alas de Coatl
+		Tooltip: Permite el vuelo y la caída lenta
+	}
+
+	ShellNecklace: {
+		DisplayName: Collar de Conchas
+		Tooltip: +1% de daño y probabilidad de golpe crítico al arrojar por cada 5 puntos de humedad
+	}
+
+	FuryOfWaters: {
+		DisplayName: Furia de las Aguas
+		Tooltip: Crea una pluma de agua tras infligir daño
+	}
+
+	Typhoon: {
+		DisplayName: Tifón
+		Tooltip: Crea una flor de agua tras infligir daño
+	}
+
+	AdventurersBook: {
+		DisplayName: Libro del Aventurero
+		Tooltip: Contiene información útil sobre las estadísticas del jugador
+	}
+
+	ClassEngraving: {
+		Tooltip: ""
+		DisplayName: Grabado de Clase
+	}
+
+	RingOfOmnipotence: {
+		DisplayName: Anillo Único
+
+		TooltipLine2: {
+			RingOfOmnipotence5:
+				'''
+				Todos los tipos de daño se aumentan en un 25%, +100 PV, +8 PV/seg,
+				la reflexión de daño aumenta un 20%, la probabilidad de esquivar y bloquear
+				se incrementa en un 15%, todas las probabilidades de crítico
+				se incrementan en un 15%, todos los tipos de daño
+				se aumentan en un 10% por cada anillo equipado
+				'''
+			RingOfOmnipotence4:
+				'''
+				Todos los tipos de daño se aumentan en un 18%, +75 PV, +5 PV/seg, 
+				la reflexión de daño aumenta un 15%, la probabilidad de esquivar y bloquear
+				se incrementa en un 10%, todas las probabilidades de crítico
+				se incrementan en un 12%, todos los tipos de daño
+				se aumentan en un 5% por cada anillo equipado
+				'''
+			RingOfOmnipotence3:
+				'''
+				+13% en todos los daños, +50 PV, +3 PV/seg, la reflexión de daño
+				aumenta un 12%, la probabilidad de esquivar aumenta un 5%,
+				todas las probabilidades de crítico aumentan un 10%
+				'''
+			RingOfOmnipotence2:
+				'''
+				+10% en todos los daños, +25 PV, +1 PV/seg, la reflexión de daño
+				aumenta un 8%
+				'''
+			RingOfOmnipotence1: Todos los tipos de daño se aumentan en un 7%, +15 PV
+			RingOfOmnipotence: Todos los tipos de daño se aumentan en un 3%
+			DivineEquipment: Equipamiento Divino
+			RingOfOmnipotence_1: No otorga ningún beneficio
+		}
+
+		Tooltip: ""
+	}
+
+	ArchmagesAmulet: {
+		Tooltip: ""
+		DisplayName: Amuleto del Archimago
+
+		Quests: {
+			ArchmagesAmulet5:
+				'''
+				+120 PM, -19% coste de maná, +13% probabilidad de golpe crítico mágico
+				+16% de daño mágico, te otorga un aura especial de mago
+				obtienes +1% de robo de maná cada 10 segundos
+				si no recibes daño. Te salva de la muerte una vez al día
+				'''
+			ArchmagesAmulet4:
+				'''
+				+120 PM, -19% coste de maná, +13% probabilidad de golpe crítico mágico
+				+16% de daño mágico, te otorga un aura especial de mago
+				obtienes +1% de robo de maná cada 10 segundos
+				si no recibes daño.
+				'''
+			ArchmagesAmulet3:
+				'''
+				+80 PM, -14% coste de maná, +9% probabilidad de golpe crítico mágico, +12% de daño mágico, te otorga un aura especial de mago
+				cuando tus PV están por debajo del 75%.
+				'''
+			ArchmagesAmulet2: +50 PM, -8% coste de maná, +5% probabilidad de golpe crítico mágico, +5% de daño mágico
+			ArchmagesAmulet1: +30 PM, -5% coste de maná, +3% probabilidad de golpe crítico mágico
+			ArchmagesAmulet: +20 PM, -3% coste de maná
+			ArchmagesAmulet_1: No otorga ningún beneficio
+			DivineEquipment: Equipamiento Divino
+		}
+	}
+
+	WarriorsEngraving: {
+		Tooltip: Grabado del Guerrero
+		DisplayName: Úsalo para elegir tu clase
+	}
+
+	WizardsEngraving: {
+		Tooltip: Úsalo para elegir tu clase
+		DisplayName: Grabado del Mago
+	}
+
+	AssasinsEngraving: {
+		DisplayName: Grabado del Asesino
+		Tooltip: Úsalo para elegir tu clase
+	}
+
+	RangersEngraving: {
+		DisplayName: Grabado del Guardabosques
+		Tooltip: Úsalo para elegir tu clase
+	}
+
+	ThrowersEngraving: {
+		DisplayName: Grabado del Lanzador
+		Tooltip: Úsalo para elegir tu clase
+	}
+
+	NagaSkin: {
+		Tooltip: ""
+		DisplayName: Piel de Naga
+	}
+
+	Breakwater: {
+		Tooltip: Crea tres cortes de agua frente al jugador
+		DisplayName: Rompeolas
+		Item.AssassinDamage: daño de asesino
+	}
+
+	Angrist: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Angrist
+		Tooltip: ""
+	}
+
+	ManGosh: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Man-Gosh
+		Tooltip: +25% de probabilidad de bloquear al tener esta arma en un slot activo
+	}
+
+	Misericorde: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Misericordia
+		Tooltip: 5% de probabilidad de matar al enemigo inmediatamente (no funciona con jefes)
+	}
+
+	Parazonium: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Parazonium
+		Tooltip: ""
+	}
+
+	SacrificialDagger: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Daga Sacrificial
+		Tooltip: Un golpe crítico inflige cuatro veces el daño normal
+	}
+
+	Sting: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Dardo
+		Tooltip:
+			'''
+			Maegnas es mi nombre, soy la perdición de las arañas.
+			Inflige el doble de daño a orcos e indica su proximidad
+			'''
+	}
+
+	AssassinItem: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Objeto de Asesino
+		Tooltip: ""
+	}
+
+	TribalQuiver: {
+		DisplayName: Carcaj Tribal
+		Tooltip:
+			'''
+			+5% de daño a distancia, +10% de daño crítico a distancia
+			15% de probabilidad de disparar una flecha adicional
+			'''
+	}
+
+	TribalBow: {
+		DisplayName: Arco Tribal
+		Tooltip: ""
+	}
+
+	ThrowingAxe: {
+		DisplayName: Hacha Arrojadiza
+		Tooltip: ""
+	}
+
+	WoodenShield: {
+		DisplayName: Escudo de Madera
+		Tooltip: +7% de resistencia al daño
+	}
+
+	ShamansStaff: {
+		DisplayName: Bastón del Chamán
+		Tooltip:
+			'''
+			Crea ondas de arena que vuelan en diferentes direcciones
+			Necesita ser cargado
+			'''
+	}
+
+	OrcishCrossbow: {
+		Tooltip: ""
+		DisplayName: Ballesta Orcish
+	}
+
+	Stiletto: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Estilete
+		Tooltip: Crea un corte doble hacia el cursor
+	}
+
+	BattleDrum: {
+		DisplayName: Tambor de Batalla
+		Tooltip: Aumenta la vida máxima en 5 por cada NPC vivo en la ciudad
+	}
+
+	SnakesFang: {
+		Tooltip: Aparece una serpiente cerca de ti después de infligir daño. Luchará por ti
+		DisplayName: Colmillo de Serpiente
+		Item.AssassinDamage: daño de asesino
+	}
+
+	TransmutationAmulet: {
+		Tooltip:
+			'''
+			La duración de los efectos de todas las pociones se incrementa en un 10%
+			El tiempo de reutilización de las pociones de curación se reduce en 5 segundos
+			Recuperas un 10% de tu maná después de usar cualquier poción
+			'''
+		DisplayName: Amuleto de Transmutación
+	}
+
+	MirrorOfUndead: {
+		Tooltip: Te teletransporta a la ubicación de tu última muerte
+		DisplayName: Espejo de los No-Muertos
+	}
+
+	NecromancersRobe: {
+		Tooltip:
+			'''
+			El daño de los súbditos se incrementa en un 12%.
+			Aumenta tu número máximo de súbditos
+			'''
+		DisplayName: Túnica del Nigromante
+	}
+
+	NecromancersHood: {
+		Tooltip:
+			'''
+			El daño de los súbditos se incrementa en un 10%.
+			Aumenta tu número máximo de súbditos
+			'''
+		DisplayName: Capucha del Nigromante
+	}
+
+	NecromancersRing: {
+		Tooltip:
+			'''
+			Aumenta en 1 el número máximo de súbditos y el daño de los súbditos en un 7%
+			Obtienes más maná máximo, regeneración de maná 
+			y daño de súbditos por cada lápida cercana.
+			'''
+		DisplayName: Anillo del Nigromante
+	}
+
+	MinotaursWaraxe: {
+		DisplayName: Hachas de Guerra del Minotauro
+		Tooltip: ""
+	}
+
+	OrcishShield: {
+		DisplayName: Escudo Orcish
+		Tooltip:
+			'''
+			Aumenta el daño de lanzamiento un 11%
+			Cuanta menos vida tengas, mayor será tu daño y crítico con lanzamientos
+			'''
+	}
+
+	BansheesHead: {
+		DisplayName: Cabeza de Banshee
+		Tooltip:
+			'''
+			Disminuye la vida de todos los enemigos cercanos en un 10%
+			y establece su defensa a 0
+			'''
+	}
+
+	AriadnesTangle: {
+		DisplayName: Enredo de Ariadna
+		Tooltip:
+			'''
+			Daño de asesino incrementado en un 7%
+			Probabilidad de golpe crítico incrementada en un 7%
+			'''
+	}
+
+	AthenasShield: {
+		Quests: {
+			DivineEquipment: Equipamiento Divino
+			AthenasShield_1: No otorga bonificaciones
+			AthenasShield: Resistencia al daño aumentada en un 5%
+			AthenasShield1:
+				'''
+				La resistencia al daño aumenta un 7%, +15 PV,
+				restaura el 25% del daño recibido si tus PV
+				están por debajo del 20%.
+				'''
+			AthenasShield2:
+				'''
+				La resistencia al daño aumenta un 10%, +45 PV,
+				restaura el 35% del daño recibido y aumenta la
+				regeneración durante 5 segundos cuando tus PV están por debajo del 35%.
+				'''
+			AthenasShield3:
+				'''
+				La resistencia al daño aumenta un 15%, +80 PV,
+				restaura el 35% del daño recibido y aumenta la
+				regeneración durante 5 segundos cuando tus PV están por debajo del 35%.
+				Las pociones de curación restauran un 30% más de PV, el tiempo de recarga se
+				reduce en 5 segundos.
+				'''
+			AthenasShield4:
+				'''
+				La resistencia al daño aumenta un 18%, +100 PV,
+				restaura el 35% del daño recibido y aumenta la
+				regeneración durante 5 segundos cuando tus PV están por debajo del 35%.
+				Las pociones de curación restauran un 30% más de PV, el tiempo de recarga se
+				reduce en 5 segundos. Aumenta enormemente la regeneración cuando tus
+				PV están por debajo de 200. 15% de probabilidad de detener un proyectil
+				'''
+			AthenasShield5:
+				'''
+				La resistencia al daño aumenta un 25%, +150 PV,
+				restaura el 35% del daño recibido, aumenta la
+				regeneración durante 7 segundos y otorga invulnerabilidad absoluta
+				durante 3 segundos si tus PV caen por debajo del 50%. Las pociones de
+				curación restauran un 30% más de PV, el tiempo de recarga se reduce en 10
+				segundos. Aumenta enormemente la regeneración cuando tus PV
+				están por debajo de 150. 15% de probabilidad de detener un proyectil
+				'''
+		}
+
+		DisplayName: Escudo de Atenea
+		Tooltip: ""
+	}
+
+	BerserksRing: {
+		DisplayName: Anillo del Berserker
+		Tooltip:
+			'''
+			La velocidad de uso de objetos se incrementa en un 30%
+			30% menos de resistencia al daño, -25 de defensa
+			'''
+	}
+
+	GoldenRune: {
+		DisplayName: Vellocino de Oro
+		Tooltip:
+			'''
+			Aumenta la regeneración de vida. Permite convertir
+			mana en salud si tu PV está por debajo del 50%.
+			'''
+	}
+
+	HeartOfDesert: {
+		Quests: {
+			HeartOfDesert4:
+				'''
+				+20% de velocidad de movimiento al equiparlo y +20% más cuando
+				estás en el desierto, +6 PV/seg, +12% de daño y
+				+8% de probabilidad de golpe crítico cuando estás en el
+				desierto. Ignora la Tormenta de Arena.
+				'''
+			HeartOfDesert5:
+				'''
+				+25% de velocidad de movimiento al equiparlo y +25% más cuando
+				estás en el desierto, +10 PV/seg, +12% de daño y
+				+8% de probabilidad de golpe crítico cuando estás en el
+				desierto. Ignora la Tormenta de Arena.
+				'''
+			HeartOfDesert3:
+				'''
+				+12% de velocidad de movimiento, +4 PV/seg, +10% de daño y
+				la probabilidad de golpe crítico aumenta un 5% cuando estás
+				en el desierto
+				'''
+			HeartOfDesert2: La velocidad de movimiento aumenta un 8%, +2.5 PV/seg.
+			HeartOfDesert1: La velocidad de movimiento aumenta un 5%, +1 PV/seg
+			HeartOfDesert: La velocidad de movimiento aumenta un 3%
+			HeartOfDesert_1: No proporciona ninguna bonificación
+			DivineEquipment: Equipamiento Divino
+		}
+
+		DisplayName: Corazón del Desierto
+		Tooltip: ""
+	}
+
+	JaguarsWings: {
+		DisplayName: Alas del Jaguar
+		Tooltip: Permite el vuelo y la caída lenta.
+	}
+
+	MagicRune: {
+		DisplayName: Runa del Mago
+		Tooltip: 12% de aumento de daño mágico.
+	}
+
+	MeleeRune: {
+		DisplayName: Runa del Guerrero
+		Tooltip: 12% de aumento de daño cuerpo a cuerpo.
+	}
+
+	MirrorShield: {
+		DisplayName: Escudo Espejo
+		Tooltip: 10% de probabilidad de detener un proyectil. Cuanta menos vida tienes, mayor es la probabilidad.
+	}
+
+	MrPigeonsCloak: {
+		DisplayName: Capa de Mr. Pigeon
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	QuiverOfOdysseus: {
+		DisplayName: Carcaj de Odiseo
+		Tooltip:
+			'''
+			Aumenta el daño de las flechas en un 15%
+			+1 proyectil de flecha
+			'''
+	}
+
+	RangerRune: {
+		DisplayName: Runa del Guardabosques
+		Tooltip: 12% de aumento de daño a distancia.
+	}
+
+	AluminiumBar: {
+		DisplayName: Lingote de Aluminio
+		Tooltip: ""
+	}
+
+	RuneOfSummoner: {
+		Tooltip: +12% de daño de los súbditos.
+		DisplayName: Runa de Invocador
+	}
+
+	RuneOfSpeed: {
+		Tooltip: 15% de aumento de velocidad de movimiento.
+		DisplayName: Runa del Corredor
+	}
+
+	RuneOfRegeneration: {
+		Tooltip: Aumento de regeneración de vida.
+		DisplayName: Runa del Doctor
+	}
+
+	RuneOfAssasin: {
+		Tooltip: +5% de probabilidad de golpe crítico.
+		DisplayName: Runa del Asesino
+	}
+
+	ShinyCover: {
+		DisplayName: Capa Brillante
+		Tooltip: Crea tres bolas de fuego a tu alrededor que dañan a los enemigos.
+	}
+
+	StatuetteOfHelios: {
+		DisplayName: Estatuilla de Helios
+		Tooltip:
+			'''
+			15% de aumento de daño mágico. 10% de aumento de probabilidad de golpe crítico mágico.
+			Aumenta el maná máximo en 50. Reduce el uso de maná en un 20% durante el día.
+			'''
+	}
+
+	ThrownRune: {
+		DisplayName: Runa del Lanzador
+		Tooltip: 12% de aumento de daño de lanzamiento.
+	}
+
+	WingsOfDaedalus: {
+		DisplayName: Alas de Dédalo
+		Tooltip: Permite el vuelo y la caída lenta.
+	}
+
+	AirAmulet: {
+		DisplayName: Amuleto de Aire
+		Tooltip: Invoca un elemental de aire aliado
+	}
+
+	BlueKey: {
+		DisplayName: Llave Azul
+		Tooltip: Abre el cofre y la puerta azul del laberinto
+	}
+
+	EarthAmulet: {
+		DisplayName: Amuleto de Tierra
+		Tooltip: Invoca un elemental de tierra aliado
+	}
+
+	FireAmulet: {
+		DisplayName: Amuleto de Fuego
+		Tooltip: Invoca un elemental de fuego aliado
+	}
+
+	GreatPotionOfOblivion: {
+		DisplayName: Gran Poción del Olvido
+		Tooltip: Reinicia todas tus habilidades y devuelve tus puntos de habilidad
+	}
+
+	KeyOfTheSun: {
+		DisplayName: Llave del Sol
+		Tooltip: Abre los cofres de Helios
+	}
+
+	MeuRansHook: {
+		DisplayName: Garfio de MeuRan
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	PanaceaScroll: {
+		DisplayName: Pergamino de Panacea
+		Tooltip: Puedes crear panacea usando este pergamino.
+	}
+
+	QuicksilverMirror: {
+		DisplayName: Espejo de Mercurio
+		Tooltip: Te ayuda a encontrar los cofres del mendigo.
+	}
+
+	RedKey: {
+		DisplayName: Llave Roja
+		Tooltip: Abre el cofre y la puerta roja del laberinto
+	}
+
+	WaterAmulet: {
+		DisplayName: Amuleto de Agua
+		Tooltip: Invoca un elemental de agua aliado
+	}
+
+	amphora3: {
+		DisplayName: Dinós
+		Tooltip: ""
+	}
+
+	amphora2: {
+		Tooltip: ""
+		DisplayName: Olpe
+	}
+
+	amphora1: {
+		Tooltip: ""
+		DisplayName: Ánfora
+	}
+
+	BismuthumBar: {
+		DisplayName: Lingote de Bismuto
+		Tooltip: ""
+	}
+
+	BismuthumOre: {
+		DisplayName: Mineral de Bismuto
+		Tooltip: ""
+	}
+
+	BronzeBar: {
+		DisplayName: Lingote de Bronce
+		Tooltip: ""
+	}
+
+	BorealWoodMirror: {
+		Tooltip: ""
+		DisplayName: Espejo de Madera Boreal
+	}
+
+	BlueMazeChest: {
+		Tooltip: ""
+		DisplayName: Cofre Azul del Laberinto
+	}
+
+	EbonwoodMirror: {
+		DisplayName: Espejo de Madera Ébano
+		Tooltip: ""
+	}
+
+	HeliosChest: {
+		Tooltip: ""
+		DisplayName: Cofre de Helios
+	}
+
+	GreenMazeChest: {
+		Tooltip: ""
+		DisplayName: Cofre Verde del Laberinto
+	}
+
+	HeliosDoor: {
+		DisplayName: Puerta de Helios
+		Tooltip: ""
+	}
+
+	MahoganyMirror: {
+		Tooltip: ""
+		DisplayName: Espejo de Caoba
+	}
+
+	MazeDoor: {
+		DisplayName: Puerta del Laberinto
+		Tooltip: ""
+	}
+
+	OrcishBed: {
+		Tooltip: ""
+		DisplayName: Cama Orcish
+	}
+
+	OrcishBookcase: {
+		DisplayName: Librería Orcish
+		Tooltip: ""
+	}
+
+	OrcishClock: {
+		DisplayName: Reloj Orcish
+		Tooltip: ""
+	}
+
+	OrcishDresser: {
+		DisplayName: Aparador Orcish
+		Tooltip: ""
+	}
+
+	OrcishPiano: {
+		DisplayName: Piano Orcish
+		Tooltip: ""
+	}
+
+	OrcishSofa: {
+		DisplayName: Sofá Orcish
+		Tooltip: ""
+	}
+
+	PalmWoodMirror: {
+		DisplayName: Espejo de Madera de Palma
+		Tooltip: ""
+	}
+
+	PapuansBathtub: {
+		DisplayName: Bañera papuana
+		Tooltip: ""
+	}
+
+	PapuansBookcase: {
+		DisplayName: Librería papuana
+		Tooltip: ""
+	}
+
+	PapuansCandelabra: {
+		DisplayName: Candelabro papuano
+		Tooltip: ""
+	}
+
+	PapuansDresser: {
+		DisplayName: Aparador papuano
+		Tooltip: ""
+	}
+
+	PapuansClock: {
+		Tooltip: ""
+		DisplayName: Reloj papuano
+	}
+
+	PapuansChandelier: {
+		Tooltip: ""
+		DisplayName: Lámpara de Araña papuana
+	}
+
+	PapuansPiano: {
+		DisplayName: Piano papuano
+		Tooltip: ""
+	}
+
+	PapuansSink: {
+		DisplayName: Fregadero papuano
+		Tooltip: ""
+	}
+
+	PearlwoodMirror: {
+		DisplayName: Espejo de Madera Perlada
+		Tooltip: ""
+	}
+
+	RedMazeChest: {
+		DisplayName: Cofre Rojo del Laberinto
+		Tooltip: ""
+	}
+
+	ShadewoodMirror: {
+		DisplayName: Espejo de Madera Sombría
+		Tooltip: ""
+	}
+
+	SwampMud: {
+		DisplayName: Barro de Pantano
+		Tooltip: ""
+	}
+
+	WoodenMirror: {
+		DisplayName: Espejo de Madera
+		Tooltip: ""
+	}
+
+	AluminiumAxe: {
+		DisplayName: Hacha de Guerra de Aluminio
+		Tooltip: ""
+	}
+
+	AluminiumHammer: {
+		DisplayName: Martillo de Aluminio
+		Tooltip: ""
+	}
+
+	AluminiumPickaxe: {
+		DisplayName: Pico de Aluminio
+		Tooltip: ""
+	}
+
+	BismuthumDrill: {
+		DisplayName: Taladro de Bismuto
+		Tooltip: ""
+	}
+
+	BismuthumPickaxe: {
+		DisplayName: Pico de Bismuto
+		Tooltip: ""
+	}
+
+	BismuthumSaw: {
+		DisplayName: Sierra de Bismuto
+		Tooltip: ""
+	}
+
+	BronzeAxe: {
+		DisplayName: Hacha de Bronce
+		Tooltip: ""
+	}
+
+	BronzeHammer: {
+		DisplayName: Martillo de Bronce
+		Tooltip: ""
+	}
+
+	BronzePickaxe: {
+		DisplayName: Pico de Bronce
+		Tooltip: ""
+	}
+
+	GalvornPickaxe: {
+		DisplayName: Pico de Galvorn
+		Tooltip: ""
+	}
+
+	GalvornWaraxe: {
+		DisplayName: Hacha de Guerra de Galvorn
+		Tooltip: ""
+	}
+
+	GalvornWarhammer: {
+		DisplayName: Martillo de Guerra de Galvorn
+		Tooltip: ""
+	}
+
+	JaguarsHamaxe: {
+		DisplayName: Hacha-Martillo del Jaguar
+		Tooltip: ""
+	}
+
+	JaguarsPickaxe: {
+		DisplayName: Pico del Jaguar
+		Tooltip: ""
+	}
+
+	PrometheusFire: {
+		Tooltip: Fuente infinita de antorchas
+		DisplayName: Fuego de Prometeo
+	}
+
+	AluminiumBlade: {
+		Item.AssassinDamage: daño de asesino
+		Tooltip: ""
+		DisplayName: Espada de Aluminio
+	}
+
+	Prominence: {
+		Item.AssassinDamage: daño de asesino
+		Tooltip: ""
+		DisplayName: Prominencia
+	}
+
+	SoulEater: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Devorador de Almas
+		Tooltip:
+			'''
+			Al causar daño, aparecen almas inquietas cerca de ti. Aumentan tu
+			daño, pero disminuyen tu salud
+			'''
+	}
+
+	Whirlpool: {
+		Item.AssassinDamage: daño de asesino
+		DisplayName: Remolino
+		Tooltip: Crea un vórtice giratorio alrededor del jugador
+	}
+
+	MoonlightStaff: {
+		Tooltip: ""
+		DisplayName: Bastón de Luz Lunar
+	}
+
+	HarpOfOrpheus: {
+		Tooltip: ""
+		DisplayName: Arpa de Orfeo
+	}
+
+	GalvornStaff: {
+		Tooltip: Crea proyectiles verdes que caen del cielo
+		DisplayName: Bastón de Galvorn
+	}
+
+	BismuthumGlove: {
+		Tooltip: ""
+		DisplayName: Guante de Bismuto
+	}
+
+	RainOfTears: {
+		DisplayName: Lluvia de Lágrimas
+		Tooltip: Crea lágrimas que caen del cielo
+	}
+
+	BismuthumSword: {
+		DisplayName: Espada de Bismuto
+		Tooltip: ""
+	}
+
+	BronzeSword: {
+		DisplayName: Espada de Bronce
+		Tooltip: ""
+	}
+
+	DwarvenBattleAxe: {
+		DisplayName: Hacha de Batalla Dwarven
+		Tooltip: ""
+	}
+
+	GalvornBlade: {
+		DisplayName: Espada de Galvorn
+		Tooltip: ""
+	}
+
+	OrcishSword: {
+		DisplayName: Espada Orcish
+		Tooltip: ""
+	}
+
+	RunicBlade: {
+		DisplayName: Espada Rúnica
+		Tooltip: ""
+	}
+
+	SharkHalberd: {
+		DisplayName: Alabarda de Tiburón
+		Tooltip: ""
+	}
+
+	SolarWind: {
+		DisplayName: Viento Solar
+		Tooltip: <clic derecho> para crear una tormenta solar
+	}
+
+	ToadGun: {
+		DisplayName: Pistola Sapo
+		Tooltip: ""
+	}
+
+	GalvornBow: {
+		Tooltip: ""
+		DisplayName: Arco de Galvorn
+	}
+
+	BronzeBow: {
+		Tooltip: ""
+		DisplayName: Arco de Bronce
+	}
+
+	BismuthumCrossbow: {
+		Tooltip: ""
+		DisplayName: Ballesta de Bismuto
+	}
+
+	AluminiumBow: {
+		Tooltip: ""
+		DisplayName: Arco de Aluminio
+	}
+
+	GrannyGun: {
+		DisplayName: Pistola de la Abuela
+		Tooltip: Más vieja que tu Abuela
+	}
+
+	Heat: {
+		DisplayName: Calor
+		Tooltip: Las flechas de madera encienden a los enemigos
+	}
+
+	UniversalCarbine: {
+		DisplayName: Carabina Universal
+		Tooltip: ¿Flechas? ¿Balas? No importa
+	}
+
+	AdamantiteJavelin: {
+		DisplayName: Jabalina de Adamantita
+		Tooltip: ""
+	}
+
+	ChlorophyteJavelin: {
+		DisplayName: Jabalina de Clorofita
+		Tooltip: ""
+	}
+
+	CobaltJavelin: {
+		DisplayName: Jabalina de Cobalto
+		Tooltip: ""
+	}
+
+	MythrilJavelin: {
+		Tooltip: ""
+		DisplayName: Jabalina de Mitrilo
+	}
+
+	JaguarsDagger: {
+		Tooltip: ""
+		DisplayName: Daga del Jaguar
+	}
+
+	JaguarsChakram: {
+		Tooltip: ""
+		DisplayName: Chackram del Jaguar
+	}
+
+	HectorsSpear: {
+		Tooltip: <clic derecho> para usar como arma arrojadiza
+		DisplayName: Lanza de Héctor
+	}
+
+	OrcishJavelin: {
+		DisplayName: Jabalina Orcish
+		Tooltip: ""
+	}
+
+	OrichalcumJavelin: {
+		DisplayName: Jabalina de Oricálco
+		Tooltip: ""
+	}
+
+	PalladiumJavelin: {
+		DisplayName: Jabalina de Paladio
+		Tooltip: ""
+	}
+
+	SharkJavelin: {
+		DisplayName: Jabalina de Tiburón
+		Tooltip: ""
+	}
+
+	TitaniumJavelin: {
+		Tooltip: ""
+		DisplayName: Jabalina de Titanio
+	}
+
+	SolarDisk: {
+		Tooltip: ""
+		DisplayName: Disco Solar
+	}
+
+	SharkKnife: {
+		Tooltip: ""
+		DisplayName: Cuchillo de Tiburón
+	}
+
+	TestItem: {
+		DisplayName: Objeto de Prueba
+		Tooltip: ""
+	}
+
+	TestItem2: {
+		DisplayName: Objeto de Prueba2
+		Tooltip: ""
+	}
+
+	AdamantiteHat: {
+		DisplayName: Sombrero de Adamantita
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 19%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 15%.
+			'''
+		AdamantiteHatSetBonus: 33% de probabilidad de no consumir objeto arrojadizo.
+	}
+
+	AdamantiteHeadpiece: {
+		DisplayName: Tocado de Adamantita
+		Tooltip:
+			'''
+			El daño de súbdito aumenta un 21%.
+			Aumenta tu número máximo de súbditos.
+			'''
+		AdamantiteHeadpieceSetBonus: Aumenta el daño de súbdito un 12%, aumenta el número máximo de súbditos.
+	}
+
+	BismuthumBreastplate: {
+		DisplayName: Peto de Bismuto
+		Tooltip:
+			'''
+			El daño aumenta un 15%.
+			La probabilidad de golpe crítico aumenta un 10%.
+			'''
+	}
+
+	BismuthumHelmet: {
+		BismuthumHelmetSetBonus: Todos tus ataques envenenan a los enemigos.
+		DisplayName: Yelmo de Bismuto
+		Tooltip:
+			'''
+			La velocidad y el daño de lanzamiento aumentan un 30%, la probabilidad de golpe crítico de lanzamiento aumenta un 18%.
+			El daño cuerpo a cuerpo aumenta un 30%, la probabilidad de golpe crítico cuerpo a cuerpo aumenta un 20%.
+			'''
+	}
+
+	BismuthumHeadgear: {
+		BismuthumHeadgearSetBonus: Todos tus ataques envenenan a los enemigos.
+		DisplayName: Tocado de Bismuto
+		Tooltip:
+			'''
+			El daño a distancia aumenta un 30%.
+			La probabilidad de no consumir munición aumenta un 20%.
+			'''
+	}
+
+	BismuthumHat: {
+		BismuthumHatSetBonus: Todos tus ataques envenenan a los enemigos.
+		DisplayName: Sombrero de Bismuto
+		Tooltip:
+			'''
+			El daño mágico y de súbdito aumentan un 27%, reduce el uso de maná un 35%.
+			Aumenta tu número máximo de súbditos, aumenta el maná máximo en 120.
+			'''
+	}
+
+	BismuthumLeggings: {
+		DisplayName: Grebas de Bismuto
+		Tooltip:
+			'''
+			La velocidad de movimiento aumenta un 35%.
+			La probabilidad de golpe crítico aumenta un 14%.
+			'''
+	}
+
+	BripesBoots: {
+		DisplayName: Botas de Bripe
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	BripesChestplate: {
+		DisplayName: Coraza de Bripe
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	BripesHeadgear: {
+		DisplayName: Tocado de Bripe
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	BronzeMask: {
+		BronzeSetBonus: La velocidad de lanzamiento aumenta un 7%, +1 de defensa.
+		DisplayName: Máscara de Bronce
+		Tooltip:
+			'''
+			El daño de lanzamiento aumenta un 5%, la velocidad de lanzamiento aumenta un 12%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 4%.
+			'''
+	}
+
+	BronzeBreastplate: {
+		DisplayName: Peto de Bronce
+		Tooltip: El daño de lanzamiento aumenta un 6%.
+	}
+
+	BronzeLeggings: {
+		DisplayName: Grebas de Bronce
+		Tooltip: La velocidad de movimiento aumenta un 10%.
+	}
+
+	CobaltHeadgear: {
+		DisplayName: Tocado de Cobalto
+		CobaltHeadgearSetBonus: 33% de probabilidad de no consumir objeto arrojadizo.
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 10%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 10%.
+			'''
+	}
+
+	ChlorophyteHeadpiece: {
+		Tooltip:
+			'''
+			27% de aumento de daño de súbdito.
+			Aumenta tu número máximo de súbditos.
+			'''
+		DisplayName: Tocado de Clorofita
+		ChlorophyteHeadpieceSetBonus: El daño de súbdito aumenta un 15%, aumenta tu número máximo de súbditos.
+	}
+
+	ChlorophyteHeadgear: {
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 19%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 15%.
+			'''
+		DisplayName: Tocado de Clorofita
+		ChlorophyteHeadgearSetBonus: 25% de aumento de velocidad de lanzamiento.
+	}
+
+	CobaltHeadpiece: {
+		CobaltHeadpieceSetBonus: El daño de súbdito aumenta un 8%, aumenta tu número máximo de súbditos.
+		DisplayName: Tocado de Cobalto
+		Tooltip: El daño de súbdito aumenta un 8%, aumenta tu número máximo de súbditos.
+	}
+
+	CompoziussHood: {
+		DisplayName: Capucha de Compozius
+		Tooltip: ¡Genial para hacerse pasar por desarrollador!
+	}
+
+	CompoziussRobe: {
+		DisplayName: Túnica de Compozius
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	EfromomrsBreastplate: {
+		DisplayName: Peto de Efromomr
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	EfromomrsHood: {
+		DisplayName: Capucha de Efromomr
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	EfromomrsLeggings: {
+		DisplayName: Grebas de Efromomr
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	FeralHelmet: {
+		FeralSetBonus: La velocidad cuerpo a cuerpo aumenta un 15%.
+		DisplayName: Yelmo Feral
+		Tooltip:
+			'''
+			El daño cuerpo a cuerpo aumenta un 5%.
+			La probabilidad de golpe crítico cuerpo a cuerpo aumenta un 3%.
+			'''
+	}
+
+	FeralBreastplate: {
+		DisplayName: Peto Feral
+		Tooltip: El daño cuerpo a cuerpo aumenta un 7%.
+	}
+
+	FeralLeggings: {
+		DisplayName: Grebas Feral
+		Tooltip:
+			'''
+			La probabilidad de golpe crítico cuerpo a cuerpo aumenta un 6%.
+			La velocidad de movimiento se reduce un 14%.
+			'''
+	}
+
+	FrozenWarderersHood: {
+		FrozenWardererSetBonus: El daño mágico aumenta un 8%.
+		DisplayName: Capucha del Guardián Helado
+		Tooltip: El daño mágico aumenta un 6%.
+	}
+
+	FrozenWarderersBreastplate: {
+		DisplayName: Peto del Guardián Helado
+		Tooltip:
+			'''
+			Aumenta el maná máximo en 40.
+			Reduce el uso de maná un 15%.
+			'''
+	}
+
+	FrozenWarderersLeggings: {
+		DisplayName: Grebas del Guardián Helado
+		Tooltip: La velocidad de movimiento aumenta un 10%.
+	}
+
+	GalvornHelmet: {
+		GalvornSetBonus: El daño mágico aumenta un 8%.
+		DisplayName: Yelmo de Galvorn
+		Tooltip:
+			'''
+			La probabilidad de golpe crítico aumenta un 7%, el daño de golpe crítico aumenta un 25%.
+			La velocidad de movimiento se reduce un 3%.
+			'''
+	}
+
+	GalvornBreastplate: {
+		DisplayName: Peto de Galvorn
+		Tooltip:
+			'''
+			El daño aumenta un 7%, la velocidad cuerpo a cuerpo aumenta un 30%
+			La velocidad de movimiento se reduce un 5%.
+			'''
+	}
+
+	GalvornLeggings: {
+		DisplayName: Grebas de Galvorn
+		Tooltip: ""
+	}
+
+	HallowedFaceShield: {
+		HallowedFaceShieldSetBonus: La velocidad de lanzamiento aumenta un 35%.
+		DisplayName: Protector Facial Sagrado
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 14%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 15%.
+			'''
+	}
+
+	HallowedHeadpiece: {
+		HallowedHeadpieceSetBonus: El daño de súbdito aumenta un 16%, aumenta tu número máximo de súbditos.
+		DisplayName: Tocado Sagrado
+		Tooltip:
+			'''
+			El daño de súbdito aumenta un 21%.
+			Aumenta tu número máximo de súbditos.
+			'''
+	}
+
+	JaguarsMask: {
+		JaguarSetBonus: La velocidad de movimiento aumenta un 30%.
+		DisplayName: Máscara de Jaguar
+		Tooltip: La velocidad de movimiento aumenta un 18%.
+	}
+
+	JaguarsBreastplate: {
+		DisplayName: Peto del Jaguar
+		Tooltip:
+			'''
+			Aumento del tiempo máximo de vuelo.
+			Aumento de la altura de salto.
+			'''
+	}
+
+	JaguarsLeggings: {
+		DisplayName: Grebas del Jaguar
+		Tooltip: La velocidad de movimiento aumenta un 20%.
+	}
+
+	KazzinaksBreastplate: {
+		DisplayName: Peto de Kazzinak
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	KazzinaksHelmet: {
+		DisplayName: Yelmo de Kazzinak
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	KazzinaksLeggings: {
+		DisplayName: Grebas de Kazzinak
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	MeuRansHood: {
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+		DisplayName: Capucha de MeuRan
+	}
+
+	MeuRansGreaves: {
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+		DisplayName: Grebas de MeuRan
+	}
+
+	MeuRansBreastplate: {
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+		DisplayName: Peto de MeuRan
+	}
+
+	MrPigeonsJacket: {
+		DisplayName: Chaqueta de Mr. Pigeon
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	MrPigeonsBoots: {
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+		DisplayName: Botas de Mr. Pigeon
+	}
+
+	MrPigeonsMask: {
+		DisplayName: Máscara de Mr. Pigeon
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	MythrilHeadpiece: {
+		MythrilHeadpieceSetBonus: El daño de súbdito aumenta un 9%, aumenta tu número máximo de súbditos.
+		DisplayName: Tocado de Mithril
+		Tooltip:
+			'''
+			El daño de súbdito aumenta un 16%.
+			Aumenta tu número máximo de súbditos.
+			'''
+	}
+
+	MythrilHeadgear: {
+		MythrilHeadgearSetBonus: 33% de probabilidad de no consumir objeto arrojadizo.
+		DisplayName: Tocado de Mithril
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 14%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 12%.
+			'''
+	}
+
+	NokilosSuit: {
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+		DisplayName: Traje de Nokilos
+	}
+
+	NokilosMask: {
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+		DisplayName: Máscara de Nokilos
+	}
+
+	NokilosBoots: {
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+		DisplayName: Botas de Nokilos
+	}
+
+	OrcishBreastplate: {
+		Tooltip: El daño de lanzamiento aumenta un 15%.
+		DisplayName: Peto Orcish
+	}
+
+	OrcishHelmet: {
+		OrcishHelmetSetBonus: 33% de probabilidad de no consumir objeto arrojadizo, 8% de aumento de probabilidad de golpe crítico de lanzamiento.
+		DisplayName: Yelmo Orcish
+		Tooltip: La velocidad de lanzamiento aumenta un 25%.
+	}
+
+	OrcishLeggings: {
+		DisplayName: Grebas Orcish
+		Tooltip: La velocidad de movimiento aumenta un 18%.
+	}
+
+	OrichalcumHat: {
+		PalladiumHatSetBonus: 33% de probabilidad de no consumir objeto arrojadizo.
+		DisplayName: Sombrero de Oricálco
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 15%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 12%.
+			'''
+	}
+
+	OrichalcumHeadpiece: {
+		OrihalcumHeadpieceSetBonus: El daño de súbdito aumenta un 9%, aumenta tu número máximo de súbditos.
+		DisplayName: Tocado de Oricálco
+		Tooltip:
+			'''
+			El daño de súbdito aumenta un 17%.
+			Aumenta tu número máximo de súbditos.
+			'''
+	}
+
+	PalladiumHat: {
+		PalladiumHatSetBonus: 33% de probabilidad de no consumir objeto arrojadizo.
+		DisplayName: Sombrero de Paladio
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 11%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 10%.
+			'''
+	}
+
+	PalladiumHood: {
+		PalladiumHoodSetBonus: El daño de súbdito aumenta un 7%, aumenta tu número máximo de súbditos.
+		DisplayName: Capucha de Paladio
+		Tooltip:
+			'''
+			El daño de súbdito aumenta un 15%.
+			Aumenta tu número máximo de súbditos.
+			'''
+	}
+
+	PikemansBreastplate: {
+		DisplayName: Peto de Piquero
+		Tooltip: El daño de lanzamiento aumenta un 12%.
+	}
+
+	PikemansHelmet: {
+		DisplayName: Yelmo de Piquero
+		Tooltip:
+			'''
+			La velocidad de lanzamiento aumenta un 12%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 5%.
+			'''
+		PikemanSetBonus: 33% de probabilidad de no consumir objeto arrojadizo.
+	}
+
+	PikemansLeggings: {
+		DisplayName: Grebas de Piquero
+		Tooltip: La velocidad de movimiento aumenta un 8%.
+	}
+
+	RekstrisBoots: {
+		DisplayName: Botas de Rekstri
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	RekstrisBreastplate: {
+		DisplayName: Peto de Rekstri
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	RekstrisHelmet: {
+		DisplayName: Yelmo de Rekstri
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	RivetedHood: {
+		RivetedSetBonus: Regeneración más rápida tras un golpe crítico.
+		DisplayName: Capucha Remachada
+		Tooltip: El daño crítico aumenta un 10%.
+	}
+
+	RivetedBoots: {
+		DisplayName: Botas Remachadas
+		Tooltip: La velocidad de movimiento aumenta un 8%
+	}
+
+	RivetedJacket: {
+		DisplayName: Chaqueta Remachada
+		Tooltip:
+			'''
+			El daño de asesino aumenta un 8%.
+			La probabilidad de golpe crítico aumenta un 6%
+			'''
+	}
+
+	RunicHood: {
+		RunicSetBonus: Todas las bonificaciones rúnicas aumentan tres veces.
+		DisplayName: Capucha Rúnica
+		Tooltip:
+			'''
+			Reduce el consumo de maná en un 23%.
+			Aumenta la regeneración de maná.
+			'''
+	}
+
+	RunicRobe: {
+		DisplayName: Túnica Rúnica
+		Tooltip:
+			'''
+			15% de aumento de daño mágico.
+			10% de aumento de probabilidad de golpe crítico mágico.
+			'''
+	}
+
+	TitaniumHat: {
+		TitaniumHatSetBonus: 33% de probabilidad de no consumir el objeto arrojadizo.
+		DisplayName: Sombrero de Titanio
+		Tooltip:
+			'''
+			El daño y la velocidad de lanzamiento aumentan un 20%.
+			La probabilidad de golpe crítico de lanzamiento aumenta un 15%.
+			'''
+	}
+
+	TitaniumHood: {
+		TitaniumHoodSetBonus: El daño de súbdito aumenta un 12%, aumenta tu número máximo de súbditos.
+		DisplayName: Capucha de Titanio
+		Tooltip:
+			'''
+			El daño de súbdito aumenta un 22%.
+			Aumenta tu número máximo de súbditos.
+			'''
+	}
+
+	VolvoxsBoots: {
+		DisplayName: Botas de Bassalt
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	VolvoxsBreastplate: {
+		DisplayName: Peto de Bassalt
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	VolvoxsHelmet: {
+		DisplayName: Yelmo de Bassalt
+		Tooltip: ¡Genial para hacerse pasar por un desarrollador!
+	}
+
+	YeomansHat: {
+		YeomanSetBonus: +1 de defensa.
+		DisplayName: Sombrero de Yeoman
+		Tooltip:
+			'''
+			El daño a distancia aumenta un 9%.
+			El daño de flecha aumenta un 12%.
+			'''
+	}
+
+	YeomansLeggings: {
+		DisplayName: Grebas de Yeoman
+		Tooltip: La velocidad de movimiento aumenta un 9%.
+	}
+
+	YeomansShirt: {
+		DisplayName: Camisa de Yeoman
+		Tooltip: La probabilidad de golpe crítico a distancia aumenta un 7%.
+	}
+}
+
+Buffs: {
+	Absorption: {
+		DisplayName: Absorción
+		Description: Tu reflejo de daño se incrementa
+	}
+
+	AuraOfEmpire: {
+		DisplayName: Aura del Imperio
+		Description: La ciudad te protege
+	}
+
+	BansheesScream: {
+		DisplayName: Grito de Banshee
+		Description: Tu velocidad de movimiento se reduce
+	}
+
+	BismuthumPoisoningEnemy: {
+		DisplayName: Envenenamiento de Bismuto
+		Description: Asustado, la víctima pierde vida
+	}
+
+	BismuthumPoisoningPlayer: {
+		DisplayName: Envenenamiento de Bismuto
+		Description: Asustado, la víctima pierde vida
+	}
+
+	Blessing: {
+		DisplayName: Bendición
+		Description: Se incrementa tu vida máxima, maná y regeneración de vida
+	}
+
+	BoneTrap: {
+		DisplayName: Trampa de Hueso
+		Description: No puedes moverte
+	}
+
+	DeathWish: {
+		DisplayName: Deseo de Muerte
+		Description: Obtienes estadísticas extra, pero comienzas a morir si no matas enemigos
+	}
+
+	EnergyShield: {
+		DisplayName: Escudo de Energía
+		Description: Obtienes un escudo alrededor del jugador que refleja proyectiles
+	}
+
+	FearOfMaze: {
+		DisplayName: Miedo al Laberinto
+		Description: Estás muy asustado y no puedes usar el mapa, colocar antorchas ni teletransportarte
+	}
+
+	FightingSpirit: {
+		DisplayName: Espíritu de Lucha
+		Description: Tu daño aumenta, pero tu reflejo de daño disminuye
+	}
+
+	Glaciation: {
+		DisplayName: Glaciación
+		Description: No puedes moverte, pero tu regeneración de vida aumenta significativamente
+	}
+
+	HealthDevourment: {
+		DisplayName: Devorador de Salud
+		Description: Tu salud disminuye rápidamente
+	}
+
+	HiddenInTheShadows: {
+		DisplayName: Escondido en las Sombras
+		Description: Eres invisible
+	}
+
+	Hypersonic: {
+		DisplayName: Hipersónico
+		Description: Las armas arrojadizas vuelan más rápido
+	}
+
+	Invulnerability: {
+		DisplayName: Invulnerabilidad
+		Description: ¡Eres inmortal!
+	}
+
+	KillingSpreeI: {
+		DisplayName: Racha de Asesinatos I
+		Description: Quieres matar una y otra vez
+	}
+
+	KillingSpreeII: {
+		DisplayName: Racha de Asesinatos II
+		Description: Quieres matar una y otra vez
+	}
+
+	KillingSpreeIII: {
+		DisplayName: Racha de Asesinatos III
+		Description: Quieres matar una y otra vez
+	}
+
+	MagicFreezing: {
+		DisplayName: Congelación Mágica
+		Description: No puedes moverte, pero regeneras tu vida rápidamente usando tu maná
+	}
+
+	MagiciansAura: {
+		DisplayName: Aura de Mago
+		Description: Tu reflejo de daño aumenta ligeramente
+	}
+
+	MiningII: {
+		DisplayName: Minería II
+		Description: Tu velocidad de minería aumenta significativamente
+	}
+
+	Paralisys: {
+		DisplayName: Parálisis
+		Description: Mods.Bismuth.Buffs.Paralisys.Description
+	}
+
+	Persecution: {
+		DisplayName: Persecución
+		Description: Después de infligir daño, tu velocidad aumenta
+	}
+
+	PhoenixBlessing: {
+		DisplayName: Bendición de Fénix
+		Description: Tu reflejo de daño aumenta un 50%
+	}
+
+	Reviving: {
+		DisplayName: Resurrección
+		Description: Los héroes nunca mueren
+	}
+
+	SkillCooldown: {
+		DisplayName: Recarga de Habilidad
+		Description: No puedes usar habilidades activas
+	}
+
+	Specularity: {
+		DisplayName: Espejismo
+		Description: Eres inmortal
+	}
+
+	Stealth: {
+		DisplayName: Crueldad
+		Description: Tu daño de asesino y probabilidad crítica aumentan, pero recibes más daño
+	}
+
+	SteelSkin: {
+		DisplayName: Piel de Acero
+		Description: Obtienes estadísticas de bonificación cuando te quedas quieto
+	}
+
+	StunningWeapons: {
+		DisplayName: Armas Aturdidoras
+		Description: Tu arma puede aturdir al enemigo
+	}
+
+	SwampQuagmire: {
+		DisplayName: Ciénaga de Pantano
+		Description: Tu velocidad de movimiento disminuye
+	}
+
+	TeleportCooldown: {
+		DisplayName: Tiempo de Recarga de Teletransporte
+		Description: No puedes usar la teletransportación
+	}
+
+	TribeCurse: {
+		DisplayName: Maldición Tribal
+		Description: Magia ancestral te absorbe desde el interior...
+	}
+
+	VampireBat: {
+		DisplayName: Murciélago Vampiro
+		Description: Na-na-na-na-na-na-na-na, Batmaaan, Batmaaan
+	}
+
+	WoundHealing: {
+		DisplayName: Curación de Heridas
+		Description: Tu regeneración de vida aumenta
+	}
+
+	AutoTargeting: {
+		DisplayName: Apuntado Automático
+		Description: Tus flechas, balas y cohetes apuntan al enemigo
+	}
+
+	Converter: {
+		DisplayName: Escudo Mágico
+		Description: Cuando recibes daño, primero gastas tu maná
+	}
+
+	Crowd: {
+		DisplayName: Multitud
+		Description: Tu recuento máximo de súbditos aumenta
+	}
+
+	EtherealProjectiles: {
+		DisplayName: Proyectiles Etéreos
+		Description: Todos tus proyectiles pueden moverse a través de los bloques
+	}
+
+	MoreEnergy: {
+		DisplayName: Más Energía
+		Description: Tu daño cuerpo a cuerpo aumenta varias veces
+	}
+
+	Motionless: {
+		DisplayName: Inmóvil
+		Description: Obtienes estadísticas de bonificación, pero no puedes moverte
+	}
+
+	NoLimit: {
+		DisplayName: ¡Sin Límite!
+		Description: ¡Puedes lanzar hechizos gratis!
+	}
+
+	Rage: {
+		DisplayName: Rabia
+		Description: Tu velocidad cuerpo a cuerpo aumenta
+	}
+
+	EthernalProjectiles: {
+		Description: Todos tus proyectiles pueden moverse a través de los bloques
+		DisplayName: Proyectiles Eternos
+	}
+
+	DicePlaying: {
+		DisplayName: Juego de Dados
+		Description: Prepara tu dinero y simplemente disfruta...
+	}
+
+	AirElemental: {
+		Description: El elemental de aire lucha por ti
+		DisplayName: Elemental de Aire
+	}
+
+	EarthElemental: {
+		DisplayName: Elemental de Tierra
+		Description: El elemental de tierra lucha por ti
+	}
+
+	FireElemental: {
+		DisplayName: Elemental de Fuego
+		Description: El elemental de fuego lucha por ti
+	}
+
+	FlowOfWind: {
+		DisplayName: Flujo de Viento
+		Description: Tu velocidad de movimiento aumenta, caes lentamente
+	}
+
+	WaterElemental: {
+		DisplayName: Elemental de Agua
+		Description: El elemental de agua lucha por ti
+	}
+
+	InvigoratingDrink: {
+		DisplayName: Bebida Vigorizante
+		Description: ¡Te sientes alegre y lleno de energía!
+	}
+}
+
+NPCs: {
+	Alchemist: {
+		DisplayName: Alquimista
+
+		Name: {
+			Rizo: Paulo
+			Albert: Di
+			Bernando: Sen-Zhermen
+			Seefeld: Aranas
+			Robert: Abelle
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			AlchemistButton_9: Resplandor Diurno
+			AlchemistButton_7: Aquí están las flores de helecho
+			AlchemistButton_6: No hay problema
+			AlchemistButton_5: ¿Cuál es la siguiente tarea?
+			AlchemistButton_4: No es tan fácil encontrar la imagen
+			AlchemistButton_3: Los cielos perdieron una imagen
+			AlchemistButton_2: Entendido
+			AlchemistButton_1: Dime qué necesitas
+			Alchemist_4: En ese caso, esperaré. Por cierto, el santuario está en algún lugar del cielo.
+			Alchemist_9: Sigue buscando, solo necesito 5.
+			Alchemist_12: De acuerdo, entonces tráeme 30 para que pueda terminar la mezcla. ¡Buena suerte!
+			Alchemist_14: Sabes bien qué hacer en tu tiempo libre, ¿eh? Espero las flores.
+			Alchemist_20: No, lamentablemente aún no he terminado de resolver el misterio del éter. Vuelve más tarde.
+			Alchemist_23: Genial, empezaré a cargar la piedra ahora mismo. Vuelve más tarde.
+			AlchemistButton_8: Necesito más tiempo para esto
+			AlchemistButton_10: Malahierba
+			AlchemistButton_11: Resplandor diurno, como ordenaste
+			AlchemistButton_12: Dame un poco más de tiempo
+			AlchemistButton_13: Pero ¿por qué me necesitas a mí?
+			AlchemistButton_14: No hay artefactos que no pueda encontrar
+			AlchemistButton_15: Aquí está la tabula
+			AlchemistButton_16: ¿Cómo va la traducción?
+			AlchemistButton_17: Me gustaría cargar la piedra
+			AlchemistButton_18: ¿Está lista la piedra?
+			Alchemist_16: Sabes, has sido de gran ayuda desde que llegué a estas tierras. Creo que mereces conocer el mayor artefacto de la alquimia. Durante 400 años, mi familia ha guardado la verdadera Piedra Filosofal. Entre sus propiedades, hay una muy fascinante: puede salvarte cuando estás a las puertas de la muerte, aunque después debe ser cargada.
+			Alchemist_13: El resplandor diurno no se recogerá solo, amigo. ¿Lo tienes ya?
+			Alchemist_11: De acuerdo, en ese caso, añadiré un poco de malahierba... Bien, está hecho, veamos el resultado... Oh, algo va mal, amigo, no me siento muy bien...
+			Alchemist_8: ¿Has conseguido ya las flores de helecho?
+			Alchemist_3: En ese caso, esperaré. Por cierto, el santuario está en algún lugar del cielo.
+			Alchemist_1: Querido amigo, ¿tienes un minuto para escucharme?
+			AlchemistNQ_4:
+				'''
+				Como dijo una vez un sabio colega mío:
+				Lo que ocurrió una vez podría no repetirse. Sin embargo, lo que ocurrió dos veces seguro que volverá a ocurrir
+				'''
+			AlchemistNQ_3: Si tan solo supieras cómo inventé una poción extraña.
+			AlchemistNQ_2: No compres pociones de {0}, su magia son trucos baratos.
+			AlchemistNQ_1: ¡Buenas noticias a todos, el slime está rezumando otra vez!
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	AlchemistDeath.DisplayName: Alquimista
+
+	BabaYaga: {
+		DisplayName: Bruja del Pantano
+
+		TownNPCMood: {
+			Content: Estoy contenta.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			SwampWitchNQ_4: ¿Has visto zapatos de plata por ahí?
+			SwampWitchNQ_3: ¿Quién es {0}? Su magia es fuerte.
+			SwampWitchNQ_2: Que la magia te guíe, héroe.
+			SwampWitchNQ_1: Pizca de copa de la muerte, tacón de zapato
+			SwampWitch_12: ¡Excelente trabajo, joven héroe! Cumplo mi palabra: estas pociones te mantendrán a salvo de muchos venenos y enfermedades. Si necesitas más, siempre puedes comprarlas aquí.
+			SwampWitch_10: Tráeme la piedra y serás recompensado.
+			SwampWitch_9: ¿Encontraste la piedra?
+			SwampWitch_7: ¡Ah, si no es el joven héroe! Llegaste justo a tiempo: acabo de terminar de leer el tomo. Ahora nada te impedirá conseguir la piedra.
+			SwampWitch_6: Mi investigación aún no ha terminado, vuelve más tarde.
+			SwampWitch_4: Necesito el libro para continuar mi investigación.
+			SwampWitch_3: ¿Has traído el libro?
+			SwampWitch_1: Joven héroe... Sabía que vendrías... Escúchame, lo juro, no te arrepentirás
+			SwampWitchAnsv_10: ¡Prepárate para perder la vida!
+			SwampWitchAnsv_9: Sí, pero no te lo mereces
+			SwampWitchAnsv_8: Es más difícil de lo que parece
+			SwampWitchAnsv_7: Sí, tómalo
+			SwampWitchAnsv_6: ¡Conseguiré la piedra!
+			SwampWitchAnsv_5: ¿Dónde puedo encontrar la piedra?
+			SwampWitchAnsv_4: ¿Cómo va la investigación?
+			SwampWitchAnsv_3_2: Continuaré mis búsquedas
+			SwampWitchAnsv_3: Encontré el libro
+			SwampWitchAnsv_2: Creo que puedo hacerlo
+			SwampWitchAnsv_1: ¿Qué necesitas de mí?
+			SwampWitchName_5: Flemet
+			SwampWitchName_4: Telsa
+			SwampWitchName_3: Whispera
+			SwampWitchName_2: Priaha
+			SwampWitchName_1: Hagata
+		}
+	}
+
+	Banshee: {
+		DisplayName: Banshee
+
+		BossChecklistIntegration: {
+			EntryName: Banshee
+			SpawnInfo: Aparece solo si entras en el templo de agua
+		}
+	}
+
+	Beggar: {
+		DisplayName: Mendigo
+
+		Name: {
+			Rizo: Farham
+			Albert: Angrenor
+			Bernando: Oliver
+			Seefeld: Gotie
+			Robert: Walter
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			BeggarAnsv_5: Jugar a los dados
+			BeggarAnsv_4: Estaba ocupado con otras cosas
+			BeggarAnsv_3: Aquí tienes comida para ti
+			BeggarAnsv_2: Te traeré comida
+			BeggarAnsv_1: ¿Qué necesitas de mí?
+			BeggarNQ_6: Ahora tienes {0} victorias en total y {1} seguidas.
+			BeggarNQ_5: Lo siento, pero no tienes suficiente dinero para hacer una apuesta. Vuelve cuando ganes al menos una moneda de oro.
+			BeggarNQ_4: Qué buen día hace hoy... ¿Tienes algo de beber?
+			BeggarNQ_3: "{0} es más de lo que aparenta. Vigílale de cerca."
+			BeggarNQ_2: ¿Podrías darme una moneda?
+			BeggarNQ_1: "{0} es el mejor tío del pueblo."
+			Beggar_4: ¿Ya tienes la comida?
+			Beggar_3: Sé que un valiente guerrero como tú no se negaría a ayudar a un pobre anciano. Tráeme un aperitivo y, tal vez, te recompense... Es broma, obviamente.
+			Beggar_1: E-je-je, eres ese novato, ¿verdad? ¡Tengo un trabajo para ti, jovencito!
+			BeggarAnsv_6: Mods.Bismuth.NPCs.Beggar.Chat.BeggarAnsv_6
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	BoneHand.DisplayName: Mano de Hueso
+
+	DwarfBlacksmith: {
+		DisplayName: Herrero Dwarven
+
+		Name: {
+			Rizo: Gimli
+			Albert: Balin
+			Bernando: Durin
+			Seefeld: Thrain
+			Robert: Alrobad
+			Gerald: Baruk
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			Blacksmith_1: "{0}, apuesto a que esos goblins sucios también te sacan de quicio, ¿verdad? Bueno, tengo una solución para eso."
+			Blacksmith_3: Hay demasiados hocicos de goblin cerca de este pueblo, pero es un problema solucionable, si me traes el plano, por supuesto.
+			Blacksmith_5: La espada aún no está lista, vuelve más tarde.
+			Blacksmith_7: ¡Juro por mi martillo que llegas justo a tiempo! Tengo una oferta para ti.
+			Blacksmith_9: Es hora de que el minotauro pierda uno de sus cuernos. ¿Has matado ya a la bestia?
+			Blacksmith_10: En ese caso no pierdas más tiempo, te estaré esperando.
+			Blacksmith_12: Sabes, hace mucho tiempo no podía llamarme el último superviviente de los gnomos. Nuestra civilización prosperaba; bajo tierra éramos los reyes, pero un solo y poderoso terremoto acabó con toda nuestra historia. Muchos de los fallecidos aún no han encontrado la paz y siguen vagando por las minas como esqueletos.
+			Blacksmith_14: No puedo esperar para empezar a forjar equipo con esta aleación. ¿Ya has obtenido 5 petos?
+			Blacksmith_15: En ese caso, no pierdas más tiempo, ya sabes lo que tienes que hacer.
+			BlacksmithNQ_1: ¡Qué grandes pociones tenía nuestra civilización; los niños podían beberlas!
+			BlacksmithNQ_2: A veces me pregunto si {0} es mi pariente lejano.
+			BlacksmithNQ_3: ¿No has visto algún anillo bonito por ahí, verdad? ¿No? Bueno, entonces.
+			BlacksmithNQ_4: Hace mucho tiempo, antes del terremoto, extraíamos un mineral de una calidad sorprendente. Quizás aún puedas encontrar algo en las profundidades de la tierra.
+			BlacksmithAnsv_1: ¿Qué solución?
+			BlacksmithAnsv_2: Te traeré un plano
+			BlacksmithAnsv_3: Aquí tienes un plano, como pediste
+			BlacksmithAnsv_4: Todavía no he hablado con {0}
+			BlacksmithAnsv_5: ¿Cómo va la fabricación de la espada?
+			BlacksmithAnsv_6: Soy todo oídos
+			BlacksmithAnsv_7: ¿Una bestia más para derrotar?
+			BlacksmithAnsv_8: ¡Lo maté, amigo mío!
+			BlacksmithAnsv_9: El minotauro sigue vivo
+			BlacksmithAnsv_10: Ve al grano
+			BlacksmithAnsv_11: Trato hecho
+			BlacksmithAnsv_12: Estoy en ello
+			BlacksmithAnsv_13: Aquí están los petos
+			BlacksmithAnsv_14: Intercambiar petos
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	EvilBabaYaga: {
+		DisplayName: Bruja del Pantano
+
+		BossChecklistIntegration: {
+			EntryName: Bruja del Pantano
+			SpawnInfo: Aparece después de completar la misión "Misterio del Pantano". Debes conservar [i:Bismuth/UnchargedElessar] para luchar contra ella.
+		}
+	}
+
+	EvilNecromancer: {
+		DisplayName: Nigromante
+
+		BossChecklistIntegration: {
+			EntryName: Nigromante
+			SpawnInfo:
+				'''
+				Aparece en su guarida después de completar la misión "Sepulturero". Debes informar al cónsul sobre el sacerdote para luchar contra él.
+				Cuando está equipado [i:Bismuth/ImperianBanner], mostrará un icono en el mapa
+				'''
+		}
+	}
+
+	ImperianCommander: {
+		DisplayName: Comandante Imperial
+
+		Name: {
+			Rizo: Grahus
+			Albert: Ingoramus
+			Bernando: Caius
+			Seefeld: Claudius
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			CommanderNQ_4: Pregúntale a {0}, él te proporcionará equipo decente.
+			CommanderNQ_3: ¡A los soldados romanos se les prohíbe morir sin permiso!
+			CommanderNQ_2: ¡Legionarios, sois una vergüenza para el Imperio Romano!
+			CommanderNQ_1: ¡Asegurad vuestros escudos!
+			Commander_5: Vuelve cuando tengas la información.
+			Commander_4: ¿Tienes alguna pista de lo que sucedió cerca del castillo?
+			Commander_2: Tengo una tarea muy importante para ti, guerrero.
+			CommanderAnsv_6: ¿Y eso a dónde nos lleva?
+			CommanderAnsv_5: Todavía no he encontrado al explorador
+			CommanderAnsv_4: Aquí tienes tu informe
+			CommanderAnsv_3: Te traeré este informe
+			CommanderAnsv_2: ¡Haré lo mejor para el Imperio!
+			CommanderAnsv_1: ¿Puedes darme equipo?
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	ImperianConsul: {
+		DisplayName: Cónsul
+
+		Name: {
+			Rizo: Bonusmalus
+			Albert: Tiverius
+			Bernando: Lucius
+			Seefeld: Publicus
+			Sqt: Horatio
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			ConsulAnsv_4: ¡Sí, señor!
+			ConsulAnsv_3: La ciudad necesita un nuevo sacerdote...
+			ConsulAnsv_2: Quiero hablar sobre {0}
+			ConsulAnsv_1: No, gracias (sin juego RPG)
+			ConsulNQ_3: Si necesitas una misión, toma una de nuestros ciudadanos
+			ConsulNQ_2: Todos los caminos conducen a nuestra ciudad.
+			ConsulNQ_1: ¡Viniste, viste, completaste la misión!
+			Consul_1: ¡Oh, tenemos un novato! Bienvenido, guerrero. Estás en el único refugio seguro en kilómetros a la redonda: ¡la ciudad Imperial! Estoy seguro de que servirás bien al Imperio. Por ahora, echa un vistazo alrededor. La inscripción de clases te ayudará a elegir tu camino; visita al Comandante para obtener tu equipo una vez que hayas terminado.
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	Minotaur: {
+		DisplayName: Minotauro
+
+		BossChecklistIntegration: {
+			EntryName: Minotauro
+			SpawnInfo: Aparece solo después de abrir el cofre rojo en el laberinto
+		}
+	}
+
+	MinotaurDeath.DisplayName: Minotauro
+
+	NagaMerchant: {
+		DisplayName: Mercader Naga
+
+		Name: {
+			Rizo: Sirene
+			Albert: Medusa
+			Bernando: Slardarie
+			Seefeld: Azshara
+			Sqt: Lahlan
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			NagaNQ_4: Recuerda: nunca te m-m-muerdas la lengua.
+			NagaNQ_2: Me alegra que hayas e-e-elegido nuestra gran r-r-raza sobre esos c-c-chupasangres.
+			NagaNQ_1: Recuerda: nunca te m-m-muerdas la lengua.
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	NecromancerDeath.DisplayName: Nigromante
+	NecromancersSkeleton.DisplayName: Esqueleto del Nigromante
+
+	Necromant: {
+		DisplayName: Nigromante
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Say1: Estoy listo
+		Say: Es hora. Que el ritual comience... contigo.
+	}
+
+	OldmanPriest: {
+		DisplayName: Anciano Sacerdote
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			OldmanPriestAnsv_1: Bendición
+			OldmanPriestNQ_1: ¡Que Júpiter te bendiga, héroe!
+			OldmanPriestNQ_2: El tiempo sana, pero los sacerdotes son más rápidos.
+			OldmanPriestNQ_3: Las cosas han mejorado mucho aquí después de que el Nigromante fuera expulsado. Como en los viejos tiempos.
+			OldmanPriestNQ_4: ¿No crees que la antropomancia es el método de predicción más preciso?
+			OldmanPriestNQ_6: Te estoy bendiciendo
+			OldmanPriestNQ_7: Lo siento, pero no puedes ser bendecido más de una vez al día
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	Orc.DisplayName: Orco
+	OrcCrossbower.DisplayName: Ballestero Orco
+	OrcDefender.DisplayName: Defensor Orco
+	OrcishPortal.DisplayName: Portal Orcish
+	OrcWizard.DisplayName: Mago Orco
+	Papuan.DisplayName: Papuano
+	PapuanArcher.DisplayName: Arquero Papuano
+	PapuanWarrior.DisplayName: Guerrero Papuano
+
+	PapuanWizard: {
+		DisplayName: Mago Papuano
+
+		BossChecklistIntegration: {
+			EntryName: Mago Papuano
+			SpawnInfo: Aparece en el pueblo del desierto en modo difícil
+		}
+	}
+
+	PapuanWizardDeath.DisplayName: Mago Papuano
+
+	Priest: {
+		DisplayName: Sacerdote
+
+		Name: {
+			Rizo: Deckard Cain
+			Albert: Saruman
+			Bernando: Velen
+			Seefeld: Ferool Rahvel
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			PriestAnsv_7: ¿Lo has cargado?
+			PriestAnsv_6: Me gustaría cargar la guadaña
+			PriestAnsv_5: He roto la lápida
+			PriestAnsv_4: Aún no he encontrado la lápida
+			PriestAnsv_3: Tengo los restos
+			PriestAnsv_2: Deséame suerte
+			PriestAnsv_1: Te escucho
+			PriestNQ_4: Los tomos de {0} son interesantes...
+			PriestNQ_3: La magia de la muerte recompensa a los dignos y tortura a los débiles... ¿Estás listo para pagar ese precio?
+			PriestNQ_2: Qué día tan soleado… Espero que la noche sea igual de clara.
+			PriestNQ_1: Si quieres saber más sobre las ruinas, visítame por la noche.
+			Priest_5: Necesito los restos para un ritual. Vuelve cuando los tengas.
+			Priest_4: ¿Ya has obtenido los restos del guerrero?
+			Priest_2: ¿Deseas poner tus manos sobre un arma de poder jamás visto? ¿Sabes guardar secretos? Si es así, prepárate para escuchar, porque tengo una tarea para ti. Por supuesto, recibirás una generosa recompensa: nada en este mundo debería hacerse gratis…
+			Priest_1: Necesito a alguien que no haga preguntas. Ven aquí cuando la noche caiga sobre esta ciudad… y no te arrepentirás
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	PriestTeleportation: {
+		DisplayName: Teletransporte del Sacerdote
+
+		Name: {
+			Rizo: Deckard Cain
+			Albert: Saruman
+			Bernando: Velen
+			Seefeld: Ferool Rahvel
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat.Priest_10: <{0}> ¡Pagarás por esto!
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	RestlessSoul.DisplayName: Alma Inquieta
+	RunicElemental.DisplayName: Elemental Rúnico
+	RunicElementalDeath.DisplayName: Muerte del Elemental Rúnico
+	SandWormBody.DisplayName: Gusano de Arena
+	SandWormHead.DisplayName: Gusano de Arena
+	SandWormTail.DisplayName: Gusano de Arena
+
+	RhinoOrc: {
+		DisplayName: Orco Rinoceronte
+
+		BossChecklistIntegration: {
+			EntryName: Orco Rinoceronte
+			SpawnInfo: Aparece durante la invasión orcish
+		}
+	}
+
+	StrangeOldman: {
+		DisplayName: Anciano Extraño
+
+		Name: {
+			Rizo: Egey
+			RizoZ: Alphus
+			RizoZZ: Avgur
+			RizoZZZ: Sulyvahn
+			RizoSZZZZ: Pepin
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			OldmanName_1: Egey
+			OldmanName_2: Alphus
+			OldmanName_3: Avgur
+			OldmanName_4: Sulyvahn
+			OldmanName_5: Pepin
+			Oldman_1: ¡Un humano! ¡Gracias, dioses del Olimpo! ¡Necesito tu ayuda! He estado atrapado en esta cueva sin posibilidad de rescate durante varios meses: ¡eres mi última esperanza!
+			Oldman_3: ¿Has encontrado la piedra?
+			Oldman_4: ¡No tardes demasiado, mi vida está en tus manos!
+			Oldman_7: "¿Puedo pedirte algo, {0}?"
+			OldmanNQ_1: Me alegro de haber salido por fin de ese laberinto: estaba terriblemente oscuro.
+			OldmanNQ_2: Ahora que el Minotauro ha sido derrotado, el subsuelo se va a calmar bastante.
+			OldmanNQ_3: En los tiempos antiguos hubo un héroe que también derrotó al Minotauro. Teseo era su nombre, creo.
+			OldmanNQ_4: No hay nada mejor que volver a estar entre la gente del Imperio.
+			OldmanNQ_5: "{0} es un tipo raro. No me fío de él."
+			OldmanAnsv_1: ¿Cómo has llegado hasta aquí?
+			OldmanAnsv_2: Quédate aquí y serás salvado
+			OldmanAnsv_3: ¡Lo he encontrado!
+			OldmanAnsv_4: Estoy buscando la piedra
+			OldmanAnsv_5: Sobre la recompensa...
+			OldmanAnsv_6: ¡Claro!
+			OldmanAnsv_7: Hablaré con {0}
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	SwampHound.DisplayName: Sabueso del Pantano
+	SwampWraith.DisplayName: Espectro del Pantano
+
+	TravelingVampire: {
+		DisplayName: Vampiro Viajero
+
+		Name: {
+			Rizo: Drácula
+			Albert: Regis
+			Bernando: Alucard
+			Seefeld: Nosferatu
+			Robert: Dio
+			Vlad: Cain
+		}
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Chat: {
+			TravelingVampireNQ_6: La Máscara te ayudará a disfrazarte.
+			TravelingVampireNQ_5: La vida de los humanos es demasiado corta; los vampiros somos eternos.
+			TravelingVampireNQ_4: Odio Crepúsculo.
+			TravelingVampireNQ_3: ¡Carpe Jugulum!
+			TravelingVampireNQ_2: ¿Quién te dijo que debía convertirse en guardián del pantano?
+			TravelingVampireNQ_1: ¿Puedes decirme por qué la tortuga vive más que generaciones de hombres, por qué el elefante sigue y sigue hasta ver dinastías, y por qué el loro nunca muere salvo por mordedura de gato, perro u otra desgracia?
+		}
+
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	SwampWitchDeath.DisplayName: Muerte de la Bruja del Pantano
+	Snake.DisplayName: Serpiente
+	AirElemental.DisplayName: Elemental de Aire
+	EarthElemental.DisplayName: Elemental de Tierra
+	FireElemental.DisplayName: Elemental de Fuego
+	WaterElemental.DisplayName: Elemental de Agua
+
+	PapuanMerchant: {
+		DisplayName: Mercader Papuano
+
+		TownNPCMood: {
+			Content: Estoy contento.
+			NoHome: No soporto no tener casa.
+			FarFromHome: Estoy demasiado lejos de casa.
+			LoveSpace: Me encanta que haya tanto espacio.
+			DislikeCrowded: No me gusta lo concurrido que está esto.
+			HateCrowded: Odio lo concurrido que está esto.
+			LikeNPC_Princess: Me gusta {NPCName}.
+			Princess_LovesNPC: Me gusta {NPCName}.
+		}
+
+		Name: {
+			Gagini: Gagini
+			Budd: Budd
+			Butannaziba: Butannaziba
+			Mazozi: Mazozi
+			Nkemdilim: Nkemdilim
+			Olanreuodzhu: Olanreuodzhu
+			Syed: Syed
+			Tafari: Tafari
+			Chidzhenda: Chidzhenda
+			Jango: Jango
+		}
+
+		Say: En
+		Say1: durante Halloween puedes comprar las bragas de la Dríada, pero yo puedo vendértelas siempre (aún no). ¿Pillas la indirecta?
+		Say2: Creo que,
+		Say3: se alegrará cuando vea este pez martillo.
+		Say4: Una vez maté 5 tiburones con una sola cuchara.
+		Say5: Te habría hecho un descuento, pero el pescado estaba insípido, así que no
+		Say6: Elijo picos puntiagudos.
+		Census.SpawnCondition: Condiciones desconocidas
+	}
+
+	Toad.DisplayName: Sapo
+	SkeletonDwarf.DisplayName: Esqueleto Dwarven
+}
+
+Projectiles: {
+	AeglosP.DisplayName: Aeglos P
+	AuraOrbital.DisplayName: Aura Orbital
+	BabaYagaBlast.DisplayName: Ráfaga de Baba Yaga
+	BabaYagaPreBlast.DisplayName: Pre-Ráfaga de Baba Yaga
+	BabaYagaSphere.DisplayName: Esfera de Baba Yaga
+	BaselardP.DisplayName: Baselard P
+	BladeOfWoeP.DisplayName: Hoja de la Aflicción P
+	BoneHandP.DisplayName: Mano de Hueso P
+	DarkSkullP.DisplayName: Calavera Oscura P
+	DoomhammerP.DisplayName: Martillo Perdición P
+	FallingDagger.DisplayName: Daga Cayendo
+	Fireball.DisplayName: Bola de Fuego
+	Fireball2.DisplayName: Bola de Fuego2
+	Fireball3.DisplayName: Bola de Fuego3
+	HeroBootsJumpEffect.DisplayName: Efecto de Salto de Botas de Héroe
+	HerosBootsBlast.DisplayName: Ráfaga de Botas de Héroe
+	IceSpikeP.DisplayName: Estaca de Hielo P
+	InkStainP.DisplayName: Mancha de Tinta P
+	LanceaP.DisplayName: Lanza P
+	LichP.DisplayName: Lich P
+	LifestealP.DisplayName: Robo de Vida P
+	ManaVamp.DisplayName: Vampiro de Maná
+	ManaVampEnemy.DisplayName: Enemigo Vampiro de Maná
+	MarbleArrow.DisplayName: Flecha de Mármol
+	MinosBlastCallP.DisplayName: Llamada de Ráfaga de Minos P
+	MinotaurAttack.DisplayName: Ataque de Minotauro
+	MinotaursAxeP.DisplayName: Hacha de Minotauro P
+	MisericordeP.DisplayName: Misericordia P
+	OrcWizardOrbP.DisplayName: Orbe de Mago Orco P
+	PhoenixP.DisplayName: Fénix P
+	RevivingEagleP.DisplayName: Águila Resucitadora P
+	SandSpike.DisplayName: Estaca de Arena
+	SandWaveEnemyP.DisplayName: Onda de Arena Enemiga P
+	ScytheSlashHitboxP.DisplayName: Hitbox de Tajo de Guadaña P
+	SphereOfLight.DisplayName: Esfera de Luz
+	StarOfTheDunedainBase.DisplayName: Estrella de la Base Dunedain
+	StarOfTheDunedainP.DisplayName: Estrella de la Dunedain P
+	TeleportTrail.DisplayName: Rastro de Teletransporte
+	TheseusWaveP.DisplayName: Onda de Teseo P
+	UndeadRevivingP.DisplayName: Resurrección No Muerta P
+	VampirismEnemy.DisplayName: Enemigo Vampirismo
+	WaveOfForceP.DisplayName: Onda de Fuerza P
+	WDFix1.DisplayName: Corrección D W 1
+	WoodenStaffP.DisplayName: Báculo de Madera P
+	BreakwaterHitboxP.DisplayName: Hitbox de Rompeolas P
+	BreakwaterP.DisplayName: Rompeolas P
+	FuryOfWatersP.DisplayName: Furia de las Aguas P
+	FuryOfWatersP2.DisplayName: Furia de las Aguas P2
+	TyphoonP.DisplayName: Tifón P
+	TyphoonP2.DisplayName: Tifón P2
+	Meteor1.DisplayName: Meteoro1
+	Meteor2.DisplayName: Meteoro2
+	Meteor3.DisplayName: Meteoro3
+	MeteorBase.DisplayName: Base de Meteoro
+	PapuanWarriorPunch.DisplayName: Puñetazo de Guerrero Papuano
+	ThrowingAxeP.DisplayName: Hacha Arrojadiza P
+	SandWaveP.DisplayName: Onda de Arena P
+	ShamansStaffP.DisplayName: Báculo de Chamán P
+	StilettoHitboxP.DisplayName: Hitbox de Estilete P
+	StilettoP.DisplayName: Estilete P
+	SnakeProj.DisplayName: Proyectil de Serpiente
+	MirrorSkullP.DisplayName: Calavera Espejo P
+	DirtBallP.DisplayName: Bola de Tierra P
+	FireElementalFireball.DisplayName: Bola de Fuego de Elemental de Fuego
+	SolarBlast.DisplayName: Ráfaga Solar
+	MeuRansHookP.DisplayName: Garfio de Meu Ran P
+	QuicksilverMirrorP.DisplayName: Espejo de Mercurio P
+	BismuthumDrillP.DisplayName: Taladro de Bismuto P
+	BismuthumSawP.DisplayName: Sierra de Bismuto P
+	ProminenceP.DisplayName: Protuberancia P
+	WhirlpoolP.DisplayName: Remolino P
+	BismuthumGloveP.DisplayName: Guante de Bismuto P
+	GalvornStaffP.DisplayName: Báculo de Galvorn P
+	MoonlightStaffP.DisplayName: Báculo de Luz Lunar P
+	RainOfTearsP.DisplayName: Lluvia de Lágrimas P
+	RunicBladeP.DisplayName: Hoja Rúnica P
+	Marker.DisplayName: Marcador
+	SolarBall.DisplayName: Bola Solar
+	SolarWave.DisplayName: Onda Solar
+	ToadGunP.DisplayName: Pistola de Sapo P
+	HeatArrow.DisplayName: Flecha de Calor
+	AdamantiteJavelinP.DisplayName: Jabalina de Adamantita P
+	ChlorophyteJavelinP.DisplayName: Jabalina de Clorofita P
+	CobaltJavelinP.DisplayName: Jabalina de Cobalto P
+	HectorsSpearP.DisplayName: Lanza de Héctor P
+	HectorsSpearP2.DisplayName: Lanza de Héctor P2
+	JaguarsChakramP.DisplayName: Chakram de Jaguar P
+	JaguarsDaggerP.DisplayName: Daga de Jaguar P
+	MythrilJavelinP.DisplayName: Jabalina de Mithril P
+	OrcishJavelinP.DisplayName: Jabalina Orcish P
+	OrichalcumJavelinP.DisplayName: Jabalina de Oricálco P
+	PalladiumJavelinP.DisplayName: Jabalina de Paladio P
+	SharkJavelinP.DisplayName: Jabalina de Tiburón P
+	SolarDiskP.DisplayName: Disco Solar P
+	SharkKnifeP.DisplayName: Cuchillo de Tiburón P
+	TitaniumJavelinP.DisplayName: Jabalina de Titanio P
+	LightningBlast.DisplayName: Ráfaga de Relámpago
+}
+
+Configs: {
+	BismuthConfig: {
+		DisplayName: Bismuth Config
+		BlacksmithForgingVolume.Tooltip: ""
+		XPMultiplier.Tooltip: ""
+	}
+}
+
+Config: {
+	AllowHealthBuffsTogether: Multiplicador de XP
+	AllowHealthBuffsTogetherTooltip: ""
+	AllowHealthBuffsTogether2: Volumen de Forja del Herrero
+	AllowHealthBuffsTogetherTooltip2: ""
+}
+
+Keybinds: {
+	"Activate Second Skill.DisplayName": Activar Segunda Habilidad
+	"Turn Into Bat.DisplayName": Convertirse en Murciélago
+	"Activate Unique Ability.DisplayName": Alternar Panel de Experiencia
+	"Toggle Experience Panel.DisplayName": Activar Habilidad Única
+	"Activate First Skill.DisplayName": Activar Primera Habilidad
+	InfoAcc.DisplayName: Info Acc
+}
+
+Biomes: {
+	ZoneSwamp: {
+		TownNPCDialogueName: la Zona Pantanosa
+		DisplayName: Zona Pantanosa
+	}
+
+	#Я не знаю почему оно здесь
+	"Bismuth:SwampSky": {
+		DisplayName: Bismuth: Cielo Pantanoso
+		TownNPCDialogueName: El Bismuth: Cielo Pantanoso
+	}
+
+	TribeTotemBiome: {
+		DisplayName: Tótem Tribal
+		TownNPCDialogueName: el Bioma de Tótem Tribal
+	}
+}
+
+BismuthPlayerSystem: {
+	BismuthPlayer: {
+		Chat: {
+			Death: no pudo hacer frente al deseo de matar
+			Death2: se volvió loco
+			OnEnterText3: "[c/ff0000:Por favor, regenera tu mundo]"
+			OnEnterText2: "[c/fc6735:¡Asegúrate de usar un personaje específico para un mundo específico!]"
+			OnEnterText1: Gracias por jugar [c/8936ff:Bismuth Mod]
+			Death4: se convirtió en víctima de conexiones rotas
+			Death3: bebió el veneno
+		}
+
+		Skill: {
+			Skill1Name: ¡Mi elección es guerrero!
+			PassiveSkill: Habilidad pasiva
+			Skill1Tooltip: +5% cuerpo a cuerpo, pero -20% a otros tipos de daño
+			SPRequired: "{0} puntos de habilidad requeridos"
+			UpgratedSkill: Esta habilidad ya ha sido aprendida
+			Skill2Name: Defensor-Aprendiz
+			Skill2Tooltip: +2 defensa, +4% de resistencia al daño.
+			SkillRequired: Necesitas aprender '{0}' para desbloquear esta habilidad
+			DefeatWoB: Derrota al Devoramundos o al Cerebro de Cthulhu para mejorar esta habilidad
+			DefeatEoC: Derrota al Ojo de Cthulhu para mejorar esta habilidad
+			HPBonus: +{0} de vida
+			SkillLevelBonus: "{0} en el siguiente nivel"
+			SkillLevel: Nivel de habilidad actual: {0}/{1}
+			Skill3Tooltip: Aumento de la vida máxima
+			Skill3Name: Tenacidad
+			DefeatGolem: Derrota al Gólem para mejorar esta habilidad
+			DefeatPlantera: Derrota a Plantera para mejorar esta habilidad
+			DefeatAnyMech: Derrota a cualquier jefe mecánico para mejorar esta habilidad
+			DefeatWoF: Derrota al Muro Carnoso para mejorar esta habilidad
+			DefeatSkeletron: Derrota a Esqueletrón para mejorar esta habilidad
+			UpgratedSkillMaxLevel: ¡Has alcanzado el nivel máximo de esta habilidad!
+			Skill4Name: ¡Mantén la Línea!
+			Skill4Tooltip: +6 de vida/segundo y +6 de defensa, cuando estás quieto
+			ActiveSkill: Habilidad activa
+			SecondsDuration: "{0} segundos"
+			ActileSkillText: Habilidad activa
+			MinutesDuration: "{0} minutos"
+			Skill22Name: Ataque de Rabia
+			CantUpgrade: No puedes mejorar esta habilidad, porque ya tienes '{0}'
+			ActiveSkillUpgrade: Mejora de habilidad activa
+			Skill5Name: Como un Muro de Piedra
+			Skill6Tooltip: +15 de vida/segundo, +20 de defensa y +10% de resistencia al daño, cuando estás quieto. Las turbas atacadas obtienen ''¡En Llamas!''
+			Skill5Tooltip: +10 de vida/segundo y +12 de defensa, cuando estás quieto
+			Skill7Name: Venganza Fría
+			Skill6Name: Venganza Caliente
+			Skill7Tooltip: +15 de vida/segundo, +20 de defensa y +10% de resistencia al daño, cuando estás quieto. Las turbas atacadas obtienen ''Quemadura Gélida''
+			DefenceBonus: +{0} de defensa
+			Skill8Tooltip: Aumento de la defensa
+			Skill8Name: Acorazado
+			Skill9Name: Sed de Vida
+			Skill9Tooltip: +15 de vida/segundo, +20 de defensa y +10% de resistencia al daño, cuando estás quieto. Las turbas atacadas obtienen ''Quemadura Gélida''
+			Skill10Tooltip: +25% de resistencia al daño en carmesí o corrupción.
+			Skill10Name: Protegido del Mal
+			Skill11Name: Hasta la Última Gota de Sangre
+			Skill11Tooltip: +4 de vida/segundo durante 4 segundos después de recibir daño
+			Skill12Tooltip: +5% de probabilidad de bloqueo, +10% de resistencia al daño
+			Skill12Name: ¡No Puedes Romperme!
+			Skill13Name: Mi Abuelo era un Vampiro
+			Skill13Tooltip: 4% de robo de vida por la noche
+			SkillOrRequired: Necesitas aprender '{0}' o '{1}' para desbloquear esta habilidad
+			Skill14Tooltip: Eres invencible
+			Skill33Name: Oleada de Energía
+			Skill14Name: Panacea contra el Daño
+			DefeatCultist: Derrota al Cultista Lunático para mejorar esta habilidad
+			Skill15Tooltip: Eres invencible
+			Skill15Name: La Constancia en Persona
+			Skill16Name: Defensor Legendario
+			Skill16Tooltip: +10 de defensa, +10% de resistencia al daño, +6 de vida/segundo, +50 de vida, +7% de probabilidad de bloqueo, -25% de velocidad de movimiento, el tiempo de recarga de las pociones de curación disminuye 10 segundos
+			FinalSkill: Habilidad final
+			Skill35Name: Luchador Legendario
+			Skill17Name: Tipo Pinchudo
+			Skill17Tooltip: Aumento del reflejo de daño
+			DamageReflectionBonus: +{0}% de reflejo de daño
+			Skill18Tooltip: +7% de velocidad cuerpo a cuerpo, +3% de probabilidad crítica cuerpo a cuerpo
+			Skill18Name: Trayectoria de un Joven Luchador
+			Skill19Tooltip: 1% de daño cuerpo a cuerpo por cada PNJ (hasta +15%)
+			Skill20Name: Campeón de Terraria
+			Skill19Name: Sr. Bienvenida
+			Skill20Tooltip: +1% de daño cuerpo a cuerpo por cada jefe asesinado (hasta +15%)
+			MeleeSpeedBonus: +{0}% de velocidad cuerpo a cuerpo
+			Skill21Tooltip: Aumento de la velocidad cuerpo a cuerpo
+			Skill21Name: Esgrimista-Virtuoso
+			Skill22Tooltip: +30% de velocidad cuerpo a cuerpo, -15% de resistencia al daño
+			Skill23Name: Ira del Berserker
+			Skill23Tooltip: +40% de velocidad cuerpo a cuerpo, -10% de resistencia al daño
+			Skill24Tooltip: +50% de velocidad cuerpo a cuerpo, +15% de probabilidad crítica cuerpo a cuerpo
+			Skill24Name: ¡HIPERFURIA!
+			Skill25Name: Ejercicios de Fuerza
+			Skill25Tooltip: Aumento del daño cuerpo a cuerpo
+			MeleeDamageBonus: +{0}% de daño cuerpo a cuerpo
+			Skill26Name: Agonía de Muerte
+			Skill26Tooltip: +10% de probabilidad crítica cuerpo a cuerpo, menos vida = más probabilidad crítica cuerpo a cuerpo
+			Skill2&Tooltip: +20% de daño cuerpo a cuerpo en la jungla
+			Skill27Name: Unidad con la Naturaleza
+			Skill28Name: Nacido para Despedazar
+			Skill28Tooltip: +15% de velocidad cuerpo a cuerpo, +20% de velocidad de movimiento
+			Skill29Name: Sed de Sangre
+			Skill29Tooltip: 6% de robo de vida, -15% de daño cuerpo a cuerpo
+			Skill30Tooltip: +10% de daño cuerpo a cuerpo, +10% de probabilidad crítica cuerpo a cuerpo, -25% de velocidad cuerpo a cuerpo
+			Skill30Name: Lento y Mortal
+			Skill31Name: El Que Confía en la Suerte
+			Skill31Tooltip:
+				'''
+				+10% de probabilidad crítica cuerpo a cuerpo, +50% de daño
+				crítico cuerpo a cuerpo, 1% de probabilidad de daño x3
+				'''
+			Skill32Tooltip: Aumento al doble del retroceso cuerpo a cuerpo
+			Skill32Name: Poder Titánico
+			Skill33Tooltip: Daño cuerpo a cuerpo x3
+			Skill34Tooltip: Daño cuerpo a cuerpo x5
+			Skill34Name: ¡Como una Bomba Nuclear!
+			Skill35Tooltip: 2% de probabilidad de daño cuerpo a cuerpo x5. +15% de daño cuerpo a cuerpo. +20% a la probabilidad, daño y velocidad crítica cuerpo a cuerpo después de consumir cualquier poción (excepto pociones de maná y de curación)
+
+			Wizard: {
+				Skill36Name: ¡Mi elección es mago!
+				Skill36Tooltip: +5% a magia y súbdito, pero -20% a otros tipos de daño
+				Skill37Tooltip: +4% de daño mágico, +6% de daño de súbdito
+				Skill37Name: Magia Elemental
+				Skill38Name: Secretos de Druidas
+				Skill38Tooltip: +1 de vida/segundo por cada súbdito cuando estás en la jungla
+				Skill39Tooltip: +4 a la cantidad máxima de súbditos
+				Skill51Name: Escudo Mágico
+				Skill39Name: ¡La Fuerza está en los Números!
+				Skill40Name: El Líder
+				Skill40Tooltip: Cantidad máxima de súbditos x2
+				Skill41Name: Coleccionista de Súbditos
+				Skill41Tooltip: +9% de daño de súbdito por cada tipo de súbdito utilizado
+				Skill42Tooltip: Los enemigos no te atacan si tienes un súbdito del mismo tipo
+				Skill42Name: Pacto de No Agresión
+				MinionDamageBonus: +{0}% de daño de súbdito
+				Skill43Tooltip: Aumento del daño de súbdito
+				Skill43Name: Rituales Antiguos
+				MinionNumberBonus: Cantidad máxima de súbditos +{0}
+				Skill44Tooltip: Aumento de la cantidad máxima de súbditos
+				Skill44Name: Tu Ejército Personal
+				Skill45Name: Súbditos-Doctores
+				Skill45Tooltip: +8 de vida máxima por súbdito
+				Skill46Tooltip: +25% de daño de súbdito, -2 de defensa por súbdito
+				Skill47Name: Egoísta
+				Skill46Name: Altruista
+				Skill47Tooltip: +1% de resistencia al daño y +2 de defensa por súbdito, -20% de daño de súbdito
+				Skill48Tooltip: Retroceso de súbdito x2
+				Skill48Name: Grito de Guerra
+				Skill49Name: Manantial Mágico
+				Skill49Tooltip: Disminución del coste de maná
+				ManaCostBonus: -{0}% de coste de hechizo
+				Skill50Name: Mago-Experto
+				Skill50Tooltip: -8% de coste de maná, +8% de daño mágico
+				Skill51Tooltip: Los ataques enemigos consumen maná en lugar de vida siempre y cuando tengas maná
+				Skill53Name: Fuerza Interior
+				Skill53Tooltip: Aumento del daño mágico
+				MagicDamageBonus: +{0}% de daño mágico
+				Skill54Tooltip: +10% de probabilidad crítica mágica, +25% de daño crítico mágico
+				Skill54Name: Mago-Asesino
+				Skill55Name: Manantial Mágico II
+				Skill55Tooltip: Aumento de la regeneración de maná
+				ManaRegenBonus: Regeneración de maná x{0}
+				Skill56Name: El Que es Fuerte de Espíritu
+				Skill56Tooltip: Convierte el 50% del daño recibido en maná
+				Skill57Tooltip: El golpe crítico mágico restaura el 20% de tu maná
+				Skill57Name: Pensamiento Crítico
+				Skill58Tooltip: +15% de daño mágico y +15% de probabilidad crítica mágica durante el día
+				Skill58Name: Mantén la Calma y Alaba al Sol
+				Skill59Name: ¡No a las Enfermedades!
+				Skill59Tooltip: Las pociones de maná no inducen la enfermedad de maná
+				Skill60Tooltip: Tus pociones de maná se usan automáticamente
+				Skill60Name: Totalmente Automatizado
+				Skill61Name: Equilibrio Interior
+				Skill61Tooltip: Los hechizos no consumen maná
+				Skill62Tooltip: Los hechizos no consumen maná, +25% de probabilidad crítica mágica
+				Skill62Name: El Estado Astral
+				Skill63Tooltip: El 7% de tu daño se convierte en maná
+				Skill63Name: Robo de Maná
+				Skill64Name: Mago Legendario
+				Skill64Tooltip: +15% de daño mágico, +20% de daño de súbdito, +15% de daño crítico mágico, +2 a la cantidad máxima de súbditos, +20% de velocidad de movimiento, puedes recoger estrellas de maná desde una distancia mayor
+			}
+
+			Assassin: {
+				Skill65Tooltip: +5% a asesino, pero -20% a otros tipos de daño, excepto cuerpo a cuerpo
+				Skill65Name: ¡Mi elección es asesino!
+				Skill66Name: Prefiero las Espadas Cortas
+				Skill66Tooltip: +5% de daño de asesino, +5% de probabilidad crítica de asesino, +40% de daño para espadas cortas
+				Skill67Name: El Asesino en la Oscuridad
+				Skill67Tooltip: +20% de XP obtenida durante la noche
+				MoveSpeedBonus: +{0}% a la velocidad de movimiento
+				Skill68Tooltip: Aumento de la velocidad de movimiento
+				Skill68Name: A la Velocidad de la Luz
+				Skill69Name: Reflejos de Cazador
+				Skill69Tooltip: Obtienes "Visión Nocturna" y "Cazador"
+				Skill70Name: Instintos de Depredador
+				Skill70Tooltip: Obtienes "Visión Nocturna" y "Cazador"
+				Skill71Tooltip: Obtienes "Visión Nocturna" y "Cazador", +40% de velocidad de movimiento después de infligir daño
+				Skill71Name: En Persecución de la Presa
+				Skill72Name: ¡Teletransporte!
+				Skill72Tooltip:
+					'''
+					Puedes teletransportarte presionando una tecla especial.
+					15 segundos de tiempo de recarga
+					'''
+				Skill73Tooltip: -7 segundos al tiempo de recarga de teletransporte
+				Skill73Name: 7 Segundos de Ventaja
+				Skill75Name: Maestro de la Teletransportación
+				Skill75Tooltip: Las partículas dejadas tras el teletransporte infligen 500 de daño a los enemigos y curan 50 de vida por cada enemigo asesinado
+				AllCritBonus: +{0}% a la probabilidad de golpe crítico de cualquier clase
+				Skill76Tooltip: Aumento del daño crítico para todas las clases
+				Skill76Name: Golpe Certero
+				AssassinDamageBonus: +{0}% de daño de asesino
+				Skill77Tooltip: Aumento del daño de asesino
+				Skill77Name: Asesino Profesional
+				Skill78Tooltip: 1% de probabilidad de daño x5
+				Skill78Name: ¡Premio Gordo!
+				Skill79Name: Daño (No) Letal
+				Skill79Tooltip: 2% de probabilidad de reducir la vida del enemigo a 1, este golpe no ignora la defensa (daño x10 al luchar contra un jefe)
+				Skill80Tooltip: Los golpes de daño x5 restauran el 25% de tu vida
+				Skill80Name: El Camino Más Corto al Corazón
+				Skill81Name: Esquivo
+				Skill81Tooltip: El golpe letal te da un 100% de probabilidad de esquivar el siguiente golpe
+				Skill82Tooltip: +10 de vida/segundo, +35% de daño de asesino y +20% de probabilidad de golpe crítico cuando estás en el agua
+				Skill82Name: Hombre Anfibio
+				Skill83Name: A Todos Les Gustan los Descuentos :)
+				Skill83Tooltip: Un 35% de descuento en cada tienda
+				Skill84Tooltip: Obtienes un 40% más de dinero durante la noche
+				Skill84Name: Un Ladrón en la Noche
+				Skill85Name: Aferrándose a la Vida
+				Skill85Tooltip: Cada golpe crítico aumenta tu regeneración de vida
+				Skill86Tooltip: +66% de daño de asesino, +30% de probabilidad crítica de asesino, +75% de daño crítico de asesino, -50% de resistencia al daño, -25 de defensa
+				Skill89Name: Matar o Morir
+				Skill86Name: Una Puñalada por la Espalda
+				Skill87Name: Maldad
+				Skill87Tooltip: +40% de probabilidad de esquivar, ignora bonificaciones previas
+				Skill88Tooltip: 50% de probabilidad de infligir "Veneno" a tu enemigo, ignora bonificaciones previas
+				Skill88Name: Crueldad de Serpiente
+				Skill89Tooltip: +100% de probabilidad crítica, +30% de daño crítico, regeneración de velocidad x4 después de matar a un enemigo, después de 4 segundos sin asesinatos empiezas a morir. -15% de vida máxima
+				Skill90Tooltip: +15% de daño y probabilidad crítica de asesino, +21% de daño de asesino y +30% de daño crítico durante la noche, +20% de daño bajo luna llena
+				Skill90Name: Asesino Legendario
+			}
+
+			UniqueAbility: Habilidad única
+			UniqueAbilityUpgrade: Mejora de habilidad única
+
+			Ranger: {
+				Skill91Name: ¡Mi elección es explorador!
+				Skill91Tooltip: +5% a distancia, pero -20% a otros tipos de daño
+				Skill92Tooltip: +4% de probabilidad crítica a distancia, +6% de daño a distancia
+				Skill92Name: Entrenamiento de Tiro
+				Skill93Name: Disparo Preciso
+				Skill93Tooltip: Aumenta la probabilidad crítica a distancia
+				RangedCritBonus: +{0}% de probabilidad crítica a distancia
+				Skill94Tooltip: Tus ataques a distancia aturden a los enemigos durante 1,5 segundos, pero su defensa se triplica
+				Skill94Name: ¡Alto! ¡Tiempo de Aturdimiento!
+				Skill106Name: La Barrera de Energía
+				Skill95Tooltip: Tus ataques a distancia aturden a los enemigos durante 2 segundos, pero su defensa aumenta 1,5 veces
+				Skill95Name: Entumecimiento
+				Skill96Name: Parálisis
+				Skill96Tooltip: Tus ataques a distancia aturden a los enemigos durante 1,5 segundos y establecen su defensa en 0
+				Skill97Tooltip: Todas las armas a distancia obtienen el efecto de binoculares
+				Skill97Name: Explorador Habilidoso
+				Skill98Name: Manos Hábiles
+				Skill98Tooltip: Obtienes más dinero por matar
+				MoneyBonus: +{0}% de dinero después de matar a un enemigo
+				Skill99Tooltip: +10% de probabilidad crítica a distancia, +25% de daño crítico a distancia
+				Skill99Name: Explorador-Asesino
+				Skill100Name: Acróbata del Infierno
+				Skill100Tooltip: +4% de probabilidad de esquivar y +23% de daño a distancia cuando estás en el Inframundo
+				RangedUsageBonus: "{0}% de velocidad de uso de arma a distancia"
+				Skill101Tooltip: Disminución del tiempo de uso de las armas de explorador
+				Skill101Name: Tormenta de Proyectiles
+				Skill102Name: Proyectiles de Detención
+				Skill102Tooltip: 3% de probabilidad de aturdir a un enemigo durante 2,5 segundos
+				Skill103Tooltip: +10% de daño a distancia después de matar a un enemigo (hasta 30%)
+				Skill103Name: Juerga Asesina
+				Skill104Name: DuelistaTodos los proyectiles a distancia se fijan automáticamente en el enemigo
+				Skill104Tooltip: +6% de probabilidad de esquivar, +25% de daño a distancia, -15% de vida máxima
+				RangedDamageBonus: +{0}% de daño a distancia
+				Skill105Tooltip: Aumento del daño a distancia
+				Skill105Name: Perforador de Armadura
+				Skill106Tooltip: Estás rodeado por un escudo que refleja proyectiles (tú también recibes daño), +25% de resistencia al daño
+				Skill107Tooltip: +8 de vida/segundo, cuando el escudo está activo
+				Skill107Name: Aumento de Vida
+				Skill108Name: Impenetrable
+				Skill108Tooltip: 100% de probabilidad de detener un proyectil
+				Skill110Tooltip: 15% de probabilidad de no consumir munición
+				Skill110Name: Avaro
+				Skill111Name: Flecha Adicional
+				Skill111Tooltip: +1 proyectil de flecha
+				Skill112Tooltip: Todas las balas rebotan dos veces antes de destruirse
+				Skill112Name: ¡Rebote!
+				Skill113Name: Granadero
+				Skill113Tooltip: +25% de daño de explosión (excepto cohetes)
+				ArrowVelocityBonus: +{0}% de velocidad de flecha
+				Skill114Tooltip: Aumento de la velocidad de la flecha
+				Skill114Name: Cuerda de Arco Robusta
+				Skill115Name: Balas Explosivas
+				Skill115Tooltip: Las balas explotan al impactar
+				Skill116Name: Llámame DoomGuy
+				Skill116Tooltip: +10 de defensa al sostener un lanzacohetes
+				Skill117Name: Al Límite
+				Skill117Tooltip: Aumento del daño de flecha
+				ArrowDamageBonus: +{0}% de daño de flecha
+				BulletDamageBonus: +{0}% de daño de bala
+				Skill118Tooltip: Aumento del daño de bala
+				Skill118Name: Balas de Punta Hueca
+				Skill119Name: Cohetes de Carga Hueca
+				Skill119Tooltip: Aumento del daño de cohete
+				RocketDamageBonus: +{0}% de daño de cohete
+				Skill120Tooltip: Todos los proyectiles a distancia se fijan automáticamente en el enemigo
+				Skill120Name: Aimbot
+				Skill121Name: Explorador Legendario
+				Skill121Tooltip: Todas las armas a distancia tienen auto-ataque. +30% de daño a distancia y daño crítico, cada disparo congela al enemigo
+			}
+
+			Thrower: {
+				Skill122Name: ¡Mi elección es lanzador!
+				Skill122Tooltip: +5% a lanzado, pero -20% a otros tipos de daño
+				Skill123Tooltip: +6% de daño lanzado, +3% de probabilidad crítica lanzada
+				Skill123Name: Puntas Dentadas
+				Skill124Name: Proyectiles Etéreos
+				Skill124Tooltip: Todos los proyectiles pueden atravesar bloques
+				Skill125Tooltip: Wallhack
+				Skill125Name: Todos los proyectiles pueden atravesar bloques
+				Skill127Name: ¡No me moveré!
+				Skill126Tooltip: Todos los proyectiles pueden atravesar bloques
+				Skill126Name: ¡Apaga Tus Trucos!
+				Skill127Tooltip: +60% de daño lanzado, +30% de crítico lanzado. +35% de resistencia al daño, pero no puedes moverte
+				Skill128Tooltip: +60% de daño lanzado, +30% de crítico lanzado, +50% de velocidad lanzada, +45% de resistencia al daño, pero no puedes moverte
+				Skill128Name: Héroe Inquebrantable
+				Skill129Name: Artillero
+				Skill129Tooltip: +60% de daño lanzado, +30% de crítico lanzado, +50% de velocidad lanzada, +65% de resistencia al daño, pero no puedes moverte
+				ThrownVelocityBonus: +{0}% de velocidad de lanzamiento
+				Skill130Tooltip: Aumento de la velocidad de los proyectiles lanzados
+				Skill130Name: Olímpico
+				Skill131Name: Tronador
+				Skill131Tooltip: Aumento del daño lanzado
+				ThrownDamageBonus: +{0}% de daño lanzado
+				Skill132Tooltip: +20% de daño explosivo. Los explosivos cuestan un 40% menos
+				Skill132Name: Pirotécnico
+				Skill133Name: Alumno Inteligente
+				Skill133Tooltip: 15% de bonificación de experiencia
+				Skill134Tooltip: +25% de maná y vida de las pociones
+				Skill134Name: Alquimista
+				Skill135Name: Potenciado
+				Skill136Name: Armadura de Espejo
+				Skill135Tooltip: 2 de vida/segundo, +10 de vida por cada mejora (buff)
+				Skill136Tooltip: 35% de probabilidad de reflejar proyectiles
+				Skill137Name: En el Camino al Infinito
+				Skill137Tooltip: 20% de probabilidad de no consumir el objeto lanzado
+				Skill138Tooltip: Activar esta habilidad invoca una lluvia de 15 meteoritos
+				Skill138Name: Lluvia de Meteoros
+				Skill139Tooltip: +15% de probabilidad crítica lanzada, +30% de daño crítico lanzado
+				Skill139Name: Lanzador-Asesino
+				Skill140Name: Dardo o Morir
+				Skill140Tooltip: Todas las armas arrojadizas consumibles obtienen +25% de daño
+				Skill141Name: ¡TORMENTA DE FUEGO!
+				Skill141Tooltip: Activar esta habilidad invoca una lluvia de 35 meteoritos
+				Skill142Tooltip: Velocidad lanzada x2 durante 5 segundos después de un golpe crítico
+				Skill142Name: Hipersónica
+				Skill144Tooltip: Tres dagas volarán al lugar donde infligiste daño
+				Skill143Tooltip: Las armas arrojadizas consumibles pueden atravesar un número infinito de enemigos y obtienen una bonificación de +40% a la velocidad lanzada
+				Skill144Name: Muerte desde el Cielo
+				Skill143Name: Directo
+				Skill146Tooltip: +1 ranura de accesorio
+				Skill146Name: La Moda es Mi Profesión
+				Skill147Name: Lanzador Legendario
+				Skill147Tooltip: +25% de daño lanzado, probabilidad crítica y daño crítico, 30% de probabilidad de no consumir el objeto lanzado, +10 de defensa
+			}
+		}
+	}
+}
+
+DamageClasses.AssasinDamageType.DisplayName: daño de asesino
+
+DiceGameSystem: {
+	DiceGame: {
+		DiceGame: {
+			EnterBet: Introduce tu apuesta:
+			YourScore: Tu Puntuación:
+			YourBet: Tu Apuesta:
+			Winstreak: Victorias Seguidas:
+			DiceVicTotal: Total de Victorias:
+			EnemyScore: Puntuación del Enemigo:
+		}
+	}
+}
+
+QuestsSystem: {
+	Quests: {
+		Quests: {
+			Quest14Short: Entrega documentos al comandante
+			Quest13Short: Haz un regalo al líder
+			Quest12Short: Gana la confianza del mendigo
+			Quest11Short: Consigue el artefacto más poderoso
+			Quest10Short: Lleva componentes para poción al alquimista
+			Quest9Short: Persuade al líder para que apruebe un nuevo sacerdote
+			Quest8Short: Elige de qué lado estás...
+			Quest7Short: Lleva placas de armadura al herrero
+			Quest6Short: Ayuda al herrero a crear un cuerno de batalla
+			Quest5Short: Consigue un arma poderosa contra los goblins
+			Quest4Short: Ayuda al vagabundo a volver a casa
+			Quest3Short: Determina el destino de la piedra misteriosa
+			Quest2Short: Ayuda a la bruja a conseguir un tomo antiguo
+			Quest1Short: Consigue equipo inicial
+			Quest14Name: Informe Importante
+			Quest13Name: Conocedor de Arte
+			Quest12Name: Alimenta al Mundo
+			Quest11Name: El Alquimista Más Grande
+			Quest10Name: Inmortalidad en una Botella
+			Quest9Name: Nuevo Sacerdote
+			Quest8Name: Sepulturero
+			Quest7Name: Armaduras del No Muerto
+			Quest6Name: A la Llamada del Cuerno
+			Quest5Name: El Asesino de Goblins
+			Quest4Name: Tesoro del Laberinto
+			Quest3Name: Misterio del Pantano
+			Quest2Name: Buscando los Secretos
+			Quest1Name: El comienzo de una aventura
+			Oldman_8: He oído que descubriste a un nigromante que envenenaba nuestra paz con su presencia. Me alegra, por supuesto, pero ahora la ciudad ha perdido a su único sacerdote. En mis años jóvenes me interesé bastante por la teología, así que quizá podría ser su sustituto. ¿Podrías hablar con el Cónsul sobre esto, por favor? Te lo agradecería.
+			Oldman_6: Me alegra que hayas tenido un minuto para hablar. Me salvaste la vida, así que toma esta piedra como muestra de mi agradecimiento; con su ayuda podrás teleportarte instantáneamente a la ciudad. No me des las gracias, es lo mínimo que puedo hacer para devolverte el favor.
+			Oldman_5: ¡No puedo expresar con palabras lo agradecido que estoy! Esta piedra me ayudará a volver a casa. Visítame en la ciudad cuando tengas un momento libre.
+			Oldman_4: ¡No tardes demasiado, mi vida está en tus manos!
+			Oldman_2: Lamentablemente, cuando vine aquí en busca de los tesoros de los que hablaban los rumores, una avalancha cortó mi camino a la superficie. También perdí una piedra mágica sin la cual no puedo regresar a casa. Está en alguna parte del laberinto, encuéntrala por favor; puedes quedarte con todo lo demás. Por cierto, esta llave estaba entre los escombros, tómala, puede que te sea útil. ¡Buena suerte!
+			SwampWitch_2: En algún lugar de este pantano hay un tesoro antiguo: una piedra imbuida con el poder del pueblo del agua. No es fácil llegar a ella: el artefacto está protegido por una poderosa maldición que mata a cualquiera que no esté preparado para la aventura, pero podría haber una solución… tráeme un tomo de la ciudad en el Gran Desierto; por lo que he oído, el conocimiento que contiene podría ayudar.
+			SwampWitch_4: Necesito el libro para continuar mis investigaciones.
+			SwampWitch_5: ¿Tienes el tomo? Excelente… Hm, parece estar escrito en un idioma del que incluso yo sé muy poco, muy inusual… Lo siento, pero tendrás que volver en un rato: necesito algo de tiempo para descifrarlo.
+			SwampWitch_6: Mi investigación aún no ha terminado: vuelve más tarde.
+			SwampWitch_8: El cofre con la piedra está escondido en algún lugar del subsuelo. No debería ser difícil llegar hasta él, pero aun así necesitas leer el tomo para evitar lo que mató a todos los aventureros antes que tú. ¡Buena suerte!
+			SwampWitch_10: Tráeme la piedra, y serás recompensado.
+			SwampWitch_13: ¿¡Qué?! ¡Parece que me equivocaba contigo, granuja! No eres ningún héroe, ¡y me aseguraré de que pagues por esto!
+			Blacksmith_2: ¡Sabía que no eras un cobarde! Este es el trato. Hace un tiempo oí hablar de Glamdring: una espada de artesanía élfica que abre cráneos de goblin con una facilidad extraordinaria. Sé que {0} tiene un plano de esta arma. ¿Quieres fastidiarlos? Tráemelo y la forjaré para ti.
+			Blacksmith_3: Hay demasiados hocicos de goblin cerca de esta ciudad, pero es un problema solucionable… si me traes el plano, claro.
+			Blacksmith_4: Genial, ahora puedo forjar la espada. Vuelve en un rato para recogerla.
+			Blacksmith_5: La espada aún no está lista, vuelve más tarde.
+			Blacksmith_6: ¡Sí, la he forjado! ¡Toma la espada y patea traseros en mi nombre!
+			Blacksmith_8: Bajo nuestra ciudad hay un antiguo laberinto con un montón de cosas útiles, pero está protegido por un minotauro. Podría forjarte un excelente instrumento musical si me traes un cuerno de esa bestia.
+			Blacksmith_10: En ese caso, no pierdas más tiempo, te estaré esperando.
+			Blacksmith_11: ¿Así que el guardián del laberinto ha sido derrotado? Excelente, dame unos minutos… ¡Listo! Toma este cuerno de batalla como regalo; estoy seguro de que te inspirará a realizar muchas hazañas heroicas.
+			Blacksmith_13: Vale, vale. Cada gnomo estaba equipado con un valioso peto, forjado con una aleación rara. Estoy seguro de que la armadura aún puede salvarse. Si me traes, digamos, 5 placas, te recompensaré y mis hermanos por fin encontrarán la paz. ¿Trato hecho?
+			Blacksmith_15: En ese caso, no pierdas más tiempo: ya sabes qué hacer.
+			Blacksmith_16: ¿Así que tienes el material? Trabajo perfecto, {0}. Quizá sepas que algunos de los objetos de mi tienda se venden por un tipo especial de moneda. Creo que mereces una moneda gnómica por cada peto. Si en el futuro te sobran algunos, tráemelos y pagaré por tus esfuerzos.
+			Priest_7: ¡En verdad, no hay límite para la estupidez humana! ¡Has arruinado todos y cada uno de mis planes! ¡Vete, y olvídate de la recompensa!
+			Priest_6: ¡Maravilloso, hermano mío! Sabe que yo, {0}, soy un hombre de palabra. En una ocasión, la propia Muerte me otorgó esta guadaña; ahora la comparto contigo con gusto. Te ayudará a separar las almas de los enemigos caídos de sus cuerpos y a utilizarlas para tus fines. Sin embargo, la guadaña pierde poder con el tiempo, así que si necesitas que la recargue, ven a verme.
+			Priest_5: Necesito los restos para un ritual. Vuelve cuando los tengas.
+			Priest_3: No muy lejos del océano, donde se encuentra la jungla, yace la tumba de un antiguo gran guerrero. Necesito sus restos para un ritual. Consíguelos sin perturbar su espíritu y serás recompensado. Esta pala te ayudará a recuperar lo que queda sin dañar la lápida. Y ni se te ocurra contarle a nadie sobre esta reunión: te juro por la propia oscuridad que lo lamentarás.
+			Consul_2: Oh, me alegra que por fin tengamos un voluntario. Sí, {0} puede asumir el trabajo desde hoy.
+			Consul_3: ¿Me estás diciendo que el sacerdote te encargó profanar una tumba? ¡Esto es simplemente increíble! Pero… todas las pruebas que presentas parecen válidas. Intenta arrestarlo antes de que escape. Y sí, aquí tienes la recompensa por tu honestidad.
+			Consul_4: Esa es una acusación muy seria, ¿tienes pruebas de su culpabilidad? No estoy preparado para procesar al sacerdote basándome solo en las palabras de un recién llegado, especialmente teniendo en cuenta la impecable reputación de {0} a lo largo de los años.
+			Commander_6_3: No tengo la menor idea de lo que podría significar, sin embargo, el explorador dio su vida por estas notas, así que será mejor que tengas cuidado cerca de ese castillo. Además, tengo algo para ti. Toma algo de oro; podría ayudarte en tus viajes.
+			Commander_6_2: No tengo la menor idea de lo que podría significar, sin embargo, el explorador dio su vida por estas notas, así que será mejor que tengas cuidado cerca de ese castillo. Además, tengo algo para ti. Toma este libro; contiene conocimiento que podría ayudarte en tus viajes.
+			Commander_6: ¿Así que el explorador ha muerto, pero recuperaste su informe? Dámelo, podría contener información crucial para el Imperio… Bien… Así que así es como son las cosas, ¿eh? Este informe contiene sus observaciones del castillo. Aquí dice que durante la noche el cofre de allí parece temblar, y después la escritura se interrumpe…
+			Commander_5: Vuelve cuando tengas la información.
+			Commander_3: Uno de nuestros exploradores fue enviado a comprobar la situación en la zona de un castillo abandonado, una antigua reliquia de una civilización perdida. Ya han pasado dos días y aún no ha regresado. Échale un vistazo e infórmame cuando termines.
+			Commander_1: ¿Eres el recluta que llegó hace poco? Bien, tengo algo de equipo para que sobrevivas un poco más. Y no, esto no es el campamento Navarro, así que no tienes que matarte trabajando para devolverme el favor.
+			Alchemist_2: Nuestro Cónsul cumple aniversario pronto y nosotros, los ciudadanos agradecidos, queremos demostrarle nuestro aprecio con un regalo: una pieza de arte antigua. Iré al grano: estamos interesados en cierto cuadro guardado en el santuario del Dios Sol Helios. Tráemelo y serás recompensado.
+			Alchemist_4: En ese caso, esperaré. Por cierto, el santuario está en algún lugar del cielo.
+			Alchemist_5: Justo lo que necesitábamos, al cónsul le encantará. Tú tampoco te irás con las manos vacías: esta poción te ayudará a reiniciar tu raza y volver a forma humana.
+			Alchemist_7: Ahora mismo estoy preparando una poción que hace inmortal al consumidor durante un corto período de tiempo. Tiene una composición muy compleja, que incluye hojas de helecho. Si me traes 5 de ellas, compartiré algo del brebaje contigo. ¿Te apuntas?
+			Alchemist_9: Sigue buscando, solo necesito 5.
+			Alchemist_10: Perfecto, amigo mío. Lo último que falta es algo de resplandor diurno. Por desgracia, mi reserva está vacía, pero he oído que puede sustituirse por malahierba. Confío en ti para tomar esa decisión. ¿Qué opinas?
+			Alchemist_14: Ya veo que sabes muy bien qué hacer en tu tiempo libre, ¿eh? Estoy esperando las flores.
+			Alchemist_15: ¡Y así, por fin llegó el último ingrediente! Gracias por tu ayuda: toma estas pociones como muestra de mi agradecimiento. ¡Estoy seguro de que te serán útiles en momentos de necesidad!
+			Alchemist_17: Para cargarla necesito una sustancia extremadamente exótica: éter. Su receta se conserva en cierta tableta esmeralda, un antiguo repositorio de sabiduría. Si me la traes, quizá pueda cargar la piedra. ¿Trato hecho?
+			Alchemist_19: ¡Oh, dioses, sí, es esto! ¡Lo has conseguido! Esta tableta describe el método para crear éter. Necesitaré algo de tiempo para descifrar los símbolos; visítame en un rato, intentaré idear algo.
+			Alchemist_20: No, por desgracia aún no he resuelto el misterio del éter. Vuelve más tarde.
+			Alchemist_21: Sí, amigo mío, he logrado descifrar la tableta. Para crear éter necesitaremos las esencias de cuatro elementos: fuego, tierra, agua y viento. Con ellas es posible crear la sustancia, pero primero lee la traducción de esta tableta para evitar errores en la fabricación. Además de eso, necesitaré los siete metales celestiales. Vuelve cuando tengas todos los ingredientes.
+			Beggar_5: ¡Gracias, amigo, me has hecho un gran favor! Sabes, el juego está prohibido en esta ciudad, pero haré una excepción solo para ti. Ven cuando quieras a probar tu suerte conmigo en un juego de dados… y de paso aligerar un poco esa cartera.
+			Beggar_4: Vuelve cuando tengas algo bueno y sabroso.
+			Beggar_2: Sé que un valiente guerrero como tú no rechazaría ayudar a un pobre anciano indefenso. Tráeme un tentempié y quizá te recompense… Es broma, obviamente.
+			Blacksmith_17: Excelente trabajo, aquí tienes tu recompensa.
+			Priest_9: Veo que vienes a recoger la guadaña. Bien, acabo de terminarla. Te será útil en muchos asuntos oscuros.
+			Priest_8: Sí, hermano mío, cargaré la guadaña. Vuelve más tarde.
+			Alchemist_22:
+				'''
+				Por desgracia, no tienes suficientes materiales. Para cargar la piedra necesitarás:
+				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:19], 30[i:Bismuth/Quicksilver]
+				10[i:Bismuth/Aether]
+				[i:Bismuth/UnchargedTruePhilosopherStone]
+				'''
+			Alchemist_23: Genial, empezaré a cargar la piedra ahora mismo. Vuelve más tarde.
+			Alchemist_24: Sí, la piedra está lista. ¡Tómala y que te proteja!
+			BackToTitle: Volver a la página de título
+			TitleText:
+				'''
+				Bienvenido al Mod Bismuth, una modificación de Terraria que añade una gran cantidad de nuevas mecánicas de juego. Toda la información que el jugador pueda necesitar para aprender se encuentra en el Libro del Aventurero. Sus páginas contienen: una lista de misiones activas/completadas, las estadísticas de tu personaje, así como el árbol de habilidades (desbloqueado una vez que elijas tu clase).
+				También revisa las opciones de Controles del Mod y Configuración del Mod y configúralas a tu gusto.
+				'''
+			ActiveQuests: Misiones Activas:
+			LinksText: Enlaces Útiles
+			CompletedQuests: Misiones Completadas:
+			Stages: Etapas:
+			QuestDiary1: Curiosamente, lo último que recuerdo es que hablaba con un hombre con túnica blanca, casi como si no hubiera existido antes de eso. Si no me equivoco, su nombre es {0}, y el lugar en el que me encontraba era la ciudad imperial. Es bastante buena aquí, sobre todo porque es el lugar más seguro de estas tierras. Parece que {0} es el líder. Me dijo que me reuniera con el comandante y recogiera mi equipo. Debería seguir su consejo, pero primero debo decidir qué estilo de lucha me conviene más y usar el grabado de clase.
+			Quest1Stage2: Toma el equipo inicial del comandante
+			Quest1Stage1: Elige tu clase
+			QuestDiary2: Estos pantanos son un lugar podrido. Los páramos venenosos y sus habitantes no son lo mejor que me ha pasado. Curiosamente, incluso en unos alrededores tan olvidados por Dios, todavía hay signos de civilización. En medio del pantano encontré a un hombre que alojaba a una bruja. Me contó la historia de un tesoro, escondido en algún lugar profundo del páramo, y me pidió que le trajera un libro, que podría ayudar a recuperarlo. No voy a mentir, parece sospechosa, pero creo que vale la pena el riesgo. El libro está guardado en algún lugar de la ciudad del desierto; debería empezar mi búsqueda allí.
+			Quest2Stage1: Encuentra el libro en el pueblo del desierto
+			QuestDiary3: Por fin, la bruja ha terminado de descifrar el tomo. Debo leer el resultado antes de salir a buscar el artefacto, no sea que la antigua maldición me mate. Evidentemente, la vieja oculta el verdadero poder de esta reliquia: una de las páginas indica que con ella podría alcanzar los poderes del pueblo acuático; para ello, debo cargar la piedra en un altar en un templo situado en el lecho marino. Ahora debo decidir cómo actuar: tomarla para mí o cumplir mi promesa.
+			Quest3Stage1_2: Quédatelo
+			Quest3Stage1_1: Lleva Gaermire a la bruja
+			QuestOr: O
+			Quest4Stage1: Lleva la piedra mágica al anciano
+			Quest4Stage2: Obtener recompensa
+			QuestDiary4: Y yo que pensaba que nada podría ser peor que perder la memoria solo para encontrarte en una ciudad desconocida, la reunión de hoy me demostró lo contrario. Buscando mineral bajo tierra, escuché un grito de ayuda. Tras los escombros encontré a un anciano que, por lo que parecía, llevaba viviendo allí un tiempo. Me dijo que la puerta más adelante en el pasillo era la entrada a un laberinto. En algún lugar dentro se encontraba una piedra mágica que podría ayudarle a volver a casa. Me dio una llave de dicha puerta. Ahora es momento de liberarle y de explorar los tesoros que guarda en su interior.
+			QuestDiary4_2: Logré recuperar la piedra del anciano. Resultó ser un dispositivo de teletransporte, llevando al propietario directamente a la ciudad imperial. El viejo me dijo que pasara por allí por si quería una recompensa por mis esfuerzos.
+			QuestDiary5: Resultó que los goblins eran un grupo duro; está claro que necesito algo más eficaz contra estas bestias. {0} me dijo que con el plano adecuado podría forjar un arma específicamente para ese propósito. Según sus palabras, el pergamino está en posesión de {1}, nuestro goblin inventor. Irónico.
+			Quest5Stage2: Espera la nueva espada
+			Quest5Stage1: Compra el plano de la espada al chapucero goblin
+			Quest6Stage1: Lleva el cuerno de minotauro al herrero
+			QuestDiary6: Hoy volví a hablar con {0}; me habló de un laberinto bajo la ciudad, en cuyo interior se encuentra un Minotauro. Al herrero solo le interesa su cuerno, del que podría hacer un instrumento musical; por tanto, el resto del tesoro es mío. Debo tomarme un tiempo para prepararme antes de enfrentar a la bestia.
+			Quest7Stage1: Trae restos de armadura dwarven
+			QuestDiary7: Ahora que lo pienso, nunca conocí a un gnomo aparte de {0}. Su historia de una civilización de enanos que fue grande lo explica todo. Tal vez se apiade de sus camaradas caídos, pero su destino no es de mucha importancia para mí. Por otro lado, {0} está dispuesto a pagar por sus corazas, así que ahora debo asumir el papel de Cazador de No Muertos, si quiero algunas de esas monedas dwarven.
+			QuestDiary8: Anoche hablé con {0}, el sacerdote de este lugar. Obviamente, es más de lo que aparenta. Me dijo que recuperara restos de la tumba de un guerrero en algún lugar junto al océano, en el lado de la jungla, y que se los trajera para un ritual. La nigromancia está prohibida aquí, bajo pena de muerte, sin embargo, {0} me prometió un "arma de poder nunca visto" y me aseguró un final amargo si lo traicionaba. Ahora debo decidir, ¿revelo sus planes al cónsul o rompo la ley para obtener esa arma?
+			Quest8Stage1_2: Reporta al líder
+			Quest8Stage1_1: Excava la lápida
+			Quest9Stage1: Habla con el líder sobre el puesto de sacerdote
+			QuestDiary9: El anciano que liberé del laberinto me dijo que una vez se dedicó a la teología y sabe que {0}, el nigromante, escapó. Él quiere ocupar su lugar y me pidió que hablara con {1} sobre el asunto. No veo razón para negarme.
+			Quest10Stage1: Lleva flores de helecho al alquimista
+			Quest10Stage2_1: Elige Resplandor diurno
+			Quest10Stage3: Lleva resplandor diurno al alquimista
+			QuestDiary10: Finalmente, {0} me pidió algo interesante. Me habló de una poción en progreso, que debería hacer que el usuario fuera invencible por un corto período de tiempo. Para crearla, necesita flores de helecho, cuyas esporas puedo encontrar en el pantano. Debería plantar esas esporas en una maceta y esperar a que florezcan.
+			Quest11Stage1: Haz la Tabula a partir de piezas
+			Quest11Stage2: Espera la traducción
+			QuestDiary11: Parece que {0} está satisfecho con mi ayuda, y por eso me habló de la verdadera piedra filosofal, un artefacto que ayuda al usuario a escapar de las garras de la muerte. Es una reliquia familiar de {0}, el problema es que tiene que ser cargada para funcionar. Y la única forma de hacerlo es usar éter, una sustancia cuya receta se describe en la Tabula Smaragdina, un antiguo tratado alquímico. Los fragmentos de dicho tratado se guardan en cofres dispersos por todo el mundo, la única forma de encontrarlos es usar espejos de mercurio. Debo llevar la Tabula a {0} una vez que esté ensamblada.
+			QuestDiary12: Aquí hay una amplia variedad de personas. Tómese a {0}, el jugador local loco que vive en una tienda cerca de la herrería. Me pidió que le trajera algo de comida. La tarea no es ciencia espacial, y él tiene información útil de paso, así que probablemente deba cumplir con su solicitud.
+			Quest12Stage1: Lleva comida al mendigo
+			Quest13Stage1: Lleva el cuadro al alquimista
+			QuestDiary13: "{0} es el alquimista de este lugar. El hombre es un gran entusiasta, y no solo en el campo de la elaboración de pociones, así que no me sorprendió cuando me pidió que lo ayudara a hacer un regalo para el aniversario del cónsul. {0} quiere presentarle un cuadro raro, encontrado en el santuario del Dios Sol Helios. Debería estar en algún lugar en los cielos sobre la ciudad."
+			QuestDiary14: El comandante me encargó una misión importante: verificar la situación en las cercanías de un fuerte abandonado. Su información indica que el explorador enviado previamente a esas tierras desapareció sin dejar rastro, y su informe es de suma importancia para la ciudad. Debo encontrar el castillo y recuperar el documento.
+			Quest14Stage2: Lleva el informe al comandante
+			Quest14Stage1: Encuentra al explorador
+			QuestDiary1_2: Curiosamente, lo último que recuerdo es haber hablado con un tipo con una túnica blanca, casi como si no hubiera existido antes de eso. Si no recuerdo mal, su nombre es {0}, y el lugar donde me encontré es la Ciudad Imperial. Desde el principio, este tipo espera que siga sus órdenes, ¡no lo creo! Rechacé su oferta de equipo, ¡debería encontrar a otro con quien jugar!
+			QuestDiary2_2: Logré recuperar el tomo que me pidió la bruja del pantano. Ahora, debo esperar mientras ella está ocupada descifrándolo.
+			Quest8Stage1_3: Destruye la lápida
+			Quest10Stage2_2: Elige Malahierba
+		}
+
+		Player: {
+			ManaCostStat: Coste de hechizos: {0}%
+			MPStat: Maná máximo: {0}
+			RegenStat: Regeneración de vida: {0}{1} de vida
+			HPStat: Vida máxima: {0}
+			PlayerStat: Estadísticas del Jugador:
+			DefenceStat: Defensa: {0}
+			EnduranceStat: Resistencia al daño: {0}%
+			BlockStat: Probabilidad de bloqueo: {0}%
+			DodgeStat: Probabilidad de esquivar: {0}%
+			MeleeSpeedStat: Velocidad cuerpo a cuerpo: {0}%
+			MeleeCritStat: Prob. de golpe crítico cuerpo a cuerpo: {0}%
+			MeleeDmgStat: Daño cuerpo a cuerpo: {0}%
+			MSStat: Velocidad de movimiento: {0}%
+			ParryStat: Probabilidad de desvío: {0}%
+			MagicDmgStat: Daño mágico: {0}%
+			MagicCritStat: Prob. de golpe crítico mágico: {0}%
+			MinionDmgStat: Daño de súbdito: {0}%
+			MaxMinionStat: Número máximo de súbditos: {0}
+			ThrownVelStat: Velocidad de proyectiles lanzados: {0}%
+			ThrownCritStat: Prob. de golpe crítico lanzado: {0}%
+			ThrownDmgStat: Daño lanzado: {0}%
+			RangedCritStat: Prob. de golpe crítico a distancia: {0}%
+			RangedDmgStat: Daño a distancia: {0}%
+			SkillsTree: Árbol de habilidades:
+			CharmStat: Encanto: {0}
+			CritDmgStat: Daño de golpe crítico: {0}%
+			AssassinCritStat: Proba. de golpe crítico de asesino: {0}%
+			AssassinDmgStat: Daño de asesino: {0}%
+		}
+	}
+}
+
+LevelsLocalization: {
+	Levels: {
+		Levels: {
+			SPs: PUNTOS DE HABILIDAD:
+			CurXP: XP:
+			Level: NIVEL:
+		}
+	}
+}
+
+CoinSystem: {
+	CoinLocalization: {
+		CoinSystem: {
+			DwarvenCoin: Moneda Dwarven
+			Ocrea: Ocrea
+			ImperianHelmet: Casco Imperiano
+			Lorica: Lorica
+			AetherRecipe: Aprender la receta para el éter
+			GalvornRecipe: Tener un Pergamino de Galvorn
+			PoisonRecipe: está en un pantano
+			PanaceaRecipe: Aprender la receta de la Receta
+			PhilosopherStone: Completa las misiones del alquimista
+			Necromant: Nigromante
+		}
+	}
+}
+
+BismuthPlayerLayerSystem: {
+	BismuthPlayerLayer: {
+		Layer: {
+			OrcishInvasionName: Invasión Orcish
+			DefeatedPortals: Portales Derrotados:
+			Wetness: Humedad:
+			Hunger: Saciedad:
+		}
+	}
+}
+
+BonusArmor: {
+	GlobalItems: {
+		Ninja: {
+			NinjaHood: 9% de aumento en la velocidad lanzada
+			NinjaPants: 7% de aumento en la probabilidad de golpe crítico lanzado
+			NinjaShirt: 9% de aumento en el daño lanzado
+		}
+
+		Fossil: {
+			FossilShirt: 12% de aumento en el daño lanzado
+			FossilPants: 5% de aumento en la probabilidad de golpe crítico lanzado
+			FossilHelm: 12% de aumento en la velocidad lanzada
+		}
+
+		Info: {
+			BaseTooltips: Presiona {0} para ver más información.
+			BaseRingTooltips: Para purificar, usa {0}[i:Bismuth/PotionOfHumanity] vendida por el Alquimista {1}
+			TheRingOfTheBloodTooltips:
+				'''
+				Si matas enemigos, satisfarás tu hambre
+				añade vampirismo a los ataques
+				{0}
+				'''
+			Unboundltips: TECLA NO ASIGNADA
+			TheRingOfTheSeasTooltips:
+				'''
+				Si está en el agua, la humedad se restaura
+				Añade la habilidad de nadar y aire infinito
+				{0}
+				'''
+		}
+	}
+}
+
+DeadGolems.Golem.BismuthumText: Tu mundo ha sido bendecido con Bismutos
+DeadSkeletron.Skeletron.HeliosText: Escuchas himnos alabando al antiguo Señor de la Luz Solar
+DeadEoC.EyeofCthulhu.MazeText: Una extraña voz te habla de un misterioso edificio en las cuevas...
+
+QUEST: {
+	QUESTCOMPLETED: ¡MISIÓN COMPLETADA!
+	QUESTFAILED: ¡MISIÓN FALLIDA!
+	QUESTACCEPTED: ¡MISIÓN ACEPTADA!
+}
