@@ -103,8 +103,8 @@ Tiles: {
 	HeliosDoorClosed.MapEntry: Puerta
 	HeliosDoorOpen.MapEntry: Puerta
 	MahoganyMirror.MapEntry: Espejo
-	OrcishBed.MapEntry: Cama 
-	OrcishBookcase.MapEntry: Librería 
+	OrcishBed.MapEntry: Cama
+	OrcishBookcase.MapEntry: Librería
 	OrcishClock.MapEntry: Reloj
 	OrcishDresser.MapEntry: Aparador
 	OrcishPiano.MapEntry: Piano
@@ -1925,12 +1925,12 @@ Items: {
 
 	SoulEater: {
 		Item.AssassinDamage: daño de asesino
-		DisplayName: Devorador de Almas
 		Tooltip:
 			'''
 			Al causar daño, aparecen almas inquietas cerca de ti. Aumentan tu
 			daño, pero disminuyen tu salud
 			'''
+		DisplayName: Devorador de Almas
 	}
 
 	Whirlpool: {
@@ -2949,43 +2949,43 @@ NPCs: {
 
 		Chat: {
 			AlchemistButton_9: Resplandor Diurno
-			AlchemistButton_7: Aquí están las flores de helecho
+			AlchemistButton_7: Aquí tienes las flores de helecho
 			AlchemistButton_6: No hay problema
 			AlchemistButton_5: ¿Cuál es la siguiente tarea?
 			AlchemistButton_4: No es tan fácil encontrar la imagen
-			AlchemistButton_3: Los cielos perdieron una imagen
+			AlchemistButton_3: Los cielos han perdido una imagen
 			AlchemistButton_2: Entendido
-			AlchemistButton_1: Dime qué necesitas
-			Alchemist_4: En ese caso, esperaré. Por cierto, el santuario está en algún lugar del cielo.
-			Alchemist_9: Sigue buscando, solo necesito 5.
-			Alchemist_12: De acuerdo, entonces tráeme 30 para que pueda terminar la mezcla. ¡Buena suerte!
-			Alchemist_14: Sabes bien qué hacer en tu tiempo libre, ¿eh? Espero las flores.
-			Alchemist_20: No, lamentablemente aún no he terminado de resolver el misterio del éter. Vuelve más tarde.
-			Alchemist_23: Genial, empezaré a cargar la piedra ahora mismo. Vuelve más tarde.
+			AlchemistButton_1: Dime, ¿qué necesitas?
+			Alchemist_4: En ese caso esperaré. Por cierto, el santuario se encuentra en algún lugar del cielo.
+			Alchemist_9: Sigue buscando, solo necesito cinco.
+			Alchemist_12: De acuerdo, tráeme 30 para poder terminar la mezcla. ¡Buena suerte!
+			Alchemist_14: Sabes cómo aprovechar tu tiempo libre, ¿eh? Estaré esperando las flores.
+			Alchemist_20: No, lamentablemente aún no he resuelto el misterio del éter. Vuelve más tarde.
+			Alchemist_23: Perfecto, empezaré a cargar la piedra ahora mismo. Regresa luego.
 			AlchemistButton_8: Necesito más tiempo para esto
 			AlchemistButton_10: Malahierba
-			AlchemistButton_11: Resplandor diurno, como ordenaste
+			AlchemistButton_11: Resplandor Diurno, tal como pediste
 			AlchemistButton_12: Dame un poco más de tiempo
-			AlchemistButton_13: Pero ¿por qué me necesitas a mí?
+			AlchemistButton_13: Pero, ¿por qué me necesitas a mí?
 			AlchemistButton_14: No hay artefactos que no pueda encontrar
-			AlchemistButton_15: Aquí está la tabula
+			AlchemistButton_15: Aquí tienes la tabula
 			AlchemistButton_16: ¿Cómo va la traducción?
 			AlchemistButton_17: Me gustaría cargar la piedra
 			AlchemistButton_18: ¿Está lista la piedra?
-			Alchemist_16: Sabes, has sido de gran ayuda desde que llegué a estas tierras. Creo que mereces conocer el mayor artefacto de la alquimia. Durante 400 años, mi familia ha guardado la verdadera Piedra Filosofal. Entre sus propiedades, hay una muy fascinante: puede salvarte cuando estás a las puertas de la muerte, aunque después debe ser cargada.
-			Alchemist_13: El resplandor diurno no se recogerá solo, amigo. ¿Lo tienes ya?
-			Alchemist_11: De acuerdo, en ese caso, añadiré un poco de malahierba... Bien, está hecho, veamos el resultado... Oh, algo va mal, amigo, no me siento muy bien...
+			Alchemist_16: Has sido de gran ayuda desde que llegaste a estas tierras. Creo que mereces conocer el mayor artefacto de la alquimia: la verdadera Piedra Filosofal, guardada por mi familia durante 400 años. Entre sus propiedades, hay una fascinante: puede salvarte cuando estás al borde de la muerte, aunque luego deberá ser recargada.
+			Alchemist_13: El Resplandor Diurno no se recogerá solo, amigo. ¿Lo tienes ya?
+			Alchemist_11: Bien, añadiré un poco de Malahierba... listo, veamos el resultado… Oh, algo va mal, amigo, no me siento muy bien...
 			Alchemist_8: ¿Has conseguido ya las flores de helecho?
-			Alchemist_3: En ese caso, esperaré. Por cierto, el santuario está en algún lugar del cielo.
+			Alchemist_3: En ese caso esperaré. Por cierto, el santuario se encuentra en algún lugar del cielo.
 			Alchemist_1: Querido amigo, ¿tienes un minuto para escucharme?
 			AlchemistNQ_4:
 				'''
 				Como dijo una vez un sabio colega mío:
-				Lo que ocurrió una vez podría no repetirse. Sin embargo, lo que ocurrió dos veces seguro que volverá a ocurrir
+				Lo que ocurrió una vez podría no repetirse, pero lo que ocurrió dos veces seguro que volverá a ocurrir.
 				'''
-			AlchemistNQ_3: Si tan solo supieras cómo inventé una poción extraña.
-			AlchemistNQ_2: No compres pociones de {0}, su magia son trucos baratos.
-			AlchemistNQ_1: ¡Buenas noticias a todos, el slime está rezumando otra vez!
+			AlchemistNQ_3: Si supieras cómo inventé una poción tan extraña...
+			AlchemistNQ_2: No compres pociones de {0}, su magia son solo trucos baratos.
+			AlchemistNQ_1: ¡Buenas noticias a todos! ¡El slime está rezumando otra vez!
 		}
 
 		Census.SpawnCondition: Condiciones desconocidas
@@ -3008,21 +3008,21 @@ NPCs: {
 		}
 
 		Chat: {
-			SwampWitchNQ_4: ¿Has visto zapatos de plata por ahí?
-			SwampWitchNQ_3: ¿Quién es {0}? Su magia es fuerte.
+			SwampWitchNQ_4: ¿Has visto por ahí unos zapatos de plata?
+			SwampWitchNQ_3: ¿Quién es {0}? Su magia es realmente poderosa.
 			SwampWitchNQ_2: Que la magia te guíe, héroe.
-			SwampWitchNQ_1: Pizca de copa de la muerte, tacón de zapato
-			SwampWitch_12: ¡Excelente trabajo, joven héroe! Cumplo mi palabra: estas pociones te mantendrán a salvo de muchos venenos y enfermedades. Si necesitas más, siempre puedes comprarlas aquí.
-			SwampWitch_10: Tráeme la piedra y serás recompensado.
-			SwampWitch_9: ¿Encontraste la piedra?
-			SwampWitch_7: ¡Ah, si no es el joven héroe! Llegaste justo a tiempo: acabo de terminar de leer el tomo. Ahora nada te impedirá conseguir la piedra.
-			SwampWitch_6: Mi investigación aún no ha terminado, vuelve más tarde.
-			SwampWitch_4: Necesito el libro para continuar mi investigación.
+			SwampWitchNQ_1: Pizca de copa de la muerte, tacón de zapato.
+			SwampWitch_12: ¡Excelente trabajo, joven héroe! Cumplo mi palabra: estas pociones te protegerán de muchos venenos y enfermedades. Y si necesitas más, siempre puedes comprarlas aquí.
+			SwampWitch_10: Tráeme la piedra y recibirás tu recompensa.
+			SwampWitch_9: ¿Has logrado encontrar la piedra?
+			SwampWitch_7: ¡Ah, si no es nuestro joven héroe! Llegas justo a tiempo; acabo de terminar de leer el tomo. Ahora nada te impedirá conseguir la piedra.
+			SwampWitch_6: Mi investigación aún no ha terminado. Vuelve más tarde.
+			SwampWitch_4: Necesito el libro para poder continuar con mis estudios.
 			SwampWitch_3: ¿Has traído el libro?
-			SwampWitch_1: Joven héroe... Sabía que vendrías... Escúchame, lo juro, no te arrepentirás
+			SwampWitch_1: Joven héroe… Sabía que vendrías. Escúchame, te lo juro, no te arrepentirás.
 			SwampWitchAnsv_10: ¡Prepárate para perder la vida!
-			SwampWitchAnsv_9: Sí, pero no te lo mereces
-			SwampWitchAnsv_8: Es más difícil de lo que parece
+			SwampWitchAnsv_9: Sí, pero no creo que te lo merezcas.
+			SwampWitchAnsv_8: Es más complicado de lo que parece.
 			SwampWitchAnsv_7: Sí, tómalo
 			SwampWitchAnsv_6: ¡Conseguiré la piedra!
 			SwampWitchAnsv_5: ¿Dónde puedo encontrar la piedra?
@@ -3076,15 +3076,15 @@ NPCs: {
 			BeggarAnsv_3: Aquí tienes comida para ti
 			BeggarAnsv_2: Te traeré comida
 			BeggarAnsv_1: ¿Qué necesitas de mí?
-			BeggarNQ_6: Ahora tienes {0} victorias en total y {1} seguidas.
-			BeggarNQ_5: Lo siento, pero no tienes suficiente dinero para hacer una apuesta. Vuelve cuando ganes al menos una moneda de oro.
+			BeggarNQ_6: Ahora tienes {0} victorias en total y {1} consecutivas.
+			BeggarNQ_5: Lo siento, pero no tienes suficiente dinero para apostar. Vuelve cuando tengas al menos una moneda de oro.
 			BeggarNQ_4: Qué buen día hace hoy... ¿Tienes algo de beber?
-			BeggarNQ_3: "{0} es más de lo que aparenta. Vigílale de cerca."
+			BeggarNQ_3: "{0} es más de lo que aparenta. Vigílalo de cerca."
 			BeggarNQ_2: ¿Podrías darme una moneda?
-			BeggarNQ_1: "{0} es el mejor tío del pueblo."
-			Beggar_4: ¿Ya tienes la comida?
-			Beggar_3: Sé que un valiente guerrero como tú no se negaría a ayudar a un pobre anciano. Tráeme un aperitivo y, tal vez, te recompense... Es broma, obviamente.
-			Beggar_1: E-je-je, eres ese novato, ¿verdad? ¡Tengo un trabajo para ti, jovencito!
+			BeggarNQ_1: "{0} es el mejor tipo del pueblo."
+			Beggar_4: ¿Ya conseguiste la comida?
+			Beggar_3: Sé que un valiente guerrero como tú no se negaría a ayudar a un pobre anciano. Tráeme un aperitivo y, tal vez, te recompense… Es broma, claro.
+			Beggar_1: E-je-je, eres ese novato, ¿verdad? ¡Tengo un trabajito para ti, jovencito!
 			BeggarAnsv_6: Mods.Bismuth.NPCs.Beggar.Chat.BeggarAnsv_6
 		}
 
@@ -3117,32 +3117,32 @@ NPCs: {
 		}
 
 		Chat: {
-			Blacksmith_1: "{0}, apuesto a que esos goblins sucios también te sacan de quicio, ¿verdad? Bueno, tengo una solución para eso."
-			Blacksmith_3: Hay demasiados hocicos de goblin cerca de este pueblo, pero es un problema solucionable, si me traes el plano, por supuesto.
+			Blacksmith_1: "{0}, apuesto a que esos sucios goblins también te sacan de quicio, ¿verdad? Bueno, tengo una solución para eso."
+			Blacksmith_3: Hay demasiados hocicos de goblin rondando por el pueblo… pero es un problema fácil de resolver, si me traes el plano, claro.
 			Blacksmith_5: La espada aún no está lista, vuelve más tarde.
-			Blacksmith_7: ¡Juro por mi martillo que llegas justo a tiempo! Tengo una oferta para ti.
-			Blacksmith_9: Es hora de que el minotauro pierda uno de sus cuernos. ¿Has matado ya a la bestia?
-			Blacksmith_10: En ese caso no pierdas más tiempo, te estaré esperando.
-			Blacksmith_12: Sabes, hace mucho tiempo no podía llamarme el último superviviente de los gnomos. Nuestra civilización prosperaba; bajo tierra éramos los reyes, pero un solo y poderoso terremoto acabó con toda nuestra historia. Muchos de los fallecidos aún no han encontrado la paz y siguen vagando por las minas como esqueletos.
-			Blacksmith_14: No puedo esperar para empezar a forjar equipo con esta aleación. ¿Ya has obtenido 5 petos?
-			Blacksmith_15: En ese caso, no pierdas más tiempo, ya sabes lo que tienes que hacer.
-			BlacksmithNQ_1: ¡Qué grandes pociones tenía nuestra civilización; los niños podían beberlas!
-			BlacksmithNQ_2: A veces me pregunto si {0} es mi pariente lejano.
-			BlacksmithNQ_3: ¿No has visto algún anillo bonito por ahí, verdad? ¿No? Bueno, entonces.
-			BlacksmithNQ_4: Hace mucho tiempo, antes del terremoto, extraíamos un mineral de una calidad sorprendente. Quizás aún puedas encontrar algo en las profundidades de la tierra.
+			Blacksmith_7: ¡Por mi martillo, llegas justo a tiempo! Tengo una oferta para ti.
+			Blacksmith_9: Ya es hora de que ese minotauro pierda uno de sus cuernos. ¿Has acabado con la bestia?
+			Blacksmith_10: Entonces no pierdas más tiempo; te estaré esperando.
+			Blacksmith_12: Sabes… hace mucho tiempo no me llamaban el último superviviente de los gnomos. Nuestra civilización prosperaba; bajo tierra éramos los reyes. Pero un solo terremoto lo destruyó todo. Muchos de los nuestros aún no han encontrado la paz… y vagan por las minas como esqueletos.
+			Blacksmith_14: No puedo esperar para empezar a forjar con esta aleación. ¿Ya conseguiste los cinco petos?
+			Blacksmith_15: En ese caso, no pierdas tiempo. Ya sabes lo que tienes que hacer.
+			BlacksmithNQ_1: Qué grandes pociones hacía nuestra gente… ¡hasta los niños podían beberlas!
+			BlacksmithNQ_2: A veces me pregunto si {0} no será un pariente lejano mío.
+			BlacksmithNQ_3: ¿No te habrás encontrado un anillo bonito por ahí, verdad? ¿No? Bueno, está bien.
+			BlacksmithNQ_4: Antes del terremoto extraíamos un mineral de calidad increíble. Quizá aún puedas hallar algo en las profundidades.
 			BlacksmithAnsv_1: ¿Qué solución?
 			BlacksmithAnsv_2: Te traeré un plano
 			BlacksmithAnsv_3: Aquí tienes un plano, como pediste
 			BlacksmithAnsv_4: Todavía no he hablado con {0}
-			BlacksmithAnsv_5: ¿Cómo va la fabricación de la espada?
-			BlacksmithAnsv_6: Soy todo oídos
-			BlacksmithAnsv_7: ¿Una bestia más para derrotar?
+			BlacksmithAnsv_5: ¿Cómo va la espada?
+			BlacksmithAnsv_6: Te escucho
+			BlacksmithAnsv_7: ¿Otra bestia para derrotar?
 			BlacksmithAnsv_8: ¡Lo maté, amigo mío!
-			BlacksmithAnsv_9: El minotauro sigue vivo
+			BlacksmithAnsv_9: El minotauro sigue con vida
 			BlacksmithAnsv_10: Ve al grano
 			BlacksmithAnsv_11: Trato hecho
 			BlacksmithAnsv_12: Estoy en ello
-			BlacksmithAnsv_13: Aquí están los petos
+			BlacksmithAnsv_13: Aquí tienes los petos
 			BlacksmithAnsv_14: Intercambiar petos
 		}
 
@@ -3193,19 +3193,19 @@ NPCs: {
 		}
 
 		Chat: {
-			CommanderNQ_4: Pregúntale a {0}, él te proporcionará equipo decente.
+			CommanderNQ_4: Pregúntale a {0}, él te dará un equipo decente.
 			CommanderNQ_3: ¡A los soldados romanos se les prohíbe morir sin permiso!
-			CommanderNQ_2: ¡Legionarios, sois una vergüenza para el Imperio Romano!
+			CommanderNQ_2: ¡Legionarios, sois una vergüenza para el Imperio!
 			CommanderNQ_1: ¡Asegurad vuestros escudos!
-			Commander_5: Vuelve cuando tengas la información.
-			Commander_4: ¿Tienes alguna pista de lo que sucedió cerca del castillo?
-			Commander_2: Tengo una tarea muy importante para ti, guerrero.
+			Commander_5: Vuelve cuando tengas más información.
+			Commander_4: ¿Tienes alguna pista sobre lo que ocurrió cerca del castillo?
+			Commander_2: Tengo una misión muy importante para ti, guerrero.
 			CommanderAnsv_6: ¿Y eso a dónde nos lleva?
-			CommanderAnsv_5: Todavía no he encontrado al explorador
+			CommanderAnsv_5: Todavía no he dado con el explorador.
 			CommanderAnsv_4: Aquí tienes tu informe
-			CommanderAnsv_3: Te traeré este informe
-			CommanderAnsv_2: ¡Haré lo mejor para el Imperio!
-			CommanderAnsv_1: ¿Puedes darme equipo?
+			CommanderAnsv_3: Te traeré este informe personalmente.
+			CommanderAnsv_2: ¡Haré todo lo posible por el Imperio!
+			CommanderAnsv_1: ¿Podrías darme algo de equipo?
 		}
 
 		Census.SpawnCondition: Condiciones desconocidas
@@ -3238,10 +3238,10 @@ NPCs: {
 			ConsulAnsv_3: La ciudad necesita un nuevo sacerdote...
 			ConsulAnsv_2: Quiero hablar sobre {0}
 			ConsulAnsv_1: No, gracias (sin juego RPG)
-			ConsulNQ_3: Si necesitas una misión, toma una de nuestros ciudadanos
-			ConsulNQ_2: Todos los caminos conducen a nuestra ciudad.
-			ConsulNQ_1: ¡Viniste, viste, completaste la misión!
-			Consul_1: ¡Oh, tenemos un novato! Bienvenido, guerrero. Estás en el único refugio seguro en kilómetros a la redonda: ¡la ciudad Imperial! Estoy seguro de que servirás bien al Imperio. Por ahora, echa un vistazo alrededor. La inscripción de clases te ayudará a elegir tu camino; visita al Comandante para obtener tu equipo una vez que hayas terminado.
+			ConsulNQ_3: Si buscas una misión, pregunta a nuestros ciudadanos
+			ConsulNQ_2: Todos los caminos llevan a nuestra ciudad
+			ConsulNQ_1: ¡Has llegado, viste y completaste la misión!
+			Consul_1: ¡Ah, un novato! Bienvenido, guerrero. Estás en el único refugio seguro en kilómetros a la redonda: ¡la ciudad Imperial! Estoy seguro de que servirás bien al Imperio. Por ahora, explora un poco. La inscripción de clases te ayudará a elegir tu camino; y cuando termines, visita al Comandante para conseguir tu equipo
 		}
 
 		Census.SpawnCondition: Condiciones desconocidas
@@ -3327,11 +3327,11 @@ NPCs: {
 		Chat: {
 			OldmanPriestAnsv_1: Bendición
 			OldmanPriestNQ_1: ¡Que Júpiter te bendiga, héroe!
-			OldmanPriestNQ_2: El tiempo sana, pero los sacerdotes son más rápidos.
-			OldmanPriestNQ_3: Las cosas han mejorado mucho aquí después de que el Nigromante fuera expulsado. Como en los viejos tiempos.
+			OldmanPriestNQ_2: El tiempo sana, pero los sacerdotes lo hacen más rápido.
+			OldmanPriestNQ_3: Las cosas han mejorado mucho desde que expulsamos al Nigromante. Como en los viejos tiempos.
 			OldmanPriestNQ_4: ¿No crees que la antropomancia es el método de predicción más preciso?
-			OldmanPriestNQ_6: Te estoy bendiciendo
-			OldmanPriestNQ_7: Lo siento, pero no puedes ser bendecido más de una vez al día
+			OldmanPriestNQ_6: Te estoy otorgando mi bendición.
+			OldmanPriestNQ_7: Lo siento, pero no puedes recibir bendiciones más de una vez al día.
 		}
 
 		Census.SpawnCondition: Condiciones desconocidas
@@ -3386,14 +3386,14 @@ NPCs: {
 			PriestAnsv_3: Tengo los restos
 			PriestAnsv_2: Deséame suerte
 			PriestAnsv_1: Te escucho
-			PriestNQ_4: Los tomos de {0} son interesantes...
-			PriestNQ_3: La magia de la muerte recompensa a los dignos y tortura a los débiles... ¿Estás listo para pagar ese precio?
-			PriestNQ_2: Qué día tan soleado… Espero que la noche sea igual de clara.
-			PriestNQ_1: Si quieres saber más sobre las ruinas, visítame por la noche.
+			PriestNQ_4: Los tomos de {0} son… interesantes.
+			PriestNQ_3: La magia de la muerte recompensa a los dignos y atormenta a los débiles… ¿estás dispuesto a pagar ese precio?
+			PriestNQ_2: Qué día tan soleado… ojalá la noche sea igual de clara.
+			PriestNQ_1: Si quieres saber más sobre las ruinas, ven a verme por la noche.
 			Priest_5: Necesito los restos para un ritual. Vuelve cuando los tengas.
-			Priest_4: ¿Ya has obtenido los restos del guerrero?
-			Priest_2: ¿Deseas poner tus manos sobre un arma de poder jamás visto? ¿Sabes guardar secretos? Si es así, prepárate para escuchar, porque tengo una tarea para ti. Por supuesto, recibirás una generosa recompensa: nada en este mundo debería hacerse gratis…
-			Priest_1: Necesito a alguien que no haga preguntas. Ven aquí cuando la noche caiga sobre esta ciudad… y no te arrepentirás
+			Priest_4: ¿Ya conseguiste los restos del guerrero?
+			Priest_2: ¿Deseas empuñar un arma cuyo poder jamás ha sido visto? ¿Sabes guardar secretos? Si es así, prepárate: tengo una tarea para ti. Y sí, serás bien recompensado… nada en este mundo se hace gratis.
+			Priest_1: Necesito a alguien que no haga preguntas. Ven cuando la noche caiga sobre la ciudad… y no te arrepentirás.
 		}
 
 		Census.SpawnCondition: Condiciones desconocidas
@@ -3468,25 +3468,23 @@ NPCs: {
 			OldmanName_3: Avgur
 			OldmanName_4: Sulyvahn
 			OldmanName_5: Pepin
-			Oldman_1: ¡Un humano! ¡Gracias, dioses del Olimpo! ¡Necesito tu ayuda! He estado atrapado en esta cueva sin posibilidad de rescate durante varios meses: ¡eres mi última esperanza!
+			Oldman_1: ¡Un humano! ¡Gracias, dioses del Olimpo! Necesito tu ayuda. He estado atrapado en esta cueva sin posibilidad de rescate durante meses: ¡eres mi última esperanza!
 			Oldman_3: ¿Has encontrado la piedra?
 			Oldman_4: ¡No tardes demasiado, mi vida está en tus manos!
-			Oldman_7: "¿Puedo pedirte algo, {0}?"
-			OldmanNQ_1: Me alegro de haber salido por fin de ese laberinto: estaba terriblemente oscuro.
-			OldmanNQ_2: Ahora que el Minotauro ha sido derrotado, el subsuelo se va a calmar bastante.
-			OldmanNQ_3: En los tiempos antiguos hubo un héroe que también derrotó al Minotauro. Teseo era su nombre, creo.
+			Oldman_7: ¿Puedo pedirte un favor, {0}?
+			OldmanNQ_1: Me alegra haber salido por fin de ese laberinto: estaba terriblemente oscuro.
+			OldmanNQ_2: Ahora que el Minotauro ha sido derrotado, el subsuelo estará mucho más tranquilo.
+			OldmanNQ_3: En tiempos antiguos hubo un héroe que también derrotó al Minotauro… Teseo era su nombre, creo.
 			OldmanNQ_4: No hay nada mejor que volver a estar entre la gente del Imperio.
-			OldmanNQ_5: "{0} es un tipo raro. No me fío de él."
+			OldmanNQ_5: "{0} es un tipo extraño… no me fío mucho de él."
 			OldmanAnsv_1: ¿Cómo has llegado hasta aquí?
-			OldmanAnsv_2: Quédate aquí y serás salvado
+			OldmanAnsv_2: Quédate aquí y estarás a salvo.
 			OldmanAnsv_3: ¡Lo he encontrado!
 			OldmanAnsv_4: Estoy buscando la piedra
-			OldmanAnsv_5: Sobre la recompensa...
+			OldmanAnsv_5: Sobre la recompensa…
 			OldmanAnsv_6: ¡Claro!
 			OldmanAnsv_7: Hablaré con {0}
 		}
-
-		Census.SpawnCondition: Condiciones desconocidas
 	}
 
 	SwampHound.DisplayName: Sabueso del Pantano
@@ -3516,12 +3514,12 @@ NPCs: {
 		}
 
 		Chat: {
-			TravelingVampireNQ_6: La Máscara te ayudará a disfrazarte.
-			TravelingVampireNQ_5: La vida de los humanos es demasiado corta; los vampiros somos eternos.
+			TravelingVampireNQ_6: La Máscara te ayudará a pasar desapercibido.
+			TravelingVampireNQ_5: La vida de los humanos es demasiado corta… nosotros, los vampiros, somos eternos.
 			TravelingVampireNQ_4: Odio Crepúsculo.
 			TravelingVampireNQ_3: ¡Carpe Jugulum!
-			TravelingVampireNQ_2: ¿Quién te dijo que debía convertirse en guardián del pantano?
-			TravelingVampireNQ_1: ¿Puedes decirme por qué la tortuga vive más que generaciones de hombres, por qué el elefante sigue y sigue hasta ver dinastías, y por qué el loro nunca muere salvo por mordedura de gato, perro u otra desgracia?
+			TravelingVampireNQ_2: ¿Quién te dijo que debía convertirme en guardián del pantano?
+			TravelingVampireNQ_1: Dime… ¿por qué la tortuga vive más que generaciones de hombres, por qué el elefante persiste hasta ver dinastías, y por qué el loro nunca muere, salvo por mordedura de un gato, un perro u otra desgracia?
 		}
 
 		Census.SpawnCondition: Condiciones desconocidas
@@ -3562,12 +3560,12 @@ NPCs: {
 		}
 
 		Say: En
-		Say1: durante Halloween puedes comprar las bragas de la Dríada, pero yo puedo vendértelas siempre (aún no). ¿Pillas la indirecta?
-		Say2: Creo que,
-		Say3: se alegrará cuando vea este pez martillo.
-		Say4: Una vez maté 5 tiburones con una sola cuchara.
-		Say5: Te habría hecho un descuento, pero el pescado estaba insípido, así que no
-		Say6: Elijo picos puntiagudos.
+		Say1: Durante Halloween puedes comprar las bragas de la Dríada, pero yo podría vendértelas siempre… aunque todavía no. ¿Captas la indirecta?
+		Say2: Creo que…
+		Say3: se va a alegrar mucho cuando vea este pez martillo.
+		Say4: Una vez maté cinco tiburones con una sola cuchara.
+		Say5: Te habría hecho un descuento, pero el pescado estaba insípido, así que no.
+		Say6: Yo elijo los picos más puntiagudos.
 		Census.SpawnCondition: Condiciones desconocidas
 	}
 
@@ -4301,7 +4299,7 @@ CoinSystem: {
 		CoinSystem: {
 			DwarvenCoin: Moneda Dwarven
 			Ocrea: Ocrea
-			ImperianHelmet: Casco Imperiano
+			ImperianHelmet: Yelmo Imperiano
 			Lorica: Lorica
 			AetherRecipe: Aprender la receta para el éter
 			GalvornRecipe: Tener un Pergamino de Galvorn
