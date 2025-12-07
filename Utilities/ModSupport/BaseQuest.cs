@@ -8,9 +8,9 @@ namespace Bismuth.Utilities.ModSupport
 {
     public abstract class BaseQuest : IQuest
     {
-        private readonly static string QUESTCOMPLETED = Language.GetTextValue("Mods.Bismuth.QUEST.QUESTCOMPLETED");
-        private readonly static string QUESTFAILED = Language.GetTextValue("Mods.Bismuth.QUEST.QUESTFAILED");
-        private readonly static string QUESTACCEPTED = Language.GetTextValue("Mods.Bismuth.QUEST.QUESTACCEPTED");
+        readonly static string QUESTCOMPLETED = Language.GetTextValue("Mods.Bismuth.QUEST.QUESTCOMPLETED");
+        readonly static string QUESTFAILED = Language.GetTextValue("Mods.Bismuth.QUEST.QUESTFAILED");
+        readonly static string QUESTACCEPTED = Language.GetTextValue("Mods.Bismuth.QUEST.QUESTACCEPTED");
 
         public const string BabaYaga = "BabaYaga";
         public const string Alchemist = "Alchemist";
@@ -34,8 +34,8 @@ namespace Bismuth.Utilities.ModSupport
         public virtual string DisplayDescription => "";
         public virtual string GetButtonText(Player player) => "";
         public virtual string GetButtonText(Player player, ref bool Isfristclicked) => "";
-        public virtual string GetChat(NPC npc, Player player) { Main.npcChatCornerItem = CornerItem; return ""; }
-        public virtual bool IsAvailable(Player player) => HasDefeated(PostBossRequirement);
+        public virtual string GetChat(NPC npc, Player player) => "";
+        public virtual bool IsAvailable(Player player) => false;
         public virtual bool IsActive(Player player) => false;
         public virtual bool IsCompleted(Player player) => false;
         public virtual bool ISManyEndings => false;
@@ -51,7 +51,7 @@ namespace Bismuth.Utilities.ModSupport
             else if (isAvailableQuest) spriteBatch.Draw(available, npc.position - Main.screenPosition + new Vector2(IsActiveQuestUIIconPositionX, IsActiveQuestUIIconPositionY), Color.White);
         }
         public virtual void OnChatButtonClicked(Player player) { }
-        public virtual void CheckItem(Player player, ref bool ModdedBool, int item_id, int need_an_item = 1, int how_many_items_to_spend = 1, string text = "", string textF = "", int itemID = 0, int stack = 0, bool IsNotification = true, bool IsQuestcompleted = true, int progres = 0)
+        public void CheckItem(Player player, ref bool ModdedBool, int item_id, int need_an_item, int how_many_items_to_spend, string text, string textF, int itemID = 0, int stack = 1, bool IsNotification = true, bool IsQuestcompleted = true, int progres = 0)
         {
             var q = player.GetModPlayer<QuestPlayer>();
 
@@ -82,6 +82,10 @@ namespace Bismuth.Utilities.ModSupport
             else if (!ISCompletedSuccessfully && !ISQUESTACCEPTED)CombatText.NewText(rect, ColorFailed, QUESTFAILED);
             if (ISQUESTACCEPTED) CombatText.NewText(rect, ColorAccepted, QUESTACCEPTED);
         }
+        public int ModifyNotificationText(Player player, string text, Color color) {
+            Rectangle rect = new((int)player.position.X, (int)player.position.Y - 35, 10, 10);
+            return CombatText.NewText(rect, color, text);
+        }
         public virtual QuestPhase Phase => QuestPhase.PreSkeletron;
         public virtual PostBossQuest PostBossRequirement => PostBossQuest.Null;
         public bool HasDefeated(PostBossQuest quest)
@@ -111,6 +115,9 @@ namespace Bismuth.Utilities.ModSupport
         public int CompletedQuickSpawnItem(Player player, int Id, int quantity)
         {
             return player.QuickSpawnItem(player.GetSource_FromThis(), Id, quantity);
+        }
+        public int RandomValue(int min, int max) {
+            return Main.rand.Next(min, max + 1);
         }
     }
 }

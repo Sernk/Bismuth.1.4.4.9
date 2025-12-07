@@ -10,12 +10,12 @@ namespace Bismuth.Utilities
         {
             if (BiomeTileCounterSystem.ZoneTotem >= 1)
             {
-                TotemOfCurse.NearbyTotemOfCurse = true;
+                BismuthWorld.NearbyTotemOfCurse = true;
                 return false;
             }
             else
             {
-                TotemOfCurse.NearbyTotemOfCurse = false;
+                BismuthWorld.NearbyTotemOfCurse = false;
                 return false;
             }
         }

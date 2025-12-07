@@ -52,7 +52,7 @@ namespace Bismuth
         public int PhilosopherStoneCharging = 0;     
         public int SunriseQuest = 0;    
         public int ReportQuest = 0;
-
+        public string PlayerClass = "Use engraving to choose your class";
         #endregion
         // Номера квестов:
         // 1 - стартовое обмундирование
@@ -2625,7 +2625,7 @@ namespace Bismuth
                         }
                         else
                         {
-                            Utils.DrawBorderStringFourWay(sb, Bismuth.Adonais, "Use engraving to choose your class", bookcoord.X + 514, bookcoord.Y + 300, Color.White, Color.Black, Vector2.Zero, 1.1f);
+                            Utils.DrawBorderStringFourWay(sb, Bismuth.Adonais, PlayerClass, bookcoord.X + 514, bookcoord.Y + 300, Color.White, Color.Black, Vector2.Zero, 1.1f);
                         }
                     }
                 }
