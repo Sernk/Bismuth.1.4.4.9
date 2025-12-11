@@ -10,6 +10,9 @@ namespace Bismuth.BismuthLayerInPlayer
     {
         public override void HideDrawLayers(PlayerDrawSet drawInfo)
         {
+            if (Player == null || !Player.active) {
+                return;
+            }
             for (int i = 0; i < drawInfo.DrawDataCache.Count; i++)
             {
                 DrawData data = drawInfo.DrawDataCache[i];
@@ -19,9 +22,9 @@ namespace Bismuth.BismuthLayerInPlayer
         }
         public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
         {
-            Player player = Main.LocalPlayer;
-            BismuthPlayer Bismuthplayer = Main.LocalPlayer.GetModPlayer<BismuthPlayer>();
-
+            if (Player == null || !Player.active) {
+                return;
+            }
             if (HotKeyPlayer.Transform)
             {
                 drawInfo.mountOffSet = 0f;
@@ -44,9 +47,9 @@ namespace Bismuth.BismuthLayerInPlayer
         }
         public override void PostUpdate()
         {
-            Player player = Main.LocalPlayer;
-            BismuthPlayer Bismuthplayer = Main.LocalPlayer.GetModPlayer<BismuthPlayer>();
-
+            if (Player == null || !Player.active) {
+                return;
+            }
             if (HotKeyPlayer.Transform)
             {
                 Player.noItems = true;

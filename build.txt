@@ -1,4 +1,4 @@
 displayName = [c/a134eb:Bismuth Mod 1.4.4 Edition] (Skills, Quests, Towns!)
 author = Kazzinak, Bassalt, Rekstri, Nokilos, BRIPE, Efromomr, Mr.Pigeon, Gs_qs
-version = 0.26
+version = 0.29
 modReferences = StructureHelper

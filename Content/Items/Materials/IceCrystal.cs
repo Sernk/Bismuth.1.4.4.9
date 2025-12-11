@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Bismuth.Content.Items.Materials
 {
-    class IceCrystal : ModItem
+    public class IceCrystal : ModItem
     {
         public override void SetDefaults()
         {          

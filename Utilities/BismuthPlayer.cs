@@ -1621,7 +1621,7 @@ namespace Bismuth.Utilities
             {
                 Player.AddBuff(ModContent.BuffType<MagiciansAura>(), 2);
             }
-            Player.statLifeMax2 = (int)(Player.statLifeMax2 * (1 - ((float)cursepts * 0.1f)));
+            //Player.statLifeMax2 = (int)(Player.statLifeMax2 * (1 - ((float)cursepts * 0.1f)));
             for (int i = 0; i < Main.npc.Length; ++i)
             {
                 if (IsEquippedBansheesHead && Main.npc[i].active && !Main.npc[i].friendly && Vector2.Distance(Main.npc[i].position, Player.position) < 500f && (Main.npc[i].lifeMax - Main.npc[i].life) < Main.npc[i].lifeMax / 10 && Main.npc[i].type != NPCID.TargetDummy)
