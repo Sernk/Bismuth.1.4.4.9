@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Bismuth.Content.Items.Materials
@@ -10,7 +11,7 @@ namespace Bismuth.Content.Items.Materials
             Item.width = 40;
             Item.height = 20;
             Item.value = Item.buyPrice(0, 1, 0, 0);
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
         }
     }
 }

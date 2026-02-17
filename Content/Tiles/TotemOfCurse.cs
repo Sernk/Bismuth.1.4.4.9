@@ -1,5 +1,4 @@
 ﻿using Bismuth.Content.Items.Other;
-using Bismuth.Content.Projectiles;
 using Bismuth.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,7 +22,7 @@ namespace Bismuth.Content.Tiles
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
             TileObjectData.newTile.Height = 5;
             Main.tileFrameImportant[Type] = true;
-            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16, 16, 16 };
+            TileObjectData.newTile.CoordinateHeights = [16, 16, 16, 16, 16];
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(233, 211, 123), CreateMapEntryName());
             TileObjectData.newTile.DrawYOffset = 2;
@@ -62,6 +61,7 @@ namespace Bismuth.Content.Tiles
                         if (!BismuthWorld.FirstTotemDeactivation)
                         {
                             player.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), ModContent.ItemType<FirstPartOfAmulet>());
+                            BismuthWorld.FirstTotemDeactivation = true;
                         }
                         SoundEngine.PlaySound(SoundID.CoinPickup, player.position);
                         time = 18000;

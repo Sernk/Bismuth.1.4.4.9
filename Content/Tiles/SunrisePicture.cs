@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -12,10 +13,10 @@ namespace Bismuth.Content.Tiles
             Main.tileLavaDeath[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3Wall);
             TileObjectData.newTile.Width = 4;
-            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16 };
+            TileObjectData.newTile.CoordinateHeights = [16, 16, 16];
             Main.tileFrameImportant[Type] = true;
             TileObjectData.addTile(Type);
-            DustType = 7;
+            DustType = DustID.WoodFurniture;
             AddMapEntry(new Color(253, 151, 49), CreateMapEntryName());
         }
     }

@@ -36,8 +36,6 @@ namespace Bismuth.Content.NPCs
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             AnimationType = NPCID.Wraith;
-            //banner = npc.type;
-            //bannerItem = mod.ItemType("SwampWraithBanner");
         }
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
@@ -67,7 +65,7 @@ namespace Bismuth.Content.NPCs
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return BismuthPlayer.ZoneSwamp && spawnInfo.SpawnTileY < Main.rockLayer && !Main.dayTime ? 5f : 0f;
+            return spawnInfo.Player.GetModPlayer<BismuthPlayer>().ZoneSwamp && spawnInfo.SpawnTileY < Main.rockLayer && !Main.dayTime ? 5f : 0f;
 
         }
         public override void HitEffect(NPC.HitInfo hit)

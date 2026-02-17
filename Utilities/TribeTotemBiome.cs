@@ -8,6 +8,7 @@ namespace Bismuth.Utilities
     {
         public override bool IsBiomeActive(Player player)
         {
+            player.GetModPlayer<BismuthPlayer>().InTribeTotemZone = BiomeTileCounterSystem.ZoneTotem >= 1;
             if (BiomeTileCounterSystem.ZoneTotem >= 1)
             {
                 BismuthWorld.NearbyTotemOfCurse = true;

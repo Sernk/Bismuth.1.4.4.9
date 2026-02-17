@@ -16,7 +16,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -52,6 +51,7 @@ namespace Bismuth
         public int PhilosopherStoneCharging = 0;     
         public int SunriseQuest = 0;    
         public int ReportQuest = 0;
+        public bool completedElessarQuest = false;
         public string PlayerClass = "Use engraving to choose your class";
         #endregion
         // Номера квестов:
@@ -197,6 +197,7 @@ namespace Bismuth
             _ = this.GetLocalization("Quests.Alchemist_22").Value; // Ru: К сожалению, тебе не хватает материалов. Для зарядки камня необходимо:\n30[i:{ItemID.CopperOre}], 30[i:{ItemID.TinOre}], 30[i:{ItemID.IronOre}], 30[i:{ItemID.LeadOre}], 30[i:{ItemID.SilverOre}], 30[i:{ItemID.GoldOre}], 30[i:{ModContent.ItemType<Items.Materials.Quicksilver>()}]\n10[i:{ModContent.ItemType<Items.Materials.Aether>()}]\n[i:{ModContent.ItemType<Items.Other.UnchargedTruePhilosopherStone>()}] En: Unfortunately, you do not have enough materials. To charge the stone you’ll need:\n30[i:{ItemID.CopperOre}], 30[i:{ItemID.TinOre}], 30[i:{ItemID.IronOre}], 30[i:{ItemID.LeadOre}], 30[i:{ItemID.SilverOre}], 30[i:{ItemID.GoldOre}], 30[i:{ModContent.ItemType<Items.Materials.Quicksilver>()}]\n10[i:{ModContent.ItemType<Items.Materials.Aether>()}]\n[i:{ModContent.ItemType<Items.Other.UnchargedTruePhilosopherStone>()}]
             _ = this.GetLocalization("Quests.Alchemist_23").Value; // Ru: Отлично, я сейчас же начну заряжать камень. Приходи позже. En: Cool, I’ll start charging the stone right now. Come back later.
             _ = this.GetLocalization("Quests.Alchemist_24").Value; // Ru: Да, камень готов. Бери его и пусть он хранит тебя! En: Yeah, the stone is ready. Take it and may it protect you!
+            _ = this.GetLocalization("Quests.Alchemist_25").Value; // Ru: Нет, к сожалению, я не смогу зарядить камень, приходите позже. En: No, sadly, I'm not charge the stone, come back later
 
             _ = this.GetLocalization("Quests.Beggar_2").Value; // Ru: Я знаю, что такой смелый и отважный воин, как ты, не откажет в помощи старому больному человеку. Принеси мне чего-нибудь пожевать, и тогда, возможно, я награжу тебя... Шучу, конечно En: I know a valiant warrior such as yourself wouldn’t refuse to aid a helpless old man. Bring me a snack, and then, perhaps I’ll reward you… A joke, obviously.
             _ = this.GetLocalization("Quests.Beggar_4").Value; // Ru: Возвращайся, как только достанешь чего-нибудь вкусненького! En: Come back once you have something nice and tasty!
@@ -292,6 +293,7 @@ namespace Bismuth
         }
         public override void Initialize()
         {
+            completedElessarQuest = false;
             EquipmentQuest = 0;
             BookOfSecretsQuest = 0;
             ElessarQuest = 0;
@@ -343,6 +345,7 @@ namespace Bismuth
         }
         public override void SaveData(TagCompound tag)
         {
+            tag["completedElessarQuest"] = completedElessarQuest;
             tag["Quest1"] = EquipmentQuest;
             tag["Quest2"] = BookOfSecretsQuest;
             tag["Quest3"] = ElessarQuest;
@@ -395,6 +398,7 @@ namespace Bismuth
         //}
         public override void LoadData(TagCompound tag)
         {
+            completedElessarQuest = tag.GetBool("completedElessarQuest");
             EquipmentQuest = tag.GetInt("Quest1");
             BookOfSecretsQuest = tag.GetInt("Quest2");
             ElessarQuest = tag.GetInt("Quest3");
@@ -666,16 +670,13 @@ namespace Bismuth
                 string name = quest.DisplayName;
                 string stage = quest.DisplayStage;
 
-                // Надёжный идентификатор для списков (если у тебя есть стабильный int-id в реестре — лучше использовать его)
                 int questId = quest.UniqueKey.GetHashCode();
 
-                // Если квест завершён — удаляем из active (по индексу) и добавляем в completed (если ещё нет)
                 if (quest.IsCompleted(p))
                 {
                     int idxActive = activequests.IndexOf(questId);
                     if (idxActive >= 0)
                     {
-                        // удаляем синхронно по индексу, а не Remove(value)
                         activequests.RemoveAt(idxActive);
                         if (idxActive < descs.Count) descs.RemoveAt(idxActive);
                         if (idxActive < shorts.Count) shorts.RemoveAt(idxActive);
@@ -688,7 +689,6 @@ namespace Bismuth
                         shortscompl.Insert(0, stage);
                     }
                 }
-                // Если квест активен — вставляем в начало (или обновляем существующий)
                 else if (quest.IsActive(p))
                 {
                     int idxActive = activequests.IndexOf(questId);
@@ -700,14 +700,12 @@ namespace Bismuth
                     }
                     else
                     {
-                        // Если квест уже есть в списке — обновляем текст (на случай изменения stage/name)
                         descs[idxActive] = name;
                         shorts[idxActive] = stage;
                     }
                 }
                 else
                 {
-                    // Квест не в активном и не в завершённом состоянии — удаляем, если он где-то остался
                     int idxActive = activequests.IndexOf(questId);
                     if (idxActive >= 0)
                     {
@@ -770,6 +768,13 @@ namespace Bismuth
             if (ElessarQuest == 190 && Player.talkNPC == -1)
             {
                 ElessarQuest = 200;
+                QuestVariable.ElessarQuest = 200;
+                if (Main.netMode == NetmodeID.MultiplayerClient) {
+                    ModPacket elessarQuestIndex = Mod.GetPacket();
+                    elessarQuestIndex.Write((byte)14);
+                    elessarQuestIndex.Write(200);
+                    elessarQuestIndex.Send();
+                }
                 CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");
             }
             if (GlamdringQuest == 90 && Player.talkNPC == -1)
@@ -798,16 +803,7 @@ namespace Bismuth
             }
             if (TombstoneQuest == 190 && Player.talkNPC == -1)
             {
-                //  TombstoneQuest = 200;
-                if (Main.netMode == 2)
-                {
-                    NetMessage.SendData(7, -1, -1, null, 0, 0f, 0f, 0f, 0, 0, 0);
-                }
-                foreach (Player player in Main.player)
-                {
-                    if (player.active)
-                        player.GetModPlayer<Quests>().TombstoneQuest = 200;
-                }
+                TombstoneQuest = 200;
                 CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");
                 Player.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), ModContent.ItemType<ImperianBanner>());
             }
@@ -819,6 +815,13 @@ namespace Bismuth
             if (NewPriestQuest == 90 && Player.talkNPC == -1)
             {
                 NewPriestQuest = 100;
+                QuestVariable.NewPriestQuest = 100;
+                if (Main.netMode == NetmodeID.MultiplayerClient) {
+                    ModPacket newPriestQuestIndex = Mod.GetPacket();
+                    newPriestQuestIndex.Write((byte)12);
+                    newPriestQuestIndex.Write(100);
+                    newPriestQuestIndex.Send();
+                }
                 CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");
             }
             if (ReportQuest == 90 && Player.talkNPC == -1)
@@ -839,6 +842,13 @@ namespace Bismuth
             if (PotionQuest == 190 && Player.talkNPC == -1)
             {
                 PotionQuest = 200;
+                QuestVariable.PotionQuest = 200;
+                if (Main.netMode == NetmodeID.MultiplayerClient) {
+                    ModPacket potionQuestIndex = Mod.GetPacket();
+                    potionQuestIndex.Write((byte)9);
+                    potionQuestIndex.Write(200);
+                    potionQuestIndex.Send();
+                }
                 CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST FAILED!");
             }
             if (PhilosopherStoneQuest == 90 && Player.talkNPC == -1)
@@ -893,18 +903,23 @@ namespace Bismuth
                     {
                         Player.inventory[num66].stack--;
                         LuceatQuest = 30;
+                        QuestVariable.LuceatQuest = 30;
+                        if (Main.netMode == NetmodeID.MultiplayerClient) {
+                            ModPacket newPriestQuestIndex = Mod.GetPacket();
+                            newPriestQuestIndex.Write((byte)11);
+                            newPriestQuestIndex.Write(30);
+                            newPriestQuestIndex.Send();
+                        }
                         Main.npcChatText = Oldman_5;
                         temp = true;
                     }
                 }
-                if (!temp)
-                    Main.npcChatText = Oldman_4;
+                if (!temp) { Main.npcChatText = Oldman_4; }
             }
             if (LuceatQuest == 40 && Player.HasBuff(ModContent.BuffType<AuraOfEmpire>()))
             {
                 LuceatQuest = 90;
-                Main.npcChatText = Oldman_6;
-                
+                Main.npcChatText = Oldman_6;      
             }
             if (LuceatQuest == 100 && TombstoneQuest == 200 && NewPriestQuest <= 10)
             {
@@ -958,6 +973,13 @@ namespace Bismuth
                     if (Player.inventory[num66].type == ModContent.ItemType<BookOfSecrets>() && Player.inventory[num66].stack > 0)
                     {
                         Player.inventory[num66].stack--;
+                        QuestVariable.BookOfSecretsQuest = 90;
+                        if (Main.netMode == NetmodeID.MultiplayerClient) {
+                            ModPacket bookOfSecretsQuestIndex = Mod.GetPacket();
+                            bookOfSecretsQuestIndex.Write((byte)13);
+                            bookOfSecretsQuestIndex.Write(90);
+                            bookOfSecretsQuestIndex.Send();
+                        }
                         BookOfSecretsQuest = 90;
                         Main.npcChatText = SwampWitch_5;
                         temp = true;
@@ -1196,6 +1218,13 @@ namespace Bismuth
                         Player.inventory[num66].stack--;
                         TombstoneQuest = 190;
                         Main.npcChatText = Consul_3;
+                        QuestVariable.TombstoneStage = 200;
+                        if (Main.netMode == NetmodeID.MultiplayerClient) {
+                            ModPacket tombstoneStageIndex = Mod.GetPacket();
+                            tombstoneStageIndex.Write((byte)7);
+                            tombstoneStageIndex.Write(200);
+                            tombstoneStageIndex.Send();
+                        }
                         temp = true;
                         return;
                     }
@@ -1317,6 +1346,13 @@ namespace Bismuth
                         Player.inventory[num66].stack--;
                         SunriseQuest = 90;                        
                         Main.npcChatText = Alchemist_5;
+                        QuestVariable.SunriseQuest = 100;
+                        if (Main.netMode == NetmodeID.MultiplayerClient) {
+                            ModPacket sunriseQuestQuestIndex = Mod.GetPacket();
+                            sunriseQuestQuestIndex.Write((byte)10);
+                            sunriseQuestQuestIndex.Write(100);
+                            sunriseQuestQuestIndex.Send();
+                        }
                         temp = true;
                         return;
                     }
@@ -1407,14 +1443,21 @@ namespace Bismuth
             }
             if (PhilosopherStoneQuest == 30)
             {
-                if (TempNPCs.WaitStoneQuestsTemp)
-                {
+                if (!TempNPCs.WaitStoneQuestsTemp) {
+                    Main.npcChatText = Alchemist_20;
+                    if (Main.netMode == NetmodeID.MultiplayerClient) {
+                        ModPacket waitStoneQuestsTempStartIndex = Mod.GetPacket();
+                        waitStoneQuestsTempStartIndex.Write((byte)2);
+                        waitStoneQuestsTempStartIndex.Write(true);
+                        waitStoneQuestsTempStartIndex.Send();
+                    }
+                    else {
+                        TempNPCs.WaitStoneQuestsTempStart = true;
+                    }
+                }
+                else {
                     Main.npcChatText = Alchemist_21;
                     PhilosopherStoneQuest = 90;
-                }
-                else if(!TempNPCs.WaitStoneQuestsTemp)
-                {
-                    Main.npcChatText = Alchemist_20;
                 }
             }
         }
@@ -1495,80 +1538,73 @@ namespace Bismuth
                 }               
             }
         }
+        bool CheckItem(int item, int count = 0, bool deletedItem = false) {
+            for (int i = 0; i < 58; i++) {
+                if (Player.inventory[i].type == item && Player.inventory[i].stack > count) {
+                    if (deletedItem) {
+                        Player.inventory[i].stack -= count;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
         public void PholosopherStoneCharging()
         {
             string Alchemist_22 = this.GetLocalization("Quests.Alchemist_22").Value;
             string Alchemist_23 = this.GetLocalization("Quests.Alchemist_23").Value;
             string Alchemist_24 = this.GetLocalization("Quests.Alchemist_24").Value;
+            string Alchemist_25 = this.GetLocalization("Quests.Alchemist_25").Value;
 
-            for (int num66 = 0; num66 < 58; num66++)
-            {
-                if (Player.inventory[num66].type == ModContent.ItemType<UnchargedTruePhilosopherStone>() && Player.inventory[num66].stack > 0)
-                {
-                    for (int num67 = 0; num67 < 58; num67++)
-                    {
-                        if (Player.inventory[num67].type == ModContent.ItemType<Aether>() && Player.inventory[num67].stack >= 10)
-                        {
-                            for (int num68 = 0; num68 < 58; num68++)
-                            {
-                                if (Player.inventory[num68].type == ItemID.SilverOre && Player.inventory[num68].stack >= 30)
-                                {
-                                    for (int num69 = 0; num69 < 58; num69++)
-                                    {
-                                        if (Player.inventory[num69].type == ModContent.ItemType<Quicksilver>() && Player.inventory[num69].stack >= 30)
-                                        {
-                                            for (int num70 = 0; num70 < 58; num70++)
-                                            {
-                                                if (Player.inventory[num70].type == ItemID.CopperOre && Player.inventory[num70].stack >= 30)
-                                                {
-                                                    for (int num71 = 0; num71 < 58; num71++)
-                                                    {
-                                                        if (Player.inventory[num71].type == ItemID.GoldOre && Player.inventory[num71].stack >= 30)
-                                                        {
-                                                            for (int num72 = 0; num72 < 58; num72++)
-                                                            {
-                                                                if (Player.inventory[num72].type == ItemID.IronOre && Player.inventory[num72].stack >= 30)
-                                                                {
-                                                                    for (int num73 = 0; num73 < 58; num73++)
-                                                                    {
-                                                                        if (Player.inventory[num73].type == ItemID.TinOre && Player.inventory[num73].stack >= 30)
-                                                                        {
-                                                                            for (int num74 = 0; num74 < 58; num74++)
-                                                                            {
-                                                                                if (Player.inventory[num74].type == ItemID.LeadOre && Player.inventory[num74].stack >= 30)
-                                                                                {
-                                                                                    Player.inventory[num67].stack -= 10;
-                                                                                    Player.inventory[num68].stack -= 30;
-                                                                                    Player.inventory[num69].stack -= 30;
-                                                                                    Player.inventory[num70].stack -= 30;
-                                                                                    Player.inventory[num71].stack -= 30;
-                                                                                    Player.inventory[num72].stack -= 30;
-                                                                                    Player.inventory[num73].stack -= 30;
-                                                                                    Player.inventory[num74].stack -= 30;
-                                                                                    PhilosopherStoneCharging = 10;
-                                                                                    Main.npcChatText = Alchemist_23;
-                                                                                    TempNPCs.RecipePhilosopherStone = true;
-                                                                                    TempNPCs.AlchemistNewQuest = true;
-                                                                                    CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");
-                                                                                    Player.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), ModContent.ItemType<TruePhilosopherStone>());
-                                                                                    PhilosopherStoneCharging = 0;
-                                                                                    return;
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+            int[] ores = [ItemID.CopperOre, ItemID.TinOre, ItemID.IronOre, ItemID.LeadOre, ItemID.SilverOre, ItemID.GoldOre, ModContent.ItemType<Quicksilver>()];
+            bool hasAll = CheckItem(ModContent.ItemType<UnchargedTruePhilosopherStone>()) && CheckItem(ModContent.ItemType<Aether>(), 10) && ores.All(id => CheckItem(id, 30));
+
+            if (PhilosopherStoneCharging == 0) {
+                if (hasAll) {
+                    Main.npcChatText = Alchemist_23; 
+                    if (Main.netMode == NetmodeID.MultiplayerClient) {
+                        ModPacket philosopherStoneQuestsTempStartIndex = Mod.GetPacket();
+                        philosopherStoneQuestsTempStartIndex.Write((byte)4);
+                        philosopherStoneQuestsTempStartIndex.Write(true);
+                        philosopherStoneQuestsTempStartIndex.Send();
                     }
+                    else {
+                        TempNPCs.PhilosopherStoneQuestsTempStart = true;
+                    }
+                    CheckItem(ModContent.ItemType<Aether>(), 10, true);
+                    CheckItem(ModContent.ItemType<UnchargedTruePhilosopherStone>(), 1, true);
+                    ores.All(id => CheckItem(id, 30, true));
+                    PhilosopherStoneCharging = 10;
+                }
+                else {
+                    Main.npcChatText = Alchemist_22;
+                }
+            }
+            if (PhilosopherStoneCharging == 10) {
+                Main.npcChatText = Alchemist_25;
+                if (TempNPCs.PhilosopherStoneQuestsTemp) {
+                    Main.npcChatText = Alchemist_24;
+                    TempNPCs.RecipePhilosopherStone = true;
+                    TempNPCs.AlchemistNewQuest = true;
+                    CombatText.NewText(new Rectangle((int)Player.position.X, (int)Player.position.Y - 35, 10, 10), Color.LemonChiffon, "QUEST COMPLETED!");
+                    Player.QuickSpawnItem(Main.LocalPlayer.GetSource_FromThis(), ModContent.ItemType<TruePhilosopherStone>());
+                    Main.npcChatText = Alchemist_23; 
+                    if (Main.netMode == NetmodeID.MultiplayerClient) {
+                        ModPacket philosopherStoneQuestsTempIndex = Mod.GetPacket();
+                        philosopherStoneQuestsTempIndex.Write((byte)3);
+                        philosopherStoneQuestsTempIndex.Write(false);
+                        philosopherStoneQuestsTempIndex.Send();
+                        ModPacket recipePhilosopherStoneIndex = Mod.GetPacket();
+                        recipePhilosopherStoneIndex.Write((byte)5);
+                        recipePhilosopherStoneIndex.Write(true);
+                        recipePhilosopherStoneIndex.Send();
+                    }
+                    else {
+                        TempNPCs.PhilosopherStoneQuestsTemp = false;
+                        TempNPCs.RecipePhilosopherStone = true;
+                    }
+                    PhilosopherStoneCharging = 0;
+                    return;
                 }
             }
         }

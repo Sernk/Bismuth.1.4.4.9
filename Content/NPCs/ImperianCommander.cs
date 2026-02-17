@@ -3,24 +3,17 @@ using Bismuth.Utilities;
 using Bismuth.Utilities.ModSupport;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Bismuth.Content.NPCs
-{
+namespace Bismuth.Content.NPCs {
     [AutoloadHead]
-    public class ImperianCommander : ModNPC
-    {
-        public override void SetStaticDefaults()
-        {
-            NPCID.Sets.NoTownNPCHappiness[NPC.type] = true;
-        }
-        public override void Load()
-        {
+    public class ImperianCommander : ModNPC {
+        public override void SetStaticDefaults() => NPCID.Sets.NoTownNPCHappiness[NPC.type] = true;
+        public override void Load() {
             string CommanderAnsv_1 = this.GetLocalization("Chat.CommanderAnsv_1").Value; // Ru: Вы можете выдать мне экипировку?
                                                                                          // En: Can you give me equipment?
             string CommanderAnsv_2 = this.GetLocalization("Chat.CommanderAnsv_2").Value; // Ru: Ради Империи я готов на всё!
@@ -48,8 +41,7 @@ namespace Bismuth.Content.NPCs
             string CommanderNQ_4 = this.GetLocalization("Chat.CommanderNQ_4").Value; // Ru: Обратись к {0}, он сделает тебе достойное снаряжение.
                                                                                      // En: Ask {0}, he’ll make you decent equipment.
         }
-        public override void SetDefaults()
-        {
+        public override void SetDefaults() {
             NPC.townNPC = true;
             NPC.friendly = true;
             NPC.width = 32;
@@ -63,33 +55,27 @@ namespace Bismuth.Content.NPCs
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.knockBackResist = 0f;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-        {
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) {
             var quests = QuestRegistry.GetAvailableQuests(Main.LocalPlayer, BaseQuest.ImperianCommander);
             bool showAvailable = Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 30 || (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest > 10 && Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest < 100);
             bool showActive = Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest <= 10 && Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100;
 
-            foreach (var quest in quests)
-            {
+            foreach (var quest in quests) {
                 quest.IsActiveQuestUIIcon(showAvailable, showActive, spriteBatch, NPC, Main.LocalPlayer);
             }
-            if (!quests.Any())
-            {
+            if (!quests.Any()) {
                 Texture2D available = ModContent.Request<Texture2D>("Bismuth/UI/AvailableQuest").Value;
                 Texture2D active = ModContent.Request<Texture2D>("Bismuth/UI/ActiveQuest").Value;
 
-                if (showAvailable)
-                {
+                if (showAvailable) {
                     spriteBatch.Draw(available, NPC.position - Main.screenPosition + new Vector2(8, -34), Color.White);
                 }
-                if (showActive)
-                {
+                if (showActive) {
                     spriteBatch.Draw(active, NPC.position - Main.screenPosition + new Vector2(4, -38), Color.White);
                 }
             }
         }
-        public override void SetChatButtons(ref string button, ref string button2)
-        {
+        public override void SetChatButtons(ref string button, ref string button2) {
             string CommanderAnsv_1 = this.GetLocalization("Chat.CommanderAnsv_1").Value;
             string CommanderAnsv_2 = this.GetLocalization("Chat.CommanderAnsv_2").Value;
             string CommanderAnsv_3 = this.GetLocalization("Chat.CommanderAnsv_3").Value;
@@ -102,133 +88,84 @@ namespace Bismuth.Content.NPCs
             Player player = Main.player[Main.myPlayer];
             var quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.ImperianCommander).FirstOrDefault();
 
-            if (TempNPCs.ImperianCommanderNewQuest && quest != null)
-            {
-                button = quest.GetButtonText(player);
-            }
-            Quests quests = (Quests)Main.player[Main.myPlayer].GetModPlayer<Quests>();
-            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 30)
-                button = CommanderAnsv_1;
-            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 0)
-                button = CommanderAnsv_2;
-            if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 5)
-            {
-                button = CommanderAnsv_3;
-            }
-            if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 20 || Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 30)
-            {
+            if (TempNPCs.ImperianCommanderNewQuest && quest != null) { button = quest.GetButtonText(player); }
+            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 30) { button = CommanderAnsv_1; }
+            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 0) { button = CommanderAnsv_2; }
+            if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 5) { button = CommanderAnsv_3; }
+            if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 20 || Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 30) {
                 bool temp = false;
-                if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 30)
-                {               
-                    for (int num66 = 0; num66 < 58; num66++)
-                    {
-                        if (Main.LocalPlayer.inventory[num66].type == ModContent.ItemType<ScoutsReport>() && Main.LocalPlayer.inventory[num66].stack > 0)
-                        {
+                if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 30) {
+                    for (int num66 = 0; num66 < 58; num66++) {
+                        if (Main.LocalPlayer.inventory[num66].type == ModContent.ItemType<ScoutsReport>() && Main.LocalPlayer.inventory[num66].stack > 0) {
                             temp = true;
                             button = CommanderAnsv_4;
                         }
                     }
                 }
-                if(!temp && Main.npcChatText != Commander_5) button = CommanderAnsv_5;           
+                if (!temp && Main.npcChatText != Commander_5) button = CommanderAnsv_5;
             }
-            if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 80)
-            {
+            if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 80) {
                 TempNPCs.ImperianCommanderNewQuest = true;
                 button = CommanderAnsv_6;
             }
         }
-        public override List<string> SetNPCNameList() => new List<string>()
-        {
+        public override List<string> SetNPCNameList() => [
                 this.GetLocalizedValue("Name.Rizo"), // Language.GetTextValue("Mods.Bismuth.CommanderName_1");
                 this.GetLocalizedValue("Name.Albert"), // Language.GetTextValue("Mods.Bismuth.CommanderName_2");
                 this.GetLocalizedValue("Name.Bernando"), // Language.GetTextValue("Mods.Bismuth.CommanderName_3");
                 this.GetLocalizedValue("Name.Seefeld") // Language.GetTextValue("Mods.Bismuth.CommanderName_4");
-        };
-
-        public override bool CheckConditions(int left, int right, int top, int bottom)
-        {
-            return false;
-        }
-        public override string GetChat()
-        {
+        ];
+        public override bool CheckConditions(int left, int right, int top, int bottom) => false;
+        public override string GetChat() {
             string Commander_2 = this.GetLocalization("Chat.Commander_2").Value;
             string Commander_4 = this.GetLocalization("Chat.Commander_4").Value;
-
             string CommanderNQ_1 = this.GetLocalization("Chat.CommanderNQ_1").Value;
             string CommanderNQ_2 = this.GetLocalization("Chat.CommanderNQ_2").Value;
             string CommanderNQ_3 = this.GetLocalization("Chat.CommanderNQ_3").Value;
             string CommanderNQ_4 = this.GetLocalization("Chat.CommanderNQ_4").Value;
 
-            Player player = Main.player[Main.myPlayer];
+            Player player = Main.LocalPlayer;
             var quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.ImperianCommander).FirstOrDefault();
 
-            if (TempNPCs.ImperianCommanderNewQuest && quest != null)
-            {
-                return quest.GetChat(NPC, player);
-            }
-
-            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 0)
-                return Commander_2;
-            if(Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 20 || Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 30)
-                return Commander_4;
-            else
-            {
-                if (NPC.FindFirstNPC(ModContent.NPCType<DwarfBlacksmith>()) >= 0 && WorldGen.genRand.Next(0, 4) == 0)
-                    return string.Format(this.GetLocalization("Chat.CommanderNQ_4").Value, Main.npc[NPC.FindFirstNPC(ModContent.NPCType<DwarfBlacksmith>())].GivenName);
-                else return WorldGen.genRand.Next(0, 3) switch
-                {
+            if (TempNPCs.ImperianCommanderNewQuest && quest != null) { return quest.GetChat(NPC, player); }
+            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 0) { return Commander_2; }
+            if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 20 || Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest == 30) { return Commander_4; }
+            else {
+                if (NPC.FindFirstNPC(ModContent.NPCType<DwarfBlacksmith>()) >= 0 && WorldGen.genRand.Next(0, 4) == 0) { return string.Format(this.GetLocalization("Chat.CommanderNQ_4").Value, Main.npc[NPC.FindFirstNPC(ModContent.NPCType<DwarfBlacksmith>())].GivenName); }
+                else return WorldGen.genRand.Next(0, 3) switch {
                     0 => CommanderNQ_1,
                     1 => CommanderNQ_2,
                     _ => CommanderNQ_3,
                 };
             }
         }
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
-        {
-            Quests quests = (Quests)Main.player[Main.myPlayer].GetModPlayer<Quests>();
-            if (firstButton) quests.CommanderQuests();    
-            if (TempNPCs.ImperianCommanderNewQuest)
-            {
+        public override void OnChatButtonClicked(bool firstButton, ref string shopName) {
+            Quests quests = (Quests)Main.LocalPlayer.GetModPlayer<Quests>();
+            if (firstButton) quests.CommanderQuests();
+            if (TempNPCs.ImperianCommanderNewQuest) {
                 Player player = Main.LocalPlayer;
-                var quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.ImperianCommander).FirstOrDefault();
+                IQuest quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.ImperianCommander).FirstOrDefault();
                 quest?.OnChatButtonClicked(player);
             }
         }
-        public void UpdatePosition()
-        {
-            if (Main.player[Main.myPlayer].position.X >= NPC.position.X)
-                NPC.spriteDirection = 1;
-            else
-                NPC.spriteDirection = -1;
-        }
-        public override void AI()
-        {
-            if (NPC.homeTileX == -1 || NPC.homeTileY == -1)
-            {
+        public void UpdatePosition() => NPC.spriteDirection = Main.LocalPlayer.position.X >= NPC.position.X ? 1 : -1;
+        public override void AI() {
+            if (NPC.homeTileX == -1 || NPC.homeTileY == -1) {
                 NPC.homeTileX = NPC.Center.ToTileCoordinates().X;
                 NPC.homeTileY = NPC.Center.ToTileCoordinates().Y;
             }
             NPC.dontTakeDamage = true;
             NPC.breath = 100;
             NPC.life = NPC.lifeMax;
-            if (NPC.oldVelocity.X != 0f)
-                NPC.velocity.X = 0f;
-            if (Main.LocalPlayer.talkNPC != -1)
-            {
-                if (Main.npc[Main.LocalPlayer.talkNPC].whoAmI == NPC.whoAmI)
-                {
-                    UpdatePosition();
-                }
-                if (Main.npc[Main.LocalPlayer.talkNPC].type != NPC.type)
-                {
-                    if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest < 10)
-                        Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest = 0;
+            if (NPC.oldVelocity.X != 0f) { NPC.velocity.X = 0f; }
+            if (Main.LocalPlayer.talkNPC != -1) {
+                if (Main.npc[Main.LocalPlayer.talkNPC].whoAmI == NPC.whoAmI) { UpdatePosition(); }
+                if (Main.npc[Main.LocalPlayer.talkNPC].type != NPC.type) {
+                    if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest < 10) { Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest = 0; }
                 }
             }
-            else
-            {
-                if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest < 10)
-                    Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest = 0;
+            else {
+                if (Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest < 10) { Main.LocalPlayer.GetModPlayer<Quests>().ReportQuest = 0; }
             }
         }
     }

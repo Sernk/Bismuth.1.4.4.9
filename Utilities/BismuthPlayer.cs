@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -61,9 +62,9 @@ namespace Bismuth.Utilities
         public bool NoRPGGameplay = false;
         public int OrcishBarTimer = 0;
         public bool extraSlotUnlocked = false;
-        public static bool InTribeTotemZone;
+        public bool InTribeTotemZone;
         #region SwampMethods
-        public static bool ZoneSwamp = false;
+        public bool ZoneSwamp = false;
         #endregion
         #region CustomPlayerStats
         public float critDmgMult = 1f; // Процентное увеличение крит. урона. Не для скиллов.
@@ -169,19 +170,26 @@ namespace Bismuth.Utilities
         public bool IsEquippedGoldenRune = false;
         public bool IsEquippedImperianBanner = false;
         #endregion
+        int whispertime;
+        int revivingtaimer = 0;
+        int bootstimer = 0;
+        bool covered = false;
+        int helmettimer = 0;
+        int bald = -1;
+        int alt = -1;
+        int full = -1;
+        int whispercurrent = 0;
+        public string oldmanname;
+        public string necrosname;
+        public static float screenmovestep = 0f;
+
         public static string StringBreak(DynamicSpriteFont font, string a, float maxWidth, float startsize = 1f) //CHECK IT!
         {
             int latestspace = 0;
             int stringstart = 0;
-            for (int i = 0; i <= a.Length - 1; i++)
-            {
-
-                if (a.Substring(i, 1) == " ")
-                {
-                    latestspace = i;
-                }
-                if (font.MeasureString(a.Substring(stringstart, i - stringstart + 1)).X * startsize >= maxWidth)
-                {
+            for (int i = 0; i <= a.Length - 1; i++) {
+                if (a.Substring(i, 1) == " ") { latestspace = i; }
+                if (font.MeasureString(a.Substring(stringstart, i - stringstart + 1)).X * startsize >= maxWidth) {
                     a = a.Remove(latestspace, 1);
                     a = a.Insert(latestspace, "\n");
                     stringstart = latestspace + 2;
@@ -189,78 +197,45 @@ namespace Bismuth.Utilities
             }
             return a;
         }
-        public override void PreUpdateMovement() // код не идеальный
-        {
-            if (NPC.downedGolemBoss)
-            {
-                count = 7;
-            }
-            if (count >= 7)
-            {
-                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-                {
-                    if (NPC.downedGolemBoss)
-                    {
-                        if (Player.armor[k].type == ModContent.ItemType<HerosBoots>())
-                        {
-                            if (Player.velocity.Y > 0)
-                            {
-                                bootstimer++;
-                            }
-                            if (bootstimer < 30 && Player.velocity.Y <= 0)
-                            {
+        public override void PreUpdateMovement() {
+            if (NPC.downedGolemBoss) { count = 7; }
+            if (count >= 7) {
+                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                    if (Player.armor[k].type == ModContent.ItemType<HerosBoots>()) {
+                        if (Player.velocity.Y > 0) { bootstimer++; }
+                        if (bootstimer < 30 && Player.velocity.Y <= 0) { bootstimer = 0; }
+                        if (Player.velocity.Y < 0) { fallTime++; }
+                        if (fallTime >= 5) { canTrigger = true; }
+                        if (canTrigger && bootstimer >= 30) {
+                            bootstimer = 30;
+                            if (WorldGen.SolidTile(Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3) || WorldGen.SolidTile(Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3)) {
+                                Projectile.NewProjectile(Player.GetSource_FromThis(), new Vector2(Player.Center.X, Player.Center.Y - 20), Vector2.Zero, ModContent.ProjectileType<HerosBootsBlast>(), 60, 5f, Main.myPlayer);
+                                SoundEngine.PlaySound(SoundID.Item14, Player.Center);
                                 bootstimer = 0;
-                            }
-                            if (Player.velocity.Y < 0)
-                            {
-                                fallTime++;
-                            }
-                            if (fallTime >= 5)
-                            {
-                                canTrigger = true;
-                            }
-
-                            if (canTrigger && bootstimer >= 30)
-                            {
-                                bootstimer = 30;
-                                if (WorldGen.SolidTile(Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3) || WorldGen.SolidTile(Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3))
-                                {
-                                    Projectile.NewProjectile(Player.GetSource_FromThis(), new Vector2(Player.Center.X, Player.Center.Y - 20), Vector2.Zero, ModContent.ProjectileType<HerosBootsBlast>(), 60, 5f, Main.myPlayer);
-                                    SoundEngine.PlaySound(SoundID.Item14, Player.Center);
-                                    bootstimer = 0;
-                                    fallTime = 0;
-                                    canTrigger = false;
-                                }
+                                fallTime = 0;
+                                canTrigger = false;
                             }
                         }
                     }
                 }
             }
         }
-        public override void FrameEffects()
-        {
-            if (IsNaga)
-            {
+        public override void FrameEffects() {
+            if (IsNaga) {
                 Player.head = EquipLoader.GetEquipSlot(Mod, "TheRingOfTheSeas", EquipType.Head);
                 Player.body = EquipLoader.GetEquipSlot(Mod, "TheRingOfTheSeas", EquipType.Body);
                 Player.legs = EquipLoader.GetEquipSlot(Mod, "TheRingOfTheSeas", EquipType.Legs);
             }
-            if (IsVampire)
-            {
+            if (IsVampire) {
                 string headName = Player.Male ? "TheRingOfTheBlood_Head_Male" : "TheRingOfTheBlood_Head_Female";
                 Player.head = EquipLoader.GetEquipSlot(Mod, headName, EquipType.Head);
                 Player.body = EquipLoader.GetEquipSlot(Mod, "TheRingOfTheBlood", EquipType.Body);
                 Player.legs = EquipLoader.GetEquipSlot(Mod, "TheRingOfTheBlood", EquipType.Legs);
             }
         }
-        public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
-        {
-            if (vampbat)
-            {
-                BatLayer?.PostDrawRecursive(ref drawInfo);
-            }
-            if (IsNaga)
-            {
+        public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo) {
+            if (vampbat) { BatLayer?.PostDrawRecursive(ref drawInfo); }
+            if (IsNaga) {
                 drawInfo.hideEntirePlayer = false;
                 drawInfo.hidesTopSkin = true;
                 drawInfo.hidesBottomSkin = true;
@@ -340,27 +315,24 @@ namespace Bismuth.Utilities
         public bool KilledBetsy = false;
         public Vector2 ScreenMoveFrom = Vector2.Zero;
         public Vector2 ScreenMoveTo = Vector2.Zero;
-
         #endregion
-        public override void ModifyScreenPosition()
-        {
-            Bismuth.CameraUpdate(true); // Обработка тряски
-            if(NPC.AnyNPCs(ModContent.NPCType<PriestTeleportation>()))
-            {
-                NPC priest = Main.npc[NPC.FindFirstNPC(ModContent.NPCType<PriestTeleportation>())];
-                Main.screenPosition = priest.Center + new Vector2(-23 * 16, 0) - new Vector2(Main.screenWidth / 2, Main.screenHeight / 2) + ((priest.Center - new Vector2(Main.screenWidth / 2, Main.screenHeight / 2)) - (priest.Center + new Vector2(-23 * 16, 0) - new Vector2(Main.screenWidth / 2, Main.screenHeight / 2))) * screenmovestep;
-            }
-        }
-        // DrawingBodyParts теперь в BismuthPlayerLayer
         #region CustomRecipesConditions
         public static bool GalvornResearch = false;
         public static bool PanaceaResearch = false;
         public static bool SwampWater = false;
         #endregion
-        public override void ResetEffects()
-        {
+        public override void ModifyScreenPosition() {
+            Bismuth.CameraUpdate(true); // Обработка тряски
+            if (NPC.AnyNPCs(ModContent.NPCType<PriestTeleportation>())) {
+                NPC npc = Main.npc[NPC.FindFirstNPC(ModContent.NPCType<PriestTeleportation>())];
+                Main.screenPosition = npc.Center + new Vector2(-23 * 16, 0) - new Vector2(Main.screenWidth / 2, Main.screenHeight / 2) + ((npc.Center - new Vector2(Main.screenWidth / 2, Main.screenHeight / 2)) - (npc.Center + new Vector2(-23 * 16, 0) - new Vector2(Main.screenWidth / 2, Main.screenHeight / 2))) * screenmovestep;
+            }
+        }
+        static void UpdateCameraPos(int npcType) { if (NPC.AnyNPCs(npcType)) { if (screenmovestep < 1f) { screenmovestep += 0.01f; } } }
+        #region SaveData
+        public override void ResetEffects() {
             IsEquippedImperianBanner = false;
-            InTribeTotemZone = false;
+            //InTribeTotemZone = false;
             vampbat = false;
             BatLayer = null;
             IsEquippedBerserksRing = false;
@@ -402,11 +374,10 @@ namespace Bismuth.Utilities
             IsEquippedRekstrisChest = false;
             IsEquippedRekstrisHelmet = false;
             IsEquippedBelt = false;
-          
+
         }
         const float maxwidth = 396f;
-        public override void Initialize()
-        {
+        public override void Initialize() {
             // EmpathyNPCs = new List<NPC>();
             NoRPGGameplay = false;
             witchsecondatt = false;
@@ -425,7 +396,7 @@ namespace Bismuth.Utilities
             LichPoints = 0;
             cursepts = 0;
             DeathPos = Vector2.Zero;
-           // PhoenixDaily = false;
+            // PhoenixDaily = false;
             IsFTRead = false;
             FTDaily = false;
             LichPoints = 0;
@@ -438,8 +409,8 @@ namespace Bismuth.Utilities
             Hunger = 0;
             SkillPoints = 0;
             SpendedPoints = 0;
-            CanBeFrozenByElemental = false;         
-            InkPos = Vector2.Zero; 
+            CanBeFrozenByElemental = false;
+            InkPos = Vector2.Zero;
             downedMinotaur = false;
             IsBoSRead = false;
             IsReadMazarbul = false;
@@ -619,8 +590,7 @@ namespace Bismuth.Utilities
             skill147lvl = 0;
             #endregion
         }
-        public override void SaveData(TagCompound tag)
-        {
+        public override void SaveData(TagCompound tag) {
             tag["extraSlotUnlocked"] = extraSlotUnlocked;
             tag["witchsecondatt"] = witchsecondatt;
             tag["OneRingTimer"] = OneRingTimer;
@@ -830,221 +800,7 @@ namespace Bismuth.Utilities
             #endregion
 
         }
-        #region SaveData
-        /*public override void SaveData(TagCompound tag)
-        {
-            TagCompound save_data = new TagCompound();
-            tag("witchsecondatt", witchsecondatt);
-            tag("OneRingTimer", OneRingTimer);
-            tag("TabulaResearch", TabulaResearch);
-            tag("WaitStoneCharging", WaitStoneCharging);
-            tag("BosWait", BosWait);
-            tag("SoulScytheCharge", SoulScytheCharge);
-            tag("WaitPhilosopherStone", WaitPhilosopherStone);
-            tag("WaitTabula", WaitTabula);
-            tag("WaitSoulScythe", WaitSoulScythe);
-            tag("WaitGlamdring", WaitGlamdring);           
-            tag("PlayerClass", PlayerClass);
-            tag("SkillPoints", SkillPoints);
-            tag("SpendedPoints", SpendedPoints);
-            tag("cursepts", cursepts);
-            tag("DeathPos", DeathPos);
-            tag("PhoenixDaily", PhoenixDaily);
-            tag("CanBeFrozenByElemental", CanBeFrozenByElemental);
-            tag("InkPos", InkPos);
-            tag("downedMinotaur", downedMinotaur);
-            tag("downedWitch", downedWitch);
-            tag("IsBoSRead", IsBoSRead);
-            tag("IsReadMazarbul", IsReadMazarbul);
-            tag("IsFTRead", IsFTRead);
-            tag("FTDaily", FTDaily);
-            tag("LichPoints", LichPoints);
-            tag("mirrordaily", mirrordaily);
-            tag("amuletdaily", amuletdaily);
-            tag("IsNaga", IsNaga);
-            tag("IsVampire", IsVampire);
-            tag("Wetness", Wetness);
-            tag("Hunger", Hunger);
-            tag("NoRPGGameplay", NoRPGGameplay);
-            tag("PhoenixPendantWasSpawned", PhoenixPendantWasSpawned);
-            #region bossessave
-            tag("KilledBossesCount", KilledBossesCount);
-            tag("KilledKingSlime", KilledKingSlime);
-            tag("KilledEoC", KilledEoC);
-            tag("KilledEoW", KilledEoW);
-            tag("KilledBoC", KilledBoC);
-            tag("KilledWormorBrain", KilledWormorBrain);
-            tag("KilledSkeletron", KilledSkeletron);
-            tag("KilledQoB", KilledQoB);
-            tag("KilledWoF", KilledWoF);
-            tag("KilledSkeletronPrime", KilledSkeletronPrime);
-            tag("KilledDestroyer", KilledDestroyer);
-            tag("KilledAnyMechBoss", KilledAnyMechBoss);
-            tag("KilledPlantera", KilledPlantera);
-            tag("KilledGolem", KilledGolem);
-            tag("KilledFishron", KilledFishron);
-            tag("KilledCultist", KilledCultist);
-            tag("KilledMoonLord", KilledMoonLord);
-            tag("KilledMourningWood", KilledMourningWood);
-            tag("KilledPumpking", KilledPumpking);
-            tag("KilledSantaNK1", KilledSantaNK1);
-            tag("KilledEverscream", KilledEverscream);
-            tag("KilledIceQueen", KilledIceQueen);
-            tag("KilledFlyingDutchman", KilledFlyingDutchman);
-            tag("KilledMartianSaucer", KilledMartianSaucer);
-            tag("KilledBetsy", KilledBetsy);
-            tag("KilledTwins", KilledTwins);
-            #endregion
-            #region skillssave
-            tag("skill1lvl", skill1lvl);
-            tag("skill2lvl", skill2lvl);
-            tag("skill3lvl", skill3lvl);
-            tag("skill4lvl", skill4lvl);
-            tag("skill5lvl", skill5lvl);
-            tag("skill6lvl", skill6lvl);
-            tag("skill7lvl", skill7lvl);
-            tag("skill8lvl", skill8lvl);
-            tag("skill9lvl", skill9lvl);
-            tag("skill10lvl", skill10lvl);
-            tag("skill11lvl", skill11lvl);
-            tag("skill12lvl", skill12lvl);
-            tag("skill13lvl", skill13lvl);
-            tag("skill14lvl", skill14lvl);
-            tag("skill15lvl", skill15lvl);
-            tag("skill16lvl", skill16lvl);
-            tag("skill17lvl", skill17lvl);
-            tag("skill18lvl", skill18lvl);
-            tag("skill19lvl", skill19lvl);
-            tag("skill20lvl", skill20lvl);
-            tag("skill21lvl", skill21lvl);
-            tag("skill22lvl", skill22lvl);
-            tag("skill23lvl", skill23lvl);
-            tag("skill24lvl", skill24lvl);
-            tag("skill25lvl", skill25lvl);
-            tag("skill26lvl", skill26lvl);
-            tag("skill27lvl", skill27lvl);
-            tag("skill28lvl", skill28lvl);
-            tag("skill29lvl", skill29lvl);
-            tag("skill30lvl", skill30lvl);
-            tag("skill31lvl", skill31lvl);
-            tag("skill32lvl", skill32lvl);
-            tag("skill33lvl", skill33lvl);
-            tag("skill34lvl", skill34lvl);
-            tag("skill35lvl", skill35lvl);
-            tag("skill36lvl", skill36lvl);
-            tag("skill37lvl", skill37lvl);
-            tag("skill38lvl", skill38lvl);
-            tag("skill39lvl", skill39lvl);
-            tag("skill40lvl", skill40lvl);
-            tag("skill41lvl", skill41lvl);
-            tag("skill42lvl", skill42lvl);
-            tag("skill43lvl", skill43lvl);
-            tag("skill44lvl", skill44lvl);
-            tag("skill45lvl", skill45lvl);
-            tag("skill46lvl", skill46lvl);
-            tag("skill47lvl", skill47lvl);
-            tag("skill48lvl", skill48lvl);
-            tag("skill49lvl", skill49lvl);
-            tag("skill50lvl", skill50lvl);
-            tag("skill51lvl", skill51lvl);
-            tag("skill53lvl", skill53lvl);
-            tag("skill54lvl", skill54lvl);
-            tag("skill55lvl", skill55lvl);
-            tag("skill56lvl", skill56lvl);
-            tag("skill57lvl", skill57lvl);
-            tag("skill58lvl", skill58lvl);
-            tag("skill59lvl", skill59lvl);
-            tag("skill60lvl", skill60lvl);
-            tag("skill61lvl", skill61lvl);
-            tag("skill62lvl", skill62lvl);
-            tag("skill63lvl", skill63lvl);
-            tag("skill64lvl", skill64lvl);
-            tag("skill65lvl", skill65lvl);
-            tag("skill66lvl", skill66lvl);
-            tag("skill67lvl", skill67lvl);
-            tag("skill68lvl", skill68lvl);
-            tag("skill69lvl", skill69lvl);
-            tag("skill70lvl", skill70lvl);
-            tag("skill71lvl", skill71lvl);
-            tag("skill72lvl", skill72lvl);
-            tag("skill73lvl", skill73lvl);
-            tag("skill75lvl", skill75lvl);
-            tag("skill76lvl", skill76lvl);
-            tag("skill77lvl", skill77lvl);
-            tag("skill78lvl", skill78lvl);
-            tag("skill79lvl", skill79lvl);
-            tag("skill80lvl", skill80lvl);
-            tag("skill81lvl", skill81lvl);
-            tag("skill82lvl", skill82lvl);
-            tag("skill83lvl", skill83lvl);
-            tag("skill84lvl", skill84lvl);
-            tag("skill85lvl", skill85lvl);
-            tag("skill86lvl", skill86lvl);
-            tag("skill87lvl", skill87lvl);
-            tag("skill88lvl", skill88lvl);
-            tag("skill89lvl", skill89lvl);
-            tag("skill90lvl", skill90lvl);
-            tag("skill91lvl", skill91lvl);
-            tag("skill92lvl", skill92lvl);
-            tag("skill93lvl", skill93lvl);
-            tag("skill94lvl", skill94lvl);
-            tag("skill95lvl", skill95lvl);
-            tag("skill96lvl", skill96lvl);
-            tag("skill97lvl", skill97lvl);
-            tag("skill98lvl", skill98lvl);
-            tag("skill99lvl", skill99lvl);
-            tag("skill100lvl", skill100lvl);
-            tag("skill101lvl", skill101lvl);
-            tag("skill102lvl", skill102lvl);
-            tag("skill103lvl", skill103lvl);
-            tag("skill104lvl", skill104lvl);
-            tag("skill105lvl", skill105lvl);
-            tag("skill106lvl", skill106lvl);
-            tag("skill107lvl", skill107lvl);
-            tag("skill108lvl", skill108lvl);
-            tag("skill110lvl", skill110lvl);
-            tag("skill111lvl", skill111lvl);
-            tag("skill112lvl", skill112lvl);
-            tag("skill113lvl", skill113lvl);
-            tag("skill114lvl", skill114lvl);
-            tag("skill115lvl", skill115lvl);
-            tag("skill116lvl", skill116lvl);
-            tag("skill117lvl", skill117lvl);
-            tag("skill118lvl", skill118lvl);
-            tag("skill119lvl", skill119lvl);
-            tag("skill120lvl", skill120lvl);
-            tag("skill121lvl", skill121lvl);
-            tag("skill122lvl", skill122lvl);
-            tag("skill123lvl", skill123lvl);
-            tag("skill124lvl", skill124lvl);
-            tag("skill125lvl", skill125lvl);
-            tag("skill126lvl", skill126lvl);
-            tag("skill127lvl", skill127lvl);
-            tag("skill128lvl", skill128lvl);
-            tag("skill129lvl", skill129lvl);
-            tag("skill130lvl", skill130lvl);
-            tag("skill131lvl", skill131lvl);
-            tag("skill132lvl", skill132lvl);
-            tag("skill133lvl", skill133lvl);
-            tag("skill134lvl", skill134lvl);
-            tag("skill135lvl", skill135lvl);
-            tag("skill136lvl", skill136lvl);
-            tag("skill137lvl", skill137lvl);
-            tag("skill138lvl", skill138lvl);
-            tag("skill139lvl", skill139lvl);
-            tag("skill140lvl", skill140lvl);
-            tag("skill141lvl", skill141lvl);
-            tag("skill142lvl", skill142lvl);
-            tag("skill143lvl", skill143lvl);
-            tag("skill144lvl", skill144lvl);
-            tag("skill146lvl", skill146lvl);
-            tag("skill147lvl", skill147lvl);
-            #endregion
-            return;
-        }*/
-        #endregion
-        public override void LoadData(TagCompound tag)
-        {
+        public override void LoadData(TagCompound tag) {
             extraSlotUnlocked = tag.GetBool("extraSlotUnlocked");
             IsReadMazarbul = tag.GetBool("IsReadMazarbul");
             OneRingTimer = tag.GetInt("OneRingTimer");
@@ -1255,17 +1011,13 @@ namespace Bismuth.Utilities
             skill147lvl = tag.GetInt("skill147lvl");
             #endregion
         }
-       
-        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
-        {
+        #endregion
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright) {
             Player drawPlayer = drawInfo.drawPlayer;
-            Mod mod = ModLoader.GetMod("Bismuth");
             BismuthPlayer modPlayer = (BismuthPlayer)drawPlayer.GetModPlayer<BismuthPlayer>();
             #region EmpathyChainDrawing
-            if (modPlayer.EmpathyNPCs.Count > 0)
-            {
-                for (int i = 0; i < modPlayer.EmpathyNPCs.Count; i++)
-                {
+            if (modPlayer.EmpathyNPCs.Count > 0) {
+                for (int i = 0; i < modPlayer.EmpathyNPCs.Count; i++) {
                     Texture2D texture = ModContent.Request<Texture2D>("Bismuth/Glow/EmpathyChain").Value;
                     Vector2 vector = Main.player[Main.myPlayer].Center;
                     Vector2 mountedCenter = Main.player[Main.myPlayer].GetModPlayer<BismuthPlayer>().EmpathyNPCs[i].Center;
@@ -1275,32 +1027,24 @@ namespace Bismuth.Utilities
                     Vector2 vector2 = mountedCenter - vector;
                     float rotation = (float)Math.Atan2((double)vector2.Y, (double)vector2.X) - 1.57f;
                     bool flag = true;
-                    if (float.IsNaN(vector.X) && float.IsNaN(vector.Y))
-                    {
+                    if (float.IsNaN(vector.X) && float.IsNaN(vector.Y)) {
                         flag = false;
                     }
-                    if (float.IsNaN(vector2.X) && float.IsNaN(vector2.Y))
-                    {
+                    if (float.IsNaN(vector2.X) && float.IsNaN(vector2.Y)) {
                         flag = false;
                     }
-                    while (flag)
-                    {
-                        if ((double)vector2.Length() < (double)num + 1.0)
-                        {
+                    while (flag) {
+                        if ((double)vector2.Length() < (double)num + 1.0) {
                             flag = false;
                         }
-                        else
-                        {
+                        else {
                             Vector2 value = vector2;
                             value.Normalize();
                             vector += value * num;
                             vector2 = mountedCenter - vector;
                             Color color = new Color(255, 255, 255, 80);
-                            //  color = Main.player[Main.myPlayer].GetModPlayer<BismuthPlayer>().EmpathyNPCs[i].GetAlpha(color);
-                            //   spriteBatch.Draw();
-                             Main.spriteBatch.Draw(texture, vector - Main.screenPosition, sourceRectangle, color, rotation, origin, 1f, SpriteEffects.None, 0);
+                            Main.spriteBatch.Draw(texture, vector - Main.screenPosition, sourceRectangle, color, rotation, origin, 1f, SpriteEffects.None, 0);
                             Lighting.AddLight(vector, 0.496f, 0.394f, 0.116f);
-                            //  Main.playerDrawData.Add(drawData);
                         }
                     }
                 }
@@ -1376,38 +1120,19 @@ namespace Bismuth.Utilities
             }
             #endregion
         }
-        private void ApplyCritBonus(ref int damage, bool crit)
-        {
-
-            if (crit)
-            {
-                damage *= (int)(critDmgMult + critDmgMultForSkills) / 2;
-            }
-        }
-        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
-        {
-            if (!mediumCoreDeath)
-            {
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath) {
+            if (!mediumCoreDeath) {
                 yield return new Item(ModContent.ItemType<AdventurersBook>());
                 yield return new Item(ModContent.ItemType<ClassEngraving>());
                 yield return new Item(ModContent.ItemType<BismuthumCasket>());
-                //yield return new Item(ModContent.ItemType<Items.Other.GrannyGun>()); были комментирование  
-                //yield return new Item(ItemID.EndlessMusketPouch);
             }
         }
-
-        #region RaceDrawing
-        // впемено отключено и перемишено в BismuthPlayerLayer
-        #endregion
-        public void TeleportPlayer()
-        {
+        public void TeleportPlayer() {
             int checkmaze = Player.FindBuffIndex(ModContent.BuffType<FearOfMaze>());
             int checkcooldown = Player.FindBuffIndex(ModContent.BuffType<TeleportCooldown>());
-            if (checkmaze == -1 && checkcooldown == -1 && skill72lvl > 0)
-            {
+            if (checkmaze == -1 && checkcooldown == -1 && skill72lvl > 0) {
                 Vector2 oldpos = Player.position;
-                for (int i = 0; i < 20; i++)
-                {
+                for (int i = 0; i < 20; i++) {
                     int teleportdust = Dust.NewDust(oldpos, Player.width / 2, Player.height / 2, 62);
                     Main.dust[teleportdust].noGravity = true;
                     Main.dust[teleportdust].velocity *= 0f;
@@ -1416,32 +1141,28 @@ namespace Bismuth.Utilities
                 Player.position = Main.MouseWorld;
                 Vector2 newpos = Player.position;
                 Vector2 way = newpos - oldpos;
-                for (int i = 0; i < 20; i++)
-                {
+                for (int i = 0; i < 20; i++) {
                     int teleportdust2 = Dust.NewDust(newpos, Player.width / 2, Player.height / 2, 62);
                     Main.dust[teleportdust2].noGravity = true;
                     Main.dust[teleportdust2].velocity *= 0f;
                     Main.dust[teleportdust2].scale = 1f;
                 }
-                for (int i = 0; i < 150; i++)
-                {
+                for (int i = 0; i < 150; i++) {
                     oldpos += (way / 150);
                     int teleportdust3 = Dust.NewDust(oldpos, Player.width / 2, Player.height / 2, 62);
                     Main.dust[teleportdust3].noGravity = true;
                     Main.dust[teleportdust3].scale = 1f;
-                    if (skill75lvl > 0)
+                    if (skill75lvl > 0) {
                         Projectile.NewProjectile(Player.GetSource_FromThis(), oldpos, new Vector2(0, 0), ModContent.ProjectileType<TeleportTrail>(), 500, 4f, Main.myPlayer);
+                    }
                 }
-                if (skill73lvl > 0)
-                    Player.AddBuff(ModContent.BuffType<TeleportCooldown>(), 480);
-                else
-                    Player.AddBuff(ModContent.BuffType<TeleportCooldown>(), 900);
-            } 
+                if (skill73lvl > 0) { Player.AddBuff(ModContent.BuffType<TeleportCooldown>(), 480); }
+                else { Player.AddBuff(ModContent.BuffType<TeleportCooldown>(), 900); }
+            }
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            if (skill11lvl > 0)
-                Player.AddBuff(ModContent.BuffType<WoundHealing>(), 240);
+            if (skill11lvl > 0) { Player.AddBuff(ModContent.BuffType<WoundHealing>(), 240); }
             if (skill56lvl > 0)
             {
                 int manabonus = (int)info.Damage / 2;
@@ -1452,24 +1173,15 @@ namespace Bismuth.Utilities
             if (Player.FindBuffIndex(ModContent.BuffType<MagiciansAura>()) != -1)
             {
                 int manabonus;
-                if (Player.statMana > Player.statManaMax2 / 2)                
-                    manabonus = (int)info.Damage / 10;                
-                else
-                    manabonus = (int)info.Damage / 4;
+                if (Player.statMana > Player.statManaMax2 / 2) { manabonus = (int)info.Damage / 10; }
+                else { manabonus = (int)info.Damage / 4; }
                 manabonus = Math.Max(1, manabonus);
                 Player.statMana += manabonus;
                 Player.ManaEffect(manabonus);
             }
-            if (sanctusdamagecounter < 10000)
-                sanctusdamagecounter += (int)info.Damage;
-            else
-                sanctusdamagecounter = 10000;
-
-            if (IsNaga && !Player.stoned && !Player.frostArmor)
-            {
-              //  playSound = false;
-                SoundEngine.PlaySound(SoundID.NPCHit23, Player.position);
-            }
+            if (sanctusdamagecounter < 10000) { sanctusdamagecounter += (int)info.Damage; }
+            else { sanctusdamagecounter = 10000; }
+            if (IsNaga && !Player.stoned && !Player.frostArmor) { SoundEngine.PlaySound(SoundID.NPCHit23, Player.position); }
             if (FTDaily && IsFTRead && (Player.statLife > info.Damage) && (float)((Player.statLife - info.Damage) / Player.statLifeMax2) < 0.2f)
             {
                 Player.HealEffect((int)(Player.statLifeMax2 * 0.4f) - Player.statLife);
@@ -1478,98 +1190,70 @@ namespace Bismuth.Utilities
             }
         }
         #region VampireMethods
-        public void vampireHeal(int dmg, Vector2 Position)
-        {            
-            Projectile.NewProjectile(Player.GetSource_FromThis(), Position.X, Position.Y, 0f, 0f, 305, 0, 0f);
+        public void vampireHeal(int dmg, Vector2 Position) {
+            Projectile.NewProjectile(Player.GetSource_FromThis(), Position.X, Position.Y, 0f, 0f, ProjectileID.VampireHeal, dmg, 0f);
         }
-        public void Manasteel(int dmg, Vector2 Position)
-        {
-            Projectile.NewProjectile(Player.GetSource_FromThis(), Position.X, Position.Y, 0f, 0f, ModContent.ProjectileType<ManaVamp>(), 0, 0f);
+        public void Manasteel(int dmg, Vector2 Position) {
+            Projectile.NewProjectile(Player.GetSource_FromThis(), Position.X, Position.Y, 0f, 0f, ModContent.ProjectileType<ManaVamp>(), dmg, 0f);
         }
-        public void Lich(int dmg, Vector2 Position)
-        {
-            Projectile.NewProjectile(Player.GetSource_FromThis(), Position.X, Position.Y, 0f, 0f, ModContent.ProjectileType<LichP>(), 0, 0f);
+        public void Lich(int dmg, Vector2 Position) {
+            Projectile.NewProjectile(Player.GetSource_FromThis(), Position.X, Position.Y, 0f, 0f, ModContent.ProjectileType<LichP>(), dmg, 0f);
         }
         #endregion
-        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
-        {
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource) {
             bool temp = false;
-           
-            for (int num66 = 0; num66 < 58; num66++)
-            {
-                if (Player.inventory[num66].type == ModContent.ItemType<TruePhilosopherStone>() && Player.inventory[num66].stack > 0)
-                {
+
+            for (int num66 = 0; num66 < 58; num66++) {
+                if (Player.inventory[num66].type == ModContent.ItemType<TruePhilosopherStone>() && Player.inventory[num66].stack > 0) {
                     Player.AddBuff(ModContent.BuffType<Reviving>(), 300);
                     Player.statLife = 1;
                     temp = true;
                     return false;
                 }
             }
-            if (!temp)
-                return true;
-
-            if (KilledBossesCount == 6 && amuletdaily && IsEquippedArchmagesAmulet)
-            {
+            if (!temp) { return true; }
+            if (KilledBossesCount == 6 && amuletdaily && IsEquippedArchmagesAmulet) {
                 Player.AddBuff(ModContent.BuffType<MagicFreezing>(), 480);
                 Player.AddBuff(ModContent.BuffType<Absorption>(), 660);
                 amuletdaily = false;
                 return false;
             }
-
             NetworkText DeathReason1 = NetworkText.FromLiteral(Player.name + this.GetLocalization("Chat.Death").Value);
             NetworkText DeathReason2 = NetworkText.FromLiteral(Player.name + this.GetLocalization("Chat.Death2").Value);
-            if (Player.FindBuffIndex(ModContent.BuffType<DeathWish>()) != -1)
-            {
-                damageSource = PlayerDeathReason.ByCustomReason(DeathReason1);
-            }            
-            if(OneRingTimer > 3600)
-                damageSource = PlayerDeathReason.ByCustomReason(DeathReason2);
-         
+            if (Player.FindBuffIndex(ModContent.BuffType<DeathWish>()) != -1) { damageSource = PlayerDeathReason.ByCustomReason(DeathReason1); }
+            if (OneRingTimer > 3600) { damageSource = PlayerDeathReason.ByCustomReason(DeathReason2); }
+
             return true;
         }
-
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
-        {
-            if (cursepts < 5)
-            {
-                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-                {
-                    if (Player.armor[k].type == ModContent.ItemType<SignOfUndead>())
-                    {
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource) {
+            if (cursepts < 5) {
+                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                    if (Player.armor[k].type == ModContent.ItemType<SignOfUndead>()) {
                         cursepts++;
                     }
                 }
             }
-            if (IsVampire && Hunger == 0)
-                Hunger = 30;
-            if (IsNaga && Wetness == 0) 
-                Wetness = 30;
+            if (IsVampire && Hunger == 0) { Hunger = 30; }
+            if (IsNaga && Wetness == 0) { Wetness = 30; }
             sanctusdamagecounter = 0;
             DeathPos = Player.position;
-            if (IsEquippedOneRing)
-            {
-                if (Player.lavaWet)
-                {
-                    for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-                    {
-                        if (Player.armor[k].type == ModContent.ItemType<RingOfOmnipotence>())
-                        {
+            if (IsEquippedOneRing) {
+                if (Player.lavaWet) {
+                    for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                        if (Player.armor[k].type == ModContent.ItemType<RingOfOmnipotence>()) {
                             Player.armor[k].stack--;
                         }
                     }
                     SoundEngine.PlaySound(SoundID.NPCDeath6, Player.position);
                     OneRingTimer = 0;
                 }
-                else
-                {
+                else {
                     OneRingTimer = 3600;
-                   
+
                 }
             }
-            if (EmpathyNPCs.Count > 0)
-            {
-                for (int i = EmpathyNPCs.Count - 1; i != -1; i--)
-                {
+            if (EmpathyNPCs.Count > 0) {
+                for (int i = EmpathyNPCs.Count - 1; i != -1; i--) {
                     NPC npc = EmpathyNPCs[i];
                     npc.life = -1;
                     npc.active = false;
@@ -1577,88 +1261,63 @@ namespace Bismuth.Utilities
                 }
             }
         }
-        public override void PostUpdate()
-        {
-            if (CustomChatClose)
-            {
+        public override void PostUpdate() {
+            Quests quests = Player.GetModPlayer<Quests>();
+            if (QuestVariable.ElessarQuest == 200 && !quests.completedElessarQuest) { quests.ElessarQuest = 200; quests.completedElessarQuest = true; }
+            if (QuestVariable.BookOfSecretsQuest == 90 && quests.BookOfSecretsQuest != 100) { Player.GetModPlayer<Quests>().BookOfSecretsQuest = 90; }
+            if (QuestVariable.TombstoneStage == 200 && quests.TombstoneQuest != 200) { quests.TombstoneQuest = 190; }
+            if (CustomChatClose) {
                 Main.CloseNPCChatOrSign();
                 CustomChatClose = false;
             }
-            if (IsEquippedRekstrisBoots && !RekstrisBootsRoar)
-            {
+            if (IsEquippedRekstrisBoots && !RekstrisBootsRoar) {
                 SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/RekstrisRoar"), Player.position);
                 RekstrisBootsRoar = true;
             }
-            if (!IsEquippedRekstrisBoots && RekstrisBootsRoar)
-            {
+            if (!IsEquippedRekstrisBoots && RekstrisBootsRoar) {
                 SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/RekstrisRoar"), Player.position);
                 RekstrisBootsRoar = false;
             }
-            if (IsEquippedRekstrisChest && !RekstrisChestRoar)
-            {
+            if (IsEquippedRekstrisChest && !RekstrisChestRoar) {
                 SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/RekstrisRoar"), Player.position);
                 RekstrisChestRoar = true;
             }
-            if (!IsEquippedRekstrisChest && RekstrisChestRoar)
-            {
+            if (!IsEquippedRekstrisChest && RekstrisChestRoar) {
                 SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/RekstrisRoar"), Player.position);
                 RekstrisChestRoar = false;
             }
-            if (IsEquippedRekstrisHelmet && !RekstrisHelmRoar)
-            {
+            if (IsEquippedRekstrisHelmet && !RekstrisHelmRoar) {
                 SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/RekstrisRoar"), Player.position);
                 RekstrisHelmRoar = true;
             }
-            if (!IsEquippedRekstrisHelmet && RekstrisHelmRoar)
-            {
+            if (!IsEquippedRekstrisHelmet && RekstrisHelmRoar) {
                 SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/RekstrisRoar"), Player.position);
                 RekstrisHelmRoar = false;
-            }          
-        }
-        public override void UpdateEquips()
-        {
-            if (IsEquippedArchmagesAmulet && KilledBossesCount > 3 && Player.statLife < Player.statLifeMax2 / 2)
-            {
-                Player.AddBuff(ModContent.BuffType<MagiciansAura>(), 2);
             }
-            //Player.statLifeMax2 = (int)(Player.statLifeMax2 * (1 - ((float)cursepts * 0.1f)));
-            for (int i = 0; i < Main.npc.Length; ++i)
-            {
-                if (IsEquippedBansheesHead && Main.npc[i].active && !Main.npc[i].friendly && Vector2.Distance(Main.npc[i].position, Player.position) < 500f && (Main.npc[i].lifeMax - Main.npc[i].life) < Main.npc[i].lifeMax / 10 && Main.npc[i].type != NPCID.TargetDummy)
-                {
+        }
+        public override void UpdateEquips() {
+            if (IsEquippedArchmagesAmulet && KilledBossesCount > 3 && Player.statLife < Player.statLifeMax2 / 2) { Player.AddBuff(ModContent.BuffType<MagiciansAura>(), 2); }
+            for (int i = 0; i < Main.npc.Length; ++i) {
+                if (IsEquippedBansheesHead && Main.npc[i].active && !Main.npc[i].friendly && Vector2.Distance(Main.npc[i].position, Player.position) < 500f && (Main.npc[i].lifeMax - Main.npc[i].life) < Main.npc[i].lifeMax / 10 && Main.npc[i].type != NPCID.TargetDummy) {
                     Main.npc[i].life -= Main.npc[i].lifeMax / 10;
                     Main.npc[i].defense = 0;
                     Lich(0, Main.npc[i].position);
-                    // Тут отрисовка эффекта
                 }
-               
-            }          
-            if (IsEquippedGoldenRune && Player.statLife < Player.statLifeMax2 / 2 && Player.statMana > 0)
-            {
-                if (Main.time % 6 == 0)
-                {
-                    Player.statLife++;
-
-                }
-                if (Main.time % 2 == 0)
-                    Player.statMana--;
             }
-            if (LichPoints >= 50)
-                LichPoints = 50;
-            if (IsEquippedLichCrown)
-            {
-                // int temp = player.statLifeMax2; были комментирование  
-                // player.statLifeMax2 /= 5;
+            if (IsEquippedGoldenRune && Player.statLife < Player.statLifeMax2 / 2 && Player.statMana > 0) {
+                if (Main.time % 6 == 0) { Player.statLife++; }
+                if (Main.time % 2 == 0) { Player.statMana--; }
+            }
+            if (LichPoints >= 50) { LichPoints = 50; }
+            if (IsEquippedLichCrown) {
                 Player.statLifeMax2 = (int)((float)Player.statLifeMax2 * (0.2f + (float)LichPoints / 50));
                 lichvisual = true;
             }
-            if (IsEquippedNecklace && IsNaga)
-            {
+            if (IsEquippedNecklace && IsNaga) {
                 Player.GetDamage(DamageClass.Throwing) += 0.01f * (float)(Wetness / 5);
                 Player.GetCritChance(DamageClass.Throwing) += Wetness / 5;
             }
-            if (!IsEquippedLichCrown)
-            {
+            if (!IsEquippedLichCrown) {
                 lichvisual = false;
                 LichPoints = 0;
             }
@@ -1667,193 +1326,84 @@ namespace Bismuth.Utilities
             //    Main.mouseLeft = false;
             //    Main.mouseLeftRelease = false;
             //}
-            if (cursepts > 0 && Player.lifeRegen > 0)
-            {
-                Player.lifeRegen = 0;
-            }
-            if (!IsEquippedSanctus)
-                sanctusdamagecounter = 0;
-            if (IsFTRead)
-            {
-                Player.lifeRegen += 4;
-            }
-            if (Main.time == 1 && !FTDaily)
-                FTDaily = true;
-            if (Main.time == 1 && IsEquippedArchmagesAmulet)
-                amuletdaily = true;
-            if (Main.time == 1 && IsEquippedMarbleMask)
-                mirrordaily = true;
-            if (Main.time == 1 && !PhoenixDaily)
-                PhoenixDaily = true;
-            if (IsEquippedOneRing)
-            {
+            if (cursepts > 0 && Player.lifeRegen > 0) { Player.lifeRegen = 0; }
+            if (!IsEquippedSanctus) { sanctusdamagecounter = 0; }
+            if (IsFTRead) { Player.lifeRegen += 4; }
+            if (Main.time == 1 && !FTDaily) { FTDaily = true; }
+            if (Main.time == 1 && IsEquippedArchmagesAmulet) { amuletdaily = true; }
+            if (Main.time == 1 && IsEquippedMarbleMask) { mirrordaily = true; }
+            if (Main.time == 1 && !PhoenixDaily) { PhoenixDaily = true; }
+            if (IsEquippedOneRing) {
                 OneRingTimer++;
-                if (OneRingTimer > 3600)
-                {
-                    if (Player.lifeRegen > 0)
-                        Player.lifeRegen = 0;
+                if (OneRingTimer > 3600) {
+                    if (Player.lifeRegen > 0) { Player.lifeRegen = 0; }
                     Player.lifeRegen -= (OneRingTimer - 3600) / 60;
-                            
-                }      
-                if(OneRingTimer > 1800)
-                {
-
+                }
+                if (OneRingTimer > 1800) {
                     alpharingmax = alpharingmax > 255 ? 255 : (OneRingTimer - 1800) / 20;
-                    if (alpharing >= alpharingmax)
-                        growring = -1;
-                    else if (alpharing <= 0)
-                        growring = 1;
+                    if (alpharing >= alpharingmax) { growring = -1; }
+                    else if (alpharing <= 0) { growring = 1; }
                     alpharing += 2 * growring;
                 }
             }
-            else
-            {
-                if(OneRingTimer > 0)
-                    OneRingTimer--;
+            else {
+                if (OneRingTimer > 0) { OneRingTimer--; }
                 alpharing = 0;
                 alpharingmax = 0;
             }
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<Doomhammer>() && Player.itemAnimation > 0 && Player.itemAnimation < 30)
-            {
-                DoomhammerTimer++;
-            }
-            else
-                DoomhammerTimer = 0;
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<Content.Items.Other.Luceat>() && Player.itemAnimation == 1)
-            {
-
-                for (int k = 0; k < 80; k++)
-                {
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<Doomhammer>() && Player.itemAnimation > 0 && Player.itemAnimation < 30) { DoomhammerTimer++; }
+            else { DoomhammerTimer = 0; }
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<Content.Items.Other.Luceat>() && Player.itemAnimation == 1) {
+                for (int k = 0; k < 80; k++) {
                     Dust.NewDust(Player.position, Player.width, Player.height, DustID.AmberBolt, 0, 0, 0, default(Color), 0.8f);
                 }
             }
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<PoisonFlask>() && Player.itemAnimation > 0 && Player.itemAnimation < 20)
-            {
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<PoisonFlask>() && Player.itemAnimation > 0 && Player.itemAnimation < 20) {
                 PoisonTimer++;
-                if(PoisonTimer == 1)
-                    Player.inventory[Player.selectedItem].stack--;
+                if (PoisonTimer == 1) { Player.inventory[Player.selectedItem].stack--; }
             }
-            else
-                PoisonTimer = 0;
+            else { PoisonTimer = 0; }
             NetworkText DeathReason3 = NetworkText.FromLiteral(Player.name + this.GetLocalization("Chat.Death3").Value);
-            if (PoisonTimer == 19)
-                Player.KillMe(PlayerDeathReason.ByCustomReason(DeathReason3), 50000, 0);
-            if (Player.ownedProjectileCounts[ModContent.ProjectileType<Fireball>()] < 1 && OrbitalAlive)
-                Projectile.NewProjectile(Player.GetSource_FromThis(), Player.position, new Microsoft.Xna.Framework.Vector2(0, 0), ModContent.ProjectileType<Fireball>(), 50, 4f, Main.myPlayer);
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<SacrificialDagger>())
-            {
-                critDmgMult += 2f;
-            }
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<ManGosh>())
-            {
-                BlockChance += 25;
-            }
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<BowOfOdysseus>() && Main.mouseRight && ArrowCharge != 100)
-            {
-                if (ArrowCharge == 1)
-                    SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/BowstringTighten"), Player.position);
+            if (PoisonTimer == 19) { Player.KillMe(PlayerDeathReason.ByCustomReason(DeathReason3), 50000, 0); }
+            if (Player.ownedProjectileCounts[ModContent.ProjectileType<Fireball>()] < 1 && OrbitalAlive) { Projectile.NewProjectile(Player.GetSource_FromThis(), Player.position, new Vector2(0, 0), ModContent.ProjectileType<Fireball>(), 50, 4f, Main.myPlayer); }
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<SacrificialDagger>()) { critDmgMult += 2f; }
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<ManGosh>()) { BlockChance += 25; }
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<BowOfOdysseus>() && Main.mouseRight && ArrowCharge != 100) {
+                if (ArrowCharge == 1) { SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/BowstringTighten"), Player.position); }
                 ArrowCharge++;
-                if(ArrowCharge == 99)
-                    SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/BowstringReady"), Player.position);
+                if (ArrowCharge == 99) { SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/BowstringReady"), Player.position); }
             }
-            if (!Main.mouseRight && ArrowCharge < 100 && Player.inventory[Player.selectedItem].type == ModContent.ItemType<BowOfOdysseus>())
-            {
+            if (!Main.mouseRight && ArrowCharge < 100 && Player.inventory[Player.selectedItem].type == ModContent.ItemType<BowOfOdysseus>()) {
                 ArrowCharge = 0;
                 Player.itemAnimation = 0;
             }
-            if (Player.inventory[Player.selectedItem].type != ModContent.ItemType<TheseusSword>() && TheseusCombo != 0)
-            {
-                TheseusCombo = 0;
+            if (Player.inventory[Player.selectedItem].type != ModContent.ItemType<TheseusSword>() && TheseusCombo != 0) { TheseusCombo = 0; }
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<TheseusSword>()) {
+                if (TheseusCombo >= 100) { TheseusCombo = 100; } else { if (Main.time % 4 == 0 && TheseusCombo > 0) { TheseusCombo--; } }
             }
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<TheseusSword>())
-            {
-                if (TheseusCombo >= 100)
-                    TheseusCombo = 100;
-                else
-                {
-                    if (Main.time % 4 == 0 && TheseusCombo > 0)
-                        TheseusCombo--;
-                }
-            }          
             bool flag = false;
-            if (Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Magic))
-            {
-                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-                {
-                    if (Player.armor[k].type == ModContent.ItemType<ArchmagesAmulet>()) 
-                    {
+            if (Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Magic)) {
+                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                    if (Player.armor[k].type == ModContent.ItemType<ArchmagesAmulet>()) {
                         flag = true;
-                        if (KilledBossesCount == 4)
-                            critDmgMult += 0.2f;
-                        if (KilledBossesCount == 5)
-                            critDmgMult += 0.5f;
-                        if (KilledBossesCount == 6)
-                            critDmgMult += 0.8f;
-                        if(amuletcounter < 3180)
-                            amuletcounter++;
+                        if (KilledBossesCount == 4) { critDmgMult += 0.2f; }
+                        if (KilledBossesCount == 5) { critDmgMult += 0.5f; }
+                        if (KilledBossesCount == 6) { critDmgMult += 0.8f; }
+                        if (amuletcounter < 3180) { amuletcounter++; }
                     }
                 }
             }
-            if(!flag)
-                amuletcounter = 0;
-                if (Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Ranged))
-                {
-                    if (IsEquippedTribalQuiver)
-                    {
-                        critDmgMult += 0.1f;
-                    }
-
-                    /*if (skill101lvl > 0 && player.inventory[player.selectedItem].useTime > 45 && player.inventory[player.selectedItem].useAnimation > 45) были комментирование  
-                    {
-                        player.inventory[player.selectedItem].useTime = 45;
-                        player.inventory[player.selectedItem].useAnimation = 45;
-                    }
-                    if (skill101lvl > 1 && player.inventory[player.selectedItem].useTime > 38 && player.inventory[player.selectedItem].useAnimation > 38)
-                    {
-                        player.inventory[player.selectedItem].useTime = 38;
-                        player.inventory[player.selectedItem].useAnimation = 38;
-                    }
-                    if (skill101lvl > 2 && player.inventory[player.selectedItem].useTime > 32 && player.inventory[player.selectedItem].useAnimation > 32)
-                    {
-                        player.inventory[player.selectedItem].useTime = 32;
-                        player.inventory[player.selectedItem].useAnimation = 32;
-                    }*/
-                }
-            if (Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Ranged) && skill121lvl > 0)
-                Player.inventory[Player.selectedItem].autoReuse = true;
-            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-            {
-                if (Player.armor[k].Name.Contains("Ring"))
-                {
-                    RingsCount++;
-                }
-            }
-
+            if (!flag) { amuletcounter = 0; }
+            if (Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Ranged) && IsEquippedTribalQuiver) { critDmgMult += 0.1f; }
+            if (Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Ranged) && skill121lvl > 0) { Player.inventory[Player.selectedItem].autoReuse = true; }
+            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) { if (Player.armor[k].Name.Contains("Ring")) { RingsCount++; } }
         }
-        int revivingtaimer = 0;
-        
-        int bootstimer = 0;
-        bool covered = false;
-        int helmettimer = 0;
-        int oldhp = 0;
-        int bald = -1;
-        int alt = -1;
-        int full = -1;
-        int whispertime = 0;
-        int whispercurrent = 0;
-        public string oldmanname;
-        public string necrosname;
-        public static float screenmovestep = 0f;
-        
-        public override void PreUpdateBuffs()
-        {
-            if (!PhoenixPendantWasSpawned && Player.name == "Spinal111")
-            {
+        public override void PreUpdateBuffs() {
+            if (!PhoenixPendantWasSpawned && Player.name == "Spinal111") {
                 PhoenixPendantWasSpawned = true;
                 Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<PhoenixPendant>());
             }
-            if (Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>() || Main.tile[Player.position.ToTileCoordinates().X + 1, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>())
-            {
+            if (Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>() || Main.tile[Player.position.ToTileCoordinates().X + 1, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>()) {
                 Player.AddBuff(ModContent.BuffType<SwampQuagmire>(), 2);
             }
             if (BismuthWorld.MazeStartX != 0 && BismuthWorld.MazeStartY != 0 && BismuthWorld.downedEoC && !BismuthWorld.OpenedRedChest)//
@@ -1861,18 +1411,15 @@ namespace Bismuth.Utilities
                 if (Player.Center.ToTileCoordinates().X > BismuthWorld.MazeStartX && Player.Center.ToTileCoordinates().X < BismuthWorld.MazeStartX + 58 && Player.Center.ToTileCoordinates().Y > BismuthWorld.MazeStartY && Player.Center.ToTileCoordinates().Y < BismuthWorld.MazeStartY + 57 && !BismuthWorld.DestroyedMaze)
                     Player.AddBuff(ModContent.BuffType<FearOfMaze>(), 100);
             }
-            if (Player.Center.ToTileCoordinates().X > BismuthWorld.WaterTempleX + 13 && Player.Center.ToTileCoordinates().X < BismuthWorld.WaterTempleX + 36 && Player.Center.ToTileCoordinates().Y > BismuthWorld.WaterTempleY + 5 && Player.Center.ToTileCoordinates().Y < BismuthWorld.WaterTempleY + 17 && !BismuthWorld.downedBanshee && !NPC.AnyNPCs(ModContent.NPCType<Banshee>()))
-            {
+            if (Player.Center.ToTileCoordinates().X > BismuthWorld.WaterTempleX + 13 && Player.Center.ToTileCoordinates().X < BismuthWorld.WaterTempleX + 36 && Player.Center.ToTileCoordinates().Y > BismuthWorld.WaterTempleY + 5 && Player.Center.ToTileCoordinates().Y < BismuthWorld.WaterTempleY + 17 && !BismuthWorld.downedBanshee && !NPC.AnyNPCs(ModContent.NPCType<Banshee>())) {
                 NPC.NewNPC(Player.GetSource_FromThis(), (BismuthWorld.WaterTempleX + 25) * 16, (BismuthWorld.WaterTempleY + 16) * 16, ModContent.NPCType<Banshee>());
             }
-            if (Vector2.Distance(Player.Center, new Vector2(BismuthWorld.WaterTempleX * 16, BismuthWorld.WaterTempleY * 16)) > 2000f && !NPC.AnyNPCs(ModContent.NPCType<NagaMerchant>()) && BismuthWorld.downedBanshee)
-            {
+            if (Vector2.Distance(Player.Center, new Vector2(BismuthWorld.WaterTempleX * 16, BismuthWorld.WaterTempleY * 16)) > 2000f && !NPC.AnyNPCs(ModContent.NPCType<NagaMerchant>()) && BismuthWorld.downedBanshee) {
                 NPC.NewNPC(Player.GetSource_FromThis(), (BismuthWorld.WaterTempleX + 25) * 16, (BismuthWorld.WaterTempleY + 16) * 16, ModContent.NPCType<NagaMerchant>());
             }
             if (Player.Center.ToTileCoordinates().X > Main.spawnTileX - 100 && Player.Center.ToTileCoordinates().X < Main.spawnTileX + 105 && Player.Center.ToTileCoordinates().Y > Main.spawnTileY - 30 && Player.Center.ToTileCoordinates().Y < Main.spawnTileY + 30)
                 Player.AddBuff(ModContent.BuffType<AuraOfEmpire>(), 2);
-            if (BismuthWorld.IsTotemActive)
-            {
+            if (BismuthWorld.IsTotemActive && InTribeTotemZone) {
                 Player.AddBuff(ModContent.BuffType<TribeCurse>(), 2);
                 if (Main.rand.Next(0, 1080) == 0)
                     NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 2) * 16, ModContent.NPCType<Papuan>());
@@ -1882,58 +1429,38 @@ namespace Bismuth.Utilities
                     NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 2) * 16, ModContent.NPCType<PapuanWarrior>());
                 if (Main.rand.Next(0, 2700) == 0 && BismuthWorld.downedEoC)
                     NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 5) * 16, ModContent.NPCType<SandWormHead>());
-                if (Main.hardMode && Main.rand.Next(0, 4000) == 0 && !NPC.AnyNPCs(ModContent.NPCType<PapuanWizard>()) && !BismuthWorld.WizardDay && Main.dayTime)
-                {
+                if (Main.hardMode && Main.rand.Next(0, 4000) == 0 && !NPC.AnyNPCs(ModContent.NPCType<PapuanWizard>()) && !BismuthWorld.WizardDay && Main.dayTime) {
                     BismuthWorld.WizardDay = true;
                     NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 2) * 16, ModContent.NPCType<PapuanWizard>());
                 }
             }
-            if (NPC.AnyNPCs(ModContent.NPCType<PriestTeleportation>()))
-            {
-                if(screenmovestep < 1f)
-                    screenmovestep += 0.01f;
-            }
-            if (Player.FindBuffIndex(ModContent.BuffType<MagiciansAura>()) == -1)
-                //Buffs.MagiciansAura.timealive = 0;
-            if(NPC.AnyNPCs(ModContent.NPCType<StrangeOldman>()))
-                oldmanname = Main.npc[NPC.FindFirstNPC(ModContent.NPCType<StrangeOldman>())].GivenName;
-            if (NPC.AnyNPCs(ModContent.NPCType<Priest>()))
-                necrosname = Main.npc[NPC.FindFirstNPC(ModContent.NPCType<Priest>())].GivenName;
-            if (BismuthWorld.OrcishInvasionStage == 1)
-                OrcishBarTimer = 300;
-            else if (BismuthWorld.OrcishInvasionStage == 2)
-            {
-                if (OrcishBarTimer > 0)
-                    OrcishBarTimer--;
-            }
-            else
-                OrcishBarTimer = 0;
+            UpdateCameraPos(ModContent.NPCType<PriestTeleportation>());
+            //if (Player.FindBuffIndex(ModContent.BuffType<MagiciansAura>()) == -1)
+            //    //Buffs.MagiciansAura.timealive = 0;
+            if (NPC.AnyNPCs(ModContent.NPCType<StrangeOldman>())) { oldmanname = Main.npc[NPC.FindFirstNPC(ModContent.NPCType<StrangeOldman>())].GivenName; }
+            if (NPC.AnyNPCs(ModContent.NPCType<Priest>())) { necrosname = Main.npc[NPC.FindFirstNPC(ModContent.NPCType<Priest>())].GivenName; }
+            if (BismuthWorld.OrcishInvasionStage == 1) { OrcishBarTimer = 300; }
+            else if (BismuthWorld.OrcishInvasionStage == 2) { if (OrcishBarTimer > 0) { OrcishBarTimer--; } } else { OrcishBarTimer = 0; }
             #region EnergyShieldReflection
-            if (Player.FindBuffIndex(ModContent.BuffType<EnergyShield>()) != -1 && skill108lvl == 0)
-            {
+            if (Player.FindBuffIndex(ModContent.BuffType<EnergyShield>()) != -1 && skill108lvl == 0) {
                 if (EnergyShieldAlpha > 100)
                     EnergyShieldAlpha--;
                 else
                     EnergyShieldAlpha = 100;
-                for (int i = 0; i < Main.projectile.Length; i++)
-                {
-                    if (Main.projectile[i].active && Main.projectile[i].hostile)
-                    {
+                for (int i = 0; i < Main.projectile.Length; i++) {
+                    if (Main.projectile[i].active && Main.projectile[i].hostile) {
                         Rectangle rect1 = new Rectangle((int)(Player.position.X - 10f), (int)(Player.position.Y), 38, 42);
                         Rectangle rect2 = new Rectangle((int)(Player.position.X - 4f), (int)(Player.position.Y - 4f), 26, 50);
                         Rectangle rect3 = new Rectangle((int)(Player.position.X - 14f), (int)(Player.position.Y + 6f), 46, 30);
                         Rectangle rect4 = new Rectangle((int)(Player.position.X - 18f), (int)(Player.position.Y + 14f), 54, 14);
                         Projectile proj = Main.projectile[i];
-                        if (rect1.Intersects(proj.Hitbox) || rect2.Intersects(proj.Hitbox) || rect3.Intersects(proj.Hitbox) || rect4.Intersects(proj.Hitbox))
-                        {
-                            if (proj.Center.X > Player.Center.X * 0.5f)
-                            {
+                        if (rect1.Intersects(proj.Hitbox) || rect2.Intersects(proj.Hitbox) || rect3.Intersects(proj.Hitbox) || rect4.Intersects(proj.Hitbox)) {
+                            if (proj.Center.X > Player.Center.X * 0.5f) {
 
                                 proj.direction = 1;
                                 proj.spriteDirection = 1;
                             }
-                            else
-                            {
+                            else {
                                 proj.direction = -1;
                                 proj.spriteDirection = -1;
                             }
@@ -1951,19 +1478,16 @@ namespace Bismuth.Utilities
             }
             #endregion
             #region StingUpdate
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<Sting>())
-            {
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<Sting>()) {
                 Player.AddBuff(BuffID.Dangersense, 3);
-                for (int i = 0; i < Main.npc.Length; i++)
-                {
+                for (int i = 0; i < Main.npc.Length; i++) {
                     if (Main.npc[i].active && Main.npc[i].life > 0 && (Main.npc[i].type == ModContent.NPCType<Orc>() || Main.npc[i].type == ModContent.NPCType<OrcCrossbower>() || Main.npc[i].type == ModContent.NPCType<OrcDefender>() || Main.npc[i].type == ModContent.NPCType<OrcWizard>() || /*Main.npc[i].type == ModContent.NPCType<OrcRider>() ||*/ Main.npc[i].type == ModContent.NPCType<RhinoOrc>()) && Vector2.Distance(Player.Center, Main.npc[i].Center) < 1000f)
                         Lighting.AddLight(Player.Center, new Vector3(0.1f, 0.1f, 0.4f));
                 }
             }
             #endregion
             #region SoulEaterUpdate
-            if (NPC.AnyNPCs(ModContent.NPCType<RestlessSoul>()))
-            {
+            if (NPC.AnyNPCs(ModContent.NPCType<RestlessSoul>())) {
                 Player.GetDamage(DamageClass.Magic) += 0.1f * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());
                 Player.GetDamage(DamageClass.Melee) += 0.1f * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());
                 Player.GetDamage(DamageClass.Ranged) += 0.1f * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());
@@ -1975,7 +1499,7 @@ namespace Bismuth.Utilities
                 Player.GetCritChance(DamageClass.Ranged) += 10 * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());
                 Player.GetCritChance(DamageClass.Throwing) += 10 * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());
                 Player.GetModPlayer<ModP>().assassinCrit += 10 * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());
-                critDmgMult += 0.5f * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());         
+                critDmgMult += 0.5f * NPC.CountNPCS(ModContent.NPCType<RestlessSoul>());
                 Player.lifeRegen = -40;
             }
             if (SoulEaterCounter > 0)
@@ -1984,39 +1508,29 @@ namespace Bismuth.Utilities
             if (!CanBeFrozenByElemental && Main.time % 108000 == 1)
                 CanBeFrozenByElemental = true;
             #region EmpathyMirrorUpdate
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<EmpathyMirror>() && Main.mouseLeft)
-            {
-                for (int j = 0; j < Main.npc.Length; j++)
-                {
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<EmpathyMirror>() && Main.mouseLeft) {
+                for (int j = 0; j < Main.npc.Length; j++) {
                     NPC npc = Main.npc[j];
-                    if (npc.active && npc.townNPC && npc.aiStyle != -1 && npc.life > 0 && npc.friendly && EmpathyNPCs.Count < 3 && !EmpathyNPCs.Contains(npc) && new Rectangle((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height).Contains((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y))
-                    {
+                    if (npc.active && npc.townNPC && npc.aiStyle != -1 && npc.life > 0 && npc.friendly && EmpathyNPCs.Count < 3 && !EmpathyNPCs.Contains(npc) && new Rectangle((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height).Contains((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y)) {
                         EmpathyNPCs.Add(npc);
                     }
                 }
             }
-            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<EmpathyMirror>() && Main.mouseRight)
-            {
-                for (int j = 0; j < Main.npc.Length; j++)
-                {
+            if (Player.inventory[Player.selectedItem].type == ModContent.ItemType<EmpathyMirror>() && Main.mouseRight) {
+                for (int j = 0; j < Main.npc.Length; j++) {
                     NPC npc = Main.npc[j];
-                    if (npc.active && npc.townNPC && npc.life > 0 && npc.friendly && EmpathyNPCs.Contains(npc) && new Rectangle((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height).Contains((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y))
-                    {
+                    if (npc.active && npc.townNPC && npc.life > 0 && npc.friendly && EmpathyNPCs.Contains(npc) && new Rectangle((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height).Contains((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y)) {
                         EmpathyNPCs.Remove(npc);
                     }
                 }
             }
-            if (EmpathyNPCs.Count > 0)
-            {
-                for (int i = EmpathyNPCs.Count - 1; i != -1; i--)
-                {
+            if (EmpathyNPCs.Count > 0) {
+                for (int i = EmpathyNPCs.Count - 1; i != -1; i--) {
                     NPC npc = EmpathyNPCs[i];
-                    if (npc.life < 0 || !npc.active)
-                    {
+                    if (npc.life < 0 || !npc.active) {
                         NetworkText DeathReason4 = NetworkText.FromLiteral(Player.name + this.GetLocalization("Chat.Death4").Value);
                         Player.KillMe(PlayerDeathReason.ByCustomReason(DeathReason4), 10000, 1);
-                        for (int k = 0; k < EmpathyNPCs.Count; k++)
-                        {
+                        for (int k = 0; k < EmpathyNPCs.Count; k++) {
                             NPC npctokill = EmpathyNPCs[i];
                             npctokill.life = -1;
                             npctokill.active = false;
@@ -2027,24 +1541,20 @@ namespace Bismuth.Utilities
                 }
             }
             #endregion
-            if (BOTDPlaces.Count > 0)
-            {
-                for (int i = BOTDPlaces.Count - 1; i != -1; i--)
-                {
+            if (BOTDPlaces.Count > 0) {
+                for (int i = BOTDPlaces.Count - 1; i != -1; i--) {
                     Vector2 pos = BOTDPlaces[i];
                     if (Vector2.Distance(Player.position, pos) > 600f)
                         BOTDPlaces.Remove(pos);
                 }
             }
             #region InsanityUpdate
-            if (Player.FindBuffIndex(ModContent.BuffType<BansheesScream>()) == -1)
-            {
+            if (Player.FindBuffIndex(ModContent.BuffType<BansheesScream>()) == -1) {
                 if (alphabanshee != 0)
                     alphabanshee -= 2;
                 growbanshee = 1;
             }
-            if (OneRingTimer > 3000)
-            {
+            if (OneRingTimer > 3000) {
                 if (whispervolume <= 0.99f)
                     whispervolume += 0.0002f;
                 if (OneRingTimer % 60 == 0)
@@ -2052,14 +1562,12 @@ namespace Bismuth.Utilities
 
                 whispercurrent++;
 
-                if (whispercurrent == 441)
-                {                 
+                if (whispercurrent == 441) {
                     whispercurrent = 0;
-                    SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/Whisper"), Player.position);            
+                    SoundEngine.PlaySound(new SoundStyle("Bismuth/Sounds/Custom/Whisper"), Player.position);
                 }
             }
-            else
-            {
+            else {
                 whispervolume = 0;
                 whispertime = 0;
                 whispercurrent = 0;
@@ -2070,25 +1578,20 @@ namespace Bismuth.Utilities
             if (!IsEquippedHeartOfSwamp)
                 alt = -1;
             if (!IsEquippedLichCrown)
-                bald = -1;            
-            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-            {
-                if (Player.armor[k].faceSlot != 0 && Player.armor[k].type != 0 && Player.armor[k].type != ModContent.ItemType<LichCrown>() && Player.armor[k].type != ModContent.ItemType<HeartOfSwamp>())
-                {
+                bald = -1;
+            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                if (Player.armor[k].faceSlot != 0 && Player.armor[k].type != 0 && Player.armor[k].type != ModContent.ItemType<LichCrown>() && Player.armor[k].type != ModContent.ItemType<HeartOfSwamp>()) {
                     full = k;
                 }
-                if (Player.armor[k].type == ModContent.ItemType<LichCrown>())
-                {
+                if (Player.armor[k].type == ModContent.ItemType<LichCrown>()) {
                     bald = k;
                 }
-                if (Player.armor[k].type == ModContent.ItemType<HeartOfSwamp>())
-                {
+                if (Player.armor[k].type == ModContent.ItemType<HeartOfSwamp>()) {
                     alt = k;
                 }
             }
-            
-            if (alt != -1 || bald != -1)
-            {
+
+            if (alt != -1 || bald != -1) {
                 if (full > alt && full > bald)
                     myhair = 0;
                 if (alt > bald && alt > full)
@@ -2100,25 +1603,19 @@ namespace Bismuth.Utilities
                 myhair = 0;
             #endregion            
             #region NarsilUpdate
-            if (NarsilHitbox != null && (Player.inventory[Player.selectedItem].type != ModContent.ItemType<Narsil>() || Player.itemAnimation == 0))
-            {
+            if (NarsilHitbox != null && (Player.inventory[Player.selectedItem].type != ModContent.ItemType<Narsil>() || Player.itemAnimation == 0)) {
                 NarsilHitbox = Rectangle.Empty;
             }
-            for (int i = 0; i < Main.projectile.Length; i++)
-            {
-                if (Main.projectile[i].active && NarsilHitbox != null && Main.projectile[i].hostile)
-                {
+            for (int i = 0; i < Main.projectile.Length; i++) {
+                if (Main.projectile[i].active && NarsilHitbox != null && Main.projectile[i].hostile) {
                     Projectile proj = Main.projectile[i];
-                    if (NarsilHitbox.Intersects(proj.Hitbox))
-                    {
-                        if (proj.Center.X > Player.Center.X * 0.5f)
-                        {
+                    if (NarsilHitbox.Intersects(proj.Hitbox)) {
+                        if (proj.Center.X > Player.Center.X * 0.5f) {
 
                             proj.direction = 1;
                             proj.spriteDirection = 1;
                         }
-                        else
-                        {
+                        else {
                             proj.direction = -1;
                             proj.spriteDirection = -1;
                         }
@@ -2139,89 +1636,75 @@ namespace Bismuth.Utilities
             }
             #endregion
             #region DoomhammerUpdate
-           
-            if (DoomhammerTimer == 15)
-            {
+
+            if (DoomhammerTimer == 15) {
                 int X1 = Player.position.ToTileCoordinates().X + (Player.direction > 0 ? 3 : -2);
                 int X2 = Player.position.ToTileCoordinates().X + (Player.direction > 0 ? 4 : -3);
                 int Y = Player.position.ToTileCoordinates().Y + 3;
                 bool check = WorldGen.SolidTile(X1, Y) && WorldGen.SolidTile(X2, Y);
-                if (check)
-                {
+                if (check) {
                     Projectile.NewProjectile(Player.GetSource_FromThis(), new Vector2(X1 * 16 + (Player.direction > 0 ? 32 : 0), Y * 16), Vector2.Zero, ModContent.ProjectileType<DoomhammerP>(), 50, 4f, Main.myPlayer);
                     SoundEngine.PlaySound(SoundID.Item14, Player.position);
                 }
             }
             #endregion
-           
-            if (Player.statLife < Player.statLifeMax2 * 0.2f && mirrordaily && IsEquippedMarbleMask)
-            {
+
+            if (Player.statLife < Player.statLifeMax2 * 0.2f && mirrordaily && IsEquippedMarbleMask) {
                 Player.AddBuff(ModContent.BuffType<Specularity>(), 720);
                 mirrordaily = false;
             }
-            if (PlayerClass != 0)
-            {
-                switch (PlayerClass)
-                {
+            if (PlayerClass != 0) {
+                switch (PlayerClass) {
                     case 1:
-                        Player.GetModPlayer<Quests>().ActualPanel = WarriorPanel;
-                        break;
+                    Player.GetModPlayer<Quests>().ActualPanel = WarriorPanel;
+                    break;
                     case 2:
-                        Player.GetModPlayer<Quests>().ActualPanel = RangerPanel;
-                        break;
+                    Player.GetModPlayer<Quests>().ActualPanel = RangerPanel;
+                    break;
                     case 3:
-                        Player.GetModPlayer<Quests>().ActualPanel = WizardPanel;
-                        break;
+                    Player.GetModPlayer<Quests>().ActualPanel = WizardPanel;
+                    break;
                     case 4:
-                        Player.GetModPlayer<Quests>().ActualPanel = ThrowerPanel;
-                        break;
+                    Player.GetModPlayer<Quests>().ActualPanel = ThrowerPanel;
+                    break;
                     case 5:
-                        Player.GetModPlayer<Quests>().ActualPanel = AssassinPanel;
-                        break;
-                }             
+                    Player.GetModPlayer<Quests>().ActualPanel = AssassinPanel;
+                    break;
+                }
             }
-            
-           
+
+
             #region BossesUpdate
             #endregion
-          
-            
+
+
             #region NagaUpdate
-            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-            {
-                if (Player.armor[k].type == ModContent.ItemType<TheRingOfTheSeas>())
-                {
-                    if (!IsNaga && !IsVampire)
-                    {
+            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                if (Player.armor[k].type == ModContent.ItemType<TheRingOfTheSeas>()) {
+                    if (!IsNaga && !IsVampire) {
                         IsNaga = true;
                         Wetness = 100;
                     }
                 }
             }
-            
-            if (IsNaga)
-            {
-                if (!Main.raining && !Player.wet)
-                {
-                    if (Player.ZoneDesert)
-                    {
+
+            if (IsNaga) {
+                if (!Main.raining && !Player.wet) {
+                    if (Player.ZoneDesert) {
                         if (Main.time % 180 == 0)
                             Wetness--;
                     }
-                    else
-                    {
+                    else {
                         if (Main.time % 900 == 0)
                             Wetness--;
                     }
 
                 }
-                if (Main.raining)
-                {
+                if (Main.raining) {
                     if (Main.time % 600 == 0)
                         Wetness++;
                 }
-                if (Player.wet)
-                {
+                if (Player.wet) {
                     if (Main.time % 240 == 0)
                         Wetness++;
                 }
@@ -2229,30 +1712,25 @@ namespace Bismuth.Utilities
                     Wetness = 0;
                 if (Wetness >= 100)
                     Wetness = 100;
-                if (Wetness >= 70 && Wetness <= 100)
-                {
-                    if (Player.lifeRegen > 0)
-                    {
+                if (Wetness >= 70 && Wetness <= 100) {
+                    if (Player.lifeRegen > 0) {
                         Player.lifeRegen *= 2;
                     }
                     Player.runAcceleration *= 1.15f;
                     Player.maxRunSpeed *= 1.15f;
                 }
-                if (Wetness >= 40 && Wetness <= 69)
-                {
+                if (Wetness >= 40 && Wetness <= 69) {
                     Player.runAcceleration *= 1.05f;
                     Player.maxRunSpeed *= 1.05f;
                     Player.lifeRegen += 4;
                 }
-                if (Wetness >= 1 && Wetness <= 39)
-                {
+                if (Wetness >= 1 && Wetness <= 39) {
                     Player.runAcceleration *= 0.8f;
                     Player.maxRunSpeed *= 0.8f;
                     if (Player.lifeRegen > 0)
                         Player.lifeRegen = 0;
                 }
-                if (Wetness == 0)
-                {
+                if (Wetness == 0) {
                     if (Player.lifeRegen > 0)
                         Player.lifeRegen = 0;
                     Player.lifeRegen -= 50;
@@ -2260,16 +1738,14 @@ namespace Bismuth.Utilities
                 Player.accFlipper = true;
                 Player.gills = true;
                 #region WatersArmorBonus
-                if (Player.armor[0].type == ModContent.ItemType<WatersHelmet>())
-                {
+                if (Player.armor[0].type == ModContent.ItemType<WatersHelmet>()) {
                     Player.GetCritChance(DamageClass.Melee) += Wetness / 10;
                     Player.GetCritChance(DamageClass.Ranged) += Wetness / 10;
                     Player.GetCritChance(DamageClass.Magic) += Wetness / 10;
                     Player.GetCritChance(DamageClass.Throwing) += Wetness / 10;
                     Player.GetModPlayer<ModP>().assassinCrit += Wetness / 10;
                 }
-                if (Player.armor[1].type == ModContent.ItemType<WatersBreastplate>())
-                {
+                if (Player.armor[1].type == ModContent.ItemType<WatersBreastplate>()) {
                     Player.GetDamage(DamageClass.Melee) += (Wetness / 7) * 0.01f;
                     Player.GetDamage(DamageClass.Ranged) += (Wetness / 7) * 0.01f;
                     Player.GetDamage(DamageClass.Magic) += (Wetness / 7) * 0.01f;
@@ -2278,8 +1754,7 @@ namespace Bismuth.Utilities
                     Player.GetModPlayer<ModP>().assassinDamage += Wetness / 7;
                     Player.lifeRegen += Wetness / 15;
                 }
-                if (Player.armor[2].type == ModContent.ItemType<WatersLeggings>())
-                {
+                if (Player.armor[2].type == ModContent.ItemType<WatersLeggings>()) {
                     Player.runAcceleration *= 1 + ((float)Wetness / 200);
                     Player.maxRunSpeed *= 1 + ((float)Wetness / 200);
                 }
@@ -2290,22 +1765,17 @@ namespace Bismuth.Utilities
             }
             #endregion
             #region VampireUpdate
-            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-            {
-                if (Player.armor[k].type == ModContent.ItemType<TheRingOfTheBlood>())
-                {
-                    if (!IsNaga && !IsVampire)
-                    {
+            for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                if (Player.armor[k].type == ModContent.ItemType<TheRingOfTheBlood>()) {
+                    if (!IsNaga && !IsVampire) {
                         IsVampire = true;
                         Hunger = 100;
                     }
                 }
             }
-            if (IsVampire)
-            {
+            if (IsVampire) {
                 Charm -= 10;
-                if (Player.FindBuffIndex(ModContent.BuffType<VampireBat>()) != -1)
-                {
+                if (Player.FindBuffIndex(ModContent.BuffType<VampireBat>()) != -1) {
                     if (Hunger < 70 && !IsEquippedDraculasCover)
                         Player.ClearBuff(ModContent.BuffType<VampireBat>());
                     if (Main.time % 240 == 0)
@@ -2313,41 +1783,33 @@ namespace Bismuth.Utilities
                 }
                 else if (Main.time % 600 == 0)
                     Hunger--;
-                    if (IsEquippedPendant)
-                    {
-                        if (Main.time % 1800 == 0)
-                            Hunger++;
-                        Player.GetModPlayer<ModP>().assassinDamage += ((float)(100 - Hunger) / 100) * 0.1f;
-                    }               
+                if (IsEquippedPendant) {
+                    if (Main.time % 1800 == 0)
+                        Hunger++;
+                    Player.GetModPlayer<ModP>().assassinDamage += ((float)(100 - Hunger) / 100) * 0.1f;
+                }
                 if (Hunger >= 100)
                     Hunger = 100;
                 if (Hunger <= 0)
-                    Hunger =  0;
-                if (Player.armor[0].type <= 0 && Main.dayTime)
-                {
-                    for (int i = 0; i < Player.position.ToTileCoordinates().Y - 5; i++)
-                    {
-                        if (WorldGen.SolidTile(Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y - i]))
-                        {
+                    Hunger = 0;
+                if (Player.armor[0].type <= 0 && Main.dayTime) {
+                    for (int i = 0; i < Player.position.ToTileCoordinates().Y - 5; i++) {
+                        if (WorldGen.SolidTile(Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y - i])) {
                             covered = true;
                             break;
                         }
                         else
                             covered = false;
                     }
-                    if (!covered)
-                    {
+                    if (!covered) {
                         if (Player.lifeRegen > 0)
                             Player.lifeRegen = 0;
                         Player.lifeRegen -= 40;
                     }
                 }
-                if (Player.armor[0].type > 0 && Main.dayTime)
-                {
-                    for (int i = 0; i < Player.position.ToTileCoordinates().Y - 5; i++)
-                    {
-                        if (WorldGen.SolidTile(Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y - i]))
-                        {
+                if (Player.armor[0].type > 0 && Main.dayTime) {
+                    for (int i = 0; i < Player.position.ToTileCoordinates().Y - 5; i++) {
+                        if (WorldGen.SolidTile(Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y - i])) {
                             covered = true;
                             helmettimer = 0;
                             break;
@@ -2355,21 +1817,18 @@ namespace Bismuth.Utilities
                         else
                             covered = false;
                     }
-                    if (!covered)
-                    {
+                    if (!covered) {
                         helmettimer++;
-                        if (helmettimer >= 600)
-                        {
+                        if (helmettimer >= 600) {
                             if (Player.lifeRegen > 0)
                                 Player.lifeRegen = 0;
                             Player.lifeRegen -= (int)(helmettimer / 100);
                         }
                         if (helmettimer >= 7200)
                             helmettimer = 7200;
-                    }                    
+                    }
                 }
-                if (Main.dayTime)
-                {
+                if (Main.dayTime) {
                     Player.GetDamage(DamageClass.Melee) -= 0.1f;
                     Player.GetDamage(DamageClass.Ranged) -= 0.1f;
                     Player.GetDamage(DamageClass.Magic) -= 0.1f;
@@ -2377,8 +1836,7 @@ namespace Bismuth.Utilities
                     Player.GetDamage(DamageClass.Throwing) -= 0.1f;
                     Player.GetModPlayer<ModP>().assassinDamage -= 0.1f;
                 }
-                else
-                {
+                else {
                     Player.GetDamage(DamageClass.Melee) += 0.15f;
                     Player.GetDamage(DamageClass.Ranged) += 0.15f;
                     Player.GetDamage(DamageClass.Magic) += 0.15f;
@@ -2388,8 +1846,7 @@ namespace Bismuth.Utilities
                     Player.endurance += 0.1f;
                     helmettimer = 0;
                 }
-                if (Hunger >= 70 && Hunger <= 100)
-                {
+                if (Hunger >= 70 && Hunger <= 100) {
                     Player.GetDamage(DamageClass.Melee) += 0.15f;
                     Player.GetDamage(DamageClass.Ranged) += 0.15f;
                     Player.GetDamage(DamageClass.Magic) += 0.15f;
@@ -2399,8 +1856,7 @@ namespace Bismuth.Utilities
                     Player.runAcceleration *= 1.2f;
                     Player.maxRunSpeed *= 1.2f;
                 }
-                if (Hunger >= 1 && Hunger <= 24)
-                {
+                if (Hunger >= 1 && Hunger <= 24) {
                     Player.statDefense -= 30;
                     if (Player.lifeRegen > 0)
                         Player.lifeRegen = 0;
@@ -2408,8 +1864,7 @@ namespace Bismuth.Utilities
                     Player.maxRunSpeed *= 1.4f;
                     Player.AddBuff(BuffID.Hunter, 60);
                 }
-                if (Hunger == 0)
-                {
+                if (Hunger == 0) {
                     if (Player.lifeRegen > 0)
                         Player.lifeRegen = 0;
                     Player.lifeRegen -= 50;
@@ -2417,22 +1872,17 @@ namespace Bismuth.Utilities
             }
             #endregion
             #region PhilosopherStoneReviving
-            if (Player.FindBuffIndex(ModContent.BuffType<Reviving>()) != -1)
-            {
-                if (revivingtaimer == 1)
-                {
+            if (Player.FindBuffIndex(ModContent.BuffType<Reviving>()) != -1) {
+                if (revivingtaimer == 1) {
                     Projectile.NewProjectile(Player.GetSource_FromThis(), Player.position + new Vector2(-40f, -40f), new Vector2(0f, -0.4f), ModContent.ProjectileType<RevivingEagleP>(), 0, 0f, Main.player[Main.myPlayer].whoAmI);
                 }
                 revivingtaimer++;
-                if (revivingtaimer >= 120)
-                {
+                if (revivingtaimer >= 120) {
                     Player.ClearBuff(ModContent.BuffType<Reviving>());
                     Player.statLife = Player.statLifeMax2;
                     revivingtaimer = 0;
-                    for (int num66 = 0; num66 < 58; num66++)
-                    {
-                        if (Player.inventory[num66].type == ModContent.ItemType<TruePhilosopherStone>() && Player.inventory[num66].stack > 0)
-                        {
+                    for (int num66 = 0; num66 < 58; num66++) {
+                        if (Player.inventory[num66].type == ModContent.ItemType<TruePhilosopherStone>() && Player.inventory[num66].stack > 0) {
                             Player.inventory[num66].stack--;
                             Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<UnchargedTruePhilosopherStone>());
                         }
@@ -2442,28 +1892,22 @@ namespace Bismuth.Utilities
             #endregion
             #region HeroBootsUpdate
             #region ExtraJumps
-            if (Player.mount.Active && Player.mount.BlockExtraJumps)
-            {
+            if (Player.mount.Active && Player.mount.BlockExtraJumps) {
                 jumpAgainHeroThird = false;
                 jumpAgainHeroSecond = false;
 
             }
-            else
-            {
-                if (!doubleJumpHeroThird)
-                {
+            else {
+                if (!doubleJumpHeroThird) {
                     jumpAgainHeroThird = false;
                 }
-                else if (Player.velocity.Y == 0f || Player.sliding)
-                {
+                else if (Player.velocity.Y == 0f || Player.sliding) {
                     jumpAgainHeroThird = true;
                 }
-                if (!doubleJumpHeroSecond)
-                {
+                if (!doubleJumpHeroSecond) {
                     jumpAgainHeroSecond = false;
                 }
-                else if (Player.velocity.Y == 0f || Player.sliding)
-                {
+                else if (Player.velocity.Y == 0f || Player.sliding) {
                     jumpAgainHeroSecond = true;
                 }
             }
@@ -2484,24 +1928,20 @@ namespace Bismuth.Utilities
                 count++;
             if (Main.player[Main.myPlayer].GetModPlayer<BismuthPlayer>().KilledGolem)
                 count++;
-            if (count >= 7)
-            {
+            if (count >= 7) {
             }
             #endregion
             #endregion
-            if (Player.FindBuffIndex(ModContent.BuffType<BoneTrap>()) == -1)
-            {
+            if (Player.FindBuffIndex(ModContent.BuffType<BoneTrap>()) == -1) {
                 BoneTrap = false;
             }
             #region DesertVillageUpdate
-            if (Player.FindBuffIndex(ModContent.BuffType<TribeCurse>()) == -1)
-            {
+            if (Player.FindBuffIndex(ModContent.BuffType<TribeCurse>()) == -1) {
                 TribeCurse = false;
             }
-            
+
             int checktribecurse = Player.FindBuffIndex(ModContent.BuffType<TribeCurse>());
-            if (checktribecurse != -1)
-            {
+            if (checktribecurse != -1) {
                 Player.lifeRegen = 0;
                 if (timer > 600 && timer < 1800)
                     Player.lifeRegen -= 10;
@@ -2510,18 +1950,14 @@ namespace Bismuth.Utilities
                 if (timer > 3600)
                     Player.lifeRegen -= 60;
             }
-            if (checktribecurse == -1)
-            {
+            if (checktribecurse == -1) {
                 timer = 0;
             }
             #endregion
             #region SourScytheChargeUpdate
-            if (SoulScytheCharge == 0)
-            {
-                for (int num66 = 0; num66 < 58; num66++)
-                {
-                    if (Player.inventory[num66].type == ModContent.ItemType<SoulScythe>() && Player.inventory[num66].stack > 0)
-                    {
+            if (SoulScytheCharge == 0) {
+                for (int num66 = 0; num66 < 58; num66++) {
+                    if (Player.inventory[num66].type == ModContent.ItemType<SoulScythe>() && Player.inventory[num66].stack > 0) {
                         Player.inventory[num66].stack = 0;
                         Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<UnchargedSoulScythe>());
                         SoulScytheCharge = -1;
@@ -2531,8 +1967,7 @@ namespace Bismuth.Utilities
             #endregion
             #region WaitTimeQuests
             #region BoSUpdate
-            if (Player.GetModPlayer<Quests>().BookOfSecretsQuest == 100 && Player.GetModPlayer<Quests>().ElessarQuest <= 10)
-            {
+            if (Player.GetModPlayer<Quests>().BookOfSecretsQuest == 100 && Player.GetModPlayer<Quests>().ElessarQuest <= 10) {
                 if (BosWait < 86400)
                     BosWait++;
                 else
@@ -2542,8 +1977,7 @@ namespace Bismuth.Utilities
                 BosWait = 0;
             #endregion
             #region GlamdringUpdate
-            if (Player.GetModPlayer<Quests>().GlamdringQuest == 30)
-            {
+            if (Player.GetModPlayer<Quests>().GlamdringQuest == 30) {
                 if (WaitGlamdring < 10800)
                     WaitGlamdring++;
                 if (WaitGlamdring >= 10800)
@@ -2553,8 +1987,7 @@ namespace Bismuth.Utilities
                 WaitGlamdring = 0;
             #endregion
             #region SoulScytheUpdate
-            if (Player.GetModPlayer<Quests>().SoulScytheQuest == 10)
-            {
+            if (Player.GetModPlayer<Quests>().SoulScytheQuest == 10) {
                 if (WaitSoulScythe < 1800)
                     WaitSoulScythe++;
                 if (WaitSoulScythe >= 1800)
@@ -2564,8 +1997,7 @@ namespace Bismuth.Utilities
                 WaitSoulScythe = 0;
             #endregion
             #region PhilosopherStoneUpdate
-            if (Player.GetModPlayer<Quests>().PhilosopherStoneQuest == 30)
-            {
+            if (Player.GetModPlayer<Quests>().PhilosopherStoneQuest == 30) {
                 if (WaitTabula < 86400)
                     WaitTabula++;
                 if (WaitTabula >= 86400)
@@ -2575,8 +2007,7 @@ namespace Bismuth.Utilities
                 WaitTabula = 0;
             #endregion
             #region StoneChargingUpdate
-            if (Player.GetModPlayer<Quests>().PhilosopherStoneCharging == 10)
-            {
+            if (Player.GetModPlayer<Quests>().PhilosopherStoneCharging == 10) {
                 if (WaitStoneCharging < 1800)
                     WaitStoneCharging++;
                 if (WaitStoneCharging >= 1800)
@@ -2587,75 +2018,58 @@ namespace Bismuth.Utilities
             #endregion
             #endregion
             #region SwampWaterUpdate
-            if (Player.wet && ZoneSwamp)
-            {
+            if (Player.wet && ZoneSwamp) {
                 Player.AddBuff(ModContent.BuffType<HealthDevourment>(), 60);
             }
-            if (Player.FindBuffIndex(ModContent.BuffType<HealthDevourment>()) != -1)
-            {
+            if (Player.FindBuffIndex(ModContent.BuffType<HealthDevourment>()) != -1) {
                 Player.lifeRegen -= 120;
             }
             #endregion
             #region HeartOfSwampUpdate
-            if (ZoneSwamp)
-            {
-                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++)
-                {
-                    if (Player.armor[k].type == ModContent.ItemType<HeartOfSwamp>())
-                    {
+            if (ZoneSwamp) {
+                for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
+                    if (Player.armor[k].type == ModContent.ItemType<HeartOfSwamp>()) {
                         Player.lifeRegen += 10;
                         break;
                     }
                 }
             }
             #endregion
-            
+
             #region OldmanTeleport
-            if (Main.LocalPlayer.GetModPlayer<Quests>().LuceatQuest == 30 && Player.talkNPC == -1)
-            {
-                for (int i = 0; i < Main.npc.Length; ++i)
-                {
-                    if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<StrangeOldman>() && Vector2.Distance(Main.npc[i].position, new Vector2((Main.spawnTileX + 45) * 16, (Main.spawnTileY - 10) * 16)) > 200f)
-                    {
+            if ((Main.LocalPlayer.GetModPlayer<Quests>().LuceatQuest == 30 || QuestVariable.LuceatQuest == 30) && Player.talkNPC == -1) {
+                for (int i = 0; i < Main.npc.Length; ++i) {
+                    if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<StrangeOldman>() && Vector2.Distance(Main.npc[i].position, new Vector2((Main.spawnTileX + 45) * 16, (Main.spawnTileY - 10) * 16)) > 200f) {
                         Main.npc[i].position = new Vector2((Main.spawnTileX + 45) * 16, (Main.spawnTileY - 10) * 16);
                         SoundEngine.PlaySound(SoundID.Item6);
-                        for (int k = 0; k < 150; k++)
-                        {
+                        for (int k = 0; k < 150; k++) {
                             Dust.NewDust(new Vector2((BismuthWorld.MazeStartX + 4) * 16, (BismuthWorld.MazeStartY + 3) * 16 - 4), 20, 20, DustID.AmberBolt, 0, 0, 0, default(Color), 0.8f);
                         }
                         Main.LocalPlayer.GetModPlayer<Quests>().LuceatQuest = 40;
                         break;
-                    }                   
-                }
-            }
-            #endregion
-            #region BabaYagaTransform
-            if (Main.LocalPlayer.GetModPlayer<Quests>().ElessarQuest == 200 && Player.talkNPC == -1 && !witchsecondatt)
-            {
-                for (int i = 0; i < Main.npc.Length; ++i)
-                {
-
-                    if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<BabaYaga>())
-                    {
-                        Main.npc[i].Transform(ModContent.NPCType<EvilBabaYaga>());
-
                     }
                 }
             }
             #endregion
+            #region BabaYagaTransform
+            //if (Main.LocalPlayer.GetModPlayer<Quests>().ElessarQuest == 200 && Player.talkNPC == -1 && !witchsecondatt) {
+            //    for (int i = 0; i < Main.npc.Length; ++i) {
+            //        if (Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<BabaYaga>()) {
+            //            Main.npc[i].Transform(ModContent.NPCType<EvilBabaYaga>());
+            //        }
+            //    }
+            //}
+            #endregion
             #region RaceBarUpdate
             {
-                if (Main.playerInventory)
-                {
+                if (Main.playerInventory) {
                     if (Main.npcShop != 0 || Player.chest != -1)
                         RaceBar = new Vector2(25, 434);
                     else
                         RaceBar = new Vector2(25, 260);
                 }
-                else
-                {
-                    if (Player.buffType.Count(x => x > 0) > 0)
-                    {
+                else {
+                    if (Player.buffType.Count(x => x > 0) > 0) {
                         RaceBar = new Vector2(25, 112);
                     }
                     else
@@ -2663,14 +2077,11 @@ namespace Bismuth.Utilities
                 }
             }
             #endregion
-            if (killersetbonus)
-            {
-                if (!Main.dayTime)
-                {
+            if (killersetbonus) {
+                if (!Main.dayTime) {
                     killersettimer++;
                 }
-                if (killersettimer >= 600)
-                {
+                if (killersettimer >= 600) {
                     Player.AddBuff(ModContent.BuffType<HiddenInTheShadows>(), 10);
                     killersettimer = 600;
                 }
@@ -2679,26 +2090,21 @@ namespace Bismuth.Utilities
                 killersettimer = 0;
             if (nomadsetbonus && Player.mount.Active)
                 Player.lifeRegen += 20;
-            if (Player.armor[0].type != ModContent.ItemType<KillersHood>() || Player.armor[1].type != ModContent.ItemType<KillersJacket>() || Player.armor[2].type != ModContent.ItemType<KillersBoots>())
-            {
+            if (Player.armor[0].type != ModContent.ItemType<KillersHood>() || Player.armor[1].type != ModContent.ItemType<KillersJacket>() || Player.armor[2].type != ModContent.ItemType<KillersBoots>()) {
                 killersetbonus = false;
             }
-            if (Player.armor[0].type != ModContent.ItemType<PaladinsMask>() || Player.armor[1].type != ModContent.ItemType<PaladinsShell>() || Player.armor[2].type != ModContent.ItemType<PaladinsLeggings>())
-            {
+            if (Player.armor[0].type != ModContent.ItemType<PaladinsMask>() || Player.armor[1].type != ModContent.ItemType<PaladinsShell>() || Player.armor[2].type != ModContent.ItemType<PaladinsLeggings>()) {
                 paladinssetbonus = false;
             }
-            if (Player.armor[0].type != ModContent.ItemType<NomadsHood>() || Player.armor[1].type != ModContent.ItemType<NomadsJacket>() || Player.armor[2].type != ModContent.ItemType<NomadsBoots>())
-            {
+            if (Player.armor[0].type != ModContent.ItemType<NomadsHood>() || Player.armor[1].type != ModContent.ItemType<NomadsJacket>() || Player.armor[2].type != ModContent.ItemType<NomadsBoots>()) {
                 nomadsetbonus = false;
             }
-            if (Player.armor[0].type != ModContent.ItemType<WatersHelmet>() || Player.armor[1].type != ModContent.ItemType<WatersBreastplate>() || Player.armor[2].type != ModContent.ItemType<WatersLeggings>())
-            {
+            if (Player.armor[0].type != ModContent.ItemType<WatersHelmet>() || Player.armor[1].type != ModContent.ItemType<WatersBreastplate>() || Player.armor[2].type != ModContent.ItemType<WatersLeggings>()) {
                 watersetbonus = false;
             }
             Quests quests = (Quests)Main.player[Main.myPlayer].GetModPlayer<Quests>();
             #region MazeMapProhibition
-            if (Player.FindBuffIndex(ModContent.BuffType<FearOfMaze>()) != -1)
-            {
+            if (Player.FindBuffIndex(ModContent.BuffType<FearOfMaze>()) != -1) {
                 Main.mapStyle = 0;
                 Main.mapFullscreen = false;
             }
@@ -2710,17 +2116,13 @@ namespace Bismuth.Utilities
             int checkbuff = Player.FindBuffIndex(ModContent.BuffType<DeathWish>());
             if (checkbuff == -1)
                 killordietaimer = 0;
-            if (checkbuff != -1 && killordietaimer >= 180)
-            {
+            if (checkbuff != -1 && killordietaimer >= 180) {
                 Player.lifeRegen = 0;
-                if (killordietaimer >= 240)
-                {
+                if (killordietaimer >= 240) {
                     Player.lifeRegen -= 20;
-                    if (killordietaimer >= 360)
-                    {
+                    if (killordietaimer >= 360) {
                         Player.lifeRegen -= 40;
-                        if (killordietaimer >= 480)
-                        {
+                        if (killordietaimer >= 480) {
                             Player.lifeRegen -= 100;
                         }
                     }
@@ -2740,8 +2142,7 @@ namespace Bismuth.Utilities
             int checkufo = Player.FindBuffIndex(140);
             int checkdragon = Player.FindBuffIndex(188);
             int checksphere = Player.FindBuffIndex(161);
-            if (skill1lvl > 0)
-            {
+            if (skill1lvl > 0) {
                 Player.GetDamage(DamageClass.Melee) += 0.05f;
                 Player.GetDamage(DamageClass.Ranged) -= 0.2f;
                 Player.GetDamage(DamageClass.Magic) -= 0.2f;
@@ -2749,65 +2150,50 @@ namespace Bismuth.Utilities
                 Player.GetDamage(DamageClass.Throwing) -= 0.2f;
                 Player.GetModPlayer<ModP>().assassinDamage -= 0.2f;
             }
-            if (skill2lvl > 0)
-            {
+            if (skill2lvl > 0) {
                 Player.statDefense += 2;
                 Player.endurance += 0.04f;
             }
-            if (skill3lvl > 0)
-            {
+            if (skill3lvl > 0) {
                 Player.statLifeMax2 += 10;
             }
-            if (skill3lvl > 1)
-            {
+            if (skill3lvl > 1) {
                 Player.statLifeMax2 += 15;
             }
-            if (skill3lvl > 2)
-            {
+            if (skill3lvl > 2) {
                 Player.statLifeMax2 += 25;
             }
-            if (skill3lvl > 3)
-            {
+            if (skill3lvl > 3) {
                 Player.statLifeMax2 += 25;
             }
-            if (skill3lvl > 4)
-            {
+            if (skill3lvl > 4) {
                 Player.statLifeMax2 += 40;
             }
-            if (skill3lvl > 5)
-            {
+            if (skill3lvl > 5) {
                 Player.statLifeMax2 += 60;
             }
-            if (skill3lvl > 6)
-            {
+            if (skill3lvl > 6) {
                 Player.statLifeMax2 += 80;
             }
-            if (skill8lvl > 0)
-            {
+            if (skill8lvl > 0) {
                 Player.statDefense += 1;
             }
-            if (skill8lvl > 1)
-            {
+            if (skill8lvl > 1) {
                 Player.statDefense += 2;
             }
-            if (skill8lvl > 2)
-            {
+            if (skill8lvl > 2) {
                 Player.statDefense += 2;
             }
-            if (skill8lvl > 3)
-            {
+            if (skill8lvl > 3) {
                 Player.statDefense += 4;
             }
-            if (skill8lvl > 4)
-            {
+            if (skill8lvl > 4) {
                 Player.statDefense += 5;
             }
-            if (skill8lvl > 5)
-            {
+            if (skill8lvl > 5) {
                 Player.statDefense += 6;
             }
-            if (skill9lvl > 0)
-            {
+            if (skill9lvl > 0) {
                 Player.lifeRegen += 8;
                 if (Player.statLife < 300)
                     Player.lifeRegen += 2;
@@ -2821,12 +2207,10 @@ namespace Bismuth.Utilities
             if (skill10lvl == skill10lvlmax)
                 if (Player.ZoneCorrupt || Player.ZoneCrimson)
                     Player.endurance += 0.25f;
-            if (skill12lvl > 0)
-            {
+            if (skill12lvl > 0) {
                 Player.endurance += 0.1f;
             }
-            if (skill16lvl > 0)
-            {
+            if (skill16lvl > 0) {
                 Player.statDefense += 10;
                 Player.endurance += 0.1f;
                 Player.lifeRegen += 12;
@@ -2841,26 +2225,22 @@ namespace Bismuth.Utilities
                 Player.thorns += 0.05f;
             if (skill17lvl > 2)
                 Player.thorns += 0.07f;
-            if (skill18lvl > 0)
-            {
+            if (skill18lvl > 0) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.06f;
                 Player.GetCritChance(DamageClass.Melee) += 3;
             }
-            if (skill19lvl > 0)
-            {
+            if (skill19lvl > 0) {
                 int NPCsCount = 0;
-                for (int i = 0; i < Main.npc.Length; i++)
-                {
+                for (int i = 0; i < Main.npc.Length; i++) {
                     if (Main.npc[i].active && Main.npc[i].townNPC && Main.npc[i].life > 0 && Main.npc[i].aiStyle != -1)
                         NPCsCount++;
                 }
-                if(NPCsCount < 15)
+                if (NPCsCount < 15)
                     Player.GetDamage(DamageClass.Melee) += 0.01f * NPCsCount;
                 else
-                    Player.GetDamage(DamageClass.Melee) += 0.15f;               
+                    Player.GetDamage(DamageClass.Melee) += 0.15f;
             }
-            if (skill20lvl > 0)
-            {
+            if (skill20lvl > 0) {
                 int vanillabosscount = 0;
                 if (KilledEoC)
                     vanillabosscount++;
@@ -2914,66 +2294,51 @@ namespace Bismuth.Utilities
                     Player.GetDamage(DamageClass.Melee) += 0.15f;
             }
 
-            if (skill21lvl > 0)
-            {
+            if (skill21lvl > 0) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.03f;
             }
-            if (skill21lvl > 1)
-            {
+            if (skill21lvl > 1) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.03f;
             }
-            if (skill21lvl > 2)
-            {
+            if (skill21lvl > 2) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.04f;
             }
-            if (skill21lvl > 3)
-            {
+            if (skill21lvl > 3) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.04f;
             }
-            if (skill21lvl > 4)
-            {
+            if (skill21lvl > 4) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.06f;
             }
-            if (skill21lvl > 5)
-            {
+            if (skill21lvl > 5) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.08f;
             }
-            if (skill21lvl > 6)
-            {
+            if (skill21lvl > 6) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.1f;
             }
-            if (skill21lvl > 7)
-            {
+            if (skill21lvl > 7) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.1f;
             }
 
 
-            if (skill25lvl > 0)
-            {
+            if (skill25lvl > 0) {
                 Player.GetDamage(DamageClass.Melee) += 0.02f;
             }
-            if (skill25lvl > 1)
-            {
+            if (skill25lvl > 1) {
                 Player.GetDamage(DamageClass.Melee) += 0.03f;
             }
-            if (skill25lvl > 2)
-            {
+            if (skill25lvl > 2) {
                 Player.GetDamage(DamageClass.Melee) += 0.03f;
             }
-            if (skill25lvl > 3)
-            {
+            if (skill25lvl > 3) {
                 Player.GetDamage(DamageClass.Melee) += 0.04f;
             }
-            if (skill25lvl > 4)
-            {
+            if (skill25lvl > 4) {
                 Player.GetDamage(DamageClass.Melee) += 0.05f;
             }
-            if (skill25lvl > 5)
-            {
+            if (skill25lvl > 5) {
                 Player.GetDamage(DamageClass.Melee) += 0.05f;
             }
-            if (skill26lvl > 0)
-            {
+            if (skill26lvl > 0) {
                 Player.GetCritChance(DamageClass.Melee) += 10;
                 if (Player.statLife < 300)
                     Player.GetCritChance(DamageClass.Melee) += 4;
@@ -2984,36 +2349,29 @@ namespace Bismuth.Utilities
                 if (Player.statLife < 50)
                     Player.GetCritChance(DamageClass.Melee) += 20;
             }
-            if (skill27lvl == skill27lvlmax && Player.ZoneJungle)
-            {
+            if (skill27lvl == skill27lvlmax && Player.ZoneJungle) {
                 Player.GetDamage(DamageClass.Melee) += 0.2f;
             }
-            if (skill28lvl > 0)
-            {
+            if (skill28lvl > 0) {
                 Player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
                 Player.moveSpeed += 0.2f;
             }
-            if (skill29lvl > 0)
-            {
+            if (skill29lvl > 0) {
                 Player.GetDamage(DamageClass.Melee) -= 0.15f;
             }
-            if (skill30lvl > 0)
-            {
+            if (skill30lvl > 0) {
                 Player.GetDamage(DamageClass.Melee) += 0.1f;
                 Player.GetCritChance(DamageClass.Melee) += 10;
                 Player.GetAttackSpeed(DamageClass.Melee) -= 0.25f;
             }
-            if (skill31lvl > 0)
-            {
+            if (skill31lvl > 0) {
                 Player.GetCritChance(DamageClass.Melee) += 10;
             }
-            if (skill35lvl > 0)
-            {
+            if (skill35lvl > 0) {
                 Player.GetDamage(DamageClass.Melee) += 0.15f;
                 Player.GetCritChance(DamageClass.Melee) += 20;
             }
-            if (skill36lvl > 0)
-            {
+            if (skill36lvl > 0) {
                 Player.GetDamage(DamageClass.Magic) += 0.05f;
                 Player.GetDamage(DamageClass.Summon) += 0.05f;
                 Player.GetDamage(DamageClass.Melee) -= 0.2f;
@@ -3021,17 +2379,14 @@ namespace Bismuth.Utilities
                 Player.GetDamage(DamageClass.Ranged) -= 0.2f;
                 Player.GetModPlayer<ModP>().assassinDamage -= 0.2f;
             }
-            if (skill37lvl > 0)
-            {
+            if (skill37lvl > 0) {
                 Player.GetDamage(DamageClass.Magic) += 0.04f;
                 Player.GetDamage(DamageClass.Summon) += 0.06f;
             }
-            if (skill38lvl > 0 && Player.ZoneJungle)
-            {
+            if (skill38lvl > 0 && Player.ZoneJungle) {
                 Player.lifeRegen += Player.numMinions * 2;
             }
-            if (skill41lvl > 0)
-            {
+            if (skill41lvl > 0) {
                 if (checkslime != -1)
                     Player.GetDamage(DamageClass.Summon) += 0.09f;
                 if (checkhornet != -1)
@@ -3057,10 +2412,8 @@ namespace Bismuth.Utilities
                 if (checksphere != -1)
                     Player.GetDamage(DamageClass.Summon) += 0.09f;
             }
-            if (skill42lvl > 0)
-            {
-                if (checkslime != -1)
-                {
+            if (skill42lvl > 0) {
+                if (checkslime != -1) {
                     Player.npcTypeNoAggro[1] = true;
                     Player.npcTypeNoAggro[16] = true;
                     Player.npcTypeNoAggro[59] = true;
@@ -3083,8 +2436,7 @@ namespace Bismuth.Utilities
                     Player.npcTypeNoAggro[336] = true;
                     Player.npcTypeNoAggro[537] = true;
                 }
-                if (checkhornet != -1)
-                {
+                if (checkhornet != -1) {
                     Player.npcTypeNoAggro[42] = true;
                     Player.npcTypeNoAggro[176] = true;
                     Player.npcTypeNoAggro[231] = true;
@@ -3093,13 +2445,11 @@ namespace Bismuth.Utilities
                     Player.npcTypeNoAggro[234] = true;
                     Player.npcTypeNoAggro[235] = true;
                 }
-                if (checkimp != -1)
-                {
+                if (checkimp != -1) {
                     Player.npcTypeNoAggro[24] = true;
                     Player.npcTypeNoAggro[25] = true;
                 }
-                if (checkeye != -1)
-                {
+                if (checkeye != -1) {
                     Player.npcTypeNoAggro[2] = true;
                     Player.npcTypeNoAggro[5] = true;
                     Player.npcTypeNoAggro[76] = true;
@@ -3110,8 +2460,7 @@ namespace Bismuth.Utilities
                     Player.npcTypeNoAggro[193] = true;
                     Player.npcTypeNoAggro[194] = true;
                 }
-                if (checkspider != -1)
-                {
+                if (checkspider != -1) {
                     Player.npcTypeNoAggro[163] = true;
                     Player.npcTypeNoAggro[164] = true;
                     Player.npcTypeNoAggro[165] = true;
@@ -3121,8 +2470,7 @@ namespace Bismuth.Utilities
                     Player.npcTypeNoAggro[239] = true;
                     Player.npcTypeNoAggro[240] = true;
                 }
-                if (checkpirate != -1)
-                {
+                if (checkpirate != -1) {
                     Player.npcTypeNoAggro[212] = true;
                     Player.npcTypeNoAggro[213] = true;
                     Player.npcTypeNoAggro[214] = true;
@@ -3130,17 +2478,14 @@ namespace Bismuth.Utilities
                     Player.npcTypeNoAggro[216] = true;
                     Player.npcTypeNoAggro[252] = true;
                 }
-                if (checkraven != -1)
-                {
+                if (checkraven != -1) {
                     Player.npcTypeNoAggro[301] = true;
                 }
-                if (checkshark != -1)
-                {
+                if (checkshark != -1) {
                     Player.npcTypeNoAggro[65] = true;
                     Player.npcTypeNoAggro[373] = true;
                 }
-                if (checksphere != -1)
-                {
+                if (checksphere != -1) {
                     Player.npcTypeNoAggro[467] = true;
                 }
             }
@@ -3166,13 +2511,11 @@ namespace Bismuth.Utilities
                 Player.maxMinions += 2;
             if (skill45lvl > 0)
                 Player.statLifeMax2 += (Player.numMinions * 8);
-            if (skill46lvl > 0)
-            {
+            if (skill46lvl > 0) {
                 Player.statDefense -= (Player.numMinions * 2);
                 Player.GetDamage(DamageClass.Summon) += 0.25f;
             }
-            if (skill47lvl > 0)
-            {
+            if (skill47lvl > 0) {
                 Player.GetDamage(DamageClass.Summon) -= 0.2f;
                 Player.statDefense += (Player.numMinions * 2);
                 Player.endurance += Player.numMinions;
@@ -3191,8 +2534,7 @@ namespace Bismuth.Utilities
                 Player.manaCost -= 0.1f;
             if (skill49lvl > 5)
                 Player.manaCost -= 0.1f;
-            if (skill50lvl > 0)
-            {
+            if (skill50lvl > 0) {
                 Player.manaCost -= 0.08f;
                 Player.GetDamage(DamageClass.Magic) += 0.08f;
             }
@@ -3216,22 +2558,18 @@ namespace Bismuth.Utilities
                 Player.manaRegenBonus += 4;
             if (skill55lvl > 2)
                 Player.manaRegenBonus += 12;
-            if (skill58lvl > 0 && Main.dayTime)
-            {
+            if (skill58lvl > 0 && Main.dayTime) {
                 Player.GetDamage(DamageClass.Magic) += 0.15f;
                 Player.GetCritChance(DamageClass.Magic) += 15;
             }
             if (skill59lvl > 0)
                 Player.ClearBuff(BuffID.ManaSickness);
-            if (skill60lvl > 0)
-            {
-                if (Player.statMana < (int)((float)item.mana * Player.manaCost))
-                {
+            if (skill60lvl > 0) {
+                if (Player.statMana < (int)((float)item.mana * Player.manaCost)) {
                     Player.QuickMana();
                 }
             }
-            if (skill64lvl > 0)
-            {
+            if (skill64lvl > 0) {
                 Player.GetDamage(DamageClass.Magic) += 0.15f;
                 Player.GetDamage(DamageClass.Summon) += 0.2f;
                 Player.GetCritChance(DamageClass.Magic) += 15;
@@ -3239,20 +2577,17 @@ namespace Bismuth.Utilities
                 Player.moveSpeed += 0.2f;
                 Player.manaMagnet = true;
             }
-            if (skill65lvl > 0)
-            {
+            if (skill65lvl > 0) {
                 Player.GetModPlayer<ModP>().assassinDamage += 0.05f;
                 Player.GetDamage(DamageClass.Ranged) -= 0.2f;
                 Player.GetDamage(DamageClass.Magic) -= 0.2f;
                 Player.GetDamage(DamageClass.Summon) -= 0.2f;
                 Player.GetDamage(DamageClass.Throwing) -= 0.2f;
             }
-            if (skill66lvl > 0)
-            {
+            if (skill66lvl > 0) {
                 Player.GetModPlayer<ModP>().assassinDamage += 0.05f;
                 Player.GetModPlayer<ModP>().assassinCrit += 5;
-                if (item.useStyle == 3 && item.ModItem != null && item.ModItem is AssassinItem)
-                {
+                if (item.useStyle == 3 && item.ModItem != null && item.ModItem is AssassinItem) {
                     Player.GetModPlayer<ModP>().assassinDamage += 0.4f;
                 }
                 if (item.useStyle == 3 && item.CountsAsClass(DamageClass.Melee))
@@ -3272,40 +2607,35 @@ namespace Bismuth.Utilities
                 Player.moveSpeed += 0.09f;
             if (skill68lvl > 6)
                 Player.moveSpeed += 0.11f;
-            if (skill76lvl > 0)
-            {
+            if (skill76lvl > 0) {
                 Player.GetCritChance(DamageClass.Melee) += 2;
                 Player.GetCritChance(DamageClass.Ranged) += 2;
                 Player.GetCritChance(DamageClass.Magic) += 2;
                 Player.GetCritChance(DamageClass.Throwing) += 2;
                 Player.GetModPlayer<ModP>().assassinCrit += 2;
             }
-            if (skill76lvl > 1)
-            {
+            if (skill76lvl > 1) {
                 Player.GetCritChance(DamageClass.Melee) += 3;
                 Player.GetCritChance(DamageClass.Ranged) += 3;
                 Player.GetCritChance(DamageClass.Magic) += 3;
                 Player.GetCritChance(DamageClass.Throwing) += 3;
                 Player.GetModPlayer<ModP>().assassinCrit += 3;
             }
-            if (skill76lvl > 2)
-            {
+            if (skill76lvl > 2) {
                 Player.GetCritChance(DamageClass.Melee) += 5;
                 Player.GetCritChance(DamageClass.Ranged) += 5;
                 Player.GetCritChance(DamageClass.Magic) += 5;
                 Player.GetCritChance(DamageClass.Throwing) += 5;
                 Player.GetModPlayer<ModP>().assassinCrit += 5;
             }
-            if (skill76lvl > 3)
-            {
+            if (skill76lvl > 3) {
                 Player.GetCritChance(DamageClass.Melee) += 5;
                 Player.GetCritChance(DamageClass.Ranged) += 5;
                 Player.GetCritChance(DamageClass.Magic) += 5;
                 Player.GetCritChance(DamageClass.Throwing) += 5;
                 Player.GetModPlayer<ModP>().assassinCrit += 5;
             }
-            if (skill76lvl > 4)
-            {
+            if (skill76lvl > 4) {
                 Player.GetCritChance(DamageClass.Melee) += 7;
                 Player.GetCritChance(DamageClass.Ranged) += 7;
                 Player.GetCritChance(DamageClass.Magic) += 7;
@@ -3324,10 +2654,8 @@ namespace Bismuth.Utilities
                 Player.GetModPlayer<ModP>().assassinDamage += 0.05f;
             if (skill77lvl > 5)
                 Player.GetModPlayer<ModP>().assassinDamage += 0.05f;
-            if (skill82lvl > 0)
-            {
-                if (Player.wet)
-                {
+            if (skill82lvl > 0) {
+                if (Player.wet) {
                     Player.GetModPlayer<ModP>().assassinDamage += 0.35f;
                     Player.GetCritChance(DamageClass.Melee) += 20;
                     Player.GetCritChance(DamageClass.Ranged) += 20;
@@ -3337,20 +2665,16 @@ namespace Bismuth.Utilities
                     Player.lifeRegen += 20;
                 }
             }
-            if (skill83lvl > 0)
-            {
+            if (skill83lvl > 0) {
                 Main.reforgeItem.value = (int)((double)Main.reforgeItem.value * 0.65);
 
             }
-            if (skill90lvl > 0)
-            {
+            if (skill90lvl > 0) {
                 Player.GetModPlayer<ModP>().assassinDamage += 0.15f;
                 Player.GetModPlayer<ModP>().assassinCrit += 15;
-                if (!Main.dayTime)
-                {
+                if (!Main.dayTime) {
                     Player.GetModPlayer<ModP>().assassinDamage += 0.21f;
-                    if (Main.moonPhase == 1)
-                    {
+                    if (Main.moonPhase == 1) {
                         Player.GetDamage(DamageClass.Melee) += 0.2f;
                         Player.GetDamage(DamageClass.Ranged) += 0.2f;
                         Player.GetDamage(DamageClass.Magic) += 0.2f;
@@ -3360,8 +2684,7 @@ namespace Bismuth.Utilities
                     }
                 }
             }
-            if (skill91lvl > 0)
-            {
+            if (skill91lvl > 0) {
                 Player.GetDamage(DamageClass.Ranged) += 0.05f;
                 Player.GetDamage(DamageClass.Melee) -= 0.2f;
                 Player.GetDamage(DamageClass.Magic) -= 0.2f;
@@ -3369,8 +2692,7 @@ namespace Bismuth.Utilities
                 Player.GetDamage(DamageClass.Throwing) -= 0.2f;
                 Player.GetModPlayer<ModP>().assassinDamage -= 0.2f;
             }
-            if (skill92lvl > 0)
-            {
+            if (skill92lvl > 0) {
                 Player.GetDamage(DamageClass.Ranged) += 0.06f;
                 Player.GetCritChance(DamageClass.Ranged) += 4;
             }
@@ -3388,13 +2710,11 @@ namespace Bismuth.Utilities
                 Player.scope = true;
             if (skill99lvl > 0)
                 Player.GetCritChance(DamageClass.Ranged) += 10;
-            if (skill100lvl > 0 && Player.ZoneUnderworldHeight)
-            {
+            if (skill100lvl > 0 && Player.ZoneUnderworldHeight) {
                 DodgeChance += 4;
                 Player.GetDamage(DamageClass.Ranged) += 0.23f;
             }
-            if (skill104lvl > 0)
-            {
+            if (skill104lvl > 0) {
                 Player.GetDamage(DamageClass.Ranged) += 0.25f;
                 Player.statLifeMax2 = (int)(Player.statLifeMax2 * 0.85);
             }
@@ -3404,15 +2724,12 @@ namespace Bismuth.Utilities
                 Player.GetDamage(DamageClass.Ranged) += 0.03f;
             if (skill105lvl > 2)
                 Player.GetDamage(DamageClass.Ranged) += 0.06f;
-            if (skill113lvl > 0)
-            {
-                if (Player.inventory[Player.selectedItem].type == ItemID.Grenade || Player.inventory[Player.selectedItem].type == ItemID.StickyGrenade || Player.inventory[Player.selectedItem].type == ItemID.BouncyGrenade || Player.inventory[Player.selectedItem].type == ItemID.PartyGirlGrenade || Player.inventory[Player.selectedItem].type == ItemID.Bomb || Player.inventory[Player.selectedItem].type == ItemID.StickyBomb || Player.inventory[Player.selectedItem].type == ItemID.BouncyBomb || Player.inventory[Player.selectedItem].type == ItemID.Dynamite || Player.inventory[Player.selectedItem].type == ItemID.StickyDynamite || Player.inventory[Player.selectedItem].type == ItemID.BouncyDynamite || Player.inventory[Player.selectedItem].type == ItemID.LandMine || Player.inventory[Player.selectedItem].type == ItemID.Beenade || Player.inventory[Player.selectedItem].type == ItemID.MolotovCocktail || Player.inventory[Player.selectedItem].type == ItemID.BombFish)
-                {
+            if (skill113lvl > 0) {
+                if (Player.inventory[Player.selectedItem].type == ItemID.Grenade || Player.inventory[Player.selectedItem].type == ItemID.StickyGrenade || Player.inventory[Player.selectedItem].type == ItemID.BouncyGrenade || Player.inventory[Player.selectedItem].type == ItemID.PartyGirlGrenade || Player.inventory[Player.selectedItem].type == ItemID.Bomb || Player.inventory[Player.selectedItem].type == ItemID.StickyBomb || Player.inventory[Player.selectedItem].type == ItemID.BouncyBomb || Player.inventory[Player.selectedItem].type == ItemID.Dynamite || Player.inventory[Player.selectedItem].type == ItemID.StickyDynamite || Player.inventory[Player.selectedItem].type == ItemID.BouncyDynamite || Player.inventory[Player.selectedItem].type == ItemID.LandMine || Player.inventory[Player.selectedItem].type == ItemID.Beenade || Player.inventory[Player.selectedItem].type == ItemID.MolotovCocktail || Player.inventory[Player.selectedItem].type == ItemID.BombFish) {
                     Player.GetDamage(DamageClass.Throwing) += 0.25f;
                 }
             }
-            if (skill116lvl > 0)
-            {
+            if (skill116lvl > 0) {
                 if (item.type == ItemID.GrenadeLauncher || item.type == ItemID.RocketLauncher || item.type == ItemID.ProximityMineLauncher || item.type == ItemID.SnowmanCannon || item.type == ItemID.ElectrosphereLauncher || item.type == 3546)
                     Player.statDefense += 10;
             }
@@ -3436,8 +2753,7 @@ namespace Bismuth.Utilities
                 Player.specialistDamage += 0.09f;
             if (skill121lvl > 0)
                 Player.GetDamage(DamageClass.Ranged) += 0.25f;
-            if (skill122lvl > 0)
-            {
+            if (skill122lvl > 0) {
                 Player.GetDamage(DamageClass.Throwing) += 0.05f;
                 Player.GetDamage(DamageClass.Ranged) -= 0.2f;
                 Player.GetDamage(DamageClass.Melee) -= 0.2f;
@@ -3445,8 +2761,7 @@ namespace Bismuth.Utilities
                 Player.GetDamage(DamageClass.Summon) -= 0.2f;
                 Player.GetModPlayer<ModP>().assassinDamage -= 0.2f;
             }
-            if (skill123lvl > 0)
-            {
+            if (skill123lvl > 0) {
                 Player.GetDamage(DamageClass.Throwing) += 0.06f;
                 Player.GetCritChance(DamageClass.Throwing) += 3;
             }
@@ -3464,60 +2779,46 @@ namespace Bismuth.Utilities
                 Player.ThrownVelocity += 0.15f;
             if (skill130lvl > 6)
                 Player.ThrownVelocity += 0.18f;
-            if (skill131lvl > 0)
-            {
+            if (skill131lvl > 0) {
                 Player.GetDamage(DamageClass.Throwing) += 0.02f;
             }
-            if (skill131lvl > 1)
-            {
+            if (skill131lvl > 1) {
                 Player.GetDamage(DamageClass.Throwing) += 0.03f;
             }
-            if (skill131lvl > 2)
-            {
+            if (skill131lvl > 2) {
                 Player.GetDamage(DamageClass.Throwing) += 0.03f;
             }
-            if (skill131lvl > 3)
-            {
+            if (skill131lvl > 3) {
                 Player.GetDamage(DamageClass.Throwing) += 0.04f;
             }
-            if (skill131lvl > 4)
-            {
+            if (skill131lvl > 4) {
                 Player.GetDamage(DamageClass.Throwing) += 0.05f;
             }
-            if (skill131lvl > 5)
-            {
+            if (skill131lvl > 5) {
                 Player.GetDamage(DamageClass.Throwing) += 0.05f;
             }
-            if (skill132lvl > 0)
-            {
-                if (Player.inventory[Player.selectedItem].type == ItemID.Grenade || Player.inventory[Player.selectedItem].type == ItemID.StickyGrenade || Player.inventory[Player.selectedItem].type == ItemID.BouncyGrenade || Player.inventory[Player.selectedItem].type == ItemID.PartyGirlGrenade || Player.inventory[Player.selectedItem].type == ItemID.Bomb || Player.inventory[Player.selectedItem].type == ItemID.StickyBomb || Player.inventory[Player.selectedItem].type == ItemID.BouncyBomb || Player.inventory[Player.selectedItem].type == ItemID.Dynamite || Player.inventory[Player.selectedItem].type == ItemID.StickyDynamite || Player.inventory[Player.selectedItem].type == ItemID.BouncyDynamite || Player.inventory[Player.selectedItem].type == ItemID.LandMine || Player.inventory[Player.selectedItem].type == ItemID.Beenade || Player.inventory[Player.selectedItem].type == ItemID.MolotovCocktail || Player.inventory[Player.selectedItem].type == ItemID.BombFish)
-                {
+            if (skill132lvl > 0) {
+                if (Player.inventory[Player.selectedItem].type == ItemID.Grenade || Player.inventory[Player.selectedItem].type == ItemID.StickyGrenade || Player.inventory[Player.selectedItem].type == ItemID.BouncyGrenade || Player.inventory[Player.selectedItem].type == ItemID.PartyGirlGrenade || Player.inventory[Player.selectedItem].type == ItemID.Bomb || Player.inventory[Player.selectedItem].type == ItemID.StickyBomb || Player.inventory[Player.selectedItem].type == ItemID.BouncyBomb || Player.inventory[Player.selectedItem].type == ItemID.Dynamite || Player.inventory[Player.selectedItem].type == ItemID.StickyDynamite || Player.inventory[Player.selectedItem].type == ItemID.BouncyDynamite || Player.inventory[Player.selectedItem].type == ItemID.LandMine || Player.inventory[Player.selectedItem].type == ItemID.Beenade || Player.inventory[Player.selectedItem].type == ItemID.MolotovCocktail || Player.inventory[Player.selectedItem].type == ItemID.BombFish) {
                     Player.GetDamage(DamageClass.Throwing) += 0.2f;
                 }
             }
-            if (skill135lvl > 0)
-            {
+            if (skill135lvl > 0) {
                 Player.statLifeMax2 += Player.buffType.Count(x => x > 0) * 10;
                 Player.lifeRegen += Player.buffType.Count(x => x > 0) * 4;
             }
-            if (skill139lvl > 0)
-            {
+            if (skill139lvl > 0) {
                 Player.GetCritChance(DamageClass.Throwing) += 15;
             }
-            if (skill140lvl > 0 && Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Throwing) && Player.inventory[Player.selectedItem].consumable)
-            {
+            if (skill140lvl > 0 && Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Throwing) && Player.inventory[Player.selectedItem].consumable) {
                 Player.inventory[Player.selectedItem].damage = (int)(Player.inventory[Player.selectedItem].damage * 1.25);
             }
-            if (skill143lvl > 0 && Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Throwing) && Player.inventory[Player.selectedItem].consumable)
-            {
+            if (skill143lvl > 0 && Player.inventory[Player.selectedItem].CountsAsClass(DamageClass.Throwing) && Player.inventory[Player.selectedItem].consumable) {
                 Player.ThrownVelocity += 0.4f;
             }
-            if (skill146lvl > 0)
-            {
+            if (skill146lvl > 0) {
                 extraSlotUnlocked = true;
             }
-            if (skill147lvl > 0)
-            {
+            if (skill147lvl > 0) {
                 Player.GetDamage(DamageClass.Throwing) += 0.25f;
                 Player.GetCritChance(DamageClass.Throwing) += 25;
                 Player.statDefense += 10;

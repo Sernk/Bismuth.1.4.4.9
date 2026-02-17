@@ -290,7 +290,8 @@ namespace Bismuth.Utilities.Global
                     {
 
                         GenerateBiomeRedChestLoot(Main.chest[redchestIndex].item, 0);
-                    } 
+                    }
+                    if (Main.netMode == NetmodeID.Server) { NetMessage.SendTileSquare(-1, BismuthWorld.MazeStartX, BismuthWorld.MazeStartY, 240); }
                 }             
             }        
         }

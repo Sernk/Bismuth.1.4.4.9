@@ -5,6 +5,6 @@ namespace Bismuth.Utilities.Recipes
 {
     public static class PoisonRecipe
     {
-        public static Condition PoisonRecipes = new Condition(ModContent.GetInstance<LocalizationSystem>().PoisonRecipe, () => BismuthPlayer.ZoneSwamp);
+        public static Condition PoisonRecipes = new(ModContent.GetInstance<LocalizationSystem>().PoisonRecipe, () => Main.LocalPlayer.GetModPlayer<BismuthPlayer>().ZoneSwamp);
     }
 }

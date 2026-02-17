@@ -3521,6 +3521,7 @@ NPCs: {
 			TravelingVampireNQ_3: Carpe Jugulum!
 			TravelingVampireNQ_2: Who told you that he must become a guard of the swamp?
 			TravelingVampireNQ_1: Can you tell me why the tortoise lives more long than generations of men, why the elephant goes on and on till he have sees dynasties, and why the parrot never die only of bite of cat of dog or other complaint?
+			NoBloodMoon: It seems that now is not the time for this.
 		}
 
 		Census.SpawnCondition: Conditions unknown
@@ -4191,12 +4192,13 @@ QuestsSystem: {
 			Alchemist_22:
 				'''
 				Unfortunately, you do not have enough materials. To charge the stone you’ll need:
-				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:19], 30[i:Bismuth/Quicksilver]
+				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:13], 30[i:Bismuth/Quicksilver]
 				10[i:Bismuth/Aether]
 				[i:Bismuth/UnchargedTruePhilosopherStone]
 				'''
 			Alchemist_23: Cool, I’ll start charging the stone right now. Come back later.
 			Alchemist_24: Yeah, the stone is ready. Take it and may it protect you!
+			Alchemist_25: No, sadly, I'm not charge the stone, come back later
 			BackToTitle: Back to title page
 			TitleText:
 				'''
@@ -4307,6 +4309,7 @@ CoinSystem: {
 			PoisonRecipe: is in a swamp
 			PanaceaRecipe: Learn the recipe for Recipe
 			PhilosopherStone: Complete the alchemist's quests
+			SoulScytheRecipe: Learn the recipe for Soul Scythe
 			Necromant: Necromant
 		}
 	}
@@ -4365,4 +4368,11 @@ QUEST: {
 	QUESTCOMPLETED: QUEST COMPLETED!
 	QUESTFAILED: QUEST FAILED!
 	QUESTACCEPTED: QUEST ACCEPTED!
+}
+
+Condition: {
+	CompleteAlchemistQuests: Complete the alchemist's quests "{0}"
+	CompleteBabaYagaQuests: Complete the Baba Yaga's quests "{0}"
+	CompletePriestQuests: Complete the priest's quests "{0}"
+	VictoryBeggar: Win the dice game against the beggar 3 times in a row
 }

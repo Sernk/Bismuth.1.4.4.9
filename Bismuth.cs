@@ -1,5 +1,7 @@
 ﻿using Bismuth.Content.Items.Armor;
 using Bismuth.Content.Items.Other;
+using Bismuth.Content.NPCs;
+using Bismuth.Content.Tiles;
 using Bismuth.Utilities;
 using Bismuth.Utilities.Global;
 using Microsoft.Xna.Framework;
@@ -8,12 +10,14 @@ using ReLogic.Content;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Bismuth
@@ -90,7 +94,6 @@ namespace Bismuth
         }
         public static void CameraUpdate(bool setValues = true)
         {
-            Player player = Main.player[Main.myPlayer];
             if (Bismuth.screenShakes.Count > 0)
             {
                 for (int index = 0; index < Bismuth.screenShakes.Count; ++index)
@@ -114,6 +117,48 @@ namespace Bismuth
                     }
                 }
             }
+        }
+        public override void HandlePacket(BinaryReader reader, int whoAmI) {
+            byte msgType = reader.ReadByte();
+            switch (msgType) {
+                case 1: HandlePacket(reader, ref TempNPCs.AlchemistTempStart); break;
+                case 2: HandlePacket(reader, ref TempNPCs.WaitStoneQuestsTempStart); break;
+                case 3: HandlePacket(reader, ref TempNPCs.PhilosopherStoneQuestsTemp); break;
+                case 4: HandlePacket(reader, ref TempNPCs.PhilosopherStoneQuestsTempStart); break;
+                case 5: HandlePacket(reader, ref TempNPCs.RecipePhilosopherStone); break;
+                case 6: HandlePacket(reader, ref TempNPCs.BabaYagaTempStart); break;
+                case 7: HandlePacket(reader, ref QuestVariable.TombstoneStage); break;
+                case 8: Transformations(reader, ModContent.NPCType<PriestTeleportation>()); break;
+                case 9: HandlePacket(reader, ref QuestVariable.PotionQuest); break;
+                case 10: HandlePacket(reader, ref QuestVariable.SunriseQuest); break;
+                case 11: HandlePacket(reader, ref QuestVariable.LuceatQuest); break;
+                case 12: HandlePacket(reader, ref QuestVariable.NewPriestQuest); break;
+                case 13: HandlePacket(reader, ref QuestVariable.BookOfSecretsQuest); break;
+                case 14: HandlePacket(reader, ref QuestVariable.ElessarQuest); break;
+            }
+            if (Main.netMode != NetmodeID.Server) { return; }
+            NetMessage.SendData(MessageID.WorldData, -1, -1, null, 0, 0.0f, 0.0f, 0.0f, 0, 0, 0);
+        }
+        static void NewNPC(BinaryReader reader, int npcType) {
+            if (Main.netMode == NetmodeID.MultiplayerClient) { return; }
+            int flag = reader.ReadInt32();
+            NPC npc = Main.npc[flag];
+            npc.active = false;
+        }
+        static void Transformations(BinaryReader reader, int npcType) {
+            if (Main.netMode == NetmodeID.MultiplayerClient) { return; }
+            int flag = reader.ReadInt32();
+            Main.npc[flag].Transform(npcType);
+        }
+        static void HandlePacket(BinaryReader reader, ref bool flag) {
+            if (Main.netMode == NetmodeID.MultiplayerClient) { return; }
+            bool index = reader.ReadBoolean();
+            flag = index;
+        }
+        static void HandlePacket(BinaryReader reader, ref int flag) {
+            if (Main.netMode == NetmodeID.MultiplayerClient) { return; }
+            int index = reader.ReadInt32();
+            flag = index;
         }
         public static void ShakeScreen(float strength, int time, string id = null)
         {

@@ -30,7 +30,6 @@ namespace Bismuth.Content.NPCs
             AIType = 183;
             AnimationType = -1;
             Banner = NPC.type;
-            //bannerItem = mod.ItemType("ToadBanner");
         }
 
         private double frameCounter = 0.0;
@@ -54,7 +53,7 @@ namespace Bismuth.Content.NPCs
                     return;
                 if (!quack)
                 {
-                    SoundEngine.PlaySound(SoundID.Zombie1, NPC.position); // Zombie1 или Shatter
+                    SoundEngine.PlaySound(SoundID.Zombie13, NPC.position);
                     quack = true;
                 }
               
@@ -106,7 +105,7 @@ namespace Bismuth.Content.NPCs
                 Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("ToadBackPaw").Type, 1f);
             }
         }
-        public override float SpawnChance(NPCSpawnInfo spawnInfo) { return BismuthPlayer.ZoneSwamp && spawnInfo.SpawnTileY < Main.rockLayer && Main.dayTime ? 7.0f : 0.0f; }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) { return spawnInfo.Player.GetModPlayer<BismuthPlayer>().ZoneSwamp && spawnInfo.SpawnTileY < Main.rockLayer && Main.dayTime ? 7.0f : 0.0f; }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ToadsEye>(), 3));

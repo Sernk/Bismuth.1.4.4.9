@@ -1,127 +1,168 @@
-﻿using System.IO;
+﻿using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
+using Terraria.Chat;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace Bismuth.Utilities
-{
-    public class TempNPCs : ModSystem
-    {
-        private const int Temp = 18000; // 5 минут = 300 сек * 60 тиков
-        private const int Temp2 = 3600; // 1 минут = 60 сек  * 60 тиков
-        private double LastTemp = 0;
+namespace Bismuth.Utilities {
+    public class TempNPCs : ModSystem {
+        const int Temp = 18000; // 5 минут = 300 сек * 60 тиков
+        const int Temp2 = 3600; // 1 минут = 60 сек  * 60 тиков
+        public static double LastTemp = 0;
 
         public static bool AlchemistTemp = false;
         public static bool AlchemistTempStart = false;
         public static bool WaitStoneQuestsTemp = false;
         public static bool WaitStoneQuestsTempStart = false;
+        public static bool PhilosopherStoneQuestsTemp = false;
+        public static bool PhilosopherStoneQuestsTempStart = false;
         public static bool RecipePhilosopherStone = false;
         public static bool BabaYagaTemp = false;
         public static bool BabaYagaTempStart = false;
         public static bool BueBegger = false;
-        public static bool AlchemistPreSkeletonNewQuest = true;
+        public static bool AlchemistPreSkeletonNewQuest = false;
         public static bool AlchemistNewQuest = false;
         public static bool BeggarNewQuest = false;
-        public static bool BabaYagaNewQuest = false;
         public static bool DwarfBlacksmithNewQuest = false;
         public static bool ImperianCommanderNewQuest = false;
         public static bool ImperianConsulNewQuest = false;
+        public static bool BabaYagaNewQuest = false;
 
-        public override void PostUpdateWorld()
-        {
-            if (AlchemistTempStart)
-            {
-                if (Main.GameUpdateCount - LastTemp >= Temp2)
-                {
-                    LastTemp = Main.GameUpdateCount;
+        public override void PostUpdateWorld() {
+            //ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral($"{Main.GameUpdateCount - LastTemp} {Temp2}"), Color.LightGray, -1);
+            if (AlchemistTempStart) {
+                if (Main.GameUpdateCount - LastTemp >= Temp2) {
                     AlchemistTemp = true;
                     AlchemistTempStart = false;
+                    LastTemp = Main.GameUpdateCount;
                 }
             }
-            if (WaitStoneQuestsTempStart)
-            {
-                if (Main.GameUpdateCount - LastTemp >= Temp)
-                {
-                    LastTemp = Main.GameUpdateCount;
+            if (WaitStoneQuestsTempStart) {
+                if (Main.GameUpdateCount - LastTemp >= Temp2) {
                     WaitStoneQuestsTemp = true;
                     WaitStoneQuestsTempStart = false;
+                    LastTemp = Main.GameUpdateCount;
                 }
             }
-            if (BabaYagaTempStart)
-            {
-                if (Main.GameUpdateCount - LastTemp >= Temp)
-                {
+            if (PhilosopherStoneQuestsTempStart) {
+                if (Main.GameUpdateCount - LastTemp >= Temp2) {
+                    PhilosopherStoneQuestsTemp = true;
+                    PhilosopherStoneQuestsTempStart = false;
                     LastTemp = Main.GameUpdateCount;
+                }
+            }
+            if (BabaYagaTempStart) {
+                if (Main.GameUpdateCount - LastTemp >= Temp2) {
                     BabaYagaTemp = true;
                     BabaYagaTempStart = false;
+                    LastTemp = Main.GameUpdateCount;
                 }
             }
         }
         #region Save tag
-        public override void ClearWorld()
-        {
+        public override void SaveWorldData(TagCompound tag) {
+            tag["AlchemistTemp"] = AlchemistTemp;
+            tag["AlchemistTempStart"] = AlchemistTempStart;
+            tag["WaitStoneQuestsTemp"] = WaitStoneQuestsTemp;
+            tag["WaitStoneQuestsTempStart"] = WaitStoneQuestsTempStart;
+            tag["PhilosopherStoneQuestsTemp"] = PhilosopherStoneQuestsTemp;
+            tag["PhilosopherStoneQuestsTempStart"] = PhilosopherStoneQuestsTempStart;
+            tag["RecipePhilosopherStone"] = RecipePhilosopherStone;
+            tag["BabaYagaTemp"] = BabaYagaTemp;
+            tag["BabaYagaTempStart"] = BabaYagaTempStart;
+            tag["BueBegger"] = BueBegger;
+            tag["AlchemistPreSkeletonNewQuest"] = AlchemistPreSkeletonNewQuest;
+            tag["AlchemistNewQuest"] = AlchemistNewQuest;
+            tag["BeggarNewQuest"] = BeggarNewQuest;
+            tag["DwarfBlacksmithNewQuest"] = DwarfBlacksmithNewQuest;
+            tag["ImperianCommanderNewQuest"] = ImperianCommanderNewQuest;
+            tag["ImperianConsulNewQuest"] = ImperianConsulNewQuest;
+            tag["BabaYagaNewQuest"] = BabaYagaNewQuest;
+            tag["LastTemp"] = LastTemp;
+        }
+        public override void LoadWorldData(TagCompound tag) {
+            AlchemistTemp = tag.GetBool("AlchemistTemp");
+            AlchemistTempStart = tag.GetBool("AlchemistTempStart");
+            WaitStoneQuestsTemp = tag.GetBool("WaitStoneQuestsTemp");
+            WaitStoneQuestsTempStart = tag.GetBool("WaitStoneQuestsTempStart");
+            PhilosopherStoneQuestsTempStart = tag.GetBool("PhilosopherStoneQuestsTempStart");
+            PhilosopherStoneQuestsTemp = tag.GetBool("PhilosopherStoneQuestsTemp");
+            RecipePhilosopherStone = tag.GetBool("RecipePhilosopherStone");
+            BabaYagaTemp = tag.GetBool("BabaYagaTemp");
+            BabaYagaTempStart = tag.GetBool("BabaYagaTempStart");
+            BueBegger = tag.GetBool("BueBegger");
+            AlchemistPreSkeletonNewQuest = tag.GetBool("AlchemistPreSkeletonNewQuest");
+            AlchemistNewQuest = tag.GetBool("AlchemistNewQuest");
+            BeggarNewQuest = tag.GetBool("BeggarNewQuest");
+            DwarfBlacksmithNewQuest = tag.GetBool("DwarfBlacksmithNewQuest");
+            ImperianCommanderNewQuest = tag.GetBool("ImperianCommanderNewQuest");
+            ImperianConsulNewQuest = tag.GetBool("ImperianConsulNewQuest");
+            BabaYagaNewQuest = tag.GetBool("BabaYagaNewQuest");
+
+            LastTemp = tag.GetDouble("LastTemp");
+        }
+        public override void OnWorldLoad() {
             AlchemistTemp = false;
             AlchemistTempStart = false;
-            BabaYagaTemp = false;
-            BabaYagaTempStart = false;
             WaitStoneQuestsTemp = false;
             WaitStoneQuestsTempStart = false;
+            PhilosopherStoneQuestsTemp = false;
+            PhilosopherStoneQuestsTempStart = false;
             RecipePhilosopherStone = false;
+            BabaYagaTemp = false;
+            BabaYagaTempStart = false;
             BueBegger = false;
-            BabaYagaNewQuest = false;
+            AlchemistPreSkeletonNewQuest = false;
             AlchemistNewQuest = false;
-            AlchemistPreSkeletonNewQuest = true;
             BeggarNewQuest = false;
             DwarfBlacksmithNewQuest = false;
             ImperianCommanderNewQuest = false;
             ImperianConsulNewQuest = false;
+            BabaYagaNewQuest = false;
+            LastTemp = 0;
         }
-        public override void SaveWorldData(TagCompound tag)
-        {
-            if (AlchemistTemp) tag["AlchemistTemp"] = true;
-            if (AlchemistTempStart) tag["AlchemistTempStart"] = true;
-            if (BabaYagaTemp) tag["BabaYagaTemp"] = true;
-            if (BabaYagaTempStart) tag["BabaYagaTempStart"] = true;
-            if (WaitStoneQuestsTemp) tag["WaitStoneQuestsTemp"] = true;
-            if (WaitStoneQuestsTempStart) tag["WaitStoneQuestsTempStart"] = true;
-            if (RecipePhilosopherStone) tag["RecipePhilosopherStone"] = true;
-            if (BueBegger) tag["BueBegger"] = true;
-            if (BabaYagaNewQuest) tag["BabaYagaNewQuest"] = true;
-            if (AlchemistNewQuest) tag["AlchemistNewQuest"] = true;
-            if (AlchemistPreSkeletonNewQuest) tag["AlchemistPreSkeletonNewQuest"] = true;
-            if (BeggarNewQuest) tag["BeggarNewQuest"] = true;
-            if (DwarfBlacksmithNewQuest) tag["DwarfBlacksmithNewQuest"] = true;
-            if (ImperianCommanderNewQuest) tag["ImperianCommanderNewQuest"] = true;
-            if(ImperianConsulNewQuest) tag["ImperianConsulNewQuest"] = true;
-        }
-        public override void NetSend(BinaryWriter writer)
-        {
-            writer.WriteFlags(AlchemistTemp, AlchemistTempStart, BabaYagaTemp, BabaYagaTempStart, WaitStoneQuestsTemp, WaitStoneQuestsTempStart, RecipePhilosopherStone, BueBegger);
+        public override void NetSend(BinaryWriter writer) {
+            writer.Write(AlchemistTemp);
+            writer.Write(AlchemistTempStart);
+            writer.Write(WaitStoneQuestsTemp);
+            writer.Write(WaitStoneQuestsTempStart);
+            writer.Write(PhilosopherStoneQuestsTemp);
+            writer.Write(PhilosopherStoneQuestsTempStart);
+            writer.Write(RecipePhilosopherStone);
+            writer.Write(BabaYagaTemp);
+            writer.Write(BabaYagaTempStart);
+            writer.Write(BueBegger);
+            writer.Write(AlchemistPreSkeletonNewQuest);
+            writer.Write(AlchemistNewQuest);
+            writer.Write(BeggarNewQuest);
+            writer.Write(DwarfBlacksmithNewQuest);
+            writer.Write(ImperianCommanderNewQuest);
+            writer.Write(ImperianConsulNewQuest);
             writer.Write(BabaYagaNewQuest);
+            writer.Write(LastTemp);
         }
-        public override void NetReceive(BinaryReader reader)
-        {
-            reader.ReadFlags(out AlchemistTemp, out AlchemistTempStart, out BabaYagaTemp, out BabaYagaTempStart, out WaitStoneQuestsTemp, out WaitStoneQuestsTempStart, out RecipePhilosopherStone, out BueBegger);
+        public override void NetReceive(BinaryReader reader) {
+            AlchemistTemp = reader.ReadBoolean();
+            AlchemistTempStart = reader.ReadBoolean();
+            WaitStoneQuestsTemp = reader.ReadBoolean();
+            WaitStoneQuestsTempStart = reader.ReadBoolean();
+            PhilosopherStoneQuestsTemp = reader.ReadBoolean();
+            PhilosopherStoneQuestsTempStart = reader.ReadBoolean();
+            RecipePhilosopherStone = reader.ReadBoolean();
+            BabaYagaTemp = reader.ReadBoolean();
+            BabaYagaTempStart = reader.ReadBoolean();
+            BueBegger = reader.ReadBoolean();
+            AlchemistPreSkeletonNewQuest = reader.ReadBoolean();
+            AlchemistNewQuest = reader.ReadBoolean();
+            BeggarNewQuest = reader.ReadBoolean();
+            DwarfBlacksmithNewQuest = reader.ReadBoolean();
+            ImperianCommanderNewQuest = reader.ReadBoolean();
+            ImperianConsulNewQuest = reader.ReadBoolean();
             BabaYagaNewQuest = reader.ReadBoolean();
-        }
-        public override void LoadWorldData(TagCompound tag)
-        {
-            AlchemistTemp = tag.ContainsKey("AlchemistTemp");
-            AlchemistTempStart = tag.ContainsKey("AlchemistTempStart");
-            BabaYagaTemp = tag.ContainsKey("BabaYagaTemp");
-            BabaYagaTempStart = tag.ContainsKey("BabaYagaTempStart");
-            WaitStoneQuestsTemp = tag.ContainsKey("WaitStoneQuestsTemp");
-            WaitStoneQuestsTempStart = tag.ContainsKey("WaitStoneQuestsTempStart");
-            RecipePhilosopherStone = tag.ContainsKey("RecipePhilosopherStone");
-            BueBegger = tag.ContainsKey("BueBegger");
-            BabaYagaNewQuest = tag.ContainsKey("BabaYagaNewQuest");
-            AlchemistNewQuest = tag.ContainsKey("AlchemistNewQuest");
-            AlchemistPreSkeletonNewQuest = tag.ContainsKey("AlchemistPreSkeletonNewQuest");
-            BeggarNewQuest = tag.ContainsKey("BeggarNewQuest");
-            DwarfBlacksmithNewQuest = tag.ContainsKey("DwarfBlacksmithNewQuest");
-            ImperianCommanderNewQuest = tag.ContainsKey("ImperianCommanderNewQuest");
-            ImperianConsulNewQuest = tag.ContainsKey("ImperianConsulNewQuest");
-        }
+            LastTemp = reader.ReadDouble();
+        } 
         #endregion
     }
 }
