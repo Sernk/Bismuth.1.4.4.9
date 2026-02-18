@@ -9,6 +9,5 @@ namespace Bismuth.Utilities {
             BismuthWorld.NearbyTotemOfCurse = active;
             return active;
         }
-        public override SceneEffectPriority Priority => SceneEffectPriority.None;
     }
 }
