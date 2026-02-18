@@ -13,9 +13,8 @@ namespace Bismuth.Utilities.Global
     public class GlobalItems : GlobalItem, ILocalizedModType
     {
         public string LocalizationCategory => "BonusArmor";
-        public bool IsInfoItem;
+        public bool IsInfoItem = false;
 
-        public GlobalItems() { IsInfoItem = false; }
         public override bool InstancePerEntity { get { return true; } }
         public override void Load()
         {
@@ -73,7 +72,8 @@ namespace Bismuth.Utilities.Global
             string Unboundltips = this.GetLocalization("Info.Unboundltips").Value;
             string Base = this.GetLocalization("Info.BaseTooltips").Value;
             string BaseRing = this.GetLocalization("Info.BaseRingTooltips").Value;
-            string BaseRing2 = string.Format(BaseRing, PotionName, Main.npc[Alchemist].GivenName);
+            string alchemistName = Alchemist != -1 ? Main.npc[Alchemist].GivenName : Lang.GetNPCNameValue(ModContent.NPCType<Alchemist>());
+            string BaseRing2 = string.Format(BaseRing, PotionName, alchemistName);
             string TheRingOfTheBlood = this.GetLocalization("Info.TheRingOfTheBloodTooltips").Value;
             string TheRingOfTheSeas = this.GetLocalization("Info.TheRingOfTheSeasTooltips").Value;
 

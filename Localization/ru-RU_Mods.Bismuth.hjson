@@ -3584,6 +3584,7 @@ NPCs: {
 			TravelingVampireNQ_3: Carpe Jugulum!
 			TravelingVampireNQ_2: Кто сказал тебе, что обязательно становится Стражем Болота?
 			TravelingVampireNQ_1: Не объяснишь ли ты, почему черепаха живет дольше, нежели целые поколения людей; почему слон переживает целые династии и почему попугай умирает лишь от укуса кошки или собаки, а не от других недугов?
+			// NoBloodMoon: It seems that now is not the time for this.
 		}
 
 		// Census.SpawnCondition: Conditions unknown
@@ -4250,12 +4251,13 @@ QuestsSystem: {
 			Alchemist_22:
 				'''
 				К сожалению, тебе не хватает материалов. Для зарядки камня необходимо:
-				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:19], 30[i:Bismuth/Quicksilver]
+				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:13], 30[i:Bismuth/Quicksilver]
 				10[i:Bismuth/Aether]
 				[i:Bismuth/UnchargedTruePhilosopherStone]
 				'''
 			Alchemist_23: Отлично, я сейчас же начну заряжать камень. Приходи позже.
 			Alchemist_24: Да, камень готов. Бери его и пусть он хранит тебя!
+			Alchemist_25: No, sadly, I'm not charge the stone, come back later
 			BackToTitle: Назад на главную страницу
 			TitleText:
 				'''
@@ -4366,6 +4368,7 @@ CoinSystem: {
 			PoisonRecipe: находится в болоте
 			PanaceaRecipe: Изучите рецепт панацеи
 			PhilosopherStone: Выполняйте задания алхимика
+			// SoulScytheRecipe: Learn the recipe for Soul Scythe
 			Necromant: Некромант
 		}
 	}
@@ -4424,4 +4427,11 @@ QUEST: {
 	// QUESTCOMPLETED: QUEST COMPLETED!
 	// QUESTFAILED: QUEST FAILED!
 	// QUESTACCEPTED: QUEST ACCEPTED!
+}
+
+Condition: {
+	// CompleteAlchemistQuests: Complete the alchemist's quests "{0}"
+	// CompleteBabaYagaQuests: Complete the Baba Yaga's quests "{0}"
+	// CompletePriestQuests: Complete the priest's quests "{0}"
+	// VictoryBeggar: Win the dice game against the beggar 3 times in a row
 }

@@ -7,34 +7,6 @@ using Terraria.ModLoader;
 
 namespace Bismuth.Utilities
 {
-    public class SwampSkyVisual : ModSystem
-    {
-        public override void PostUpdateEverything()
-        {
-            bool _SwampSkyVisual = false;
-            NPC[] npc = Main.npc;
-            foreach (NPC npc2 in npc)
-            {
-                if (BismuthPlayer.ZoneSwamp)
-                {
-                    _SwampSkyVisual = true;
-                    break;
-                }
-            }
-            if (_SwampSkyVisual)
-            {
-                if (!Filters.Scene["Bismuth:SwampSky"].IsActive())
-                {
-                    Filters.Scene.Activate("Bismuth:SwampSky", default(Vector2));
-                }
-            }
-            else if (Filters.Scene["Bismuth:SwampSky"].IsActive())
-            {
-                Filters.Scene.Deactivate("Bismuth:SwampSky");
-            }
-        }
-    }
-
     public class SwampSky : CustomSky
     {
         private bool isActive;
@@ -52,17 +24,6 @@ namespace Bismuth.Utilities
                 intensity -= 0.01f;
             }
         }
-
-        private bool UpdatepyroIndex()
-        {
-            bool _SwampSky = BismuthPlayer.ZoneSwamp = true;
-            if (_SwampSky)
-            {
-                return true;
-            }
-            return false;
-        }
-
         public override void Draw(SpriteBatch spriteBatch, float minDepth, float maxDepth)
         {
             if (maxDepth >= 0f && minDepth < 0f)

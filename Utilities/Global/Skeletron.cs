@@ -21,17 +21,6 @@ namespace Bismuth.Utilities.Global
         {
             _ = this.GetLocalization("HeliosText").Value;
         }
-        public void GenerateBiomeHeliosChestLoot(Item[] chestInventory, int HelioscurrentIndex)
-        {
-            // Prominence => SolarDisk => StatuetteOfHelios => ShinyCover => SolarWind => Heat => Prominence
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<Prominence>(), ModContent.ItemType<SolarDisk>(), ModContent.ItemType<StatuetteOfHelios>(), ModContent.ItemType<ShinyCover>(), ModContent.ItemType<SolarWind>(), ModContent.ItemType<Heat>())); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GreaterHealingPotion); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(3, 11); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RegenerationPotion, ItemID.IronskinPotion, ItemID.SwiftnessPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.GillsPotion, ItemID.ShinePotion, ItemID.SpelunkerPotion, ItemID.NightOwlPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RecallPotion, ItemID.InvisibilityPotion, ItemID.HunterPotion, ItemID.ThornsPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.CookedFish, ItemID.CookedShrimp, ItemID.CookedMarshmallow, ItemID.BowlofSoup, ItemID.Bacon, ItemID.SugarCookie)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(6, 12); HelioscurrentIndex++;
-            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GoldCoin); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(2, 5); HelioscurrentIndex++;
-        }
         public override void OnKill(NPC npc)
         {
             string HeliosText = this.GetLocalization("HeliosText").Value;
@@ -48,7 +37,7 @@ namespace Bismuth.Utilities.Global
                     {
                         Main.NewText(HeliosText, Color.LightGray);
                     }
-                    else if (Main.netMode == 2)
+                    else if (Main.netMode == NetmodeID.Server)
                     {
                         ChatHelper.BroadcastChatMessage(NetworkText.FromKey(HeliosText, new object[0]), Color.LightGoldenrodYellow, -1);
                     }
@@ -122,7 +111,7 @@ namespace Bismuth.Utilities.Global
                                     WorldGen.PlaceTile(StartHeliosX + i, StartHeliosY + j, TileID.Torches, false, false, 0, 6);
                                     break;
                             }
-                            ;
+                            
 
                             WorldGen.SlopeTile(StartHeliosX + 9, StartHeliosY, 2);
                             WorldGen.SlopeTile(StartHeliosX + 7, StartHeliosY + 1, 2);
@@ -144,15 +133,7 @@ namespace Bismuth.Utilities.Global
                             WorldGen.SlopeTile(StartHeliosX + 17, StartHeliosY + 7, 4);
                             WorldGen.Place1xX(StartHeliosX + 3, StartHeliosY + 11, (ushort)ModContent.TileType<HeliosDoorClosed>());
                             WorldGen.Place1xX(StartHeliosX + 18, StartHeliosY + 11, (ushort)ModContent.TileType<HeliosDoorClosed>());
-                            int helioschest = WorldGen.PlaceChest(StartHeliosX + 10, StartHeliosY + 9, (ushort)ModContent.TileType<HeliosChest>(), false, 0);
-                            int chestIndex = Chest.FindChest(StartHeliosX + 10, StartHeliosY + 8);
-                            if (chestIndex != -1)
-                            {
-
-                                GenerateBiomeHeliosChestLoot(Main.chest[chestIndex].item, 0);
-                            }
                         }
-
                     }
                     int[,] HeliosTempleWall = new int[,]  {   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                                                               { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -185,26 +166,33 @@ namespace Bismuth.Utilities.Global
                         {
                             switch (HeliosTempleWall[j, i])
                             {
-                                case 0:
-                                    break;
-                                case 1:
-                                    WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.PearlstoneBrick);
-                                    break;
-                                case 2:
-                                    WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.StoneSlab);
-                                    break;
-                                case 3:
-                                    WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.IronFence);
-                                    break;
-                                case 4:
-                                    WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.GoldBrick);
-                                    break;
+                                case 0: break;
+                                case 1: WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.PearlstoneBrick); break;
+                                case 2: WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.StoneSlab); break;
+                                case 3: WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.IronFence); break;
+                                case 4: WorldGen.PlaceWall(StartHeliosX + i, StartHeliosY + j, WallID.GoldBrick); break;
                             }
                         }
                     }
                     WorldGen.PlaceObject(StartHeliosX + 10, StartHeliosY + 5, ModContent.TileType<SunrisePicture>());
+                    int helioschest = WorldGen.PlaceChest(StartHeliosX + 10, StartHeliosY + 9, (ushort)ModContent.TileType<HeliosChest>(), false, 0);
+                    //int chestIndex = Chest.FindChest(StartHeliosX + 10, StartHeliosY + 8);
+                    if (helioschest != -1) {
+                        GenerateBiomeHeliosChestLoot(Main.chest[helioschest].item, 0);
+                    }
+                    if (Main.netMode == NetmodeID.Server) { NetMessage.SendTileSquare(-1, StartHeliosX, StartHeliosY, 100); }
                 }
             }
+        }
+        public void GenerateBiomeHeliosChestLoot(Item[] chestInventory, int HelioscurrentIndex) {
+            // Prominence => SolarDisk => StatuetteOfHelios => ShinyCover => SolarWind => Heat => Prominence
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<Prominence>(), ModContent.ItemType<SolarDisk>(), ModContent.ItemType<StatuetteOfHelios>(), ModContent.ItemType<ShinyCover>(), ModContent.ItemType<SolarWind>(), ModContent.ItemType<Heat>())); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GreaterHealingPotion); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(3, 11); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RegenerationPotion, ItemID.IronskinPotion, ItemID.SwiftnessPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.GillsPotion, ItemID.ShinePotion, ItemID.SpelunkerPotion, ItemID.NightOwlPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.RecallPotion, ItemID.InvisibilityPotion, ItemID.HunterPotion, ItemID.ThornsPotion)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(1, 6); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ItemID.CookedFish, ItemID.CookedShrimp, ItemID.CookedMarshmallow, ItemID.BowlofSoup, ItemID.Bacon, ItemID.SugarCookie)); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(6, 12); HelioscurrentIndex++;
+            chestInventory[HelioscurrentIndex].SetDefaults(ItemID.GoldCoin); chestInventory[HelioscurrentIndex].stack = Main.rand.Next(2, 5); HelioscurrentIndex++;
         }
     }
 }

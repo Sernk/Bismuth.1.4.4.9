@@ -10,17 +10,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Bismuth.Content.NPCs
-{
+namespace Bismuth.Content.NPCs {
     [AutoloadHead]
-    public class Beggar : ModNPC
-    {
-        public override void SetStaticDefaults()
-        {
-            NPCID.Sets.NoTownNPCHappiness[NPC.type] = true;
-        }
-        public override void Load()
-        {
+    public class Beggar : ModNPC {
+        public override void SetStaticDefaults() => NPCID.Sets.NoTownNPCHappiness[NPC.type] = true;
+        public override void Load() {
             string Beggar_1 = this.GetLocalization("Chat.Beggar_1").Value; // Ru: Э-ге-ге, да ты же тот самый новенький! У меня есть к тебе дело, юнец! En: E-he-he, you’re that newbie, aren’t you! I have a job for you, young’un!
             string Beggar_3 = this.GetLocalization("Chat.Beggar_3").Value; // Ru: Я знаю, что такой смелый и отважный воин, как ты, не откажет в помощи старому больному человеку. Принеси мне чего-нибудь пожевать, и тогда, возможно, я награжу тебя... Шучу, конечно En: I know a valiant warrior such as yourself wouldn’t refuse to aid a helpless old man. Bring me a snack, and then, perhaps I’ll reward you… A joke, obviously.
             string Beggar_4 = this.GetLocalization("Chat.Beggar_4").Value; // Ru: Еда у тебя? En: You have the food yet?
@@ -38,8 +32,7 @@ namespace Bismuth.Content.NPCs
             string BeggarAnsv_4 = this.GetLocalization("Chat.BeggarAnsv_4").Value; // Ru: Я был занят другими делами En: I was busy with other things
             string BeggarAnsv_5 = this.GetLocalization("Chat.BeggarAnsv_5").Value; // Ru: Сыграть в кости En: Play dice
         }
-        public override void SetDefaults()
-        {
+        public override void SetDefaults() {
             NPC.townNPC = true;
             NPC.friendly = true;
             NPC.width = 32;
@@ -61,8 +54,7 @@ namespace Bismuth.Content.NPCs
             this.GetLocalizedValue("Name.Seefeld"), // Language.GetTextValue("Mods.Bismuth.BeggarName_4");
             this.GetLocalizedValue("Name.Robert") // Language.GetTextValue("Mods.Bismuth.BeggarName_5");
         };
-        public override string GetChat()
-        {
+        public override string GetChat() {
             string Beggar_1 = this.GetLocalization("Chat.Beggar_1").Value;
             string Beggar_3 = this.GetLocalization("Chat.Beggar_3").Value;
             string Beggar_4 = this.GetLocalization("Chat.Beggar_4").Value;
@@ -74,66 +66,38 @@ namespace Bismuth.Content.NPCs
             Player player = Main.player[Main.myPlayer];
             var quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.Beggar).FirstOrDefault();
 
-            if (TempNPCs.BeggarNewQuest && quest != null) return quest.GetChat(NPC, player);
-
-            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 0)
-            {
-                return Beggar_1;
-            }
-            else if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 20)
-            {
-                return Beggar_3;
-            }
-            else
-            {
-                if (NPC.FindFirstNPC(550) >= 0 && WorldGen.genRand.Next(0, 4) == 0)
-                {
-                    return string.Format(this.GetLocalization("Chat.BeggarNQ_1").Value, Main.npc[NPC.FindFirstNPC(550)].GivenName);
-                }
-                else if (NPC.FindFirstNPC(ModContent.NPCType<Priest>()) >= 0 && WorldGen.genRand.Next(0, 4) == 0)
-                {
-                    return string.Format(this.GetLocalization("Chat.BeggarNQ_3").Value, Main.npc[NPC.FindFirstNPC(ModContent.NPCType<Priest>())].GivenName);
-                }
-                else return WorldGen.genRand.Next(0, 2) switch
-                {
+            if (TempNPCs.BeggarNewQuest && quest != null) { return quest.GetChat(NPC, player); }
+            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100 && Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 0) { return Beggar_1; }
+            else if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 20) { return Beggar_3; }
+            else {
+                if (NPC.FindFirstNPC(550) >= 0 && WorldGen.genRand.Next(0, 4) == 0) { return string.Format(this.GetLocalization("Chat.BeggarNQ_1").Value, Main.npc[NPC.FindFirstNPC(550)].GivenName); }
+                else if (NPC.FindFirstNPC(ModContent.NPCType<Priest>()) >= 0 && WorldGen.genRand.Next(0, 4) == 0) { return string.Format(this.GetLocalization("Chat.BeggarNQ_3").Value, Main.npc[NPC.FindFirstNPC(ModContent.NPCType<Priest>())].GivenName); }
+                else return WorldGen.genRand.Next(0, 2) switch {
                     0 => BeggarNQ_2,
                     1 => BeggarNQ_4,
                     _ => string.Format(this.GetLocalization("Chat.BeggarNQ_6").Value, Main.LocalPlayer.GetModPlayer<DiceGame>().VictoryTotal, Main.LocalPlayer.GetModPlayer<DiceGame>().VictoryInARow),
                 };
             }
         }
-        public override bool CheckConditions(int left, int right, int top, int bottom)
-        {
-            return false;
-        }
-        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-        {
-            var quests = QuestRegistry.GetAvailableQuests(Main.LocalPlayer, BaseQuest.Beggar);
+        public override bool CheckConditions(int left, int right, int top, int bottom) => false;
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) {
+            IEnumerable<IQuest> quests = QuestRegistry.GetAvailableQuests(Main.LocalPlayer, BaseQuest.Beggar);
             bool showAvailable = Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest <= 10 && Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100;
             bool showActive = Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest > 10 && Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest < 100;
 
-            foreach (var quest in quests)
-            {
+            foreach (IQuest quest in quests) {
                 quest.IsActiveQuestUIIcon(showAvailable, showActive, spriteBatch, NPC, Main.LocalPlayer);
             }
-            if (!quests.Any())
-            {
+            if (!quests.Any()) {
                 Texture2D available = ModContent.Request<Texture2D>("Bismuth/UI/AvailableQuest").Value;
                 Texture2D active = ModContent.Request<Texture2D>("Bismuth/UI/ActiveQuest").Value;
 
-                if (showAvailable)
-                {
-                    spriteBatch.Draw(available, NPC.position - Main.screenPosition + new Vector2(8, -34), Color.White);
-                }
-                if (showActive)
-                {
-                    spriteBatch.Draw(active, NPC.position - Main.screenPosition + new Vector2(4, -38), Color.White);
-                }
+                if (showAvailable) { spriteBatch.Draw(available, NPC.position - Main.screenPosition + new Vector2(8, -34), Color.White); }
+                if (showActive) { spriteBatch.Draw(active, NPC.position - Main.screenPosition + new Vector2(4, -38), Color.White); }
             }
         }
-        public override void AddShops()
-        {
-            var Bue = new Condition("Bue", () => TempNPCs.BueBegger);
+        public override void AddShops() {
+            var Bue = new Condition(LocUtil.Loc("Condition.VictoryBeggar"), () => TempNPCs.BueBegger);
 
             NPCShop shop = new(Type, "BeggarShop");
 
@@ -143,8 +107,7 @@ namespace Bismuth.Content.NPCs
 
             shop.Register();
         }
-        public override void SetChatButtons(ref string button, ref string button2)
-        {
+        public override void SetChatButtons(ref string button, ref string button2) {
             string Beggar_4 = this.GetLocalization("Chat.Beggar_4").Value;
             string BeggarAnsv_1 = this.GetLocalization("Chat.BeggarAnsv_1").Value;
             string BeggarAnsv_2 = this.GetLocalization("Chat.BeggarAnsv_2").Value;
@@ -152,137 +115,76 @@ namespace Bismuth.Content.NPCs
             string BeggarAnsv_4 = this.GetLocalization("Chat.BeggarAnsv_4").Value;
             string BeggarAnsv_5 = this.GetLocalization("Chat.BeggarAnsv_5").Value;
 
-            Quests quests = (Quests)Main.player[Main.myPlayer].GetModPlayer<Quests>();
-           
-            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100)
-            {
-                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 0)
-                {
-                    button2 = BeggarAnsv_1;
-                }
-                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 5)
-                {
-                    button2 = BeggarAnsv_2;
-                }
-                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 20)
-                {
+            if (Main.LocalPlayer.GetModPlayer<Quests>().EquipmentQuest == 100) {
+                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 0) { button2 = BeggarAnsv_1; }
+                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 5) { button2 = BeggarAnsv_2; }
+                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 20) {
                     bool temp = false;
-                    for (int i = 0; i < 58; i++)
-                    {
+                    for (int i = 0; i < 58; i++) {
                         Item item = Main.LocalPlayer.inventory[i];
-                        if (item != null && item.stack > 0)
-                        {
-                            if (item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 ||item.buffType == BuffID.WellFed3) 
-                            {
+                        if (item != null && item.stack > 0) {
+                            if (item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3) {
                                 temp = true;
                                 button2 = BeggarAnsv_3;
                             }
                         }
                     }
-                    if (!temp && Main.npcChatText != Beggar_4)
-                    {
-                        button2 = BeggarAnsv_4;
-                    }
+                    if (!temp && Main.npcChatText != Beggar_4) { button2 = BeggarAnsv_4; }
                 }
-                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 100)
-                {
-                    Player player = Main.player[Main.myPlayer];
-                    var quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.Beggar).FirstOrDefault();
-                    if (TempNPCs.DwarfBlacksmithNewQuest && quest != null)
-                    {
-                        button = quest.GetButtonText(player);
-                    }
-                    else
-                    {
-                        button = Lang.inter[28].Value;
-                    }
+                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 100) {
+                    Player player = Main.LocalPlayer;
+                    IQuest quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.Beggar).FirstOrDefault();
+                    if (TempNPCs.DwarfBlacksmithNewQuest && quest != null) { button = quest.GetButtonText(player); }
+                    else { button = Lang.inter[28].Value; }
                     button2 = BeggarAnsv_5;
                 }
             }
         }
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
-        {
+        public override void OnChatButtonClicked(bool firstButton, ref string shopName) {
             string BeggarNQ_5 = this.GetLocalization("Chat.BeggarNQ_5").Value;
 
             Quests quests = Main.LocalPlayer.GetModPlayer<Quests>();
             DiceGame Dicegame = Main.LocalPlayer.GetModPlayer<DiceGame>();
 
             Player player = Main.LocalPlayer;
-            var quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.Beggar).FirstOrDefault();
+            IQuest quest = QuestRegistry.GetAvailableQuests(player, BaseQuest.Beggar).FirstOrDefault();
 
-            if (firstButton && Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 100)
-            {
+            if (firstButton && Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest == 100) {
                 TempNPCs.BeggarNewQuest = true;
-                if (TempNPCs.BeggarNewQuest && quest != null)
-                {
-                    quest?.OnChatButtonClicked(player);
-                }
-                else
-                {
-                     shopName = "BeggarShop";
-                }
+                if (TempNPCs.BeggarNewQuest && quest != null) { quest?.OnChatButtonClicked(player); }
+                else { shopName = "BeggarShop"; }
             }
-            else
-            {
-
-                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest != 100)
-                {
-                    quests.BeggarQuests();
-                }
-                else
-                {
+            else {
+                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest != 100) { quests.BeggarQuests(); }
+                else {
                     bool temp = false;
-                    for (int num66 = 0; num66 < 58; num66++)
-                    {
-                        if (player.inventory[num66].type == ItemID.GoldCoin)
-                        {
+                    for (int num66 = 0; num66 < 58; num66++) {
+                        if (player.inventory[num66].type == ItemID.GoldCoin) {
                             temp = true;
                             Dicegame.IsTableOpened = true;
                         }
                     }
-                    if (!temp)
-                    {
-                        Main.npcChatText = BeggarNQ_5;
-                    }
+                    if (!temp) { Main.npcChatText = BeggarNQ_5; }
                 }
-            }               
+            }
         }
-        public void UpdatePosition()
-        {
-            if (Main.player[Main.myPlayer].position.X >= NPC.position.X)
-                NPC.spriteDirection = -1;
-            else
-                NPC.spriteDirection = 1;
-        }
-        public override void AI()
-        {
-            if (NPC.homeTileX == -1 || NPC.homeTileY == -1)
-            {
+        public void UpdatePosition() => NPC.spriteDirection = Main.LocalPlayer.position.X >= NPC.position.X ? -1 : 1;
+        public override void AI() {
+            if (NPC.homeTileX == -1 || NPC.homeTileY == -1) {
                 NPC.homeTileX = NPC.Center.ToTileCoordinates().X;
                 NPC.homeTileY = NPC.Center.ToTileCoordinates().Y;
             }
             NPC.dontTakeDamage = true;
             NPC.breath = 100;
             NPC.life = NPC.lifeMax;
-            if (NPC.oldVelocity.X != 0f)
-                NPC.velocity.X = 0f;
-            if (Main.LocalPlayer.talkNPC != -1)
-            {
-                if (Main.npc[Main.LocalPlayer.talkNPC].whoAmI == NPC.whoAmI)
-                {
-                    UpdatePosition();
-                }
-                if (Main.npc[Main.LocalPlayer.talkNPC].type != NPC.type)
-                {
-                    if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest < 10)
-                        Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest = 0;
+            if (NPC.oldVelocity.X != 0f) { NPC.velocity.X = 0f; }
+            if (Main.LocalPlayer.talkNPC != -1) {
+                if (Main.npc[Main.LocalPlayer.talkNPC].whoAmI == NPC.whoAmI) { UpdatePosition(); }
+                if (Main.npc[Main.LocalPlayer.talkNPC].type != NPC.type) {
+                    if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest < 10){ Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest = 0; }
                 }
             }
-            else
-            {
-                if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest < 10)
-                    Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest = 0;
-            }
+            else { if (Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest < 10) { Main.LocalPlayer.GetModPlayer<Quests>().FoodQuest = 0; } }
         }
     }
 }

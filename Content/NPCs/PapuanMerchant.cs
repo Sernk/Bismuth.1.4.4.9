@@ -10,13 +10,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace Bismuth.Content.NPCs
-{
+namespace Bismuth.Content.NPCs {
     [AutoloadHead]
-    public class PapuanMerchant : ModNPC
-    {
-        public override void Load()
-        {
+    public class PapuanMerchant : ModNPC {
+        public override void Load() {
             _ = this.GetLocalization("Say").Value; // "At "
             _ = this.GetLocalization("Say1").Value; // during Halloween you can buy fashionable Dryad's panties, but I can sell it to you always(not yet). Took the hint?
             _ = this.GetLocalization("Say2").Value; // I think,
@@ -25,15 +22,8 @@ namespace Bismuth.Content.NPCs
             _ = this.GetLocalization("Say5").Value; // I would have made you a discount, but the fish was tasteless, so no
             _ = this.GetLocalization("Say6").Value; // I choose pointy peakes.
         }
-        public override string Texture
-        {
-            get
-            {
-                return "Bismuth/Content/NPCs/PapuanMerchant";
-            }
-        }
-        public override void SetStaticDefaults()
-        {
+        public override string Texture => "Bismuth/Content/NPCs/PapuanMerchant";
+        public override void SetStaticDefaults() {
             Main.npcFrameCount[NPC.type] = 25;
             NPCID.Sets.ExtraFramesCount[NPC.type] = 5;
             NPCID.Sets.AttackFrameCount[NPC.type] = 4;
@@ -43,8 +33,7 @@ namespace Bismuth.Content.NPCs
             NPCID.Sets.AttackAverageChance[NPC.type] = 30;
             NPCID.Sets.NoTownNPCHappiness[NPC.type] = true;
         }
-        public override void SetDefaults()
-        {
+        public override void SetDefaults() {
             NPC.townNPC = true;
             NPC.friendly = true;
             NPC.width = 28;
@@ -58,82 +47,32 @@ namespace Bismuth.Content.NPCs
             NPC.knockBackResist = 0.5f;
             AnimationType = NPCID.Demolitionist;
         }
-        public override bool CanTownNPCSpawn(int numTownNPCs)
-        {
-            for (int i = 0; i < 255; i++)
-            {
+        public override bool CanTownNPCSpawn(int numTownNPCs) {
+            for (int i = 0; i < 255; i++) {
                 Player player = Main.player[i];
-                if (player.active)
-                {
-                    for (int j = 0; j < player.inventory.Length; j++)
-                    {
-                        if (player.inventory[j].type == ModContent.ItemType<RuneEssence>())
-                        {
-                            return true;
-                        }
+                if (player.active) {
+                    for (int j = 0; j < player.inventory.Length; j++) {
+                        if (player.inventory[j].type == ModContent.ItemType<RuneEssence>()) { return true; }
                     }
                 }
             }
             return false;
         }
-        public override List<string> SetNPCNameList()
-        {
-            switch (WorldGen.genRand.Next(4))
-            {
-                case 0:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Gagini"),
-                    };
-                case 1:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Budd"),
-                    };
-                case 2:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Butannaziba"),
-                    };
-                case 3:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Mazozi"),
-                    };
-                case 4:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Nkemdilim"),
-                    };
-                case 5:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Olanreuodzhu"),
-                    };
-                case 6:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Syed"),
-                    };
-                case 7:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Tafari"),
-                    };
-                case 8:
-                    return new List<string>
-                    {
-                        this.GetLocalizedValue("Name.Chidzhenda"),
-                    };
-                default:
-                    return new List<string>                         
-                    {
-                        this.GetLocalizedValue("Name.Jango"),
-                    };
-            }
+        public override List<string> SetNPCNameList() {
+            return WorldGen.genRand.Next(4) switch {
+                0 => [this.GetLocalizedValue("Name.Gagini"),],
+                1 => [this.GetLocalizedValue("Name.Budd"),],
+                2 => [this.GetLocalizedValue("Name.Butannaziba"),],
+                3 => [this.GetLocalizedValue("Name.Mazozi"),],
+                4 => [this.GetLocalizedValue("Name.Nkemdilim"),],
+                5 => [this.GetLocalizedValue("Name.Olanreuodzhu"),],
+                6 => [this.GetLocalizedValue("Name.Syed"),],
+                7 => [this.GetLocalizedValue("Name.Tafari"),],
+                8 => [this.GetLocalizedValue("Name.Chidzhenda"),],
+                _ => [this.GetLocalizedValue("Name.Jango"),],
+            };
         }
-        public override string GetChat()
-        {
+        public override string GetChat() {
             string Say0 = this.GetLocalization("Say").Value;
             string Say1 = this.GetLocalization("Say1").Value;
             string Say2 = this.GetLocalization("Say2").Value;
@@ -151,35 +90,20 @@ namespace Bismuth.Content.NPCs
             string SayFull = $"{Say0} {armsdealerName} {Say1}";
             string SayFull1 = $"{Say2} {anglerName} {Say3}";
 
-            if (Armsdealer >= 0 && Main.rand.Next(5) == 0)
-            {
-                return SayFull;
-            }
-            if (Angler >= 0 && Main.rand.Next(5) == 0)
-            {
-                return SayFull1;
-            }
-            switch (Main.rand.Next(3))
-            {
-                case 0: return Say4;
-                case 1: return Say5;
-                default: return Say6;
-            }
+            if (Armsdealer >= 0 && Main.rand.NextBool(5)) { return SayFull; }
+            if (Angler >= 0 && Main.rand.NextBool(5)) { return SayFull1; }
+            return Main.rand.Next(3) switch {
+                0 => Say4,
+                1 => Say5,
+                _ => Say6,
+            };
         }
-        public override void SetChatButtons(ref string button, ref string button2)
-        {
-            button = Lang.inter[28].Value;
+        public override void SetChatButtons(ref string button, ref string button2) => button = Lang.inter[28].Value;
+        public override void OnChatButtonClicked(bool firstButton, ref string shopName) {
+            if (firstButton) { shopName = "PapuanMerchantShop"; }
         }
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
-        {
-            if (firstButton)
-            {
-                shopName = "PapuanMerchantShop";
-            }
-        }
-        public override void AddShops()
-        {
-            var HardMode = new Condition("KilledEoC", () => Main.hardMode);
+        public override void AddShops() {
+            Condition HardMode = Condition.Hardmode;
 
             NPCShop shop = new(Type, "PapuanMerchantShop");
 
@@ -196,34 +120,25 @@ namespace Bismuth.Content.NPCs
 
             shop.Register();
         }
-        public override void TownNPCAttackStrength(ref int damage, ref float knockback)
-        {
+        public override void TownNPCAttackStrength(ref int damage, ref float knockback) {
             damage = 60;
             knockback = 6f;
         }
-
-        public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
-        {
+        public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown) {
             cooldown = 10;
             randExtraCooldown = 10;
         }
-
-        public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
-        {
+        public override void TownNPCAttackProj(ref int projType, ref int attackDelay) {
             projType = ModContent.ProjectileType<SharkKnifeP>();
             attackDelay = 4;
         }
-        public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
-        {
+        public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset) {
             multiplier = 12f;
             randomOffset = 2f;
         }
-        public override void HitEffect(NPC.HitInfo hit)
-        {
-            if (NPC.life <= 0)
-            {
-                for (int k = 0; k < 20; k++)
-                {
+        public override void HitEffect(NPC.HitInfo hit) {
+            if (NPC.life <= 0) {
+                for (int k = 0; k < 20; k++) {
                     Dust.NewDust(NPC.position, NPC.width, NPC.height, 5, 2.5f * hit.HitDirection, -2.5f, 0, default(Color), 0.7f);
                 }
                 Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("PapuanMerchantHead").Type, 1f);

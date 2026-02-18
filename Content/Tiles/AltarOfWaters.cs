@@ -11,18 +11,17 @@ namespace Bismuth.Content.Tiles
     {
         public override void SetStaticDefaults()
         {
-            TileObjectData.newTile.DrawYOffset = 2;
             Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = true;
-            TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
-            TileObjectData.newTile.Height = 2;
-            TileObjectData.newTile.Width = 6;
             Main.tileLighted[Type] = true;
             Main.tileFrameImportant[Type] = true;
-            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16 };
+            TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
+            TileObjectData.newTile.Width = 6;
+            TileObjectData.newTile.Height = 2;
+            TileObjectData.newTile.CoordinateWidth = 16;
+            TileObjectData.newTile.CoordinateHeights = [16, 16];
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(152, 171, 198), CreateMapEntryName());
-            TileObjectData.newTile.DrawYOffset = 2;
             MineResist = 5f;
             MinPick = 999999;
         }

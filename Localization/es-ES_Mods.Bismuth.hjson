@@ -3520,6 +3520,7 @@ NPCs: {
 			TravelingVampireNQ_3: ¡Carpe Jugulum!
 			TravelingVampireNQ_2: ¿Quién te dijo que debía convertirme en guardián del pantano?
 			TravelingVampireNQ_1: Dime… ¿por qué la tortuga vive más que generaciones de hombres, por qué el elefante persiste hasta ver dinastías, y por qué el loro nunca muere, salvo por mordedura de un gato, un perro u otra desgracia?
+			// NoBloodMoon: It seems that now is not the time for this.
 		}
 
 		Census.SpawnCondition: Condiciones desconocidas
@@ -4190,12 +4191,13 @@ QuestsSystem: {
 			Alchemist_22:
 				'''
 				Por desgracia, no tienes suficientes materiales. Para cargar la piedra necesitarás:
-				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:19], 30[i:Bismuth/Quicksilver]
+				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:13], 30[i:Bismuth/Quicksilver]
 				10[i:Bismuth/Aether]
 				[i:Bismuth/UnchargedTruePhilosopherStone]
 				'''
 			Alchemist_23: Genial, empezaré a cargar la piedra ahora mismo. Vuelve más tarde.
 			Alchemist_24: Sí, la piedra está lista. ¡Tómala y que te proteja!
+			// Alchemist_25: No, sadly, I'm not charge the stone, come back later
 			BackToTitle: Volver a la página de título
 			TitleText:
 				'''
@@ -4306,6 +4308,7 @@ CoinSystem: {
 			PoisonRecipe: está en un pantano
 			PanaceaRecipe: Aprender la receta de la Receta
 			PhilosopherStone: Completa las misiones del alquimista
+			// SoulScytheRecipe: Learn the recipe for Soul Scythe
 			Necromant: Nigromante
 		}
 	}
@@ -4364,4 +4367,11 @@ QUEST: {
 	QUESTCOMPLETED: ¡MISIÓN COMPLETADA!
 	QUESTFAILED: ¡MISIÓN FALLIDA!
 	QUESTACCEPTED: ¡MISIÓN ACEPTADA!
+}
+
+Condition: {
+	// CompleteAlchemistQuests: Complete the alchemist's quests "{0}"
+	// CompleteBabaYagaQuests: Complete the Baba Yaga's quests "{0}"
+	// CompletePriestQuests: Complete the priest's quests "{0}"
+	// VictoryBeggar: Win the dice game against the beggar 3 times in a row
 }

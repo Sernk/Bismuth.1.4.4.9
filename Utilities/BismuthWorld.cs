@@ -18,7 +18,6 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.WorldBuilding;
-using static StructureHelper.API.Generator;
 
 namespace Bismuth.Utilities
 {
@@ -120,294 +119,123 @@ namespace Bismuth.Utilities
         #endregion
         public static int BeachEndLeft = 0; // Конец левого пляжа (по иксам)
         public static int BeachEndRight = Main.maxTilesX;  // Конец правого пляжа (по иксам)
+        public static bool WizardDay = false;
+        public static bool downedWitch = false;
+        public static bool SoulScytheRecipe = false;
 
         //Remnants Settings
         int DesertPitSetting = 60;
 
-        public static void CallOrcishInvasion()
-        {
-            var source = Main.LocalPlayer.GetSource_FromThis();
+        void DoCastleside() {
+            if (castleside == 0) { castleside = CastleSpawnX > Main.maxTilesX / 2 ? 1 : -1; }
+        }
+        public static void setVampShop() {
+            int[] rand = [ModContent.ItemType<DraculasCover>(), ModContent.ItemType<PendantOfBlood>(), ModContent.ItemType<MarbleMask>(), ModContent.ItemType<ManGosh>(), ModContent.ItemType<Misericorde>(), ModContent.ItemType<Baselard>()];
+            for (int i = rand.Length - 1; i >= 1; i--) {
+                int j = Main.rand.Next(i + 1);
+                (rand[i], rand[j]) = (rand[j], rand[i]);
+            }
+            VampShop[0] = rand[0];
+            VampShop[1] = rand[1];
+            VampShop[2] = rand[2];
+        }
+        void TravelingVampireShop(IEntitySource source) {
+            if (!NPC.AnyNPCs(ModContent.NPCType<TravelingVampire>())) {
+                if (Main.bloodMoon && !Main.dayTime) {
+                    setVampShop();
+                    SpawnTravelingVampire(source);
+                }
+            }
+        }
+        public static void CallOrcishInvasion() {
+            IEntitySource source = Main.LocalPlayer.GetSource_FromThis();
             Bismuth.ShakeScreen(50f, 180);
-            Mod mod = ModLoader.GetMod("Bismuth");
             OrcishInvasionStage = 1;
             NPC.NewNPC(source, CastleSpawnX * 16 + 482, CastleSpawnY * 16 + 438, ModContent.NPCType<OrcishPortal>());
             NPC.NewNPC(source, CastleSpawnX * 16 + 120, CastleSpawnY * 16 + 438, ModContent.NPCType<OrcishPortal>());
             NPC.NewNPC(source, CastleSpawnX * 16 + 280, CastleSpawnY * 16 + 170, ModContent.NPCType<OrcishPortal>());
             NPC.NewNPC(source, CastleSpawnX * 16 + 650, CastleSpawnY * 16 + 60, ModContent.NPCType<OrcishPortal>());
         }
-        public static void RevealAroundPoint(int x, int y)
-        {
-            for (int i = x - 5; i < x + 5; i++)
-            {
-                for (int j = y - 5; j < y + 5; j++)
-                {
-                    if (WorldGen.InWorld(i, j))
-                        Main.Map.Update(i, j, 255);
-                }
-            }
-            Main.refreshMap = true;
-        }
-        public static bool WizardDay = false;
-        public override void PostUpdateWorld()
-        {
-            var source = Main.LocalPlayer.GetSource_FromThis();
-            if (!NPC.AnyNPCs(ModContent.NPCType<ImperianConsul>()))
-            {
-                NPC.NewNPC(source, (Main.spawnTileX + 6) * 16 + 4, (Main.spawnTileY + 3) * 16, ModContent.NPCType<ImperianConsul>());
-            }
-            if (!NPC.AnyNPCs(ModContent.NPCType<DwarfBlacksmith>()))
-            {
-                NPC.NewNPC(source, (Main.spawnTileX - 24) * 16, (Main.spawnTileY + 3) * 16, ModContent.NPCType<DwarfBlacksmith>());
-            }
-            if (!NPC.AnyNPCs(ModContent.NPCType<Beggar>()))
-            {
-                NPC.NewNPC(source, (Main.spawnTileX - 43) * 16, (Main.spawnTileY + 3) * 16, ModContent.NPCType<Beggar>());
-            }
-            if (!NPC.AnyNPCs(ModContent.NPCType<Alchemist>()) && Main.LocalPlayer.GetModPlayer<Quests>().PotionQuest != 200)
-            {
-                NPC.NewNPC(source, (Main.spawnTileX - 61) * 16, (Main.spawnTileY + 4) * 16, ModContent.NPCType<Alchemist>());
-            }
-            if (!NPC.AnyNPCs(ModContent.NPCType<ImperianCommander>()))
-            {
-                NPC.NewNPC(source, (Main.spawnTileX + 59) * 16, (Main.spawnTileY + 4) * 16, ModContent.NPCType<ImperianCommander>());
-            }
-            if (!NPC.AnyNPCs(ModContent.NPCType<StrangeOldman>()) && Main.LocalPlayer.GetModPlayer<Quests>().LuceatQuest >= 40 && Main.LocalPlayer.GetModPlayer<Quests>().NewPriestQuest != 100)
-            {
-                NPC.NewNPC(source, (Main.spawnTileX + 45) * 16, (Main.spawnTileY - 10) * 16, ModContent.NPCType<StrangeOldman>());
-            }
-            if (!NPC.AnyNPCs(ModContent.NPCType<OldmanPriest>()) && Main.LocalPlayer.GetModPlayer<Quests>().NewPriestQuest == 100)
-            {
-                NPC.NewNPC(source, (Main.spawnTileX + 29) * 16, (Main.spawnTileY + 2) * 16 - 2, ModContent.NPCType<OldmanPriest>());
-            }
-            if (castleside == 0)
-            {
-                castleside = CastleSpawnX > Main.maxTilesX / 2 ? 1 : -1;
-            }
-            if (!NPC.AnyNPCs(ModContent.NPCType<TravelingVampire>()))
-            {
-                if (Main.bloodMoon && !Main.dayTime)
-                {
-                    int[] rand = new int[6] { ModContent.ItemType<DraculasCover>(), ModContent.ItemType<PendantOfBlood>(), ModContent.ItemType<MarbleMask>(), ModContent.ItemType<ManGosh>(), ModContent.ItemType<Misericorde>(), ModContent.ItemType<Baselard>() };
-                    for (int i = rand.Length - 1; i >= 1; i--)
-                    {
-                        int j = Main.rand.Next(i + 1);
-                        int temp = rand[j];
-                        rand[j] = rand[i];
-                        rand[i] = temp;
-                    }
-                    VampShop[0] = rand[0];
-                    VampShop[1] = rand[1];
-                    VampShop[2] = rand[2];
-                    NPC.NewNPC(source, (Main.spawnTileX - 82) * 16, (Main.spawnTileY - 2) * 16, ModContent.NPCType<TravelingVampire>());
-                }
-            }
-            if (Main.bloodMoon && !Main.dayTime && !NPC.AnyNPCs(ModContent.NPCType<TravelingVampire>()))
-            {
+        void SpawnTravelingVampire(IEntitySource source) {
+            if (Main.bloodMoon && !Main.dayTime) {
                 NPC.NewNPC(source, (Main.spawnTileX - 82) * 16, (Main.spawnTileY - 2) * 16, ModContent.NPCType<TravelingVampire>());
             }
-            if (NPC.CountNPCS(ModContent.NPCType<OrcishPortal>()) == 0 && OrcishInvasionStage == 1)
-            {
+        }
+        void OrcishInvasion() {
+            if (NPC.CountNPCS(ModContent.NPCType<OrcishPortal>()) == 0 && OrcishInvasionStage == 1) {
                 OrcishInvasionStage = 0;
                 DefeatedPortals = 0;
             }
-            #region Statue Buff Update
-            if (NearbyTotemOfCurse == false)
-            {
-                IsTotemActive = false;
+        }
+        void DoGenCrypt(IEntitySource source) {
+            if (!CryptIsSpawned) {
+                if (QuestVariable.TombstoneStage == 200) {
+                    int CryptX = TombstoneX - 9;
+                    int CryptY = Main.maxTilesY / 3;
+                    BismuthGen.GenCrypt(source, CryptX, CryptY);
+                    CryptIsSpawned = true;
+                    if (Main.netMode == NetmodeID.Server) { NetMessage.SendTileSquare(-1, CryptX, CryptY, 120); }
+                }
             }
-            if (!Main.dayTime)
-                WizardDay = false;
-            #endregion
-            #region Crypt
-            if (Main.LocalPlayer.GetModPlayer<Quests>().TombstoneQuest == 200 && !CryptIsSpawned)
-            {
-                int CryptX = TombstoneX - 9;
-                int CryptY = Main.maxTilesY / 3;
-                for (int i = 0; i < 15; i++)
-                {
-                    WorldMethods.BresenhamLineTunnel(CryptX - 5 + Main.rand.Next(-5 + i, 5 + i), CryptY + 12 - i, CryptX + 15 + Main.rand.Next(-5 + i, 5 + i), CryptY + 12 - i, 4);
-                }
-                for (int i = 0; i < 50; i++)
-                {
-                    for (int j = 0; j < 50; j++)
-                    {
-                        Main.tile[CryptX - 15 + j, CryptY + 15 - i].LiquidAmount = 0;
-                    }
-                }
-                int[,] Crypt = new int[,]
-                {
-                       {0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 1, 6, 4, 4, 4, 4, 4, 5, 1, 0, 0, 0, 0, 0},
-                       {0, 3, 1, 1, 1, 1, 4, 7, 0, 0, 0, 8, 4, 1, 1, 1, 1, 2, 0},
-                       {0, 1, 6, 4, 4, 4, 4, 0, 0, 0, 0, 0, 4, 4, 4, 4, 5, 1, 0},
-                       {0, 1, 4, 7, 0, 8, 4, 0, 0, 0, 0, 0, 4, 7, 0, 8, 4, 1, 0},
-                       {3, 1, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4, 0, 0, 0, 4, 1, 2},
-                       {1, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 1},
-                       {1, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 8, 1},
-                       {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                       {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                       {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                };
-                for (int j = 0; j < Crypt.GetLength(0); j++)
-                {
-                    for (int i = 0; i < Crypt.GetLength(1); i++)
-                    {
-                        switch (Crypt[j, i])
-                        {
-                            case 0:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                break;
-                            case 1:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.IridescentBrick);
-                                break;
-                            case 2:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.IridescentBrick);
-                                WorldGen.SlopeTile(CryptX + i, CryptY + j, 1);
-                                break;
-                            case 3:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.IridescentBrick);
-                                WorldGen.SlopeTile(CryptX + i, CryptY + j, 2);
-                                break;
-                            case 4:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.GrayBrick);
-                                break;
-                            case 5:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.GrayBrick);
-                                WorldGen.SlopeTile(CryptX + i, CryptY + j, 1);
-                                break;
-                            case 6:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.GrayBrick);
-                                WorldGen.SlopeTile(CryptX + i, CryptY + j, 2);
-                                break;
-                            case 7:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.GrayBrick);
-                                WorldGen.SlopeTile(CryptX + i, CryptY + j, 3);
-                                break;
-                            case 8:
-                                WorldGen.KillTile(CryptX + i, CryptY + j);
-                                WorldGen.PlaceTile(CryptX + i, CryptY + j, TileID.GrayBrick);
-                                WorldGen.SlopeTile(CryptX + i, CryptY + j, 4);
-                                break;
-                        }
-                    }
-                }
-                int[,] CryptWall = new int[,]
-                {
-                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 2, 2, 3, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 1, 0, 0, 0, 3, 1, 1, 1, 2, 2, 3, 0, 0, 0, 1, 0, 0},
-                       {0, 0, 3, 2, 2, 1, 3, 1, 2, 1, 1, 2, 3, 2, 2, 1, 3, 0, 0},
-                       {0, 0, 3, 2, 2, 1, 3, 2, 2, 1, 1, 1, 3, 2, 2, 1, 3, 0, 0},
-                       {0, 1, 3, 2, 2, 1, 3, 2, 2, 1, 1, 1, 3, 2, 1, 1, 3, 1, 0},
-                       {0, 1, 3, 2, 1, 1, 3, 2, 1, 1, 1, 1, 3, 2, 1, 1, 3, 1, 0},
-                       {0, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 0},
-                       {0, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 0},
-                       {0, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 2, 3, 1, 0},
-                       {0, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 2, 2, 3, 1, 0},
-                       {0, 2, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 2, 1, 3, 1, 0},
-                       {0, 2, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 0},
-                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                };
-                for (int j = 0; j < CryptWall.GetLength(0); j++)
-                {
-                    for (int i = 0; i < CryptWall.GetLength(1); i++)
-                    {
-                        switch (CryptWall[j, i])
-                        {
-                            case 0:
-                                break;
-                            case 1:
-                                WorldGen.KillWall(CryptX + i, CryptY + j);
-                                WorldGen.PlaceWall(CryptX + i, CryptY + j, WallID.Ebonwood);
-                                break;
-                            case 2:
-                                WorldGen.KillWall(CryptX + i, CryptY + j);
-                                WorldGen.PlaceWall(CryptX + i, CryptY + j, WallID.Bone);
-                                WorldGen.paintWall(CryptX + i, CryptY + j, 27);
-                                break;
-                            case 3:
-                                WorldGen.KillWall(CryptX + i, CryptY + j);
-                                WorldGen.PlaceWall(CryptX + i, CryptY + j, WallID.PearlstoneBrick);
-                                break;
-                        }
-                    }
-                }
-                WorldGen.PlaceTile(CryptX + 1, CryptY + 10, TileID.Platforms, false, false, -1, 16);
-                WorldGen.PlaceTile(CryptX + 1, CryptY + 9, TileID.Books);
-                WorldGen.PlaceTile(CryptX + 17, CryptY + 10, TileID.Platforms, false, false, -1, 16);
-                WorldGen.PlaceTile(CryptX + 17, CryptY + 9, TileID.Books);
-                WorldGen.PlaceTile(CryptX + 1, CryptY + 13, ModContent.TileType<Bone1>());
-                WorldGen.PlaceTile(CryptX + 17, CryptY + 13, ModContent.TileType<Bone1>());
-                WorldGen.Place3x1(CryptX + 10, CryptY + 13, (ushort)ModContent.TileType<Bone4>());
-                WorldGen.Place3x2(CryptX + 3, CryptY + 13, TileID.Campfire, 2);
-                WorldGen.Place3x2(CryptX + 15, CryptY + 13, TileID.Campfire, 2);
-                WorldGen.Place2x2(CryptX + 13, CryptY + 13, TileID.CookingPots, 0);
-                WorldGen.PlaceTile(CryptX + 9, CryptY + 2, TileID.Chandeliers, false, false, -1, 32);
-                NPC.NewNPC(source, (CryptX + 11) * 16, (CryptY + 10) * 16, ModContent.NPCType<Necromant>());
-                CryptIsSpawned = true;
-            }
-            #endregion
-            if (!DownedNecromancer && CryptIsSpawned && !NPC.AnyNPCs(ModContent.NPCType<Necromant>()) && !NPC.AnyNPCs(ModContent.NPCType<EvilNecromancer>()))
+        }
+        void StatueBuffUpdate() {
+            IsTotemActive = NearbyTotemOfCurse;
+            if (!Main.dayTime) { WizardDay = false; }
+        }
+        void DoSpawnNecromant(IEntitySource source) {
+            if (!DownedNecromancer && CryptIsSpawned && !NPC.AnyNPCs(ModContent.NPCType<Necromant>()) && !NPC.AnyNPCs(ModContent.NPCType<EvilNecromancer>())) {
                 NPC.NewNPC(source, (TombstoneX + 2) * 16, (Main.maxTilesY / 3 + 10) * 16, ModContent.NPCType<Necromant>());
-            if (MazeStartX != 0 && MazeStartY != 0 && !NPC.AnyNPCs(ModContent.NPCType<Minotaur>()) && !Main.player[Main.myPlayer].GetModPlayer<BismuthPlayer>().downedMinotaur && DestroyedMaze && Main.player[Main.myPlayer].Center.ToTileCoordinates().X > MazeStartX && Main.player[Main.myPlayer].Center.ToTileCoordinates().X < MazeStartX + 58 && Main.player[Main.myPlayer].Center.ToTileCoordinates().Y > MazeStartY && Main.player[Main.myPlayer].Center.ToTileCoordinates().Y < MazeStartY + 57)
-            {
+            }
+        }
+        void DoSpawnMinotaur(IEntitySource source) {
+            if (MazeStartX != 0 && MazeStartY != 0 && !NPC.AnyNPCs(ModContent.NPCType<Minotaur>()) && !Main.LocalPlayer.GetModPlayer<BismuthPlayer>().downedMinotaur && DestroyedMaze && Main.LocalPlayer.Center.ToTileCoordinates().X > MazeStartX && Main.player[Main.myPlayer].Center.ToTileCoordinates().X < MazeStartX + 58 && Main.player[Main.myPlayer].Center.ToTileCoordinates().Y > MazeStartY && Main.player[Main.myPlayer].Center.ToTileCoordinates().Y < MazeStartY + 57) {
                 NPC.NewNPC(source, (MazeStartX + 6) * 16, (MazeStartY + 50) * 16, ModContent.NPCType<Minotaur>());
             }
-            if (!NPC.AnyNPCs(ModContent.NPCType<BabaYaga>()) && !NPC.AnyNPCs(ModContent.NPCType<EvilBabaYaga>()) && Main.LocalPlayer.GetModPlayer<Quests>().ElessarQuest == 200 && !Main.LocalPlayer.GetModPlayer<BismuthPlayer>().downedWitch)
-            {
-                if (!Main.LocalPlayer.GetModPlayer<BismuthPlayer>().witchsecondatt)
+        }
+        void DoSpawnBabaYaga(IEntitySource source) {
+            if (!NPC.AnyNPCs(ModContent.NPCType<BabaYaga>()) && !NPC.AnyNPCs(ModContent.NPCType<EvilBabaYaga>()) && QuestVariable.ElessarQuest == 200 && !Main.LocalPlayer.GetModPlayer<BismuthPlayer>().downedWitch) {
+                if (!Main.LocalPlayer.GetModPlayer<BismuthPlayer>().witchsecondatt) {
                     Main.LocalPlayer.GetModPlayer<BismuthPlayer>().witchsecondatt = true;
+                }
+            }
+            if (!downedWitch && !NPC.AnyNPCs(ModContent.NPCType<BabaYaga>()) && !NPC.AnyNPCs(ModContent.NPCType<SwampWitchDeath>()) && !NPC.AnyNPCs(ModContent.NPCType<EvilBabaYaga>())) {
                 NPC.NewNPC(source, WitchSpawnX, WitchSpawnY, ModContent.NPCType<BabaYaga>());
             }
-            if (Main.LocalPlayer.GetModPlayer<Quests>().ElessarQuest != 200 && !NPC.AnyNPCs(ModContent.NPCType<BabaYaga>()))
-                NPC.NewNPC(source, WitchSpawnX, WitchSpawnY, ModContent.NPCType<BabaYaga>());
-            #region Sunrise
-            if (Main.LocalPlayer.GetModPlayer<Quests>().SunriseQuest == 100 && !SunriseIsPlaced)
-            {
-                WorldGen.PlaceTile(SunriseX, SunriseY, ModContent.TileType<SunrisePicture>());
+        }
+        void DoGenGenSunrise(int x, int y) {
+            if (QuestVariable.SunriseQuest == 100 && !SunriseIsPlaced) {
+                BismuthGen.GenSunrise(x, y);
                 SunriseIsPlaced = true;
             }
+        }
+        void DoEditWaterTemple() {
+            BismuthGen.EditWaterTempe(downedBanshee, WaterTempleX, WaterTempleY);
+        }
+        void SpawnOldmanPriest(IEntitySource source) {
+            if (QuestVariable.NewPriestQuest == 100 && !NPC.AnyNPCs(ModContent.NPCType<OldmanPriest>())) {
+                NPC.NewNPC(source, (Main.spawnTileX + 29) * 16, (Main.spawnTileY + 2) * 16 - 2, ModContent.NPCType<OldmanPriest>());
+            }
+        }
+        public override void PostUpdateWorld() {
+            IEntitySource source = Main.LocalPlayer.GetSource_FromThis();
+            BismuthGen.GenCityNPC(source, Main.spawnTileX, Main.spawnTileY);
+            DoCastleside();
+            TravelingVampireShop(source);
+            OrcishInvasion();
+            #region Statue Buff Update
+            StatueBuffUpdate();
             #endregion
-            if (Main.LocalPlayer.GetModPlayer<Quests>().NewPriestQuest == 100 && !NPC.AnyNPCs(ModContent.NPCType<OldmanPriest>()))
-                NPC.NewNPC(source,(Main.spawnTileX + 29) * 16, (Main.spawnTileY + 2) * 16 - 2, ModContent.NPCType<OldmanPriest>());
-            if (!downedBanshee)
-            {
-                Main.tile[WaterTempleX + 9, WaterTempleY + 17].TileFrameX = 72;
-                Main.tile[WaterTempleX + 40, WaterTempleY + 17].TileFrameX = 72;
-                Main.tile[WaterTempleX + 19, WaterTempleY + 14].TileFrameX = 54;
-                Main.tile[WaterTempleX + 19, WaterTempleY + 13].TileFrameX = 54;
-                Main.tile[WaterTempleX + 18, WaterTempleY + 14].TileFrameX = 36;
-                Main.tile[WaterTempleX + 18, WaterTempleY + 13].TileFrameX = 36;
-                Main.tile[WaterTempleX + 32, WaterTempleY + 14].TileFrameX = 54;
-                Main.tile[WaterTempleX + 32, WaterTempleY + 13].TileFrameX = 54;
-                Main.tile[WaterTempleX + 31, WaterTempleY + 14].TileFrameX = 36;
-                Main.tile[WaterTempleX + 31, WaterTempleY + 13].TileFrameX = 36;
-            }
-            else
-            {
-                Main.tile[WaterTempleX + 9, WaterTempleY + 17].TileFrameX = 0;
-                Main.tile[WaterTempleX + 40, WaterTempleY + 17].TileFrameX = 0;
-                Main.tile[WaterTempleX + 19, WaterTempleY + 14].TileFrameX = 18;
-                Main.tile[WaterTempleX + 19, WaterTempleY + 13].TileFrameX = 18;
-                Main.tile[WaterTempleX + 18, WaterTempleY + 14].TileFrameX = 0;
-                Main.tile[WaterTempleX + 18, WaterTempleY + 13].TileFrameX = 0;
-                Main.tile[WaterTempleX + 32, WaterTempleY + 14].TileFrameX = 18;
-                Main.tile[WaterTempleX + 32, WaterTempleY + 13].TileFrameX = 18;
-                Main.tile[WaterTempleX + 31, WaterTempleY + 14].TileFrameX = 0;
-                Main.tile[WaterTempleX + 31, WaterTempleY + 13].TileFrameX = 0;
-            }
+            #region Crypt
+            DoGenCrypt(source);
+            #endregion
+            DoSpawnNecromant(source);
+            DoSpawnMinotaur(source);
+            DoSpawnBabaYaga(source);
+            #region Sunrise
+            DoGenGenSunrise(SunriseX, SunriseY);
+            DoEditWaterTemple();
+            #endregion
+            SpawnOldmanPriest(source);
         }
         public override void OnWorldLoad()
         {
@@ -429,11 +257,11 @@ namespace Bismuth.Utilities
             MazeStartY = 0;
             CastleSpawnX = 0;
             CastleSpawnY = 0;
-            TownTiles = new List<Vector2>();
-            TownWalls = new List<Vector2>();
-            DoorsRight = new List<Vector2>();
-            DoorsLeft = new List<Vector2>();
-            CasketCoords = new List<Vector2>();
+            TownTiles = [];
+            TownWalls = [];
+            DoorsRight = [];
+            DoorsLeft = [];
+            CasketCoords = [];
             IsSwampSuccess = true;
             IsDesertSuccess = true;
             GeneratedCaslte = true;
@@ -463,183 +291,7 @@ namespace Bismuth.Utilities
             {
                 return;
             }
-            tasks.Insert(ShiniesIndex + 1, new PassLegacy("Generating more vanilla ores", delegate (GenerationProgress progress, GameConfiguration configuration)
-            {
-                progress.Message = "Generating more vanilla ores";
-                #region Mod Ores
-                int aluminium = ModContent.TileType<AluminiumOre>();
-                int cinnabar = ModContent.TileType<Content.Tiles.Cinnabar>();
-                for (int n = 0; n < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 3E-05); n++)
-                {
-                    WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceLow, (int)GenVars.worldSurfaceHigh), (double)WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(2, 5), aluminium, false, 0f, 0f, false, true);
-                }
-                for (int num = 0; num < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 8E-05); num++)
-                {
-                    WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(3, 6), aluminium, false, 0f, 0f, false, true);
-                }
-                for (int num2 = 0; num2 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); num2++)
-                {
-                    WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), aluminium, false, 0f, 0f, false, true);
-                }
-                for (int num = 0; num < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 8E-05 / 2); num++)
-                {
-                    WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(3, 6), cinnabar, false, 0f, 0f, false, true);
-                }
-                for (int num2 = 0; num2 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); num2++)
-                {
-                    WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), cinnabar, false, 0f, 0f, false, true);
-                }
-                #endregion
-                #region More Vanilla Ores
-                bool CopperInWorld, TinInWorld, IronInWorld, LeadInWorld, SilverInWorld, TungstenInWorld, GoldInWorld, PlatinumInWorld = CopperInWorld = TinInWorld = IronInWorld = LeadInWorld = SilverInWorld = TungstenInWorld = GoldInWorld = false;
-                for (int x = 0; x < Main.maxTilesX; x++)
-                {
-                    for (int y = 0; y < Main.maxTilesY; y++)
-                    {
-                        if (Main.tile[x, y].TileType == TileID.Copper)
-                        {
-                            CopperInWorld = true;
-                        }
-                        else
-                            TinInWorld = true;
-                        if (Main.tile[x, y].TileType == TileID.Iron)
-                        {
-                            IronInWorld = true;
-                        }
-                        else
-                            LeadInWorld = true;
-
-                        if (Main.tile[x, y].TileType == TileID.Silver)
-                        {
-                            SilverInWorld = true;
-                        }
-                        else
-                            TungstenInWorld = true;
-
-                        if (Main.tile[x, y].TileType == TileID.Gold)
-                        {
-                            GoldInWorld = true;
-                        }
-                        else
-                            PlatinumInWorld = true;
-                        if (x == Main.maxTilesX && y == Main.maxTilesY) break;
-                    }
-                }
-                if (CopperInWorld)
-                {
-                    for (int n = 0; n < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 6E-05); n++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceLow, (int)GenVars.worldSurfaceHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(2, 6), TileID.Tin, false, 0f, 0f, false, true);
-                    }
-                    for (int l = 0; l < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 8E-05); l++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(3, 7), TileID.Tin, false, 0f, 0f, false, true);
-                    }
-                    for (int m = 0; m < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); m++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Tin, false, 0f, 0f, false, true);
-                    }
-                }
-                if (TinInWorld)
-                {
-                    for (int n = 0; n < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 6E-05); n++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceLow, (int)GenVars.worldSurfaceHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(2, 6), TileID.Copper, false, 0f, 0f, false, true);
-                    }
-                    for (int l = 0; l < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 8E-05); l++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(3, 7), TileID.Copper, false, 0f, 0f, false, true);
-                    }
-                    for (int m = 0; m < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); m++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Copper, false, 0f, 0f, false, true);
-                    }
-                }
-                if (IronInWorld)
-                {
-                    for (int n = 0; n < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 3E-05); n++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceLow, (int)GenVars.worldSurfaceHigh), (double)WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(2, 5), TileID.Lead, false, 0f, 0f, false, true);
-                    }
-                    for (int num = 0; num < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 8E-05); num++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(3, 6), TileID.Lead, false, 0f, 0f, false, true);
-                    }
-                    for (int num2 = 0; num2 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); num2++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Lead, false, 0f, 0f, false, true);
-                    }
-                }
-                if (LeadInWorld)
-                {
-                    for (int n = 0; n < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 3E-05); n++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceLow, (int)GenVars.worldSurfaceHigh), (double)WorldGen.genRand.Next(3, 7), WorldGen.genRand.Next(2, 5), TileID.Iron, false, 0f, 0f, false, true);
-                    }
-                    for (int num = 0; num < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 8E-05); num++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(3, 6), TileID.Iron, false, 0f, 0f, false, true);
-                    }
-                    for (int num2 = 0; num2 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.0002); num2++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Iron, false, 0f, 0f, false, true);
-                    }
-                }
-                if (SilverInWorld)
-                {
-                    for (int num3 = 0; num3 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 2.6E-05); num3++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(3, 6), TileID.Tungsten, false, 0f, 0f, false, true);
-                    }
-                    for (int num4 = 0; num4 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00015); num4++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Tungsten, false, 0f, 0f, false, true);
-                    }
-                    for (int num5 = 0; num5 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00017); num5++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next(0, (int)GenVars.worldSurfaceLow), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Tungsten, false, 0f, 0f, false, true);
-                    }
-                }
-                if (TungstenInWorld)
-                {
-                    for (int num3 = 0; num3 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 2.6E-05); num3++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.worldSurfaceHigh, (int)GenVars.rockLayerHigh), (double)WorldGen.genRand.Next(3, 6), WorldGen.genRand.Next(3, 6), TileID.Silver, false, 0f, 0f, false, true);
-                    }
-                    for (int num4 = 0; num4 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00015); num4++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Silver, false, 0f, 0f, false, true);
-                    }
-                    for (int num5 = 0; num5 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00017); num5++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next(0, (int)GenVars.worldSurfaceLow), (double)WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(4, 8), TileID.Silver, false, 0f, 0f, false, true);
-                    }
-                }
-                if (GoldInWorld)
-                {
-                    for (int num6 = 0; num6 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00012); num6++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(4, 8), TileID.Platinum, false, 0f, 0f, false, true);
-                    }
-                    for (int num7 = 0; num7 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00012); num7++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next(0, (int)GenVars.worldSurfaceLow - 20), (double)WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(4, 8), TileID.Platinum, false, 0f, 0f, false, true);
-                    }
-                }
-                if (PlatinumInWorld)
-                {
-                    for (int num6 = 0; num6 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00012); num6++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next((int)GenVars.rockLayerLow, Main.maxTilesY), (double)WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(4, 8), TileID.Gold, false, 0f, 0f, false, true);
-                    }
-                    for (int num7 = 0; num7 < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 0.00012); num7++)
-                    {
-                        WorldGen.TileRunner(WorldGen.genRand.Next(0, Main.maxTilesX), WorldGen.genRand.Next(0, (int)GenVars.worldSurfaceLow - 20), (double)WorldGen.genRand.Next(4, 8), WorldGen.genRand.Next(4, 8), TileID.Gold, false, 0f, 0f, false, true);
-                    }
-                }
-                #endregion
-
-            }));
+            BismuthGen.GenOre(tasks, ShiniesIndex, "Generating more vanilla ores");
             int WaterTempleCleanX = 0;
             int WaterTempleCleanY = 0;
             int GravitatingSand = tasks.FindIndex(genpass => genpass.Name.Equals("Gravitating Sand"));
@@ -906,7 +558,7 @@ namespace Bismuth.Utilities
                         }
                     }
                 }
-                WorldGen.Place2x2(WaterTempleX + 23, WaterTempleY + 17, (ushort)ModContent.TileType<AltarOfWaters>(), 0);
+                WorldGen.PlaceObject(WaterTempleX + 23, WaterTempleY + 17, (ushort)ModContent.TileType<AltarOfWaters>());
                 WorldGen.Place1xX(WaterTempleX + 4, WaterTempleY + 20, TileID.ClosedDoor, 35);
                 WorldGen.Place1xX(WaterTempleX + 12, WaterTempleY + 17, TileID.ClosedDoor, 35);
                 WorldGen.Place1xX(WaterTempleX + 37, WaterTempleY + 17, TileID.ClosedDoor, 35);
@@ -1695,38 +1347,34 @@ namespace Bismuth.Utilities
                 ;
             }));
             int DesertIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Full Desert"));
-            tasks.Insert(DesertIndex + 1, new PassLegacy("Desert Village Setting", delegate (GenerationProgress progress, GameConfiguration configuration)
-            {
-                var desert = GenVars.UndergroundDesertLocation;
-                int desertLeft = desert.Left;
-                int desertRight = desert.Right;
+            //tasks.Insert(DesertIndex + 1, new PassLegacy("Desert Village Setting", delegate (GenerationProgress progress, GameConfiguration configuration) {
+            //    var desert = GenVars.UndergroundDesertLocation;
+            //    int desertLeft = desert.Left;
+            //    int desertRight = desert.Right;
 
-                int offset = -60; // смещение влево
-                int CenterX = desertLeft + ((desertRight - desertLeft) / 2) + offset;
+            //    int offset = -60; // смещение влево
+            //    int CenterX = desertLeft + ((desertRight - desertLeft) / 2) + offset;
 
-                int top = Math.Max((int)GenVars.worldSurfaceLow, desert.Top - 20);
-                int bottom = Math.Min(Main.maxTilesY - 1, desert.Bottom + 50);
-                int centerY = top;
+            //    int top = Math.Max((int)GenVars.worldSurfaceLow, desert.Top - 20);
+            //    int bottom = Math.Min(Main.maxTilesY - 1, desert.Bottom + 50);
+            //    int centerY = top;
 
-                for (int j = top; j <= bottom; j++)
-                {
-                    if (WorldMethods.CheckWall(CenterX, j, WallID.HardenedSand) || WorldMethods.CheckWall(CenterX, j, WallID.Sandstone))
-                    {
-                        centerY = j - DesertPitSetting;
-                        break;
-                    }
-                }
+            //    for (int j = top; j <= bottom; j++) {
+            //        if (WorldMethods.CheckWall(CenterX, j, WallID.HardenedSand) || WorldMethods.CheckWall(CenterX, j, WallID.Sandstone)) {
+            //            centerY = j - DesertPitSetting;
+            //            break;
+            //        }
+            //    }
 
-                StartBridgeX = CenterX;
-                BridgeY = centerY;
-                EndBridgeX = StartBridgeX + 2;
-            }));
+            //    StartBridgeX = CenterX;
+            //    BridgeY = centerY;
+            //    EndBridgeX = StartBridgeX + 2;
+            //}));
 
-            tasks.Insert(MicroBiomesIndex + 2, new PassLegacy("Desert Village", delegate (GenerationProgress progress, GameConfiguration configuration)
-            {
-                Point16 ruin3Pos = new Point16(StartBridgeX, BridgeY);
-                GenerateStructure("Structures/Desert", ruin3Pos, Bismuth.instance);
-            }));     
+            //tasks.Insert(MicroBiomesIndex + 2, new PassLegacy("Desert Village", delegate (GenerationProgress progress, GameConfiguration configuration) {
+            //    Point16 ruin3Pos = new Point16(StartBridgeX, BridgeY);
+            //    GenerateStructure("Structures/Desert", ruin3Pos, Bismuth.instance);
+            //}));
             tasks.Insert(MicroBiomesIndex + 3, new PassLegacy("Imperian Town", delegate (GenerationProgress progress, GameConfiguration configuration)
             {
                 Main.spawnTileX = Main.maxTilesX / 2;
@@ -3584,33 +3232,33 @@ namespace Bismuth.Utilities
             }));
         }
         #region Chests Loot
-        void GenerateBiomeTailorChestLoot(Item[] chestInventory)
+        public static void GenerateBiomeTailorChestLoot(Item[] chestInventory)
         {
             int TailorcurrentIndex = 0;
             chestInventory[TailorcurrentIndex].SetDefaults(ModContent.ItemType<SecondPartOfAmulet>()); TailorcurrentIndex++;
         }
-        void GenerateBiomeMainChestLoot(Item[] chestInventory)
+        public static void GenerateBiomeMainChestLoot(Item[] chestInventory)
         {
             int MaincurrentIndex = 0;
             chestInventory[MaincurrentIndex].SetDefaults(ModContent.ItemType<ThirdPartOfAmulet>()); MaincurrentIndex++;
         }
-        void GenerateBiomeUnderChestLoot(Item[] chestInventory)
+        public static void GenerateBiomeUnderChestLoot(Item[] chestInventory)
         {
             int UndercurrentIndex = 0;
             chestInventory[UndercurrentIndex].SetDefaults(ModContent.ItemType<FourthPartOfAmulet>()); UndercurrentIndex++;
         }
-        void GenerateBiomeForgeChestLoot(Item[] chestInventory)
+        public static void GenerateBiomeForgeChestLoot(Item[] chestInventory)
         {
             int ForgecurrentIndex = 0;
             chestInventory[ForgecurrentIndex].SetDefaults(ModContent.ItemType<FifthPartOfAmulet>()); ForgecurrentIndex++;
 
         }
-        void GenerateBiomeSwampChestLoot(Item[] chestInventory)
+        public static void GenerateBiomeSwampChestLoot(Item[] chestInventory)
         {
             int SwampcurrentIndex = 0;
             chestInventory[SwampcurrentIndex].SetDefaults(ModContent.ItemType<UnchargedElessar>()); SwampcurrentIndex++;
         }
-        void GenerateBiomeOrcishChestLoot(Item[] chestInventory)
+        public static void GenerateBiomeOrcishChestLoot(Item[] chestInventory)
         {
             int OrcishcurrentIndex = 0;
             chestInventory[OrcishcurrentIndex].SetDefaults(Utils.SelectRandom(WorldGen.genRand, ModContent.ItemType<Doomhammer>(), ModContent.ItemType<OrcishBanner>(), ModContent.ItemType<MagnesiumOxide>(), ModContent.ItemType<WaveOfForce>())); OrcishcurrentIndex++;
@@ -3622,6 +3270,8 @@ namespace Bismuth.Utilities
         #endregion
         public override void SaveWorldData(TagCompound tag)
         {
+            tag["downedWitch"] = downedWitch;
+            tag["SoulScytheRecipe"] = SoulScytheRecipe;
             tag["TotemX"] = TotemX;
             tag["TotemY"] = TotemY;
             tag["TotemCooldown"] = TotemCooldown;
@@ -3668,6 +3318,8 @@ namespace Bismuth.Utilities
         }
         public override void LoadWorldData(TagCompound tag)
         {
+            downedWitch = tag.GetBool("downedWitch");
+            SoulScytheRecipe = tag.GetBool("SoulScytheRecipe");
             TotemX = tag.GetInt("TotemX");
             TotemY = tag.GetInt("TotemY");
             TotemCooldown = tag.GetInt("TotemCooldown");
@@ -3715,6 +3367,8 @@ namespace Bismuth.Utilities
         }
         public override void NetSend(BinaryWriter writer)
         {
+            writer.Write(downedWitch);
+            writer.Write(SoulScytheRecipe);
             writer.Write(TownTiles.Count);
             foreach (var v in TownTiles)
             {
@@ -3770,7 +3424,7 @@ namespace Bismuth.Utilities
             writer.Write(CryptIsSpawned);
             writer.Write(GeneratedCaslte);
             writer.Write(SunriseIsPlaced);
-            //writer.Write(OpenedRedChest);
+            writer.Write(OpenedRedChest);
             writer.Write(DestroyedMaze);
             writer.Write(WizardDay);
             writer.Write(FirstTotemDeactivation);
@@ -3783,9 +3437,12 @@ namespace Bismuth.Utilities
             {
                 writer.Write(VampShop[i]);
             }
+            writer.Write(NearbyTotemOfCurse);
         }
         public override void NetReceive(BinaryReader reader)
         {
+            downedWitch = reader.ReadBoolean();
+            SoulScytheRecipe = reader.ReadBoolean();
             int count = reader.ReadInt32();
             TownTiles = new List<Vector2>();
             for (int i = 0; i < count; i++)
@@ -3855,8 +3512,10 @@ namespace Bismuth.Utilities
             KilledBossesInWorld = reader.ReadInt32();
             OrcishInvasionStage = reader.ReadInt32();
             RemovePriest = reader.ReadInt32();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++) {
                 VampShop[i] = reader.ReadInt32();
+            }
+            NearbyTotemOfCurse = reader.ReadBoolean();
         }
     }
 }

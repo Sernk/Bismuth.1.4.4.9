@@ -1,11 +1,13 @@
-﻿using MonoMod.RuntimeDetour;
+﻿using Bismuth.Utilities.ModSupport.BismuthHooks;
+using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Terraria;
-using Terraria.GameContent;          
-using Terraria.ID;                  
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.DataStructures;
 
-namespace Bismuth.Utilities
+namespace Bismuth.Utilities.Hooks
 {
     /// <summary>
     /// Возможно цену можно поменять и по легче но я не знаю как.
@@ -13,33 +15,15 @@ namespace Bismuth.Utilities
     /// </summary>
     public sealed class Shop : ModSystem
     {
-        private Hook _getShoppingSettingsHook;
-
         public override void Load()
         {
-            // Берём целевой метод: ShopHelper.GetShoppingSettings(Player,NPC)
-            MethodInfo target = typeof(ShopHelper).GetMethod(nameof(ShopHelper.GetShoppingSettings), BindingFlags.Instance | BindingFlags.Public);
-            _getShoppingSettingsHook = new Hook(target, (GetShoppingSettingsDetour)Detour_GetShoppingSettings);
+            On_ShopHelper.GetShoppingSettings += On_ShopHelper_GetShoppingSettings;
         }
 
-        public override void Unload()
-        {
-            _getShoppingSettingsHook?.Dispose();
-        }
-
-        /// <summary>Сигнатура оригинального метода.</summary>
-        private delegate ShoppingSettings Orig_GetShoppingSettings(ShopHelper self, Player player, NPC npc);
-
-        /// <summary>
-        /// Сигнатура detour‑метода: первым идёт trampoline «orig».
-        /// </summary>
-        private delegate ShoppingSettings GetShoppingSettingsDetour(Orig_GetShoppingSettings orig, ShopHelper self, Player player, NPC npc);
-
-        private ShoppingSettings Detour_GetShoppingSettings(Orig_GetShoppingSettings orig, ShopHelper self, Player player, NPC npc)
-        {
+        private ShoppingSettings On_ShopHelper_GetShoppingSettings(On_ShopHelper.orig_GetShoppingSettings orig, ShopHelper self, Player player, NPC npc) {
             ShoppingSettings settings = orig(self, player, npc);
 
-            var bismuth = player.GetModPlayer<BismuthPlayer>();
+            BismuthPlayer bismuth = player.GetModPlayer<BismuthPlayer>();
 
             if (bismuth.skill132lvl > 0 && npc.type == NPCID.Demolitionist) settings.PriceAdjustment *= 0.6f;
             if (bismuth.skill83lvl > 0) settings.PriceAdjustment *= 0.65f;
@@ -57,6 +41,9 @@ namespace Bismuth.Utilities
             if (bismuth.Charm <= -30) settings.PriceAdjustment *= 1.30f;
 
             return settings;
+        }
+        public override void Unload() {
+            On_ShopHelper.GetShoppingSettings -= On_ShopHelper_GetShoppingSettings;
         }
     }
 }
