@@ -1,5 +1,4 @@
-﻿// Code by 𝒜𝑒𝓇𝒾𝓈
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Terraria.GameContent.Generation;
 using Terraria.ModLoader;
@@ -27,20 +26,11 @@ namespace Bismuth.Utilities {
             if (Success) GensBool = true;
         }
         public abstract bool Do_MakeGen(GenerationProgress progress);
-        public override void OnWorldLoad() {
-            GensBool = false;
-        }
-        public override void SaveWorldData(TagCompound tag) {
-            tag[SaveName] = GensBool;
-        }
-        public override void LoadWorldData(TagCompound tag) {
-            GensBool = tag.GetBool(SaveName);
-        }
-        public override void NetSend(BinaryWriter writer) {
-            writer.Write(GensBool);
-        }
-        public override void NetReceive(BinaryReader reader) {
-            GensBool = reader.ReadBoolean();
-        }
+        public override void OnWorldLoad() => GensBool = false;
+        public override void SaveWorldData(TagCompound tag) => tag[SaveName] = GensBool;
+        public override void LoadWorldData(TagCompound tag) => GensBool = tag.GetBool(SaveName);
+        public override void NetSend(BinaryWriter writer) => writer.Write(GensBool);
+        public override void NetReceive(BinaryReader reader) => GensBool = reader.ReadBoolean();
+        public override void ClearWorld() => GensBool = false;
     }
 }

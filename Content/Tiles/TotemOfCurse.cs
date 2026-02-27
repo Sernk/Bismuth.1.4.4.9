@@ -1,9 +1,11 @@
 ﻿using Bismuth.Content.Items.Other;
+using Bismuth.Content.NPCs;
 using Bismuth.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -33,22 +35,45 @@ namespace Bismuth.Content.Tiles
         {
             return false;
         }
-        public override void NearbyEffects(int i, int j, bool closer)
-        { 
-            Player player = Main.LocalPlayer;
-            if (player.ZoneDesert)
-            {
-                if (closer == false)
-                {
-                    if (BismuthWorld.IsTotemActive) { BismuthWorld.TotemX = i; BismuthWorld.TotemY = j - 2; }
-                    if (BismuthWorld.TotemCooldown > 0) { BismuthWorld.IsTotemActive = false; BismuthWorld.TotemCooldown--; }
-                    else BismuthWorld.IsTotemActive = true;
+        public override void NearbyEffects(int i, int j, bool closer) {
+            if (!closer) {
+                if (BismuthWorld.IsTotemActive && Main.LocalPlayer.InModBiome<TribeTotemBiome>()) {
+                    if (Main.rand.NextBool(1080)) {
+                        int npc = NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<Papuan>());
+                        if (Main.netMode == NetmodeID.Server && npc < Main.maxNPCs) {
+                            NetMessage.SendData(MessageID.SyncNPC, number: npc);
+                        }
+                    }
+                    if (Main.rand.NextBool(1260)) {
+                        int npc = NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<PapuanArcher>());
+                        if (Main.netMode == NetmodeID.Server && npc < Main.maxNPCs) {
+                            NetMessage.SendData(MessageID.SyncNPC, number: npc);
+                        }
+                    }
+                    if (Main.rand.NextBool(1800)) {
+                        int npc = NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<PapuanWarrior>());
+                        if (Main.netMode == NetmodeID.Server && npc < Main.maxNPCs) {
+                            NetMessage.SendData(MessageID.SyncNPC, number: npc);
+                        }
+                    }
+                    if (Main.rand.NextBool(2700) && BismuthWorld.downedEoC) {
+                        NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 8) * 16, ModContent.NPCType<SandWormHead>());
+                    }
+                    if (Main.hardMode && Main.rand.NextBool(4000) && !NPC.AnyNPCs(ModContent.NPCType<PapuanWizard>()) && !BismuthWorld.WizardDay && Main.dayTime) {
+                        BismuthWorld.WizardDay = true;
+                        NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<PapuanWizard>());
+                    }
                 }
+                if (BismuthWorld.TotemCooldown > 0) {
+                    BismuthWorld.IsTotemActive = false;
+                    BismuthWorld.TotemCooldown--;
+                }
+                else { BismuthWorld.IsTotemActive = true; }
             }
         }
         public override bool RightClick(int i, int j)
         {
-            Player player = Main.player[Main.myPlayer];
+            Player player = Main.LocalPlayer;
             if (BismuthWorld.IsTotemActive)
             {
                 for (int num66 = 0; num66 < 58; num66++)

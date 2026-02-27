@@ -25,6 +25,7 @@ namespace Bismuth.Content.NPCs {
             NPC.knockBackResist = 0.4f;
             AIType = NPCID.Retinazer;
             AnimationType = NPCID.Hellhound;
+            SpawnModBiomes = [ModContent.GetInstance<ZoneSwamp>().Type];
         }
         public override void HitEffect(NPC.HitInfo hit) {
             if (NPC.life <= 0) {
@@ -43,7 +44,7 @@ namespace Bismuth.Content.NPCs {
             }
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-            return spawnInfo.Player.GetModPlayer<BismuthPlayer>().ZoneSwamp && spawnInfo.SpawnTileY < Main.rockLayer ? 5f : 0f;
+            return spawnInfo.Player.InModBiome<ZoneSwamp>() && spawnInfo.SpawnTileY < Main.rockLayer ? 5f : 0f;
         }
     }
 }

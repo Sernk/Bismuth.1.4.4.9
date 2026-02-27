@@ -286,7 +286,6 @@ namespace Bismuth.Utilities
         {
             int MicroBiomesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
             int ShiniesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
-            ModLoader.TryGetMod("Synergia", out Mod Synergia); 
             if (ShiniesIndex == -1)
             {
                 return;
@@ -295,30 +294,23 @@ namespace Bismuth.Utilities
             int WaterTempleCleanX = 0;
             int WaterTempleCleanY = 0;
             int GravitatingSand = tasks.FindIndex(genpass => genpass.Name.Equals("Gravitating Sand"));
-            if (ModLoader.TryGetMod("Remnants", out Mod Remnants))
+            tasks.Insert(GravitatingSand + 1, new PassLegacy("Initializing", delegate (GenerationProgress progress, GameConfiguration configuration)
             {
-                DesertPitSetting = 75;
-            }
-            else
-            {
-                tasks.Insert(GravitatingSand + 1, new PassLegacy("Initializing", delegate (GenerationProgress progress, GameConfiguration configuration)
-                {
-                    int x = 0;
-                    int y = 0;
-                    while (!WorldMethods.CheckLiquid(x, y, 255))
-                        y++;
-                    while (!WorldGen.SolidTile(x, y))
-                        x++;
-                    BeachEndLeft = x;
-                    x = Main.maxTilesX - 1;
-                    y = 0;
-                    while (!WorldMethods.CheckLiquid(x, y, 255))
-                        y++;
-                    while (!WorldGen.SolidTile(x, y))
-                        x--;
-                    BeachEndRight = x;
-                }));
-            }
+                int x = 0;
+                int y = 0;
+                while (!WorldMethods.CheckLiquid(x, y, 255))
+                    y++;
+                while (!WorldGen.SolidTile(x, y))
+                    x++;
+                BeachEndLeft = x;
+                x = Main.maxTilesX - 1;
+                y = 0;
+                while (!WorldMethods.CheckLiquid(x, y, 255))
+                    y++;
+                while (!WorldGen.SolidTile(x, y))
+                    x--;
+                BeachEndRight = x;
+            }));
             int WaterTempleIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Surface Chests"));
             tasks.Insert(WaterTempleIndex + 1, new PassLegacy("Generating Water Temple", delegate (GenerationProgress progress, GameConfiguration configuration)
             {
@@ -1010,14 +1002,7 @@ namespace Bismuth.Utilities
             int WeedsIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Weeds"));
             int SpawnCleanIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Jungle Chests"));
             int SpawnPointIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Spawn Point"));
-            string name;
-            if (Synergia != null) {
-                name = "Final Cleanup";
-            }
-            else {
-                name = "Spawn Update";
-            }
-            tasks.Insert(SpawnPointIndex + 1, new PassLegacy(name, delegate (GenerationProgress progress, GameConfiguration configuration)
+            tasks.Insert(SpawnPointIndex + 1, new PassLegacy("Spawn Update", delegate (GenerationProgress progress, GameConfiguration configuration)
             {
                 Main.spawnTileX = Main.maxTilesX / 2;
                 Main.spawnTileY -= 2;

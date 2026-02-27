@@ -30,6 +30,7 @@ namespace Bismuth.Content.NPCs
             AIType = 183;
             AnimationType = -1;
             Banner = NPC.type;
+            SpawnModBiomes = [ModContent.GetInstance<ZoneSwamp>().Type];
         }
 
         private double frameCounter = 0.0;
@@ -105,7 +106,7 @@ namespace Bismuth.Content.NPCs
                 Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, Mod.Find<ModGore>("ToadBackPaw").Type, 1f);
             }
         }
-        public override float SpawnChance(NPCSpawnInfo spawnInfo) { return spawnInfo.Player.GetModPlayer<BismuthPlayer>().ZoneSwamp && spawnInfo.SpawnTileY < Main.rockLayer && Main.dayTime ? 7.0f : 0.0f; }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) { return spawnInfo.Player.InModBiome<ZoneSwamp>() && spawnInfo.SpawnTileY < Main.rockLayer && Main.dayTime ? 7.0f : 0.0f; }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ToadsEye>(), 3));

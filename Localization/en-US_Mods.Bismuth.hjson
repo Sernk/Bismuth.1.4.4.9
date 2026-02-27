@@ -3702,7 +3702,7 @@ Keybinds: {
 Biomes: {
 	ZoneSwamp: {
 		TownNPCDialogueName: the Zone Swamp
-		DisplayName: Zone Swamp
+		DisplayName: "[c/5d8931: Swamp]"
 	}
 
 	#Я не знаю почему оно здесь

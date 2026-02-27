@@ -1260,6 +1260,11 @@ namespace Bismuth.Utilities
             }
         }
         public override void PostUpdate() {
+
+            if (BismuthWorld.IsTotemActive && InTribeTotemZone) {
+                Player.AddBuff(ModContent.BuffType<TribeCurse>(), 2);
+            }
+
             Quests quests = Player.GetModPlayer<Quests>();
             if (QuestVariable.ElessarQuest == 200 && !quests.completedElessarQuest) { quests.ElessarQuest = 200; quests.completedElessarQuest = true; }
             if (QuestVariable.BookOfSecretsQuest == 90 && quests.BookOfSecretsQuest != 100) { Player.GetModPlayer<Quests>().BookOfSecretsQuest = 90; }
@@ -1401,36 +1406,15 @@ namespace Bismuth.Utilities
                 PhoenixPendantWasSpawned = true;
                 Player.QuickSpawnItem(Player.GetSource_FromThis(), ModContent.ItemType<PhoenixPendant>());
             }
-            if (Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>() || Main.tile[Player.position.ToTileCoordinates().X + 1, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>()) {
-                Player.AddBuff(ModContent.BuffType<SwampQuagmire>(), 2);
+            if (Main.tile[Player.position.ToTileCoordinates().X, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>() || Main.tile[Player.position.ToTileCoordinates().X + 1, Player.position.ToTileCoordinates().Y + 3].TileType == ModContent.TileType<SwampMud>()) { Player.AddBuff(ModContent.BuffType<SwampQuagmire>(), 2); }
+            if (BismuthWorld.MazeStartX != 0 && BismuthWorld.MazeStartY != 0 && BismuthWorld.downedEoC && !BismuthWorld.OpenedRedChest){
+                if (Player.Center.ToTileCoordinates().X > BismuthWorld.MazeStartX && Player.Center.ToTileCoordinates().X < BismuthWorld.MazeStartX + 58 && Player.Center.ToTileCoordinates().Y > BismuthWorld.MazeStartY && Player.Center.ToTileCoordinates().Y < BismuthWorld.MazeStartY + 57 && !BismuthWorld.DestroyedMaze) { Player.AddBuff(ModContent.BuffType<FearOfMaze>(), 100); }
             }
-            if (BismuthWorld.MazeStartX != 0 && BismuthWorld.MazeStartY != 0 && BismuthWorld.downedEoC && !BismuthWorld.OpenedRedChest)//
-            {
-                if (Player.Center.ToTileCoordinates().X > BismuthWorld.MazeStartX && Player.Center.ToTileCoordinates().X < BismuthWorld.MazeStartX + 58 && Player.Center.ToTileCoordinates().Y > BismuthWorld.MazeStartY && Player.Center.ToTileCoordinates().Y < BismuthWorld.MazeStartY + 57 && !BismuthWorld.DestroyedMaze)
-                    Player.AddBuff(ModContent.BuffType<FearOfMaze>(), 100);
-            }
-            if (Player.Center.ToTileCoordinates().X > BismuthWorld.WaterTempleX + 13 && Player.Center.ToTileCoordinates().X < BismuthWorld.WaterTempleX + 36 && Player.Center.ToTileCoordinates().Y > BismuthWorld.WaterTempleY + 5 && Player.Center.ToTileCoordinates().Y < BismuthWorld.WaterTempleY + 17 && !BismuthWorld.downedBanshee && !NPC.AnyNPCs(ModContent.NPCType<Banshee>())) {
-                NPC.NewNPC(Player.GetSource_FromThis(), (BismuthWorld.WaterTempleX + 25) * 16, (BismuthWorld.WaterTempleY + 16) * 16, ModContent.NPCType<Banshee>());
-            }
-            if (Vector2.Distance(Player.Center, new Vector2(BismuthWorld.WaterTempleX * 16, BismuthWorld.WaterTempleY * 16)) > 2000f && !NPC.AnyNPCs(ModContent.NPCType<NagaMerchant>()) && BismuthWorld.downedBanshee) {
-                NPC.NewNPC(Player.GetSource_FromThis(), (BismuthWorld.WaterTempleX + 25) * 16, (BismuthWorld.WaterTempleY + 16) * 16, ModContent.NPCType<NagaMerchant>());
-            }
-            if (Player.Center.ToTileCoordinates().X > Main.spawnTileX - 100 && Player.Center.ToTileCoordinates().X < Main.spawnTileX + 105 && Player.Center.ToTileCoordinates().Y > Main.spawnTileY - 30 && Player.Center.ToTileCoordinates().Y < Main.spawnTileY + 30)
-                Player.AddBuff(ModContent.BuffType<AuraOfEmpire>(), 2);
-            if (BismuthWorld.IsTotemActive && InTribeTotemZone) {
+            if (Player.Center.ToTileCoordinates().X > BismuthWorld.WaterTempleX + 13 && Player.Center.ToTileCoordinates().X < BismuthWorld.WaterTempleX + 36 && Player.Center.ToTileCoordinates().Y > BismuthWorld.WaterTempleY + 5 && Player.Center.ToTileCoordinates().Y < BismuthWorld.WaterTempleY + 17 && !BismuthWorld.downedBanshee && !NPC.AnyNPCs(ModContent.NPCType<Banshee>())) { NPC.NewNPC(Player.GetSource_FromThis(), (BismuthWorld.WaterTempleX + 25) * 16, (BismuthWorld.WaterTempleY + 16) * 16, ModContent.NPCType<Banshee>()); }
+            if (Vector2.Distance(Player.Center, new Vector2(BismuthWorld.WaterTempleX * 16, BismuthWorld.WaterTempleY * 16)) > 2000f && !NPC.AnyNPCs(ModContent.NPCType<NagaMerchant>()) && BismuthWorld.downedBanshee) { NPC.NewNPC(Player.GetSource_FromThis(), (BismuthWorld.WaterTempleX + 25) * 16, (BismuthWorld.WaterTempleY + 16) * 16, ModContent.NPCType<NagaMerchant>()); }
+            if (Player.Center.ToTileCoordinates().X > Main.spawnTileX - 100 && Player.Center.ToTileCoordinates().X < Main.spawnTileX + 105 && Player.Center.ToTileCoordinates().Y > Main.spawnTileY - 30 && Player.Center.ToTileCoordinates().Y < Main.spawnTileY + 30) { Player.AddBuff(ModContent.BuffType<AuraOfEmpire>(), 2); }
+            if (BismuthWorld.IsTotemActive && InTribeTotemZone) { 
                 Player.AddBuff(ModContent.BuffType<TribeCurse>(), 2);
-                if (Main.rand.Next(0, 1080) == 0)
-                    NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 2) * 16, ModContent.NPCType<Papuan>());
-                if (Main.rand.Next(0, 1260) == 0)
-                    NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 2) * 16, ModContent.NPCType<PapuanArcher>());
-                if (Main.rand.Next(0, 1800) == 0)
-                    NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 2) * 16, ModContent.NPCType<PapuanWarrior>());
-                if (Main.rand.Next(0, 2700) == 0 && BismuthWorld.downedEoC)
-                    NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 5) * 16, ModContent.NPCType<SandWormHead>());
-                if (Main.hardMode && Main.rand.Next(0, 4000) == 0 && !NPC.AnyNPCs(ModContent.NPCType<PapuanWizard>()) && !BismuthWorld.WizardDay && Main.dayTime) {
-                    BismuthWorld.WizardDay = true;
-                    NPC.NewNPC(Player.GetSource_FromThis(), BismuthWorld.TotemX * 16, (BismuthWorld.TotemY + 2) * 16, ModContent.NPCType<PapuanWizard>());
-                }
             }
             UpdateCameraPos(ModContent.NPCType<PriestTeleportation>());
             //if (Player.FindBuffIndex(ModContent.BuffType<MagiciansAura>()) == -1)
@@ -15672,6 +15656,6 @@ namespace Bismuth.Utilities
               //  Main.PlaySound(SoundID.NPCHit23, player.position);
             }
             return;
-        }        
+        }
     }
 }

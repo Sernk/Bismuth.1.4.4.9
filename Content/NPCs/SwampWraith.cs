@@ -36,6 +36,7 @@ namespace Bismuth.Content.NPCs
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             AnimationType = NPCID.Wraith;
+            SpawnModBiomes = [ModContent.GetInstance<ZoneSwamp>().Type];
         }
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
@@ -65,7 +66,7 @@ namespace Bismuth.Content.NPCs
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return spawnInfo.Player.GetModPlayer<BismuthPlayer>().ZoneSwamp && spawnInfo.SpawnTileY < Main.rockLayer && !Main.dayTime ? 5f : 0f;
+            return spawnInfo.Player.InModBiome<ZoneSwamp>() && spawnInfo.SpawnTileY < Main.rockLayer && !Main.dayTime ? 5f : 0f;
 
         }
         public override void HitEffect(NPC.HitInfo hit)

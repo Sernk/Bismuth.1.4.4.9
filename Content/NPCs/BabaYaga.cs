@@ -62,6 +62,7 @@ namespace Bismuth.Content.NPCs {
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.knockBackResist = 0f;
+            SpawnModBiomes = [ModContent.GetInstance<ZoneSwamp>().Type];
         }
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) {
             var quests = QuestRegistry.GetAvailableQuests(Main.LocalPlayer, "BabaYaga");
