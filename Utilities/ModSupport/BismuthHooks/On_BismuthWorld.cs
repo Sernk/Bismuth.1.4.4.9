@@ -91,6 +91,26 @@ namespace Bismuth.Utilities.ModSupport.BismuthHooks {
         }
 
         // =====================================================
+        // StartOrcishInvasion
+        // =====================================================
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public delegate void orig_StartOrcishInvasion();
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public delegate void hook_StartOrcishInvasion(orig_OrcishInvasion orig);
+
+        static Hook Hook_StartOrcishInvasion;
+
+        public static event hook_OrcishInvasion StartOrcishInvasion {
+            add {
+                Hook_StartOrcishInvasion = new Hook(Target.GetMethod("CallOrcishInvasion", Flags), value);
+                Hook_StartOrcishInvasion.Apply();
+            }
+            remove => Hook_StartOrcishInvasion?.Dispose();
+        }
+
+        // =====================================================
         // DoGenCrypt
         // =====================================================
 
