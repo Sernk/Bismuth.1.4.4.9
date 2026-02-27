@@ -98,7 +98,7 @@ namespace Bismuth.Utilities.ModSupport.BismuthHooks {
         public delegate void orig_StartOrcishInvasion();
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public delegate void hook_StartOrcishInvasion(orig_OrcishInvasion orig);
+        public delegate void hook_StartOrcishInvasion(orig_StartOrcishInvasion orig);
 
         static Hook Hook_StartOrcishInvasion;
 
