@@ -28,7 +28,7 @@ Tiles: {
 		OrcishChest: Chest
 	}
 
-	OrcishCoatOfArms.MapEntry: Orcish Coat Of Arms
+	OrcishCoatOfArms.MapEntry: Orcish Coat of Arms
 	OrcishDoorClosed.MapEntry: Door
 	OrcishDoorOpen.MapEntry: Door
 	OrcishLamp.MapEntry: Lamp
@@ -330,7 +330,7 @@ Items: {
 	}
 
 	HeartOfSwamp: {
-		DisplayName: Heart Of the Swamp
+		DisplayName: Heart of the Swamp
 		Tooltip:
 			'''
 			Increases maximum life by 60 and life regeneration
