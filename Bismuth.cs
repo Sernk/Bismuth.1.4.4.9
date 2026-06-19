@@ -20,6 +20,8 @@ using Terraria.ModLoader;
 namespace Bismuth {
     public class Bismuth : Mod {
         static internal Bismuth instance;
+        public static bool SynergiaActive { get; private set; } = false;
+
         public static Texture2D VampireFemaleLegs;
         internal static ModKeybind FirstSkillActivate;
         internal static ModKeybind SecondSkillActivate;
@@ -29,7 +31,9 @@ namespace Bismuth {
         internal static ModKeybind InfoAcc;
         public static double pressedToggleExperiencePanelHotKeyTime;
         public static double pressedToggleBat;
+
         public static DynamicSpriteFont Adonais;
+
         public static int DwarvenCoinID;
         public static int ImperianHelmetID;
         public static int LoricaID;
@@ -144,6 +148,8 @@ namespace Bismuth {
         }
         public override void Load() {
             instance = this;
+            ModLoader.TryGetMod("Synergia", out Mod value);
+            if (value != null) { SynergiaActive = true; }
             DwarvenCoinID = CustomCurrencyManager.RegisterCurrency(new DwarvenCoinData(ModContent.ItemType<DwarvenCoin>(), 9999999L));
             ImperianHelmetID = CustomCurrencyManager.RegisterCurrency(new ImperianHelmetExchangeData(ModContent.ItemType<ImperianHelmet>(), 999L));
             LoricaID = CustomCurrencyManager.RegisterCurrency(new LoricaExchangeData(ModContent.ItemType<Lorica>(), 999L));
@@ -182,6 +188,8 @@ namespace Bismuth {
             VampireBatTurnHotKey = KeybindLoader.RegisterKeybind(this, "Turn Into Bat", "T");
             TeleportActivate = KeybindLoader.RegisterKeybind(this, "Activate Second Skill", "U");
             InfoAcc = KeybindLoader.RegisterKeybind(this, "InfoAcc", "LeftShift");
+        }
+        public override void PostSetupContent() {
         }
         public override void Unload() {
             VampireMaleFace = null;

@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Bismuth.Utilities;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Chat;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace Bismuth.Content.NPCs
@@ -29,6 +32,12 @@ namespace Bismuth.Content.NPCs
         {
             NPC.lifeMax = (int)(NPC.lifeMax * 1.5f);
             NPC.damage = (int)(NPC.damage * 1.5f);
+        }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+            if (spawnInfo.Player.ZoneDesert) {
+                return 10f;
+            }
+            else { return 0f; }
         }
         public override void HitEffect(NPC.HitInfo hit)
         {

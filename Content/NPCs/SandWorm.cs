@@ -1,4 +1,5 @@
 ﻿using Bismuth.Content.Items.Materials;
+using Bismuth.Utilities;
 using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
@@ -24,7 +25,12 @@ namespace Bismuth.Content.NPCs
             //bannerItem = mod.ItemType("SandWormBanner");
             // npc.color = Color.Aqua;
         }
-
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+            if (spawnInfo.Player.ZoneDesert && NPC.downedBoss1) {
+                return 6f;
+            }
+            return 0f;
+        }
         public override void Init()
         {
             base.Init();

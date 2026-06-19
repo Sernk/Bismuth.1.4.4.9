@@ -1,6 +1,7 @@
 ﻿using Bismuth.Content.Items.Accessories;
 using Bismuth.Content.Items.Weapons.Throwing;
 using Bismuth.Content.Projectiles;
+using Bismuth.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
@@ -28,6 +29,12 @@ namespace Bismuth.Content.NPCs
             NPC.aiStyle = 3;
             Main.npcFrameCount[NPC.type] = 21;
             AIType = NPCID.GoblinWarrior;;
+        }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+            if (spawnInfo.Player.ZoneDesert) {
+                return 7f;
+            }
+            return 0f;
         }
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {

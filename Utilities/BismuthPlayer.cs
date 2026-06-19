@@ -40,6 +40,8 @@ namespace Bismuth.Utilities
         bool canTrigger = false;
         public Transformation BatLayer;
 
+        public bool zoneTotem;
+
         public static int alphabanshee = 0;
         public static int growbanshee = 1;
         public static int alpharing = 0;
@@ -197,6 +199,7 @@ namespace Bismuth.Utilities
             return a;
         }
         public override void PreUpdateMovement() {
+            if (Bismuth.SynergiaActive) { return; }
             if (NPC.downedGolemBoss) { count = 7; }
             if (count >= 7) {
                 for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
@@ -373,6 +376,7 @@ namespace Bismuth.Utilities
             IsEquippedRekstrisChest = false;
             IsEquippedRekstrisHelmet = false;
             IsEquippedBelt = false;
+            zoneTotem = false;
 
         }
         const float maxwidth = 396f;
@@ -1236,7 +1240,7 @@ namespace Bismuth.Utilities
             if (IsNaga && Wetness == 0) { Wetness = 30; }
             sanctusdamagecounter = 0;
             DeathPos = Player.position;
-            if (IsEquippedOneRing) {
+            if (IsEquippedOneRing && !Bismuth.SynergiaActive) {
                 if (Player.lavaWet) {
                     for (int k = 3; k < 8 + Player.extraAccessorySlots; k++) {
                         if (Player.armor[k].type == ModContent.ItemType<RingOfOmnipotence>()) {

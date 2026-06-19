@@ -15,7 +15,7 @@ namespace Bismuth.Content.Items.Tools
             Item.height = 12;
             Item.useTime = 14;
             Item.useAnimation = 14;
-            Item.hammer = 90;
+            Item.hammer = 2;
             Item.useStyle = 1;
             Item.knockBack = 6;
             Item.value = Item.buyPrice(0, 4, 50, 0);

@@ -2620,47 +2620,31 @@ namespace Bismuth
                         Utils.DrawBorderStringFourWay(sb, curfont, SkillsTree, bookcoord.X + 700 - curfont.MeasureString(SkillsTree).X / 2, bookcoord.Y + 30, Color.White, Color.Black, Vector2.Zero);
                         if (Player.GetModPlayer<BismuthPlayer>().PlayerClass != 0)
                         {
-                            if (treecoord.X > FrameStart.X)
-                                treecoord.X = FrameStart.X;
-                            if (treecoord.X + ActualPanel.Width < FrameStart.X + FrameWidth)
-                                treecoord.X = FrameStart.X + FrameWidth - ActualPanel.Width;//
-                            if (treecoord.Y > FrameStart.Y)
-                                treecoord.Y = FrameStart.Y;
-                            if (treecoord.Y + ActualPanel.Height < FrameStart.Y + FrameHeight)
-                                treecoord.Y = FrameStart.Y + FrameHeight - ActualPanel.Height;
+                            if (treecoord.X > FrameStart.X) { treecoord.X = FrameStart.X; }
+                            if (treecoord.X + ActualPanel.Width < FrameStart.X + FrameWidth) { treecoord.X = FrameStart.X + FrameWidth - ActualPanel.Width; }
+                            if (treecoord.Y > FrameStart.Y) { treecoord.Y = FrameStart.Y; }
+                            if (treecoord.Y + ActualPanel.Height < FrameStart.Y + FrameHeight) { treecoord.Y = FrameStart.Y + FrameHeight - ActualPanel.Height; }
                             if (treeflag && Main.mouseLeft) // Лежит ли мышь в пределах рамки
                             {
                                 int oldposX = Main.mouseX - Main.lastMouseX;
                                 int oldposY = Main.mouseY - Main.lastMouseY;
-                                if (treecoord.X <= FrameStart.X && treecoord.X + ActualPanel.Width >= FrameStart.X + FrameWidth && treecoord.Y <= FrameStart.Y && treecoord.Y + ActualPanel.Height >= FrameStart.Y + FrameHeight)
-                                {
+                                if (treecoord.X <= FrameStart.X && treecoord.X + ActualPanel.Width >= FrameStart.X + FrameWidth && treecoord.Y <= FrameStart.Y && treecoord.Y + ActualPanel.Height >= FrameStart.Y + FrameHeight) {
                                     treecoord.X += oldposX;
                                     treecoord.Y += oldposY;
                                 }
-                                if (treecoord.X > FrameStart.X)
-                                    treecoord.X = FrameStart.X;
-                                if (treecoord.X + ActualPanel.Width < FrameStart.X + FrameWidth)
-                                    treecoord.X = FrameStart.X + FrameWidth - ActualPanel.Width;//
-                                if (treecoord.Y > FrameStart.Y)
-                                    treecoord.Y = FrameStart.Y;
-                                if (treecoord.Y + ActualPanel.Height < FrameStart.Y + FrameHeight)
-                                    treecoord.Y = FrameStart.Y + FrameHeight - ActualPanel.Height;
-
+                                if (treecoord.X > FrameStart.X) { treecoord.X = FrameStart.X; }
+                                if (treecoord.X + ActualPanel.Width < FrameStart.X + FrameWidth) { treecoord.X = FrameStart.X + FrameWidth - ActualPanel.Width; }
+                                if (treecoord.Y > FrameStart.Y) { treecoord.Y = FrameStart.Y; }
+                                if (treecoord.Y + ActualPanel.Height < FrameStart.Y + FrameHeight) { treecoord.Y = FrameStart.Y + FrameHeight - ActualPanel.Height; }
                             }
                             sb.Draw(ActualPanel, FrameStart, new Rectangle?(new Rectangle((int)(FrameStart.X - treecoord.X), (int)(FrameStart.Y - treecoord.Y), FrameWidth, FrameHeight)), Color.White);
-                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 1)
-                                Player.GetModPlayer<BismuthPlayer>().DrawWarriorTree(sb);
-                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 2)
-                                Player.GetModPlayer<BismuthPlayer>().DrawRangerTree(sb);
-                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 3)
-                                Player.GetModPlayer<BismuthPlayer>().DrawWizardTree(sb);
-                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 4)
-                                Player.GetModPlayer<BismuthPlayer>().DrawThrowerTree(sb);
-                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 5)
-                                Player.GetModPlayer<BismuthPlayer>().DrawAssassinTree(sb);
+                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 1) { Player.GetModPlayer<BismuthPlayer>().DrawWarriorTree(sb); }
+                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 2) { Player.GetModPlayer<BismuthPlayer>().DrawRangerTree(sb); }
+                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 3) { Player.GetModPlayer<BismuthPlayer>().DrawWizardTree(sb); }
+                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 4) { Player.GetModPlayer<BismuthPlayer>().DrawThrowerTree(sb); }
+                            if (Player.GetModPlayer<BismuthPlayer>().PlayerClass == 5) { Player.GetModPlayer<BismuthPlayer>().DrawAssassinTree(sb); }
                         }
-                        else
-                        {
+                        else {
                             Utils.DrawBorderStringFourWay(sb, Bismuth.Adonais, PlayerClass, bookcoord.X + 514, bookcoord.Y + 300, Color.White, Color.Black, Vector2.Zero, 1.1f);
                         }
                     }

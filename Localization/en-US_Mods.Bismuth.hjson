@@ -415,11 +415,7 @@ Items: {
 
 	MagnesiumOxide: {
 		DisplayName: Magnesium Oxide
-		Tooltip:
-			'''
-			Increases throwing velocity by 40%
-			Decreases throwing damage by 8% 
-			'''
+		Tooltip: 40% increased thrown velosity, 8% decreased thrown damage.
 	}
 
 	MarbleMask: {
@@ -1120,7 +1116,7 @@ Items: {
 
 	ShellNecklace: {
 		DisplayName: Shell Necklace
-		Tooltip:  Increases throwing damage and crit. chance by 1% for every 5 wetness points
+		Tooltip: +1% throwing damage and critical strike chance for every 5 wetness points
 	}
 
 	FuryOfWaters: {
@@ -1167,7 +1163,7 @@ Items: {
 				'''
 				+13% for all damages, +50 HP, +3 HP/sec, damage reflection 
 				is increased by 12%, dodge chance is increased by 
-mana				5%, all crit. strike chances are increased by 10%
+				5%, all crit. strike chances are increased by 10%
 				'''
 			RingOfOmnipotence2:
 				'''
@@ -1301,8 +1297,8 @@ mana				5%, all crit. strike chances are increased by 10%
 		DisplayName: Tribal Quiver
 		Tooltip:
 			'''
-			Increases ranged damage by 5%, as well as ctitical damage by 10% 
-			Has 15% chance to shoot one more arrow.
+			+5% ranged damage, +10% ranged critical damage 
+			15% chance to shoot one more arrow
 			'''
 	}
 
@@ -1318,7 +1314,7 @@ mana				5%, all crit. strike chances are increased by 10%
 
 	WoodenShield: {
 		DisplayName: Wooden Shield
-		Tooltip: Increases damage resistance by 7%
+		Tooltip: +7% damage resistance
 	}
 
 	ShamansStaff: {
@@ -1343,7 +1339,7 @@ mana				5%, all crit. strike chances are increased by 10%
 
 	BattleDrum: {
 		DisplayName: Battle Drum
-		Tooltip: Increases max health by 5 for every living town npc
+		Tooltip: Increases max hp by 5 for every living town npc
 	}
 
 	SnakesFang: {
@@ -1355,7 +1351,7 @@ mana				5%, all crit. strike chances are increased by 10%
 	TransmutationAmulet: {
 		Tooltip:
 			'''
-			Increases  buff duration for all potions by 10%
+			Buff duration for all potions is increased by 10%
 			Healing potions' cooldown is shortened by 5 seconds
 			You restore 10% of your mana after using any potion
 			'''
@@ -1370,7 +1366,7 @@ mana				5%, all crit. strike chances are increased by 10%
 	NecromancersRobe: {
 		Tooltip:
 			'''
-			Increases summon damage by 12%. 
+			Minion damage is increased by 12%. 
 			Increases your max number of minions
 			'''
 		DisplayName: Necromancer's Robe
@@ -1379,7 +1375,7 @@ mana				5%, all crit. strike chances are increased by 10%
 	NecromancersHood: {
 		Tooltip:
 			'''
-			Increases summon damage by 10%. 
+			Minion damage is increased by 10%. 
 			Increases your max number of minions
 			'''
 		DisplayName: Necromancer's Hood
@@ -1388,15 +1384,15 @@ mana				5%, all crit. strike chances are increased by 10%
 	NecromancersRing: {
 		Tooltip:
 			'''
-			Increases your max number of minions by 1 and summon damage by 7% 
+			Increases max number of minions by 1 and minion damage by 7% 
 			You get more max mana, mana regeneration and 
-			minion damage for every tombstone nearby.
+			minion damage for every nearby tombstone.
 			'''
 		DisplayName: Necromancer's Ring
 	}
 
 	MinotaursWaraxe: {
-		DisplayName: Minotaur's Waraxe
+		DisplayName: Minotaur's Waraxes
 		Tooltip: ""
 	}
 
@@ -1404,8 +1400,8 @@ mana				5%, all crit. strike chances are increased by 10%
 		DisplayName: Orcish Shield
 		Tooltip:
 			'''
-			Increases throwing damage by 11%
-			The less health you have - the higher your throwing damage and crit
+			Increased thrown damage by 11%
+			The less health you have - the higher your thrown damage and crit
 			'''
 	}
 
@@ -1535,17 +1531,17 @@ mana				5%, all crit. strike chances are increased by 10%
 
 	MagicRune: {
 		DisplayName: Wizard's Rune
-		Tooltip: Increases magic damage by 12%
+		Tooltip: 12% increased magic damage.
 	}
 
 	MeleeRune: {
 		DisplayName: Warrior's Rune
-		Tooltip: Increases melee damage by 12%
+		Tooltip: 12% increased melee damage.
 	}
 
 	MirrorShield: {
 		DisplayName: Mirror Shield
-		Tooltip: Has 10% chance to parry a projectile. The less HP you have - the higher the chance is.
+		Tooltip: 10% chance to parry a projectile. The less HP you have - the higher the chance is.
 	}
 
 	MrPigeonsCloak: {
@@ -1558,13 +1554,13 @@ mana				5%, all crit. strike chances are increased by 10%
 		Tooltip:
 			'''
 			Increases arrow damage by 15%
-			+1 additional arrow projectile
+			+1 arrow projectile
 			'''
 	}
 
 	RangerRune: {
 		DisplayName: Ranger's Rune
-		Tooltip: Increases ranged damage by 12%
+		Tooltip: 12% increased ranged damage.
 	}
 
 	AluminiumBar: {
@@ -1573,22 +1569,22 @@ mana				5%, all crit. strike chances are increased by 10%
 	}
 
 	RuneOfSummoner: {
-		Tooltip: Increases summon damage by 12%
+		Tooltip: 12% increased minion damage.
 		DisplayName: Sumonner's Rune
 	}
 
 	RuneOfSpeed: {
-		Tooltip: Increases movement speed by 15%
+		Tooltip: 15% increased movement speed.
 		DisplayName: Runner's Rune
 	}
 
 	RuneOfRegeneration: {
-		Tooltip: Increases life regeneration.
+		Tooltip: Increased life regeneration.
 		DisplayName: Doctor's Rune
 	}
 
 	RuneOfAssasin: {
-		Tooltip: Increases critical strike chance by 5%
+		Tooltip: +5% critical strike chance.
 		DisplayName: Assassin's Rune
 	}
 
@@ -1601,15 +1597,14 @@ mana				5%, all crit. strike chances are increased by 10%
 		DisplayName: Statuette of Helios
 		Tooltip:
 			'''
-			Increases magic damage by 15%
-			Increases magical crit chance by 10% 
-			Increases maximum mana by 50. Reduces mana usage by 20% in daytime.
+			15% increased magic damage. 10% increased magic critical strike chance. 
+			Increased maximum mana by 50. Reduces mana usage by 20% in daytime.
 			'''
 	}
 
 	ThrownRune: {
 		DisplayName: Thrower's Rune
-		Tooltip: Increases throwing damage by 12%
+		Tooltip: 12% increased throwing damage.
 	}
 
 	WingsOfDaedalus: {
@@ -2295,26 +2290,26 @@ mana				5%, all crit. strike chances are increased by 10%
 	}
 
 	FeralHelmet: {
-		FeralSetBonus: Increases melee speed by 15%.
+		FeralSetBonus: Melee speed is increased by 15%.
 		DisplayName: Feral Helmet
 		Tooltip:
 			'''
-			Increases melee damage by 5%. 
-			Increases melee critical strike chance by 3%.
+			Melee damage is increased by 5%. 
+			Melee critical strike chance is increased by 3%.
 			'''
 	}
 
 	FeralBreastplate: {
 		DisplayName: Feral Breastplate
-		Tooltip: Increases melee damage by 7%.
+		Tooltip: Melee damage is increased by 7%.
 	}
 
 	FeralLeggings: {
 		DisplayName: Feral Leggings
 		Tooltip:
 			'''
-			Increases melee critical strike chance by 6%. 
-			Decreases movement speed by 14%.
+			Melee critical strike chance is increased by 6%. 
+			Movement speed is decreased by 14%.
 			'''
 	}
 
@@ -2550,7 +2545,7 @@ mana				5%, all crit. strike chances are increased by 10%
 			Throwing velocity is increased by 12%. 
 			Throwing critical strike chance is increased by 5%.
 			'''
-		PikemanSetBonus: 33% chance to not consume throwing item.
+		PikemanSetBonus: 33% chance to not consume thrown item.
 	}
 
 	PikemansLeggings: {
@@ -4196,7 +4191,7 @@ QuestsSystem: {
 			Priest_8: Yes, my brother, I will charge the scythe. Come back later.
 			Alchemist_22:
 				'''
-				Unfortunately, you don't have enough materials. To charge the stone you’ll need:
+				Unfortunately, you do not have enough materials. To charge the stone you’ll need:
 				30[i:12], 30[i:699], 30[i:11], 30[i:700], 30[i:14], 30[i:13], 30[i:Bismuth/Quicksilver]
 				10[i:Bismuth/Aether]
 				[i:Bismuth/UnchargedTruePhilosopherStone]
@@ -4334,15 +4329,15 @@ BismuthPlayerLayerSystem: {
 BonusArmor: {
 	GlobalItems: {
 		Ninja: {
-			NinjaHood: Increases throwing velocity by 9%
-			NinjaPants: Increases throwing critical strike chance by 7%
-			NinjaShirt: Increases throwing damage by 9%
+			NinjaHood: 9% increased thrown velocity
+			NinjaPants: 7% increased thrown critical strike chance
+			NinjaShirt: 9% increased thrown damage
 		}
 
 		Fossil: {
-			FossilShirt: Increases throwing damage by 12%
-			FossilPants: Increases throwing critical strike chance by 5%
-			FossilHelm: Increases throwing velocity by 12%
+			FossilShirt: 12% increased thrown damage
+			FossilPants: 5% increased thrown critical strike chance
+			FossilHelm: 12% increased thrown velocity
 		}
 
 		Info: {
@@ -4365,7 +4360,7 @@ BonusArmor: {
 	}
 }
 
-DeadGolems.Golem.BismuthumText: Your world has been blessed with Bismuthum
+DeadGolems.Golem.BismuthumText: Your world has been blessed with Bismuthums
 DeadSkeletron.Skeletron.HeliosText: You hear hymns praising the ancient Lord of Sunlight
 DeadEoC.EyeofCthulhu.MazeText: Strange voice tells you about a mysterious building in caves...
 

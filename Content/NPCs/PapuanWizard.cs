@@ -5,6 +5,7 @@ using Bismuth.Content.Projectiles;
 using Bismuth.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,6 +18,12 @@ namespace Bismuth.Content.NPCs
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[NPC.type] = 29;
+        }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+            if (Main.hardMode && !NPC.AnyNPCs(Type) && Main.dayTime && spawnInfo.Player.ZoneDesert) {
+                return 4f;
+            }
+            return 0f;
         }
 
         public override void SetDefaults()

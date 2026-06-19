@@ -9,8 +9,6 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using System;
-using System.Linq;
 
 namespace Bismuth.Content.Tiles
 {
@@ -29,70 +27,16 @@ namespace Bismuth.Content.Tiles
             AddMapEntry(new Color(233, 211, 123), CreateMapEntryName());
             TileObjectData.newTile.DrawYOffset = 2;
         }
-        
-        private Player FindClosestPlayer(Vector2 totemPosition)//Added this
-        {
-            Player closestPlayer = null;
-            float closestDistance = float.MaxValue;
-            
-            for (int i = 0; i < Main.maxPlayers; i++)
-            {
-                Player player = Main.player[i];
-                if (player != null && player.active && !player.dead)
-                {
-                    float distance = Vector2.Distance(totemPosition, player.Center);
-                    if (distance < closestDistance)
-                    {
-                        closestDistance = distance;
-                        closestPlayer = player;
-                    }
-                }
-            }
-            
-            return closestPlayer;
-        }
-        
         public override bool CanKillTile(int i, int j, ref bool blockDamaged)
         {
             return false;
         }
-        
         public override bool CanExplode(int i, int j)
         {
             return false;
         }
-        
         public override void NearbyEffects(int i, int j, bool closer) {
-            if (!closer && Main.netMode != 1) { // Added Main.netMode != 1 check
-                Player closestPlayer = FindClosestPlayer(new Vector2(i * 16, j * 16));
-                
-                if (BismuthWorld.IsTotemActive && closestPlayer != null && closestPlayer.InModBiome<TribeTotemBiome>()) {
-                    if (Main.rand.NextBool(1080)) {
-                        int npc = NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<Papuan>());
-                        if (Main.netMode == NetmodeID.Server && npc < Main.maxNPCs) {
-                            NetMessage.SendData(MessageID.SyncNPC, number: npc);
-                        }
-                    }
-                    if (Main.rand.NextBool(1260)) {
-                        int npc = NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<PapuanArcher>());
-                        if (Main.netMode == NetmodeID.Server && npc < Main.maxNPCs) {
-                            NetMessage.SendData(MessageID.SyncNPC, number: npc);
-                        }
-                    }
-                    if (Main.rand.NextBool(1800)) {
-                        int npc = NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<PapuanWarrior>());
-                        if (Main.netMode == NetmodeID.Server && npc < Main.maxNPCs) {
-                            NetMessage.SendData(MessageID.SyncNPC, number: npc);
-                        }
-                    }
-                    if (Main.rand.NextBool(2700) && BismuthWorld.downedEoC) {
-                        NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 8) * 16, ModContent.NPCType<SandWormHead>());
-                    }
-                    if (Main.hardMode && Main.rand.NextBool(4000) && !NPC.AnyNPCs(ModContent.NPCType<PapuanWizard>()) && !BismuthWorld.WizardDay && Main.dayTime) {
-                        BismuthWorld.WizardDay = true;
-                        NPC.NewNPC(new EntitySource_WorldEvent(), i * 16, (j + 4) * 16, ModContent.NPCType<PapuanWizard>());
-                    }
-                }
+            if (!closer) {
                 if (BismuthWorld.TotemCooldown > 0) {
                     BismuthWorld.IsTotemActive = false;
                     BismuthWorld.TotemCooldown--;
@@ -100,7 +44,6 @@ namespace Bismuth.Content.Tiles
                 else { BismuthWorld.IsTotemActive = true; }
             }
         }
-        
         public override bool RightClick(int i, int j)
         {
             Player player = Main.LocalPlayer;
@@ -135,7 +78,6 @@ namespace Bismuth.Content.Tiles
             }
             return true;
         }
-        
         public override void MouseOver(int i, int j)
         {
             Player player = Main.player[Main.myPlayer];
@@ -145,8 +87,7 @@ namespace Bismuth.Content.Tiles
                 player.cursorItemIconID = ItemID.GoldCoin;
             }
         }
-        
-        public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+        public override void PostDraw(int i, int j, SpriteBatch spriteBatch) // Пусть тот, кто делал фикс PostDraw() в 0.11, горит блять в аду, мудак ебаный.
         {
             if (BismuthWorld.IsTotemActive)
             {

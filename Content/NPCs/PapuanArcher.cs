@@ -1,5 +1,6 @@
 ﻿using Bismuth.Content.Items.Accessories;
 using Bismuth.Content.Items.Weapons.Ranged;
+using Bismuth.Utilities;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -50,6 +51,12 @@ namespace Bismuth.Content.NPCs
         public override void AI()
         {
             NPC.TargetClosest(true);
+        }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) {
+            if (spawnInfo.Player.ZoneDesert) {
+                return 8.5f;
+            }
+            return 0f;
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {

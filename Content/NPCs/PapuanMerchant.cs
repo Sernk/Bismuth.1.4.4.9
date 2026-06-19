@@ -115,8 +115,6 @@ namespace Bismuth.Content.NPCs {
             shop.Add(ModContent.ItemType<JaguarsBreastplate>());
             shop.Add(ModContent.ItemType<JaguarsLeggings>());
             shop.Add(ModContent.ItemType<JaguarsPickaxe>());
-            shop.Add(ModContent.ItemType<JaguarsDagger>());
-            shop.Add(ModContent.ItemType<JaguarsChakram>());
 
             shop.Add(ModContent.ItemType<HerbalFeather>(), HardMode);
 
