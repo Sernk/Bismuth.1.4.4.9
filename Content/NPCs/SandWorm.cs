@@ -27,7 +27,7 @@ namespace Bismuth.Content.NPCs
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo) {
             if (spawnInfo.Player.ZoneDesert && NPC.downedBoss1) {
-                return 6f;
+                return 1.1f;
             }
             return 0f;
         }
